@@ -1,0 +1,45 @@
+@charset "UTF-8";
+@use 'value' as v;
+@use 'color' as c;
+@use 'font' as f;
+
+html {
+  scroll-behavior: smooth;
+  font-size      : f.baseSize( 'desktop' );
+
+  @include v.mediaScreen( 'tablet' ) {
+    font-size: f.baseSize( 'tablet' );
+  }
+
+  @include v.mediaScreen( 'mobile' ) {
+    font-size: f.baseSize( 'mobile' );
+  }
+}
+
+body {
+  background-color     : c.$baseColor;
+  color                : c.$black;
+  font-family          : f.family( 'base' );
+  font-size            : 1rem;
+  line-height          : f.lineHeight( 'normal' );
+  letter-spacing       : f.letterSpacing( 'normal' );
+  word-wrap            : break-word;
+  font-feature-settings: 'palt';
+}
+
+ul {
+  li {
+    list-style: none;
+    margin    : 0;
+  }
+}
+
+a {
+  display        : inline-block;
+  color          : inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+}

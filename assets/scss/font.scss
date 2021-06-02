@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Cantarell:wght@700&family=Noto+Sans+JP:wght@300;700&display=swap');
+
+$fontBaseSizeMap: (
+  'desktop': 18px,
+  'tablet' : 16px,
+  'mobile' : 14px,
+);
+
+@function calcRemFontSize( $fontSize ) {
+  @return #{(round(($fontSize / 16) * 100) / 100) * 1rem};
+};
+
+$fontSizeMap: (
+  'medium' : 1rem,
+  'large'  : calcRemFontSize( 20 ),
+  'larger' : calcRemFontSize( 24 ),
+  'max'    : calcRemFontSize( 36 ),
+  'small'  : calcRemFontSize( 14 ),
+  'smaller': calcRemFontSize( 12 ),
+  'min'    : calcRemFontSize( 10 ),
+  'heading': calcRemFontSize( 48 ),
+);
+
+$fontFamilyMap: (
+  'base'   : 'Noto Sans JP',
+  'english': 'Cantarell'
+);
+
+$lineHeightMap: (
+  'normal'  : 1.8,
+  'narrowed': 1.4
+);
+
+$letterSpacingMap: (
+  'normal'  : .16em,
+  'narrowed': .08em
+);
+
+@function baseSize($key) {
+  @return map-get($fontBaseSizeMap, $key);
+};
+
+@function size($key) {
+  @return map-get($fontSizeMap, $key);
+};
+
+@function family($key) {
+  @return map-get($fontFamilyMap, $key);
+};
+
+@function lineHeight($key) {
+  @return map-get($lineHeightMap, $key);
+};
+
+@function letterSpacing($key) {
+  @return map-get($letterSpacingMap, $key);
+};

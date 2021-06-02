@@ -1,0 +1,30 @@
+$val                   : .5rem;
+$desktopScreenSize     : 1280px;
+$tabletWidthScreenSize : 1024px;
+$tabletHeightScreenSize: 768px;
+$mobileScreenSize      : 480px;
+
+@mixin mediaScreen( $range ) {
+  @if $range == 'desktop' {
+    @media all and (min-width: $tabletWidthScreenSize) and (max-width: $desktopScreenSize) { @content; }
+  } @else if $range == 'tablet' {
+    @media all and (min-width: $mobileScreenSize) and (max-width: $tabletWidthScreenSize) { @content; }
+  } @else if $range == 'tabletLandscape' {
+    @media all and (min-width: $tabletHeightScreenSize) and (max-width: $tabletWidthScreenSize) { @content; }
+  } @else if $range == 'tabletVertical' {
+    @media all and (min-width: $mobileScreenSize) and (max-width: $tabletHeightScreenSize) { @content; }
+  } @else if $range == 'mobile' {
+    @media all and (max-width: $mobileScreenSize) { @content; }
+  }
+}
+
+$zIndexMap: (
+  'max'     : 100,
+  'navi'    : 80,
+  'overlay' : 70,
+  'contents': 50
+) !default;
+
+@function zIndex( $key ) {
+  @return map-get( $zIndexMap, $key );
+};

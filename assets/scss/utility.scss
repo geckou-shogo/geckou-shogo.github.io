@@ -1,0 +1,17 @@
+@use 'value' as v;
+@use "sass:math";
+
+@mixin gridList( $column: 2, $tabletColumn: 2, $mobileColumn: 1, $gap: v.$val * 4 ) {
+  display              : grid;
+  grid-template-columns: repeat(auto-fit, calc((100% - (#{$gap} * ( #{$column} - 1))) / #{$column}));
+  gap                  : $gap;
+
+  @include v.mediaScreen( 'tablet' ) {
+    grid-template-columns: repeat(auto-fit, calc(( 100% - (#{$gap} * ( #{$tabletColumn} - 1))) / #{$tabletColumn}));
+  }
+
+  @include v.mediaScreen( 'mobile' ) {
+    grid-template-columns: repeat(auto-fit, calc(( 100% - ((#{$gap} / 2) * ( #{$mobileColumn} - 1))) / #{$mobileColumn}));
+    gap                  : math.div($gap, 2);
+  }
+}

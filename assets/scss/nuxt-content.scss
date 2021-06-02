@@ -1,0 +1,50 @@
+@charset "UTF-8";
+@use 'value' as v;
+@use 'color' as c;
+@use 'font' as f;
+
+.nuxt-content {
+  h2 {
+    margin        : v.$val * 8 v.$val * 2 v.$val * 2;
+    padding-bottom: v.$val * 2;
+    color         : c.$mainColor;
+    font-size     : f.size( 'larger' );
+    border-bottom : 1px solid c.$lightBlack;
+
+    @include v.mediaScreen( 'mobile' ) {
+      margin: v.$val * 4 v.$val * 2 v.$val * 2;
+      padding-bottom: v.$val;
+    }
+  }
+
+  h3 {
+    margin     : v.$val * 4 v.$val * 2 v.$val * 2;
+    color      : c.$darkBlack;
+    font-size  : f.size( 'large' );
+
+    @include v.mediaScreen( 'mobile' ) {
+      margin-bottom: v.$val * 2;
+    }
+  }
+
+  p {
+    padding: v.$val * 2;
+    
+    &:not(:last-child) {
+      margin-bottom: v.$val * 2;
+
+      @include v.mediaScreen( 'mobile' ) {
+        margin-bottom: v.$val;
+      }
+    }
+  }
+
+  strong {
+    color: c.$darkBlack;
+  }
+
+  pre, code {
+    padding   : 2px;
+    background: c.$lightBlack;
+  }
+}
