@@ -1,3 +1,4 @@
+@use 'sass:math';
 @import url('https://fonts.googleapis.com/css2?family=Cantarell:wght@700&family=Noto+Sans+JP:wght@300;700&display=swap');
 
 $fontBaseSizeMap: (
@@ -7,7 +8,7 @@ $fontBaseSizeMap: (
 );
 
 @function calcRemFontSize( $fontSize ) {
-  @return #{(round(($fontSize / 16) * 100) / 100) * 1rem};
+  @return #{(math.div(round((math.div($fontSize, 16)) * 100), 100)) * 1rem};
 };
 
 $fontSizeMap: (

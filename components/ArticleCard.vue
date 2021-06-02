@@ -50,6 +50,7 @@ export default {
 @use '~/assets/scss/value' as v;
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
+@use 'sass:math';
 
 .card {
   position: relative;
@@ -102,7 +103,7 @@ export default {
 
     > * {
       &:not(:last-child) {
-        margin-right: v.$val / 2;
+        margin-right: math.div(v.$val, 2);
       }
     }
   }

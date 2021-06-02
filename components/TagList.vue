@@ -24,6 +24,7 @@ export default {
 @use '~/assets/scss/value' as v;
 @use '~/assets/scss/color' as c;
 @use '~/assets/scss/font' as f;
+@use 'sass:math';
 
 .tags {
   display: flex;
@@ -38,10 +39,10 @@ export default {
 .list {
   display: flex;
   flex-wrap: wrap;
-  padding: v.$val / 2;
+  padding: math.div(v.$val, 2);
 
   > li {
-    padding: v.$val / 2;
+    padding: math.div(v.$val, 2);
     font-size: f.size('min');
 
     &::before {
