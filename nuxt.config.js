@@ -11,10 +11,6 @@ export default {
     base: '/geckou-shogo.github.io/',
   },
 
-  generate: {
-    dir: 'docs',
-  },
-
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'geckou',
