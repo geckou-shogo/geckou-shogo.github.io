@@ -2,10 +2,9 @@ import Sass from 'sass'
 import Fiber from 'fibers'
 
 export default {
-  ssr: true,
-
   // Target: https://go.nuxtjs.dev/config-target
-  target: 'server',
+  target: 'static',
+  ssr: true,
 
   router: {
     base: '/geckou-shogo.github.io/',
