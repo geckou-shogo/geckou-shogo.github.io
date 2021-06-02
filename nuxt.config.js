@@ -30,6 +30,7 @@ export default {
         href: '/apple-touch-icon.min.png',
       },
     ],
+    base: { href: '/' },
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
