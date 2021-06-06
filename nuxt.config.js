@@ -4,9 +4,10 @@ import Fiber from 'fibers'
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
-  ssr: true,
+  ssr: false,
 
   router: {
+    mode: 'hash',
     base: '/geckou-shogo.github.io/',
   },
 
@@ -81,6 +82,11 @@ export default {
           fiber: Fiber,
         },
       },
+    },
+    extend(config, { isDev }) {
+      if (!isDev) {
+        config.output.publicPath = './static/'
+      }
     },
   },
 
