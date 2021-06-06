@@ -7,7 +7,6 @@ export default {
   ssr: true,
 
   router: {
-    mode: 'hash',
     base: '/geckou-shogo.github.io/',
   },
 
@@ -82,11 +81,6 @@ export default {
           fiber: Fiber,
         },
       },
-    },
-    extend(config, { isDev }) {
-      if (!isDev) {
-        config.output.publicPath = './static/'
-      }
     },
   },
 
