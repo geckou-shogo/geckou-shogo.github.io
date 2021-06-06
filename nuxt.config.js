@@ -7,7 +7,7 @@ export default {
   ssr: true,
 
   router: {
-    base: '/geckou-shogo.github.io/',
+    base: '/',
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
