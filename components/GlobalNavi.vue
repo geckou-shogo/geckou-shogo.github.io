@@ -19,7 +19,7 @@
             WORKS
           </NuxtLink>
         </li>
-        <li>
+        <li v-if="false">
           <a
             :class="$style.navi__icon"
             href="https://twitter.com/okou_joe"
