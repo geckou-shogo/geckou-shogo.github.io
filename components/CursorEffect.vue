@@ -5,15 +5,15 @@
   />
 </template>
 
-<script lang="ts">
+<script>
 export default {
-  data(): any {
+  data() {
     return {
       mouseX: -100,
       mouseY: -100,
     }
   },
-  mounted(): void {
+  mounted() {
     if (process.browser) {
       window.addEventListener('mousemove', (e) => {
         this.mouseY = e.pageY
