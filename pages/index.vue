@@ -1,6 +1,28 @@
 <template>
   <main id="frontpage" :class="$style.container">
     <Intro :class="$style.intro" :container-id="'frontpage'" />
+    <section>
+      <header :class="$style.section__header">
+        <Heading
+          :heading="'VISION'"
+          :description="'合同会社Geckouとは'"
+          :class="$style.section__heading"
+        />
+      </header>
+      <div :class="$style.vision">
+        <p>
+          <strong>合同会社Geckou</strong>
+          は、暗闇を進む人々を、月明かりのように照らせるよう名付けました。
+        </p>
+        <p>
+          エンタテインメントや娯楽といった付加価値の提供ではなく、<br />人々が抱える悩みや不満などの解消を目的とし、
+          希望していることができるよう、ITを中心に活用してお手伝いしております。
+        </p>
+        <p>
+          Geckouは人々が自身の望む道を歩めるような社会づくりに、貢献いたします。
+        </p>
+      </div>
+    </section>
     <section v-if="false" :class="$style.section">
       <header :class="$style.section__header">
         <Heading
@@ -59,7 +81,7 @@
         <iframe
           src="https://docs.google.com/forms/d/e/1FAIpQLSewpIVsGpZVR3cK9RIflcWIs5J9bFedXIgsqylcxE8N7o0Ybw/viewform?embedded=true"
           width="100%"
-          height="733"
+          height="800"
           frameborder="0"
           marginheight="0"
           marginwidth="0"
@@ -149,6 +171,22 @@ export default class IndexPage extends Vue {
           width: 100%;
         }
       }
+    }
+  }
+}
+
+.vision {
+  max-width: v.$tabletWidthScreenSize;
+  margin: 0 auto v.$val * 8;
+  padding: v.$val * 4;
+
+  > p {
+    &:not(:last-child) {
+      margin-bottom: v.$val * 4;
+    }
+
+    strong {
+      font-weight: normal;
     }
   }
 }

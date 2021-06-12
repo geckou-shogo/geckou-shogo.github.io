@@ -3,14 +3,13 @@
     <h1 :class="$style.header__title">
       {{ title }}
     </h1>
-    <small
-      v-for="(category, index) in categories"
-      :key="index"
-      :category="category"
-      :class="$style.header__category"
-    >
-      <CategoryIcon :category="category" />{{ category }}
-    </small>
+    <ul :class="$style.header__list">
+      <li v-for="(category, index) in categories" :key="index">
+        <small :class="$style.header__category">
+          <CategoryIcon :category="category" />{{ category }}
+        </small>
+      </li>
+    </ul>
     <div :class="$style.header__thumbnail">
       <div :class="$style.header__thumbnail__wrapper">
         <img :src="require(`~/assets/img/tmb/${thumbnail}`)" :alt="title" />
@@ -53,14 +52,24 @@ export default {
     text-align: center;
 
     @include v.mediaScreen('mobile') {
-      padding: 0 v.$val * 2;
+      padding: v.$val * 2 v.$val * 2 0;
       font-size: f.size('larger');
+    }
+  }
+
+  &__list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: v.$val;
+
+    > li {
+      padding: v.$val;
     }
   }
 
   &__category {
     display: flex;
-    padding: v.$val;
     justify-content: center;
     align-items: center;
     color: c.$darkGray;
@@ -79,7 +88,7 @@ export default {
     padding: v.$val * 2;
 
     @include v.mediaScreen('mobile') {
-      padding: 0 v.$val * 2;
+      padding: 0;
     }
 
     &__wrapper {

@@ -18,12 +18,18 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 @Component
 export default class SlugPage extends Vue {
-  async asyncData ({ $content, params }: { $content: any, params: any }): Promise<{ page: any }> {
+  async asyncData({
+    $content,
+    params,
+  }: {
+    $content: any
+    params: any
+  }): Promise<{ page: any }> {
     const page = await $content('works', params.slug || 'index').fetch()
     return { page }
   }
 
-  layout () {
+  layout() {
     return 'article'
   }
 }
@@ -36,24 +42,27 @@ export default class SlugPage extends Vue {
 .header {
   padding: v.$val * 4;
 
-  @include v.mediaScreen( 'mobile' ) {
-    padding: v.$val * 2;
+  @include v.mediaScreen('mobile') {
+    padding: 0;
   }
 }
 
 .main {
-  width    : 100%;
+  width: 100%;
   max-width: v.$tabletWidthScreenSize;
-  margin   : auto;
-  padding  : v.$val * 2;
+  margin: auto;
+  padding: v.$val * 2;
 
-  @include v.mediaScreen( 'mobile' ) {
+  @include v.mediaScreen('mobile') {
     padding: 0;
   }
 }
 
 .column {
   padding: v.$val * 2;
-}
 
+  @include v.mediaScreen('mobile') {
+    padding: 0;
+  }
+}
 </style>

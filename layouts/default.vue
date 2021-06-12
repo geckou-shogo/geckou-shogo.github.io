@@ -2,6 +2,7 @@
   <div :class="$style.wrapper">
     <GlobalNavi />
     <Nuxt />
+    <CursorEffect />
   </div>
 </template>
 
@@ -10,14 +11,14 @@
 @use '~/assets/scss/color' as c;
 
 .wrapper {
-  display         : flex;
-  flex-direction  : column;
-  min-height      : 100vh;
-  padding-right   : v.$val * 7;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-right: v.$val * 7;
   background-color: c.$mainColor;
-  color           : c.$white;
+  color: c.$white;
 
-  @include v.mediaScreen( 'mobile' ) {
+  @include v.mediaScreen('mobile') {
     padding-right: 0;
   }
 }
