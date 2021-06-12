@@ -4,6 +4,10 @@
 @use 'font' as f;
 
 .nuxt-content {
+  #tags-works {
+    display: none;
+  }
+  
   h2 {
     margin        : v.$val * 8 v.$val * 2 v.$val * 2;
     padding-bottom: v.$val * 2;
@@ -36,6 +40,14 @@
       @include v.mediaScreen( 'mobile' ) {
         margin-bottom: v.$val;
       }
+    }
+  }
+
+  ul {
+    padding: v.$val;
+
+    li {
+      padding: v.$val;
     }
   }
 
