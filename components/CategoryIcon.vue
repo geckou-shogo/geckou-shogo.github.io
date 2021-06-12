@@ -18,20 +18,11 @@ export default Vue.extend({
   computed: {
     categoryIcon() {
       switch (this.category) {
-        case 'Delicious': {
-          return 'bxs-dish'
+        case 'develop': {
+          return 'bx-code-block'
         }
-        case 'Illust': {
-          return 'bxs-paint'
-        }
-        case 'Goods': {
-          return 'bxs-gift'
-        }
-        case 'web': {
-          return 'bx-globe'
-        }
-        case 'DTP': {
-          return 'bxs-palette'
+        case 'design': {
+          return 'bx-palette'
         }
         default: {
           return 'bxs-file-blank'

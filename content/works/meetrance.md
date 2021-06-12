@@ -1,6 +1,6 @@
 ---
 title     : 株式会社meetrance
-categories: [desighn]
+categories: [design]
 thumbnail : meetrance.jpg
 client    : 株式会社meetrance
 ---
@@ -8,7 +8,6 @@ client    : 株式会社meetrance
 ## 概要
 
 株式会社meetrance コーポレートサイトのデザインです。
-
 ### デザイン概要
 
 地域との密着性をアピールするため、アットホームなイメージでデザインいたしました。

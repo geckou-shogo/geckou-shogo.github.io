@@ -18,25 +18,22 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-
 import sal from 'sal.js'
-@Component
 
+@Component
 export default class IndexPage extends Vue {
-  async asyncData ({ $content }: { $content: any }): Promise<{ works: [] }> {
-    const works: [] = await $content('works', { deep: true })
-      .fetch()
+  async asyncData({ $content }: { $content: any }): Promise<{ works: [] }> {
+    const works: [] = await $content('works', { deep: true }).fetch()
 
     return {
-      works
+      works,
     }
   }
 
-  mounted () {
+  mounted() {
     sal()
   }
 }
-
 </script>
 
 <style lang="scss" module>
@@ -44,22 +41,22 @@ export default class IndexPage extends Vue {
 
 .section {
   min-height: 100vh;
-  width     : 100%;
-  max-width : v.$desktopScreenSize;
-  margin    : auto;
-  padding   : v.$val * 2;
-  position  : relative;
-  z-index   : v.zIndex('contents');
+  width: 100%;
+  max-width: v.$desktopScreenSize;
+  margin: auto;
+  padding: v.$val * 2;
+  position: relative;
+  z-index: v.zIndex('contents');
 
-  @include v.mediaScreen( 'mobile' ) {
-    margin-bottom:  v.$val * 6;
+  @include v.mediaScreen('mobile') {
+    margin-bottom: v.$val * 6;
   }
 
   &__header {
-    padding      : v.$val * 2;
+    padding: v.$val * 2;
     margin-bottom: v.$val * 4;
 
-    @include v.mediaScreen( 'mobile' ) {
+    @include v.mediaScreen('mobile') {
       margin-bottom: 0;
     }
   }

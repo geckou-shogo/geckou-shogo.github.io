@@ -52,6 +52,10 @@ export default {
     border-bottom: 2px solid c.$white;
     position: relative;
 
+    @include v.mediaScreen('mobile') {
+      margin-bottom: 6px;
+    }
+
     &::before,
     &::after {
       content: '';

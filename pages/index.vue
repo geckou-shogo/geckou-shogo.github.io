@@ -1,7 +1,7 @@
 <template>
   <main id="frontpage" :class="$style.container">
     <Intro :class="$style.intro" :container-id="'frontpage'" />
-    <!-- <section :class="$style.section">
+    <section v-if="false" :class="$style.section">
       <header :class="$style.section__header">
         <Heading
           :heading="'BLOG'"
@@ -17,7 +17,7 @@
           </NuxtLink>
         </div>
       </div>
-    </section> -->
+    </section>
     <section :class="$style.section">
       <header :class="$style.section__header">
         <Heading
@@ -47,12 +47,33 @@
         <CompanyList />
       </div>
     </section>
+    <section>
+      <header :class="$style.section__header">
+        <Heading
+          :heading="'CONTACT'"
+          :description="'お問い合わせ'"
+          :class="$style.section__heading"
+        />
+      </header>
+      <div :class="$style.section__contents">
+        <iframe
+          src="https://docs.google.com/forms/d/e/1FAIpQLSewpIVsGpZVR3cK9RIflcWIs5J9bFedXIgsqylcxE8N7o0Ybw/viewform?embedded=true"
+          width="100%"
+          height="641"
+          frameborder="0"
+          marginheight="0"
+          marginwidth="0"
+          >読み込んでいます…</iframe
+        >
+      </div>
+    </section>
     <GlobalFooter />
   </main>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+import sal from 'sal.js'
 
 @Component
 export default class IndexPage extends Vue {
@@ -75,8 +96,8 @@ export default class IndexPage extends Vue {
     }
   }
 
-  build!: {
-    transpile: ['sal']
+  mounted() {
+    sal()
   }
 }
 </script>
@@ -94,7 +115,7 @@ export default class IndexPage extends Vue {
   min-height: 100vh;
   width: 100%;
   max-width: v.$desktopScreenSize;
-  margin: auto;
+  margin: 0 auto v.$val * 8 auto;
   padding: v.$val * 2;
   position: relative;
   z-index: v.zIndex('contents');

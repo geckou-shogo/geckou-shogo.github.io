@@ -1,6 +1,6 @@
 ---
 title     : 不動産投資LP
-categories: [desighn, develop]
+categories: [design, develop]
 thumbnail : subsidy.jpg
 client    : 株式会社ETSホールディングス
 ---

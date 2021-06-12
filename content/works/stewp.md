@@ -1,6 +1,6 @@
 ---
 title     : STEWP
-categories: [desighn, develop]
+categories: [design, develop]
 thumbnail : stewp.png
 link      : https://stewp.app/
 ---
