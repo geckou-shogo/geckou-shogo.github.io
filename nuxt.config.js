@@ -1,5 +1,4 @@
 import Sass from 'sass'
-import Fiber from 'fibers'
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
@@ -77,9 +76,6 @@ export default {
     loaders: {
       scss: {
         implementation: Sass,
-        sassOptions: {
-          fiber: Fiber,
-        },
       },
     },
   },
