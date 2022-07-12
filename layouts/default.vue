@@ -1,7 +1,6 @@
 <template>
   <div>
     <Nuxt />
-    <CursorEffect />
   </div>
 </template>
 

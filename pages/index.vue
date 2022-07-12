@@ -34,20 +34,25 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 export default {
   data() {
     return {
-      mobileView: true,
       windowWidth: 0,
+      windowHeight: 0,
+    }
+  },
+  computed: {
+    windowView() {
+      return this.windowWidth <= 768
+    },
+    windowHeight() {
+      return this.windowHeight <= 768
     }
   },
   methods: {
     calculateWindowWidth() {
       this.windowWidth = window.innerWidth
-      console.log(window.innerWidth);
-      
-      // true/false
-      this.mobileView = this.windowWidth < 768
-    },
-    scroll() {
-      const area  = document.querySelector('#scroll');
+      this.windowHeight = window.innerHeight
+      if (this.windowWidth > this.windowHeight) {
+        console.log('横幅が大きい'); 
+        const area  = document.querySelector('#scroll');
       const wrap  = document.querySelector('#scroll_wrap');
       const items = document.querySelectorAll('.scroll_item');
       const num   = items.length;
@@ -70,14 +75,20 @@ export default {
           },
         },
       });
+      } 
+      console.log(this.windowView);
+      console.log(this.windowHeight);
+      
     },
+    
   },
   mounted() {
     window.addEventListener('resize', this.calculateWindowWidth)
     gsap.registerPlugin(ScrollTrigger);
     this.$nextTick(() => {
-      this.scroll();
+      this.calculateWindowWidth();
     });
+    
   },
 }
 </script>
@@ -92,6 +103,9 @@ export default {
   overflow: hidden;
   &_wrap {
     display: flex;
+    @media (max-width: 768px) {
+      display: block;
+    }
   }
   
 }
@@ -127,7 +141,5 @@ export default {
 .contact {
   background-color: red;
 }
-
-
 
 </style>
