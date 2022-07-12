@@ -36,59 +36,52 @@ export default {
     return {
       windowWidth: 0,
       windowHeight: 0,
-    }
-  },
-  computed: {
-    windowView() {
-      return this.windowWidth <= 768
-    },
-    windowHeight() {
-      return this.windowHeight <= 768
+      scrollY: 0,
     }
   },
   methods: {
     calculateWindowWidth() {
-      this.windowWidth = window.innerWidth
-      this.windowHeight = window.innerHeight
-      if (this.windowWidth > this.windowHeight) {
+      if (window.innerWidth > window.innerHeight) {
         console.log('横幅が大きい'); 
         const area  = document.querySelector('#scroll');
-      const wrap  = document.querySelector('#scroll_wrap');
-      const items = document.querySelectorAll('.scroll_item');
-      const num   = items.length;
+        const wrap  = document.querySelector('#scroll_wrap');
+        const items = document.querySelectorAll('.scroll_item');
+        const num   = items.length;
 
-      gsap.set(wrap,  { width: num * 100 + "%" });
-      gsap.set(items, { width: 100 / num + "%" });
+        gsap.set(wrap,  { width: num * 100 + "%" });
+        gsap.set(items, { width: 100 / num + "%" });
 
-      gsap.to(items,  {
-        xPercent: -100 * ( num - 1 ), //x方向に移動させる
-        ease: "none",
-        scrollTrigger: {
-          trigger: area,
-          start: "top top",
-          end: "+=100%",
-          scrub: 1, //スクロール量に応じて動かす
-          pin: true, //ピン留め
-          snap: { //キリの良い位置へ移動させる
-            snapTo: 1 / ( num - 1 ),
-            duration: 0.5,
+        gsap.to(items, {
+          xPercent: -100 * ( num - 1 ), //x方向に移動させる
+          ease: "none",
+          scrollTrigger: {
+            trigger: area,
+            start: "top top",
+            end: "+=100%",
+            scrub: 1, //スクロール量に応じて動かす
+            pin: true, //ピン留め
+            snap: { //キリの良い位置へ移動させる
+              snapTo: 1 / ( num - 1 ),
+              duration: 0.5,
+            },
           },
-        },
-      });
+        });
       } 
-      console.log(this.windowView);
-      console.log(this.windowHeight);
-      
+      console.log('width=' + innerWidth);
+      console.log('height=' + innerHeight);
     },
-    
+    handleScroll() {
+        this.scrollY = window.scrollY;
+        console.log(handleScroll);
+        
+    }
   },
   mounted() {
-    window.addEventListener('resize', this.calculateWindowWidth)
-    gsap.registerPlugin(ScrollTrigger);
-    this.$nextTick(() => {
+      window.addEventListener('resize', this.calculateWindowWidth, 'scroll', this.handleScroll)
+      gsap.registerPlugin(ScrollTrigger);
+      this.$nextTick(() => {
       this.calculateWindowWidth();
     });
-    
   },
 }
 </script>
