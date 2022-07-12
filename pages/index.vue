@@ -1,28 +1,28 @@
 <template>
   <main id="frontpage">
     <div id="scroll" :class="$style.scroll">
-    <div id="scroll_wrap" :class="$style.scroll_wrap">
-      <section id="vision" :class="$style.vision">
-        <div  :class="[$style.container, 'item']">
-            <h2 :class="$style.subttl">1</h2>
+      <div id="scroll_wrap" :class="$style.scroll_wrap">
+        <section id="vision" :class="$style.vision" class="item">
+          <div :class="$style.container">
+              <h2 :class="$style.subttl">1</h2>
+          </div>
+        </section> 
+        <section id="service" :class="$style.service" class="item">
+          <div :class="$style.container">
+              <h2 :class="$style.subttl">2</h2>
+          </div>
+        </section>
+        <section id="company" :class="$style.company" class="item">
+          <div :class="$style.container">
+              <h2 :class="$style.subttl">3</h2>
+          </div>
+        </section>
+        <section id="contact" :class="$style.contact" class="item">
+          <div :class="$style.container">
+              <h2 :class="$style.subttl">4</h2>
+          </div>
+        </section>
         </div>
-      </section> 
-      <section id="service" :class="$style.service">
-        <div  :class="[$style.container, 'item']">
-            <h2 :class="$style.subttl">2</h2>
-        </div>
-      </section>
-      <section id="company" :class="$style.company">
-        <div  :class="[$style.container, 'item']">
-            <h2 :class="$style.subttl">3</h2>
-        </div>
-      </section>
-      <section id="contact" :class="$style.contact">
-        <div  :class="[$style.container, 'item']">
-            <h2 :class="$style.subttl">4</h2>
-        </div>
-      </section>
-      </div>
       </div>
   </main>
 </template>
@@ -42,18 +42,19 @@ export default {
       gsap.set(wrap,  { width: num * 100 + "%" });
       gsap.set(items, { width: 100 / num + "%" });
 
-      console.log(area)
-      console.log('.item')
-
-      gsap.to(this.$style.scroll,  {
+      gsap.to(items,  {
         xPercent: -100 * ( num - 1 ), //x方向に移動させる
         ease: "none",
         scrollTrigger: {
           trigger: area,
-          start: "top top", //開始位置
-          end: "+=8000", //終了位置
+          start: "top top",
+          end: "+=100%",
+          scrub: 1, //スクロール量に応じて動かす
           pin: true, //ピン留め
-          scrub: true, //スクロール量に応じて動かす
+          snap: { //キリの良い位置へ移動させる
+            snapTo: 1 / ( num - 1 ),
+            duration: 0.5,
+          },
         },
       });
     },
@@ -85,6 +86,7 @@ export default {
   color: c.$black;
 }
 
+
 .container {
   display: flex;
   height: 100vh;
@@ -93,7 +95,6 @@ export default {
 }
 
 .vision {
-  width: 100%;
   background-color: c.$black;
   .subttl {
     color: c.$white;
@@ -101,17 +102,14 @@ export default {
 }
 
 .service {
-  width: 100%;
   background-color: aqua;
 }
 
 .company {
-  width: 100%;
-  background-color: .707070;
+  background-color: #707070;
 }
 
 .contact {
-  width: 100%;
   background-color: red;
 }
 
