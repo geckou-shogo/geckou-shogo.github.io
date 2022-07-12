@@ -2,22 +2,22 @@
   <main id="frontpage">
     <div id="scroll" :class="$style.scroll">
       <div id="scroll_wrap" :class="$style.scroll_wrap">
-        <section id="vision" :class="$style.vision" class="item">
+        <section id="vision" :class="$style.vision" class="scroll_item">
           <div :class="$style.container">
               <h2 :class="$style.subttl">1</h2>
           </div>
         </section> 
-        <section id="service" :class="$style.service" class="item">
+        <section id="service" :class="$style.service" class="scroll_item">
           <div :class="$style.container">
               <h2 :class="$style.subttl">2</h2>
           </div>
         </section>
-        <section id="company" :class="$style.company" class="item">
+        <section id="company" :class="$style.company" class="scroll_item">
           <div :class="$style.container">
               <h2 :class="$style.subttl">3</h2>
           </div>
         </section>
-        <section id="contact" :class="$style.contact" class="item">
+        <section id="contact" :class="$style.contact" class="scroll_item">
           <div :class="$style.container">
               <h2 :class="$style.subttl">4</h2>
           </div>
@@ -32,11 +32,24 @@ import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default {
+  data() {
+    return {
+      mobileView: true,
+      windowWidth: 0,
+    }
+  },
   methods: {
+    calculateWindowWidth() {
+      this.windowWidth = window.innerWidth
+      console.log(window.innerWidth);
+      
+      // true/false
+      this.mobileView = this.windowWidth < 768
+    },
     scroll() {
       const area  = document.querySelector('#scroll');
       const wrap  = document.querySelector('#scroll_wrap');
-      const items = document.querySelectorAll('.item');
+      const items = document.querySelectorAll('.scroll_item');
       const num   = items.length;
 
       gsap.set(wrap,  { width: num * 100 + "%" });
@@ -60,6 +73,7 @@ export default {
     },
   },
   mounted() {
+    window.addEventListener('resize', this.calculateWindowWidth)
     gsap.registerPlugin(ScrollTrigger);
     this.$nextTick(() => {
       this.scroll();
@@ -79,6 +93,7 @@ export default {
   &_wrap {
     display: flex;
   }
+  
 }
 
 .subttl {
@@ -112,5 +127,7 @@ export default {
 .contact {
   background-color: red;
 }
+
+
 
 </style>
