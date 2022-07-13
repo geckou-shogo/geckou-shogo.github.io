@@ -28,6 +28,8 @@
 </template>
 
 <script lang="ts">
+import { stringify } from 'querystring'
+import { booleanLiteral } from '@babel/types'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -36,20 +38,42 @@ export default {
     return {
       windowWidth: 0,
       windowHeight: 0,
-      windowName: false,
+      windowName: true,
       scrollY: 0,
     }
   },
   mounted() {
     window.addEventListener('resize', this.calculateWindowWidth)
+    window.addEventListener('resize', this.handleScroll)
     window.addEventListener('scroll', this.handleScroll)
     gsap.registerPlugin(ScrollTrigger)
     this.$nextTick(() => {
-      this.calculateWindowWidth()
       this.handleScroll()
+      this.calculateWindowWidth()
     })
   },
   methods: {
+    handleScroll() {
+      if (window.innerWidth < window.innerHeight) {
+        this.scrollY = window.scrollY
+        console.log(this.scrollY)
+        console.log('スクロールを検知します')
+
+        // string ''
+        // number 1
+        // boolean true false
+        // []array []
+        // {}object {
+        //   a: 0,
+        // },
+
+        if (this.windowName !== false) {
+          console.log(this.windowName)
+          // location.reload()
+          // this.windowName = false
+        }
+      }
+    },
     calculateWindowWidth() {
       if (window.innerWidth > window.innerHeight) {
         console.log('横幅が大きい')
@@ -80,18 +104,6 @@ export default {
       }
       console.log('width=' + innerWidth)
       console.log('height=' + innerHeight)
-    },
-    handleScroll() {
-      if (window.innerWidth < window.innerHeight) {
-        this.scrollY = window.scrollY
-        console.log(this.scrollY)
-        console.log('スクロールを検知します')
-        if (this.windowname !== 'false') {
-          location.reload()
-        } else {
-          this.windowname !== 'true'
-        }
-      }
     },
   },
 }
