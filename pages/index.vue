@@ -36,8 +36,18 @@ export default {
     return {
       windowWidth: 0,
       windowHeight: 0,
+      windowName: false,
       scrollY: 0,
     }
+  },
+  mounted() {
+    window.addEventListener('resize', this.calculateWindowWidth)
+    window.addEventListener('scroll', this.handleScroll)
+    gsap.registerPlugin(ScrollTrigger)
+    this.$nextTick(() => {
+      this.calculateWindowWidth()
+      this.handleScroll()
+    })
   },
   methods: {
     calculateWindowWidth() {
@@ -52,16 +62,16 @@ export default {
         gsap.set(items, { width: 100 / num + '%' })
 
         gsap.to(items, {
-          xPercent: -100 * (num - 1), //x方向に移動させる
+          xPercent: -100 * (num - 1), // x方向に移動させる
           ease: 'none',
           scrollTrigger: {
             trigger: area,
             start: 'top top',
             end: '+=100%',
-            scrub: 1, //スクロール量に応じて動かす
-            pin: true, //ピン留め
+            scrub: 1, // スクロール量に応じて動かす
+            pin: true, // ピン留め
             snap: {
-              //キリの良い位置へ移動させる
+              // キリの良い位置へ移動させる
               snapTo: 1 / (num - 1),
               duration: 0.5,
             },
@@ -72,18 +82,17 @@ export default {
       console.log('height=' + innerHeight)
     },
     handleScroll() {
-      this.scrollY = window.scrollY
-      console.log(this.scrollY)
+      if (window.innerWidth < window.innerHeight) {
+        this.scrollY = window.scrollY
+        console.log(this.scrollY)
+        console.log('スクロールを検知します')
+        if (this.windowname !== 'false') {
+          location.reload()
+        } else {
+          this.windowname !== 'true'
+        }
+      }
     },
-  },
-  mounted() {
-    window.addEventListener('resize', this.calculateWindowWidth)
-    window.addEventListener('scroll', this.handleScroll)
-    gsap.registerPlugin(ScrollTrigger)
-    this.$nextTick(() => {
-      this.calculateWindowWidth()
-      this.handleScroll()
-    })
   },
 }
 </script>
