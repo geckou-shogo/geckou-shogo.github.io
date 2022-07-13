@@ -88,6 +88,7 @@ export default {
         gsap.set(items, { width: 100 / num + '%' })
 
         gsap.to(items, {
+          horizontal: 'true',
           xPercent: -100 * (num - 1), // x方向に移動させる
           ease: 'none',
           scrollTrigger: {
