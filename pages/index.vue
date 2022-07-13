@@ -38,45 +38,45 @@ export default {
     return {
       windowWidth: 0,
       windowHeight: 0,
+      windowStatus: '',
       windowName: true,
       scrollY: 0,
     }
   },
   mounted() {
-    window.addEventListener('resize', this.calculateWindowWidth)
+    window.addEventListener('load', this.windowWatch)
     window.addEventListener('resize', this.handleScroll)
     window.addEventListener('scroll', this.handleScroll)
+    window.addEventListener('resize', this.calculateWindowWidth)
     gsap.registerPlugin(ScrollTrigger)
     this.$nextTick(() => {
+      this.windowWatch()
       this.handleScroll()
+      this.windowConfirmation()
       this.calculateWindowWidth()
     })
   },
   methods: {
+    windowWatch() {
+      this.windowStatus =
+        window.innerWidth > window.innerHeight ? 'landscape' : 'portrait'
+      console.log(this.windowStatus)
+    },
     handleScroll() {
-      if (window.innerWidth < window.innerHeight) {
-        this.scrollY = window.scrollY
-        console.log(this.scrollY)
-        console.log('スクロールを検知します')
+      window.addEventListener('scroll', this.windowConfirmation)
+    },
+    windowConfirmation() {
+      const status =
+        window.innerWidth > window.innerHeight ? 'landscape' : 'portrait'
 
-        // string ''
-        // number 1
-        // boolean true false
-        // []array []
-        // {}object {
-        //   a: 0,
-        // },
-
-        if (this.windowName !== false) {
-          console.log(this.windowName)
-          // location.reload()
-          // this.windowName = false
-        }
+      if (status === this.windowStatus) {
+        removeEventListener('scroll', this.windowConfirmation)
+      } else {
+        window.location.reload()
       }
     },
     calculateWindowWidth() {
       if (window.innerWidth > window.innerHeight) {
-        console.log('横幅が大きい')
         const area = document.querySelector('#scroll')
         const wrap = document.querySelector('#scroll_wrap')
         const items = document.querySelectorAll('.scroll_item')
@@ -102,8 +102,6 @@ export default {
           },
         })
       }
-      console.log('width=' + innerWidth)
-      console.log('height=' + innerHeight)
     },
   },
 }
