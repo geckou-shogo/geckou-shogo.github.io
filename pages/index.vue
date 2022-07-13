@@ -45,9 +45,8 @@ export default {
   },
   mounted() {
     window.addEventListener('load', this.windowWatch)
-    window.addEventListener('resize', this.handleScroll)
     window.addEventListener('scroll', this.handleScroll)
-    window.addEventListener('resize', this.calculateWindowWidth)
+    window.addEventListener('resize', this.windowResize)
     gsap.registerPlugin(ScrollTrigger)
     this.$nextTick(() => {
       this.windowWatch()
@@ -57,6 +56,9 @@ export default {
     })
   },
   methods: {
+    windowResize() {
+      this.handleScroll, this.calculateWindowWidth, this.handleScroll
+    },
     windowWatch() {
       this.windowStatus =
         window.innerWidth > window.innerHeight ? 'landscape' : 'portrait'
