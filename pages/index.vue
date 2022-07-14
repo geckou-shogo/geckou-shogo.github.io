@@ -1,26 +1,16 @@
 <template>
   <main id="frontpage">
     <div id="scroll" :class="$style.scroll">
-      <div id="scroll_wrap" :class="$style.scroll_wrap">
-        <section id="vision" :class="$style.vision" class="scroll_item">
-          <div :class="$style.container">
-            <h2 :class="$style.subttl">1</h2>
-          </div>
-        </section>
-        <section id="service" :class="$style.service" class="scroll_item">
-          <div :class="$style.container">
-            <h2 :class="$style.subttl">2</h2>
-          </div>
-        </section>
-        <section id="company" :class="$style.company" class="scroll_item">
-          <div :class="$style.container">
-            <h2 :class="$style.subttl">3</h2>
-          </div>
-        </section>
-        <section id="contact" :class="$style.contact" class="scroll_item">
-          <div :class="$style.container">
-            <h2 :class="$style.subttl">4</h2>
-          </div>
+      <div id="scroll_container" :class="$style.scroll_container">
+        <section
+          class="scroll_item"
+          v-for="data in sectionData"
+          :class="$style.vision"
+          :key="data.id"
+        >
+          <CommonContainer
+            :sectionData="data"
+          ></CommonContainer>
         </section>
       </div>
     </div>
@@ -32,81 +22,98 @@ import { stringify } from 'querystring'
 import { booleanLiteral } from '@babel/types'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import CommonContainer from '~/components/CommonContainer.vue'
 
 export default {
-  data() {
-    return {
-      windowWidth: 0,
-      windowHeight: 0,
-      windowStatus: '',
-      windowName: true,
-      scrollY: 0,
-    }
-  },
-  mounted() {
-    window.addEventListener('load', this.windowWatch)
-    window.addEventListener('scroll', this.handleScroll)
-    window.addEventListener('resize', this.windowResize)
-    gsap.registerPlugin(ScrollTrigger)
-    this.$nextTick(() => {
-      this.windowWatch()
-      this.handleScroll()
-      this.windowConfirmation()
-      this.calculateWindowWidth()
-    })
-  },
-  methods: {
-    windowResize() {
-      this.handleScroll, this.calculateWindowWidth, this.handleScroll
+    data() {
+        return {
+            windowStatus: "",
+            sectionData: [
+              {
+                id: 'vision',
+                heading: '1',
+                description: '説明',
+              },
+               {
+                id: 'service',
+                heading: '2',
+                description: '説明',
+              },
+              {
+                id: 'information',
+                heading: '3',
+                description: '説明',
+              },
+              {
+                id: 'contact',
+                heading: '4',
+                description: '説明',
+              },
+            ],
+        };
     },
-    windowWatch() {
-      this.windowStatus =
-        window.innerWidth > window.innerHeight ? 'landscape' : 'portrait'
-      console.log(this.windowStatus)
+    mounted() {
+        window.addEventListener("load", this.windowWatch);
+        window.addEventListener("scroll", this.handleScroll);
+        window.addEventListener("resize", this.windowResize);
+        gsap.registerPlugin(ScrollTrigger);
+        this.$nextTick(() => {
+            this.windowWatch();
+            this.handleScroll();
+            this.windowConfirmation();
+            this.calculateWindowWidth();
+        });
     },
-    handleScroll() {
-      window.addEventListener('scroll', this.windowConfirmation)
+    methods: {
+        windowResize() {
+            this.handleScroll, this.calculateWindowWidth, this.handleScroll;
+        },
+        windowWatch() {
+            this.windowStatus =
+                window.innerWidth > window.innerHeight ? "landscape" : "portrait";
+            console.log(this.windowStatus);
+        },
+        handleScroll() {
+            window.addEventListener("scroll", this.windowConfirmation);
+        },
+        windowConfirmation() {
+            const status = window.innerWidth > window.innerHeight ? "landscape" : "portrait";
+            if (status === this.windowStatus) {
+                removeEventListener("scroll", this.windowConfirmation);
+            }
+            else {
+                window.location.reload();
+            }
+        },
+        calculateWindowWidth() {
+            if (window.innerWidth > window.innerHeight) {
+                const area = document.querySelector("#scroll");
+                const container = document.querySelector("#scroll_container");
+                const items = document.querySelectorAll(".scroll_item");
+                const num = items.length;
+                gsap.set(container, { width: num * 100 + "%" });
+                gsap.set(items, { width: 100 / num + "%" });
+                gsap.to(items, {
+                    horizontal: "true",
+                    xPercent: -100 * (num - 1),
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: area,
+                        start: "top top",
+                        end: "+=100%",
+                        scrub: 1,
+                        pin: true,
+                        snap: {
+                            // キリの良い位置へ移動させる
+                            snapTo: 1 / (num - 1),
+                            duration: 0.5,
+                        },
+                    },
+                });
+            }
+        },
     },
-    windowConfirmation() {
-      const status =
-        window.innerWidth > window.innerHeight ? 'landscape' : 'portrait'
-
-      if (status === this.windowStatus) {
-        removeEventListener('scroll', this.windowConfirmation)
-      } else {
-        window.location.reload()
-      }
-    },
-    calculateWindowWidth() {
-      if (window.innerWidth > window.innerHeight) {
-        const area = document.querySelector('#scroll')
-        const wrap = document.querySelector('#scroll_wrap')
-        const items = document.querySelectorAll('.scroll_item')
-        const num = items.length
-
-        gsap.set(wrap, { width: num * 100 + '%' })
-        gsap.set(items, { width: 100 / num + '%' })
-
-        gsap.to(items, {
-          horizontal: 'true',
-          xPercent: -100 * (num - 1), // x方向に移動させる
-          ease: 'none',
-          scrollTrigger: {
-            trigger: area,
-            start: 'top top',
-            end: '+=100%',
-            scrub: 1, // スクロール量に応じて動かす
-            pin: true, // ピン留め
-            snap: {
-              // キリの良い位置へ移動させる
-              snapTo: 1 / (num - 1),
-              duration: 0.5,
-            },
-          },
-        })
-      }
-    },
-  },
+    components: { CommonContainer }
 }
 </script>
 
@@ -117,7 +124,7 @@ export default {
 
 .scroll {
   overflow: hidden;
-  &_wrap {
+  &_container {
     display: flex;
     @media (max-width: 768px) {
       display: block;

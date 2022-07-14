@@ -1,8 +1,8 @@
 <template>
   <dl :class="$style.list">
     <div
-      v-for="(item, index) in company"
-      :key="index"
+      v-for="item in company"
+      :key="item.term"
       :class="$style.list__item"
     >
       <dt :class="$style.list__term">

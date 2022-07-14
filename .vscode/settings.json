@@ -1,0 +1,6 @@
+{
+    "vetur.format.defaultFormatter.postcss": "none",
+    "vetur.format.defaultFormatter.ts": "none",
+    "vetur.format.defaultFormatter.html": "none",
+    "vetur.format.defaultFormatter.js": "none"
+}
