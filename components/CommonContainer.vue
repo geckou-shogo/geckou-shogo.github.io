@@ -3,7 +3,7 @@
     <div 
     :class="$style.container"
     >
-      <h2 :class="$style.heading">
+      <h2 class="heading" :class="$style.heading">
         {{ sectionData.heading }}
       </h2>
       <p :class="$style.description">
@@ -45,7 +45,7 @@ export default {
 
 }
 .vision {
-  background-color: c.$blue;
+  /* background-color: c.$blue; */
 }
 
 .service {

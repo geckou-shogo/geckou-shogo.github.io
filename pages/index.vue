@@ -1,6 +1,6 @@
 <template>
-  <main id="frontpage">
-    <div id="scroll" :class="$style.scroll">
+  <main id="frontpage" class="page">
+    <div id="scroll" class="background_color" :class="$style.scroll">
       <div id="scroll_container" :class="$style.scroll_container">
         <section
           class="scroll_item"
@@ -22,98 +22,118 @@ import { stringify } from 'querystring'
 import { booleanLiteral } from '@babel/types'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import CommonContainer from '~/components/CommonContainer.vue'
 
 export default {
-    data() {
-        return {
-            windowStatus: "",
-            sectionData: [
+  data() {
+      return {
+          windowStatus: "",
+          sectionData: [
+            {
+              id: 'vision',
+              heading: '1',
+              description: '説明',
+              color:  '#1c4ac9',
+            },
               {
-                id: 'vision',
-                heading: '1',
-                description: '説明',
-              },
-               {
-                id: 'service',
-                heading: '2',
-                description: '説明',
-              },
-              {
-                id: 'information',
-                heading: '3',
-                description: '説明',
-              },
-              {
-                id: 'contact',
-                heading: '4',
-                description: '説明',
-              },
-            ],
-        };
+              id: 'service',
+              heading: '2',
+              description: '説明',
+              color:  '#3C62C9',
+            },
+            {
+              id: 'information',
+              heading: '3',
+              description: '説明',
+              color:  '#798EC9',
+            },
+            {
+              id: 'contact',
+              heading: '4',
+              description: '説明',
+              color:  '#B5BBC9',
+            },
+          ],
+      };
+  },
+  mounted() {
+      window.addEventListener('load', this.windowWatch)
+      window.addEventListener('resize', this.handleScroll)
+      window.addEventListener('scroll', this.handleScroll)
+      window.addEventListener('resize', this.calculateWindowWidth)
+      window.addEventListener('resize', this.windowResize)
+      gsap.registerPlugin(ScrollTrigger);
+      this.$nextTick(() => {
+          this.windowWatch();
+          this.handleScroll();
+          this.windowConfirmation();
+          this.calculateWindowWidth();
+          this.backGroundColor();
+      });
+  },
+  methods: {
+    windowWatch() {
+        this.windowStatus =
+            window.innerWidth > window.innerHeight ? "landscape" : "portrait";
+        console.log(this.windowStatus);
     },
-    mounted() {
-        window.addEventListener("load", this.windowWatch);
-        window.addEventListener("scroll", this.handleScroll);
-        window.addEventListener("resize", this.windowResize);
-        gsap.registerPlugin(ScrollTrigger);
-        this.$nextTick(() => {
-            this.windowWatch();
-            this.handleScroll();
-            this.windowConfirmation();
-            this.calculateWindowWidth();
+    windowResize() {
+        this.handleScroll, this.calculateWindowWidth;
+    },
+    windowConfirmation() {
+        const status = window.innerWidth > window.innerHeight ? "landscape" : "portrait";
+        if (status === this.windowStatus) {
+            removeEventListener("scroll", this.windowConfirmation);
+        }
+        else {
+            window.location.reload();
+        }
+    },
+    handleScroll() {
+      window.addEventListener("scroll", this.windowConfirmation);
+    },
+    calculateWindowWidth() {
+      if (window.innerWidth > window.innerHeight) {
+        const area = document.querySelector("#scroll");
+        const container = document.querySelector("#scroll_container");
+        const items = document.querySelectorAll(".scroll_item");
+        const num = items.length;
+        gsap.set(container, { width: num * 100 + "%" });
+        gsap.set(items, { width: 100 / num + "%" });
+        gsap.to(items, {
+            xPercent: -100 * (num - 1),
+            ease: "none",
+            scrollTrigger: {
+                trigger: area,
+                start: "top top",
+                end: "+=100%",
+                scrub: 1,
+                pin: true,
+                snap: {
+                // キリの良い位置へ移動させる
+                snapTo: 1 / (num - 1),
+                duration: 0.5,
+                },
+            },
         });
+      }
     },
-    methods: {
-        windowResize() {
-            this.handleScroll, this.calculateWindowWidth, this.handleScroll;
-        },
-        windowWatch() {
-            this.windowStatus =
-                window.innerWidth > window.innerHeight ? "landscape" : "portrait";
-            console.log(this.windowStatus);
-        },
-        handleScroll() {
-            window.addEventListener("scroll", this.windowConfirmation);
-        },
-        windowConfirmation() {
-            const status = window.innerWidth > window.innerHeight ? "landscape" : "portrait";
-            if (status === this.windowStatus) {
-                removeEventListener("scroll", this.windowConfirmation);
-            }
-            else {
-                window.location.reload();
-            }
-        },
-        calculateWindowWidth() {
-            if (window.innerWidth > window.innerHeight) {
-                const area = document.querySelector("#scroll");
-                const container = document.querySelector("#scroll_container");
-                const items = document.querySelectorAll(".scroll_item");
-                const num = items.length;
-                gsap.set(container, { width: num * 100 + "%" });
-                gsap.set(items, { width: 100 / num + "%" });
-                gsap.to(items, {
-                    horizontal: "true",
-                    xPercent: -100 * (num - 1),
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: area,
-                        start: "top top",
-                        end: "+=100%",
-                        scrub: 1,
-                        pin: true,
-                        snap: {
-                            // キリの良い位置へ移動させる
-                            snapTo: 1 / (num - 1),
-                            duration: 0.5,
-                        },
-                    },
-                });
-            }
-        },
-    },
-    components: { CommonContainer }
+    backGroundColor() {
+      const page = document.querySelector(".page");
+      const backgroundColorChange = document.querySelector(".background_color");
+      const color = this.sectionData.color;
+
+      gsap.to(backgroundColorChange, {
+        scrollTrigger: {
+          trigger: page,
+          start: 'top top' ,
+          duration: 5, //５秒後かけてアニメーションさせる
+          backgroundColor: this.color, //背景色を赤にする
+        }
+      })
+      console.log('カラーを変更するよ')
+      console.log(color)
+    }
+  },
 }
 </script>
 
@@ -144,22 +164,4 @@ export default {
   justify-content: center;
 }
 
-.vision {
-  background-color: c.$black;
-  .subttl {
-    color: c.$white;
-  }
-}
-
-.service {
-  background-color: aqua;
-}
-
-.company {
-  background-color: #707070;
-}
-
-.contact {
-  background-color: red;
-}
 </style>
