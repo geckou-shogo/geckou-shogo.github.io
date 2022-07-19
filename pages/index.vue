@@ -1,7 +1,10 @@
 <template>
-  <main id="frontpage" class="page">
-    <div id="scroll" class="background_color" :class="$style.scroll">
-      <div id="scroll_container" :class="$style.scroll_container">
+  <main id="frontpage" >
+    <div id="scroll" :class="$style.scroll">
+      <div id="scroll_container" 
+        class="page"
+        :class="$style.scroll_container"
+      >
         <section
           class="scroll_item"
           v-for="data in sectionData"
@@ -120,6 +123,8 @@ export default {
     backGroundColor() {
       const page = document.querySelector(".page");
       const backgroundColorChange = document.querySelector(".background_color");
+      console.log(page);
+      console.log(backgroundColorChange);
       
       // const color = this.sectionData.color;
 
@@ -129,7 +134,7 @@ export default {
           start: 'top top',
           end: 'bottom botoom',
           duration: 1, //５秒後かけてアニメーションさせる
-          backgroundColor: 'red', //背景色を赤にする
+          backgroundColor: "red", //背景色を赤にする
           markers: 'true'
         }
       })

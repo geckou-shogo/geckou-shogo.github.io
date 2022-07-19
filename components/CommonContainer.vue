@@ -1,5 +1,8 @@
 <template>
-  <div :class="$style[sectionData.id]">
+  <div 
+      class="background_color"
+      :class="$style[sectionData.id]"
+  >
     <div 
     :class="$style.container"
     >
@@ -33,7 +36,6 @@ export default {
 
 .heading {
   font-size: 100px;
-  color: c.$white;
 }
 .container {
   display: flex;
@@ -41,7 +43,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: c.$black;
 
 }
 .vision {
