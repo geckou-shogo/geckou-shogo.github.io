@@ -123,6 +123,7 @@ export default {
     backGroundColor() {
       const page = document.querySelector(".page");
       const backgroundColorChange = document.querySelector(".background_color");
+
       console.log(page);
       console.log(backgroundColorChange);
       
