@@ -120,18 +120,20 @@ export default {
     backGroundColor() {
       const page = document.querySelector(".page");
       const backgroundColorChange = document.querySelector(".background_color");
-      const color = this.sectionData.color;
+      
+      // const color = this.sectionData.color;
 
       gsap.to(backgroundColorChange, {
         scrollTrigger: {
           trigger: page,
-          start: 'top top' ,
-          duration: 5, //５秒後かけてアニメーションさせる
-          backgroundColor: this.color, //背景色を赤にする
+          start: 'top top',
+          end: 'bottom botoom',
+          duration: 1, //５秒後かけてアニメーションさせる
+          backgroundColor: 'red', //背景色を赤にする
+          markers: 'true'
         }
       })
       console.log('カラーを変更するよ')
-      console.log(color)
     }
   },
 }
@@ -146,7 +148,7 @@ export default {
   overflow: hidden;
   &_container {
     display: flex;
-    @media (max-width: 768px) {
+    @include v.mq(md) {
       display: block;
     }
   }
