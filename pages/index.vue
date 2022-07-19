@@ -20,43 +20,41 @@
   </main>
 </template>
 
-<script lang="ts">
-import { stringify } from 'querystring'
-import { booleanLiteral } from '@babel/types'
+<script>
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 export default {
   data() {
-      return {
-          windowStatus: "",
-          sectionData: [
-            {
-              id: 'vision',
-              heading: '1',
-              description: '説明',
-              color:  '#1c4ac9',
-            },
-              {
-              id: 'service',
-              heading: '2',
-              description: '説明',
-              color:  '#3C62C9',
-            },
-            {
-              id: 'information',
-              heading: '3',
-              description: '説明',
-              color:  '#798EC9',
-            },
-            {
-              id: 'contact',
-              heading: '4',
-              description: '説明',
-              color:  '#B5BBC9',
-            },
-          ],
-      };
+    return {
+      windowStatus: "",
+      sectionData: [
+        {
+          id: 'vision',
+          heading: '1',
+          description: '説明',
+          color:  '#1c4ac9',
+        },
+          {
+          id: 'service',
+          heading: '2',
+          description: '説明',
+          color:  '#3C62C9',
+        },
+        {
+          id: 'information',
+          heading: '3',
+          description: '説明',
+          color:  '#798EC9',
+        },
+        {
+          id: 'contact',
+          heading: '4',
+          description: '説明',
+          color:  '#B5BBC9',
+        },
+      ],
+    }
   },
   mounted() {
       window.addEventListener('load', this.windowWatch)
@@ -96,47 +94,50 @@ export default {
     },
     calculateWindowWidth() {
       if (window.innerWidth > window.innerHeight) {
-        const area = document.querySelector("#scroll");
-        const container = document.querySelector("#scroll_container");
-        const items = document.querySelectorAll(".scroll_item");
-        const num = items.length;
-        gsap.set(container, { width: num * 100 + "%" });
-        gsap.set(items, { width: 100 / num + "%" });
+        const area = document.querySelector("#scroll")
+        const container = document.querySelector("#scroll_container")
+        const items = document.querySelectorAll(".scroll_item")
+        const num = items.length
+
+        gsap.set(container, { width: num * 100 + "%" })
+        gsap.set(items, { width: 100 / num + "%" })
         gsap.to(items, {
-            xPercent: -100 * (num - 1),
-            ease: "none",
-            scrollTrigger: {
-                trigger: area,
-                start: "top top",
-                end: "+=100%",
-                scrub: 1,
-                pin: true,
-                snap: {
-                // キリの良い位置へ移動させる
-                snapTo: 1 / (num - 1),
-                duration: 0.5,
-                },
+          xPercent: -100 * (num - 1),
+          ease: "none",
+          scrollTrigger: {
+            trigger: area,
+            start: "top top",
+            end: "+=100%",
+            scrub: true,
+            pin: true,
+            snap: {
+              // キリの良い位置へ移動させる
+              snapTo: 1 / (num - 1),
+              duration: 0.5,
             },
-        });
+          },
+        })
       }
     },
     backGroundColor() {
-      const page = document.querySelector(".page");
+      const area = document.querySelector("#scroll")
       const backgroundColorChange = document.querySelector(".background_color");
-
-      console.log(page);
       console.log(backgroundColorChange);
-      
+       //初期状態をセット
+      // gsap.set(".background_color", 
+      // { 
+        
+        
+      // });
       // const color = this.sectionData.color;
-
       gsap.to(backgroundColorChange, {
+        duration: '1s', //５秒後かけてアニメーションさせる
+        backgroundColor: "red", //背景色を赤にする
         scrollTrigger: {
-          trigger: page,
-          start: 'top top',
-          end: 'bottom botoom',
-          duration: 1, //５秒後かけてアニメーションさせる
-          backgroundColor: "red", //背景色を赤にする
-          markers: 'true'
+          trigger: area,
+          start: "top center",
+          end: "bottom center",
+          toggleActions: "play pause reverse reset",
         }
       })
       console.log('カラーを変更するよ')

@@ -1,7 +1,7 @@
 <template>
   <div 
       class="background_color"
-      :class="$style[sectionData.id]"
+      :class="[$style.wrapper, $style[sectionData.id]]"
   >
     <div 
     :class="$style.container"
@@ -33,7 +33,9 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
-
+.wrapper {
+  transition: all .3s;
+}
 .heading {
   font-size: 100px;
 }
@@ -47,7 +49,7 @@ export default {
 
 }
 .vision {
-  /* background-color: c.$blue;  */
+  background-color: c.$white;
 }
 
 .service {
