@@ -45,7 +45,7 @@ export default {
 
 }
 .vision {
-  background-color: c.$blue;
+  /* background-color: c.$blue; */
 }
 
 .service {
