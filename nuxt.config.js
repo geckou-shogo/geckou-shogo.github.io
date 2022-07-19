@@ -34,8 +34,6 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    'boxicons/css/boxicons.min.css',
-    '~/node_modules/sal.js/dist/sal.css',
     '~/node_modules/ress/dist/ress.min.css',
     '~/assets/scss/base.scss',
     '~/assets/scss/nuxt-content.scss',
