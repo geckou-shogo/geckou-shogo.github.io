@@ -42,7 +42,8 @@ export default {
   align-items: center;
   justify-content: center;
   color: c.$black;
-
 }
+
+
 
 </style>
