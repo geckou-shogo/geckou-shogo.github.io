@@ -2,14 +2,14 @@
   <main id="frontpage" >
     <div id="scroll" :class="$style.scroll">
       <div id="scroll_container" 
-        class="page"
         :class="$style.scroll_container"
       >
         <section
           class="scroll_item"
           v-for="data in sectionData"
-          :class="$style.vision"
+          :class="$style.scroll_item"
           :key="data.id"
+          :data-color="data.color"
         >
           <CommonContainer
             :sectionData="data"
@@ -58,10 +58,7 @@ export default {
   },
   mounted() {
       window.addEventListener('load', this.windowWatch)
-      window.addEventListener('resize', this.handleScroll)
-      window.addEventListener('scroll', this.handleScroll)
-      window.addEventListener('resize', this.calculateWindowWidth)
-      window.addEventListener('resize', this.windowResize)
+      
       gsap.registerPlugin(ScrollTrigger);
       this.$nextTick(() => {
           this.windowWatch();
@@ -74,25 +71,28 @@ export default {
   methods: {
     windowWatch() {
         this.windowStatus =
-            window.innerWidth > window.innerHeight ? "landscape" : "portrait";
+            window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
         console.log(this.windowStatus);
     },
     windowResize() {
+        window.addEventListener('resize', this.windowResize)
         this.handleScroll, this.calculateWindowWidth;
     },
     windowConfirmation() {
-        const status = window.innerWidth > window.innerHeight ? "landscape" : "portrait";
+        const status = window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
         if (status === this.windowStatus) {
-            removeEventListener("scroll", this.windowConfirmation);
+            removeEventListener('scroll', this.windowConfirmation);
         }
         else {
             window.location.reload();
         }
     },
     handleScroll() {
-      window.addEventListener("scroll", this.windowConfirmation);
+      window.addEventListener('scroll', this.windowConfirmation);
+      window.addEventListener('resize', this.handleScroll)
     },
     calculateWindowWidth() {
+      window.addEventListener('resize', this.calculateWindowWidth)
       if (window.innerWidth > window.innerHeight) {
         const area = document.querySelector("#scroll")
         const container = document.querySelector("#scroll_container")
@@ -120,27 +120,23 @@ export default {
       }
     },
     backGroundColor() {
-      const area = document.querySelector("#scroll")
-      const backgroundColorChange = document.querySelector(".background_color");
-      console.log(backgroundColorChange);
-       //初期状態をセット
-      // gsap.set(".background_color", 
-      // { 
-        
-        
-      // });
-      // const color = this.sectionData.color;
-      gsap.to(backgroundColorChange, {
-        duration: '1s', //５秒後かけてアニメーションさせる
-        backgroundColor: "red", //背景色を赤にする
-        scrollTrigger: {
-          trigger: area,
-          start: "top center",
-          end: "bottom center",
-          toggleActions: "play pause reverse reset",
-        }
+      // const area = document.querySelector("#scroll")
+      const els = document.querySelectorAll(".scroll_item");
+      els.forEach(el => {
+          let color = el.dataset.color // datadに格納しているカラーコードを取得
+          console.log(color);
+          gsap.to(el, {
+          duration: '1s', //５秒後かけてアニメーションさせる
+          backgroundColor: color, //dataに格納しているカラーコードを入力
+          scrollTrigger: {
+            trigger: el,
+            start: "top top",
+            end: "bottom bottom",
+            toggleActions: "play pause reverse reset",
+          }
+        })
+        console.log(el);
       })
-      console.log('カラーを変更するよ')
     }
   },
 }
@@ -159,6 +155,11 @@ export default {
       display: block;
     }
   }
+}
+
+.scroll_item {
+  transition: all .3s;
+  background-color: c.$white;
 }
 
 .subttl {
