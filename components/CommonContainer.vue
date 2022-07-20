@@ -1,6 +1,5 @@
 <template>
   <div 
-      class="background_color"
       :class="[$style.wrapper, $style[sectionData.id]]"
   >
     <div 
@@ -33,9 +32,6 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
-.wrapper {
-  transition: all .3s;
-}
 .heading {
   font-size: 100px;
 }
@@ -48,17 +44,5 @@ export default {
   color: c.$black;
 
 }
-.vision {
-  background-color: c.$white;
-}
 
-.service {
-  background-color: #3C62C9;
-}
-.information {
-  background-color: #798EC9;
-}
-.contact {
-  background-color: #B5BBC9;
-}
 </style>
