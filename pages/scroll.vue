@@ -1,17 +1,17 @@
 <template>
-<main id="scrollPage">
-  <div class="wrapper d-flex flex-nowrap">
-    <section :class="$style.section" class="section section--large flex-shrink-0 vw-100 vh-100 d-flex justify-content-center align-items-center">
-      Part One
-    </section>
-    <section :class="$style.section" class="section section--dark section--small vh-100 flex-shrink-0 d-flex justify-content-center align-items-center">
-      Part Two
-    </section>
-    <section :class="$style.section" class="section section--small vh-100 flex-shrink-0 d-flex justify-content-center align-items-center">
-      Part Three
-    </section>
-    <section :class="$style.section" class="section section--large flex-shrink-0 vw-100 vh-100 d-flex justify-content-center align-items-center">
-      Part Four
+<main id="frontpage">
+  <div :class="$style.scroll" class="scroll">
+    <section 
+      class="scroll_item"
+      v-for="item in sectionData"
+      :class="$style.section"
+      :key="item.id"
+      :data-color="item.color"
+    >
+      <CommonContainer
+        :sectionData="item"
+      >
+      </CommonContainer>
     </section>
 </div>
 
@@ -24,13 +24,44 @@
   import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
   export default {
+  data() {
+    return {
+      windowStatus: "",
+      sectionData: [
+        {
+          id: 'vision',
+          heading: '1',
+          description: '説明',
+          color:  '#1c4ac9',
+        },
+          {
+          id: 'service',
+          heading: '2',
+          description: '説明',
+          color:  '#3C62C9',
+        },
+        {
+          id: 'information',
+          heading: '3',
+          description: '説明',
+          color:  '#798EC9',
+        },
+        {
+          id: 'contact',
+          heading: '4',
+          description: '説明',
+          color:  '#B5BBC9',
+        },
+      ],
+    }
+  },
     mounted() {
       gsap.registerPlugin(ScrollTrigger);
       this.backGroundColor()
     },
     methods: {
       backGroundColor() {
-        const sections = gsap.utils.toArray("section");
+        const sections = gsap.utils.toArray('.scroll_item');
         let maxWidth = 0;
         const getMaxWidth = () => {
         maxWidth = 0;
@@ -44,14 +75,14 @@
           x: () => `-${maxWidth - window.innerWidth}`,
           ease: "none",
           scrollTrigger: {
-            trigger: ".wrapper",
+            trigger: ".scroll",
             pin: true,
             scrub: true,
             end: () => `+=${maxWidth}`,
             invalidateOnRefresh: true
           }
         });
-        sections.forEach((sct, i) => {
+        sections.forEach((sct) => {
         ScrollTrigger.create({
           trigger: sct,
           start: () => 'top top-=' + (sct.offsetLeft - window.innerWidth/2) * (maxWidth / (maxWidth - window.innerWidth)),
@@ -71,8 +102,20 @@
 @use '~/assets/scss/color' as c;
 
 
+.scroll {
+  display: flex;
+}
+
 .section {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  flex-shrink: 0;
+  justify-content: center;
   font-size: 5rem;
+  font-weight: 900;
+  transition: color 0.3s;
 }
 
 </style>
@@ -81,32 +124,10 @@
   body {
     overflow-x: hidden;
   }
-  .wrapper {
-    display: flex;
-  }
-  .section {
-    font-size: 5rem;
-  }
   .section--large {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    align-items: center;
-    flex-shrink: 0;
-    justify-content: center;
     background-color: #e4002b;
-    color: white;
-  }
-  .section--small {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    align-items: center;
-    flex-shrink: 0;
-    justify-content: center;
   }
   .section--dark {
-    color: white;
     background-color: black;
   }
 
@@ -117,11 +138,6 @@
     background: tomato;
     top: 0;
     left: calc(50vw - 1px);
-  }
-
-  section {
-    font-weight: 900;
-    transition: color 0.3s;
   }
 
   section.active {
