@@ -48,14 +48,14 @@
             pin: true,
             scrub: true,
             end: () => `+=${maxWidth}`,
-            invalidateOnRefresh: true,
+            invalidateOnRefresh: true
           }
         });
-        sections.forEach((sct) => {
+        sections.forEach((sct, i) => {
         ScrollTrigger.create({
           trigger: sct,
           start: () => 'top top-=' + (sct.offsetLeft - window.innerWidth/2) * (maxWidth / (maxWidth - window.innerWidth)),
-          end: () => '+=100%' ,
+          end: () => '+=' + sct.offsetWidth * (maxWidth / (maxWidth - window.innerWidth)),
           toggleClass: {targets: sct, className: "active"}
         });
       });
