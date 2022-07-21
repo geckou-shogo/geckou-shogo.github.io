@@ -48,14 +48,14 @@
             pin: true,
             scrub: true,
             end: () => `+=${maxWidth}`,
-            invalidateOnRefresh: true
+            invalidateOnRefresh: true,
           }
         });
-        sections.forEach((sct, i) => {
+        sections.forEach((sct) => {
         ScrollTrigger.create({
           trigger: sct,
           start: () => 'top top-=' + (sct.offsetLeft - window.innerWidth/2) * (maxWidth / (maxWidth - window.innerWidth)),
-          end: () => '+=' + sct.offsetWidth * (maxWidth / (maxWidth - window.innerWidth)),
+          end: () => '+=100%' ,
           toggleClass: {targets: sct, className: "active"}
         });
       });
@@ -99,7 +99,7 @@
   }
   .section--small {
     display: flex;
-    width: 46rem;
+    width: 100vw;
     height: 100vh;
     align-items: center;
     flex-shrink: 0;
