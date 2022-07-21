@@ -1,33 +1,29 @@
 <template>
-  <main id="frontpage" >
-    <div id="scroll" :class="$style.scroll">
-      <div id="scroll_container" 
-        :class="$style.scroll_container"
+  <main id="frontpage">
+    <div :class="$style.scroll" class="scroll">
+      <section 
+        v-for="item in sectionData"
+        :class="[$style.section, 'scroll_item']"
+        :key="item.id"
+        :data-color="item.color"
       >
-        <section
-          class="scroll_item"
-          v-for="data in sectionData"
-          :class="$style.scroll_item"
-          :key="data.id"
-          :data-color="data.color"
+        <CommonContainer
+          :sectionData="item"
         >
-          <CommonContainer
-            :sectionData="data"
-          ></CommonContainer>
-        </section>
-      </div>
+        </CommonContainer>
+      </section>
     </div>
   </main>
 </template>
 
 <script>
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  import gsap from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-export default {
+  export default {
   data() {
     return {
-      windowStatus: "",
+      screenStatus: '',
       sectionData: [
         {
           id: 'vision',
@@ -54,126 +50,86 @@ export default {
           color:  '#B5BBC9',
         },
       ],
+      maxWidth: 0,
     }
   },
-  mounted() {
-      window.addEventListener('load', this.windowWatch)
-      
-      gsap.registerPlugin(ScrollTrigger);
-      this.$nextTick(() => {
-          this.windowWatch();
-          this.handleScroll();
-          this.windowConfirmation();
-          this.calculateWindowWidth();
-          this.backGroundColor();
-      });
-  },
-  methods: {
-    windowWatch() {
-        this.windowStatus =
-            window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
-        console.log(this.windowStatus);
+    mounted() {
+      gsap.registerPlugin(ScrollTrigger)
+      this.scrollPreference()
+      this.screenStatus =
+      window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
+      window.addEventListener('resize', this.registrationScrollEvent)
     },
-    windowResize() {
-        window.addEventListener('resize', this.windowResize)
-        this.handleScroll, this.calculateWindowWidth;
-    },
-    windowConfirmation() {
-        const status = window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
-        if (status === this.windowStatus) {
-            removeEventListener('scroll', this.windowConfirmation);
-        }
-        else {
-            window.location.reload();
-        }
-    },
-    handleScroll() {
-      window.addEventListener('scroll', this.windowConfirmation);
-      window.addEventListener('resize', this.handleScroll)
-    },
-    calculateWindowWidth() {
-      window.addEventListener('resize', this.calculateWindowWidth)
-      if (window.innerWidth > window.innerHeight) {
-        const area = document.querySelector("#scroll")
-        const container = document.querySelector("#scroll_container")
-        const items = document.querySelectorAll(".scroll_item")
-        const num = items.length
+    methods: {
+      registrationScrollEvent() {
+      window.addEventListener('scroll', this.checkIsScreenLandscape)
+      },
+      checkIsScreenLandscape() {
+        const currrentScreenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
+        if (this.screenStatus !== currrentScreenStatus) location.reload()
+        else window.removeEventListener('scroll', this.checkIsScreenLandscape)
+      },
+      scrollPreference() {
+        if (window.innerWidth > window.innerHeight) {
+          const sections = gsap.utils.toArray('.scroll_item')
 
-        gsap.set(container, { width: num * 100 + "%" })
-        gsap.set(items, { width: 100 / num + "%" })
-        gsap.to(items, {
-          xPercent: -100 * (num - 1),
-          ease: "none",
-          scrollTrigger: {
-            trigger: area,
-            start: "top top",
-            end: "+=100%",
-            scrub: true,
-            pin: true,
-            snap: {
-              // キリの良い位置へ移動させる
-              snapTo: 1 / (num - 1),
-              duration: 0.5,
-            },
-          },
-        })
-      }
-    },
-    // backGroundColor() {
-    //   // const area = document.querySelector("#scroll")
-    //   const els = document.querySelectorAll(".scroll_item");
-    //   els.forEach(el => {
-    //       let color = el.dataset.color // datadに格納しているカラーコードを取得
-    //       console.log(color);
-    //       gsap.to(el, {
-    //       duration: '1s', //５秒後かけてアニメーションさせる
-    //       backgroundColor: color, //dataに格納しているカラーコードを入力
-    //       scrollTrigger: {
-    //         trigger: el,
-    //         start: "top top",
-    //         end: "bottom bottom",
-    //         toggleActions: "play pause reverse reset",
-    //       }
-    //     })
-    //     console.log(el);
-    //   })
-    // }
-    backGroundColor() {
-      const area = document.querySelector("#scroll")
-      const sections = gsap.utils.toArray('.scroll_item');
-      let maxWidth = 0;
-      console.log(sections)
-      const getMaxWidth = () => {
-      maxWidth = 0;
-      sections.forEach((section) => {
-        maxWidth += section.offsetWidth;
-        });
-      };
-      getMaxWidth();
-      ScrollTrigger.addEventListener('refreshInit', getMaxWidth);
-      gsap.to(sections, {
-        x: () => `-${maxWidth - window.innerWidth}`,
-        ease: "none",
-        scrollTrigger: {
-          trigger: area,
-          pin: true,
-          scrub: true,
-          end: () => `+=${maxWidth}`,
-          invalidateOnRefresh: true
+          const getMaxWidth = () => {
+            this.maxWidth = 0
+            sections.forEach((section) => {
+              this.maxWidth += section.offsetWidth
+            })
+          }
+
+          getMaxWidth()
+
+          ScrollTrigger.addEventListener('refreshInit', getMaxWidth)
+
+          gsap.to(sections, {
+            x: () => `-${this.maxWidth - window.innerWidth}`,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: '.scroll',
+                pin: true,
+                scrub: true,
+                end: () => `+=${this.maxWidth}`,
+                invalidateOnRefresh: true
+              }
+          })
+
+          sections.forEach((sct) => {
+            const color = sct.dataset.color
+
+            gsap.to(sct, {
+              backgroundColor: color,
+              scrollTrigger: {
+                trigger: sct,
+                start: () => 'top top-=' + (sct.offsetLeft - window.innerWidth/2) * (this.maxWidth / (this.maxWidth - window.innerWidth)),
+                end: () => '+=' + sct.offsetWidth * (this.maxWidth / (this.maxWidth - window.innerWidth)),
+                toggleClass: {targets: sct, className: 'active'}
+              }
+            })
+          })
+        } else {
+          const sections = gsap.utils.toArray('.scroll_item')
+          sections.forEach((sct) => {
+            const color = sct.dataset.color
+
+            gsap.to(sct, {
+              backgroundColor: color,
+              scrollTrigger: {
+                trigger: sct,
+                start: 'top center',
+                end: 'bottom center',
+                markers: true
+              }
+            })
+          })
         }
-      });
-      sections.forEach((sct, i) => {
-      ScrollTrigger.create({
-        trigger: sct,
-        start: () => 'top top-=' + (sct.offsetLeft - window.innerWidth/2) * (maxWidth / (maxWidth - window.innerWidth)),
-        end: () => '+=' + sct.offsetWidth * (maxWidth / (maxWidth - window.innerWidth)),
-        toggleClass: {targets: sct, className: "active"}
-      });
-    });
+      }
     }
-  },
-}
+  }
 </script>
+
 
 <style lang="scss" module>
 @use '~/assets/scss/value' as v;
@@ -182,29 +138,22 @@ export default {
 
 .scroll {
   overflow: hidden;
-  &_container {
-    display: flex;
-    @include v.mq(md) {
-      display: block;
-    }
+  display: flex;
+
+  @include v.mq(md) {
+    display: block;
   }
 }
 
-.scroll_item {
-  transition: all .3s;
-  background-color: c.$white;
-}
-
-.subttl {
-  font-size: 100px;
-  color: c.$black;
-}
-
-.container {
+.section {
   display: flex;
+  width: 100vw;
   height: 100vh;
   align-items: center;
+  flex-shrink: 0;
   justify-content: center;
+  font-size: 5rem;
+  font-weight: 900;
+  transition: color .3s, background-color .3s;
 }
-
 </style>
