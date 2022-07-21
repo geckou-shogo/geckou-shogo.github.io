@@ -57,8 +57,7 @@ export default {
     }
   },
   mounted() {
-      window.addEventListener('load', this.windowWatch)
-      
+      window.addEventListener('load', this.windowWatch)  
       gsap.registerPlugin(ScrollTrigger);
       this.$nextTick(() => {
           this.windowWatch();
@@ -119,58 +118,26 @@ export default {
         })
       }
     },
-    // backGroundColor() {
-    //   // const area = document.querySelector("#scroll")
-    //   const els = document.querySelectorAll(".scroll_item");
-    //   els.forEach(el => {
-    //       let color = el.dataset.color // datadに格納しているカラーコードを取得
-    //       console.log(color);
-    //       gsap.to(el, {
-    //       duration: '1s', //５秒後かけてアニメーションさせる
-    //       backgroundColor: color, //dataに格納しているカラーコードを入力
-    //       scrollTrigger: {
-    //         trigger: el,
-    //         start: "top top",
-    //         end: "bottom bottom",
-    //         toggleActions: "play pause reverse reset",
-    //       }
-    //     })
-    //     console.log(el);
-    //   })
-    // }
     backGroundColor() {
-      const area = document.querySelector("#scroll")
-      const sections = gsap.utils.toArray('.scroll_item');
-      let maxWidth = 0;
-      console.log(sections)
-      const getMaxWidth = () => {
-      maxWidth = 0;
-      sections.forEach((section) => {
-        maxWidth += section.offsetWidth;
-        });
-      };
-      getMaxWidth();
-      ScrollTrigger.addEventListener('refreshInit', getMaxWidth);
-      gsap.to(sections, {
-        x: () => `-${maxWidth - window.innerWidth}`,
-        ease: "none",
-        scrollTrigger: {
-          trigger: area,
-          pin: true,
-          scrub: true,
-          end: () => `+=${maxWidth}`,
-          invalidateOnRefresh: true
-        }
-      });
-      sections.forEach((sct, i) => {
-      ScrollTrigger.create({
-        trigger: sct,
-        start: () => 'top top-=' + (sct.offsetLeft - window.innerWidth/2) * (maxWidth / (maxWidth - window.innerWidth)),
-        end: () => '+=' + sct.offsetWidth * (maxWidth / (maxWidth - window.innerWidth)),
-        toggleClass: {targets: sct, className: "active"}
-      });
-    });
+      // const area = document.querySelector("#scroll")
+      const els = document.querySelectorAll(".scroll_item");
+      els.forEach(el => {
+          let color = el.dataset.color // datadに格納しているカラーコードを取得
+          console.log(color);
+          gsap.to(el, {
+          duration: '1s', //５秒後かけてアニメーションさせる
+          backgroundColor: color, //dataに格納しているカラーコードを入力
+          scrollTrigger: {
+            trigger: el,
+            start: "top top",
+            end: "bottom bottom",
+            toggleActions: "play pause reverse reset",
+          }
+        })
+        console.log(el);
+      })
     }
+    
   },
 }
 </script>
