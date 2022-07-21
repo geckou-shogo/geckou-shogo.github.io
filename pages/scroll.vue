@@ -57,10 +57,11 @@
   },
     mounted() {
       gsap.registerPlugin(ScrollTrigger);
-      this.setHorizontalScroll();
+      this.scrollPreference();
       this.screenStatus =
       window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
       window.addEventListener('resize', this.registrationScrollEvent)
+      console.log(this.screenStatus);
     },
     methods: {
       registrationScrollEvent() {
@@ -72,7 +73,7 @@
       if (this.screenStatus !== currrentScreenStatus) location.reload()
       else window.removeEventListener('scroll', this.checkIsScreenLandscape)
       },
-      setHorizontalScroll() {
+      scrollPreference() {
         if (window.innerWidth > window.innerHeight) {
           const sections = gsap.utils.toArray('.scroll_item');
           let maxWidth = 0;
@@ -105,6 +106,21 @@
                 start: () => 'top top-=' + (sct.offsetLeft - window.innerWidth/2) * (maxWidth / (maxWidth - window.innerWidth)),
                 end: () => '+=' + sct.offsetWidth * (maxWidth / (maxWidth - window.innerWidth)),
                 toggleClass: {targets: sct, className: 'active'}
+              }
+            })
+          });
+        } else {
+            const sections = gsap.utils.toArray('.scroll_item');
+            sections.forEach((sct) => {
+            let color = sct.dataset.color
+            console.log(color);
+            gsap.to(sct, {
+              backgroundColor: color,
+              scrollTrigger: {
+                trigger: sct,
+                start: 'top center',
+                end: 'bottom center',
+                markers: true
               }
             })
           });
