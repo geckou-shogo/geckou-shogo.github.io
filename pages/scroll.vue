@@ -26,7 +26,7 @@
   export default {
   data() {
     return {
-      windowStatus: "",
+      screenStatus: '',
       sectionData: [
         {
           id: 'vision',
@@ -57,39 +57,58 @@
   },
     mounted() {
       gsap.registerPlugin(ScrollTrigger);
-      this.backGroundColor()
+      this.setHorizontalScroll();
+      this.screenStatus =
+      window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
+      window.addEventListener('resize', this.registrationScrollEvent)
     },
     methods: {
-      backGroundColor() {
-        const sections = gsap.utils.toArray('.scroll_item');
-        let maxWidth = 0;
-        const getMaxWidth = () => {
-        maxWidth = 0;
-        sections.forEach((section) => {
-          maxWidth += section.offsetWidth;
+      registrationScrollEvent() {
+      window.addEventListener('scroll', this.checkIsScreenLandscape)
+      },
+      checkIsScreenLandscape() {
+      const currrentScreenStatus =
+        window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
+      if (this.screenStatus !== currrentScreenStatus) location.reload()
+      else window.removeEventListener('scroll', this.checkIsScreenLandscape)
+      },
+      setHorizontalScroll() {
+        if (window.innerWidth > window.innerHeight) {
+          const sections = gsap.utils.toArray('.scroll_item');
+          let maxWidth = 0;
+          const getMaxWidth = () => {
+          maxWidth = 0;
+          sections.forEach((section) => {
+            maxWidth += section.offsetWidth;
+            });
+          };
+          getMaxWidth();
+          ScrollTrigger.addEventListener('refreshInit', getMaxWidth);
+          gsap.to(sections, {
+            x: () => `-${maxWidth - window.innerWidth}`,
+            ease: "none",
+            scrollTrigger: {
+              trigger: ".scroll",
+              pin: true,
+              scrub: true,
+              end: () => `+=${maxWidth}`,
+              invalidateOnRefresh: true
+            }
           });
-        };
-        getMaxWidth();
-        ScrollTrigger.addEventListener("refreshInit", getMaxWidth);
-        gsap.to(sections, {
-          x: () => `-${maxWidth - window.innerWidth}`,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".scroll",
-            pin: true,
-            scrub: true,
-            end: () => `+=${maxWidth}`,
-            invalidateOnRefresh: true
-          }
-        });
-        sections.forEach((sct) => {
-        ScrollTrigger.create({
-          trigger: sct,
-          start: () => 'top top-=' + (sct.offsetLeft - window.innerWidth/2) * (maxWidth / (maxWidth - window.innerWidth)),
-          end: () => '+=' + sct.offsetWidth * (maxWidth / (maxWidth - window.innerWidth)),
-          toggleClass: {targets: sct, className: "active"}
-        });
-      });
+            sections.forEach((sct) => {
+            let color = sct.dataset.color
+            console.log(color);
+            gsap.to(sct, {
+              backgroundColor: color,
+              scrollTrigger: {
+                trigger: sct,
+                start: () => 'top top-=' + (sct.offsetLeft - window.innerWidth/2) * (maxWidth / (maxWidth - window.innerWidth)),
+                end: () => '+=' + sct.offsetWidth * (maxWidth / (maxWidth - window.innerWidth)),
+                toggleClass: {targets: sct, className: 'active'}
+              }
+            })
+          });
+        }
       }
     }
   }
@@ -103,7 +122,11 @@
 
 
 .scroll {
+  overflow: hidden;
   display: flex;
+  @include v.mq(md) {
+    display: block;
+  }
 }
 
 .section {
@@ -115,7 +138,7 @@
   justify-content: center;
   font-size: 5rem;
   font-weight: 900;
-  transition: color 0.3s;
+  transition: color .3s, background-color .3s;
 }
 
 </style>
