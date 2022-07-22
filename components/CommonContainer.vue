@@ -5,12 +5,6 @@
     <div 
     :class="$style.container"
     >
-      <h2 class="heading" :class="$style.heading">
-        {{ sectionData.heading }}
-      </h2>
-      <p :class="$style.description">
-        {{ sectionData.description }}
-      </p>
     </div>
   </div>
 </template>

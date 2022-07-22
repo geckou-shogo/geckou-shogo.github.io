@@ -13,6 +13,7 @@
         </CommonContainer>
       </section>
     </div>
+    <GlobalNavigation></GlobalNavigation>
   </main>
 </template>
 
@@ -27,26 +28,18 @@
       sectionData: [
         {
           id: 'vision',
-          heading: '1',
-          description: '説明',
           color:  '#1c4ac9',
         },
           {
           id: 'service',
-          heading: '2',
-          description: '説明',
           color:  '#3C62C9',
         },
         {
           id: 'information',
-          heading: '3',
-          description: '説明',
           color:  '#798EC9',
         },
         {
           id: 'contact',
-          heading: '4',
-          description: '説明',
           color:  '#B5BBC9',
         },
       ],
