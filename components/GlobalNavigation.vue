@@ -29,7 +29,7 @@
     position: fixed;
     width: calc(100% / 2);
     left: calc(100% - 78%);
-    bottom:  128px;
+    bottom:  64px;
   }
   .navi__list {
     display: flex;
