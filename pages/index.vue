@@ -1,21 +1,23 @@
 <template>
   <main id="frontpage">
-    <GradationBackground>
-      <div :class="$style.scroll" class="scroll">
-        <section 
-          v-for="item in sectionData"
-          :class="[$style.section, 'scroll_item']"
-          :key="item.id"
-          :data-color="item.color"
+    <GradationBackground
+      :class="$style.screen"
+    />
+    <GlobalNavigation></GlobalNavigation>
+    <div :class="$style.scroll" class="scroll">
+      <section 
+        v-for="item in sectionData"
+        :class="[$style.section, 'scroll_item']"
+        :key="item.id"
+        :data-color="item.color"
+      >
+        <CommonContainer
+          :sectionData="item"
         >
-          <CommonContainer
-            :sectionData="item"
-          >
-          </CommonContainer>
-        </section>
-      </div>
-      <div :class="$style.center_marker"></div>
-    </GradationBackground>
+        </CommonContainer>
+      </section>
+    </div>
+    <div :class="$style.center_marker"></div>
   </main>
 </template>
 
@@ -95,7 +97,7 @@
             const color = sct.dataset.color
 
             gsap.to(sct, {
-              backgroundColor: color,
+              // backgroundColor: color,
               scrollTrigger: {
                 trigger: sct,
                 start: () => 'top top-=' + (sct.offsetLeft - window.innerWidth/2) * (this.maxWidth / (this.maxWidth - window.innerWidth)),
@@ -110,7 +112,7 @@
             const color = sct.dataset.color
 
             gsap.to(sct, {
-              backgroundColor: color,
+              // backgroundColor: color,
               scrollTrigger: {
                 trigger: sct,
                 start: 'top center',
@@ -159,5 +161,11 @@
   background: tomato;
   top: 0;
   left: calc(50vw - 1px);
+}
+
+.screen {
+  position: fixed;
+  top: 0;
+  left:0;
 }
 </style>

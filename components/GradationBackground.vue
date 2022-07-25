@@ -4,13 +4,6 @@
 
 <script>
 export default {
-  props: {
-    sectionData: {
-      required: true,
-      default: () => {},
-    }
-    
-  }
 } 
 </script>
 
@@ -20,6 +13,8 @@ export default {
 @use '~/assets/scss/color' as c;
 
 .screen {
+  width: 100%;
+  height: 100vh;
   background: linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);
 }
 
