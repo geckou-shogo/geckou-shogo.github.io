@@ -1,20 +1,21 @@
 <template>
   <main id="frontpage">
-    <div :class="$style.scroll" class="scroll">
-      <section 
-        v-for="item in sectionData"
-        :class="[$style.section, 'scroll_item']"
-        :key="item.id"
-        :data-color="item.color"
-      >
-        <CommonContainer
-          :sectionData="item"
+    <GradationBackground>
+      <div :class="$style.scroll" class="scroll">
+        <section 
+          v-for="item in sectionData"
+          :class="[$style.section, 'scroll_item']"
+          :key="item.id"
+          :data-color="item.color"
         >
-        </CommonContainer>
-      </section>
-    </div>
-    <GlobalNavigation></GlobalNavigation>
-    <div :class="$style.center_marker"></div>
+          <CommonContainer
+            :sectionData="item"
+          >
+          </CommonContainer>
+        </section>
+      </div>
+      <div :class="$style.center_marker"></div>
+    </GradationBackground>
   </main>
 </template>
 
