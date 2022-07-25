@@ -104,7 +104,7 @@
               }
             })
               gsap.to(screens,{
-              y: '',
+              y: '-100vh',
               scrollTrigger: {
                 trigger: '.scroll',
                 start: () => 'top top-=' + (sct.offsetLeft - window.innerWidth/2) * (this.maxWidth / (this.maxWidth - window.innerWidth)),
