@@ -52,7 +52,6 @@
           color:  '#B5BBC9',
         },
       ],
-      maxWidth: 0,
     }
   },
     mounted() {

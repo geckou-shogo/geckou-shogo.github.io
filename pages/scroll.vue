@@ -1,6 +1,18 @@
 <template>
-  <main id="scroll">
-    
+  <main id="frontpage" class="scroll">
+    <GlobalNavigation></GlobalNavigation>
+    <section
+      v-for="item in sectionDatas"
+      :class="[$style.section, 'scroll_item']"
+      :key="item.id"
+      :data-color="item.color"
+    >
+      <CommonContainer
+        sectionData="item"
+      >
+      </CommonContainer>
+    </section>
+    <div :class="$style.center_marker"></div>
   </main>
 </template>
 
@@ -10,7 +22,54 @@
 
   export default {
     data() {
-      
+      return {
+        screenStatus: '',
+        sectionDatas: [
+          {
+            id: 'top',
+          },
+          {
+            id: 'vision',
+          },
+          {
+            id: 'service',
+          },
+          {
+            id: 'information',
+          },
+          {
+            id: 'contact',
+          },
+        ],
+      }
+    },
+    mounted() {
+      gsap.registerPlugin(ScrollTrigger)
+      this.scrollPreference()
+      this.screenStatus =
+      window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
+      window.addEventListener('resize', this.registrationScrollEvent)
+    },
+    methods: {
+      checkIsScreenLandscape() {
+        const currrentScreenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
+        if (this.screenStatus !== currrentScreenStatus) location.reload()
+        else window.removeEventListener('scroll', this.checkIsScreenLandscape)
+      },
+      scrollPreference() {
+        let sections = document.querySelector(".scroll");
+        gsap.to(sections, {
+          xPercent: -100 * (sections.length - 1),
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".scroll",
+            pin: true,
+            scrub: 1,
+            snap: 1 / (sections.length - 1),
+            end: () => "+=" + document.querySelector(".scroll").offsetWidth
+          }
+        });
+      }
     }
   }
 </script>
