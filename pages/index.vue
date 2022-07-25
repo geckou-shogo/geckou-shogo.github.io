@@ -1,8 +1,13 @@
 <template>
   <main id="frontpage">
+    <GradationBackground
+      :class="$style.screen"
+      :sectionDatas="sectionDatas"
+    />
+    <GlobalNavigation></GlobalNavigation>
     <div :class="$style.scroll" class="scroll">
       <section 
-        v-for="item in sectionData"
+        v-for="item in sectionDatas"
         :class="[$style.section, 'scroll_item']"
         :key="item.id"
         :data-color="item.color"
@@ -13,7 +18,7 @@
         </CommonContainer>
       </section>
     </div>
-    <GlobalNavigation></GlobalNavigation>
+    <div :class="$style.center_marker"></div>
   </main>
 </template>
 
@@ -25,25 +30,28 @@
   data() {
     return {
       screenStatus: '',
-      sectionData: [
+      sectionDatas: [
+        {
+          id: 'top',
+          color: 'linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);',
+        },
         {
           id: 'vision',
-          color:  '#1c4ac9',
+          color:  'linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);',
         },
-          {
+        {
           id: 'service',
-          color:  '#3C62C9',
+          color:  'linear-gradient(to bottom, #192c38, #15324f 34%,  #31527b);',
         },
         {
           id: 'information',
-          color:  '#798EC9',
+          color:  'linear-gradient(to bottom, #31527b, #246495 66%,  #31527b);',
         },
         {
           id: 'contact',
           color:  '#B5BBC9',
         },
       ],
-      maxWidth: 0,
     }
   },
     mounted() {
@@ -65,7 +73,7 @@
       scrollPreference() {
         if (window.innerWidth > window.innerHeight) {
           const sections = gsap.utils.toArray('.scroll_item')
-
+          const screens  = document.getElementsByClassName('screen')
           const getMaxWidth = () => {
             this.maxWidth = 0
             sections.forEach((section) => {
@@ -74,7 +82,6 @@
           }
 
           getMaxWidth()
-
           ScrollTrigger.addEventListener('refreshInit', getMaxWidth)
 
           gsap.to(sections, {
@@ -88,27 +95,28 @@
                 invalidateOnRefresh: true
               }
           })
-
           sections.forEach((sct) => {
-            const color = sct.dataset.color
-
             gsap.to(sct, {
-              backgroundColor: color,
               scrollTrigger: {
                 trigger: sct,
                 start: () => 'top top-=' + (sct.offsetLeft - window.innerWidth/2) * (this.maxWidth / (this.maxWidth - window.innerWidth)),
                 end: () => '+=' + sct.offsetWidth * (this.maxWidth / (this.maxWidth - window.innerWidth)),
-                toggleClass: {targets: sct, className: 'active'}
               }
             })
+              gsap.to(screens,{
+              y: '',
+              scrollTrigger: {
+                trigger: '.scroll',
+                start: () => 'top top-=' + (sct.offsetLeft - window.innerWidth/2) * (this.maxWidth / (this.maxWidth - window.innerWidth)),
+                end: () => '+=' + sct.offsetWidth * (this.maxWidth / (this.maxWidth - window.innerWidth)),
+                scrub: true,
+              }
+            })  
           })
         } else {
           const sections = gsap.utils.toArray('.scroll_item')
           sections.forEach((sct) => {
-            const color = sct.dataset.color
-
             gsap.to(sct, {
-              backgroundColor: color,
               scrollTrigger: {
                 trigger: sct,
                 start: 'top center',
@@ -118,6 +126,7 @@
             })
           })
         }
+        
       }
     }
   }
@@ -147,6 +156,16 @@
   justify-content: center;
   font-size: 5rem;
   font-weight: 900;
-  transition: color .3s, background-color .3s;
+  border: solid 2px #fff;
 }
+
+.center_marker {
+  position: fixed;
+  width: 2px;
+  height: 100vh;
+  background: tomato;
+  top: 0;
+  left: calc(50vw - 1px);
+}
+
 </style>

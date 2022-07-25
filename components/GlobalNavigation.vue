@@ -3,9 +3,9 @@
   <div :class="$style.navi">
     <div :class="$style.navi__inner">
       <ul :class="$style.navi__list">
-        <li :class="$style.navi__li">TOP</li>
-        <li :class="$style.navi__li">VISION</li>
-        <li :class="$style.navi__li">SERVICE</li>
+        <li :class="$style.navi__li"><a href="#">TOP</a></li>
+        <li :class="$style.navi__li"><a href="#vision">VISION</a></li>
+        <li :class="$style.navi__li"><a href="#service">SERVICE</a></li>
         <li :class="$style.navi__li">INFORMATION</li>
         <li :class="$style.navi__li">CONTACT</li> 
       </ul>
@@ -30,6 +30,7 @@
     width: calc(100% / 2);
     left: calc(100% - 78%);
     bottom:  64px;
+    z-index: v.zIndex(navi);
   }
   .navi__list {
     display: flex;
@@ -45,6 +46,7 @@
     &:hover {
       opacity: .7;
     }
+    
   }
 
 </style>
