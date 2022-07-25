@@ -1,5 +1,6 @@
 <template>
   <div 
+    class="screen"
     :class="$style.screen"
   >
     <div
@@ -18,7 +19,7 @@ export default {
     sectionDatas: {
       required: true,
       type: Array,
-    }
+    },
   }
 } 
 </script>

@@ -45,7 +45,7 @@
         },
         {
           id: 'information',
-          color:  'linear-gradient(to bottom, #31527b, #246495 66%,  #086c92);',
+          color:  'linear-gradient(to bottom, #31527b, #246495 66%,  #31527b);',
         },
         {
           id: 'contact',
@@ -97,7 +97,6 @@
                 invalidateOnRefresh: true
               }
           })
-
           sections.forEach((sct) => {
             gsap.to(sct, {
               scrollTrigger: {
@@ -107,6 +106,13 @@
               }
             })
           })
+          gsap.to(this.$style.screen,{
+            scrollTrigger: {
+              trigger: '.scroll',
+              start: 'start start',
+              end: '+=100%',
+            }
+          })  
         } else {
           const sections = gsap.utils.toArray('.scroll_item')
           sections.forEach((sct) => {
@@ -120,6 +126,7 @@
             })
           })
         }
+        
       }
     }
   }
@@ -149,6 +156,7 @@
   justify-content: center;
   font-size: 5rem;
   font-weight: 900;
+  border: solid 2px #fff;
 }
 
 .center_marker {
