@@ -14,6 +14,7 @@
       </section>
     </div>
     <GlobalNavigation></GlobalNavigation>
+    <div :class="$style.center_marker"></div>
   </main>
 </template>
 
@@ -147,6 +148,15 @@
   justify-content: center;
   font-size: 5rem;
   font-weight: 900;
-  transition: color .3s, background-color .3s;
+  transition: background-color .3s;
+}
+
+.center_marker {
+  position: fixed;
+  width: 2px;
+  height: 100vh;
+  background: tomato;
+  top: 0;
+  left: calc(50vw - 1px);
 }
 </style>
