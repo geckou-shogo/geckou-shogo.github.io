@@ -1,9 +1,25 @@
 <template>
-  <div :class="$style.screen" />
+  <div 
+    :class="$style.screen"
+  >
+    <div
+      v-for="item in sectionDatas"
+      :class="$style.screen_item"
+      :key="item.id"
+      :style="{backgroundImage: item.color}"
+    />
+
+  </div>
 </template>
 
 <script>
 export default {
+  props: {
+    sectionDatas: {
+      required: true,
+      type: Array,
+    }
+  }
 } 
 </script>
 
@@ -13,9 +29,14 @@ export default {
 @use '~/assets/scss/color' as c;
 
 .screen {
+  position: fixed;
+  top: 0;
+  left:0;
   width: 100%;
-  height: 100vh;
-  background: linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);
+  &_item {
+    width: 100%;
+    height: 100vh;
+  }
 }
 
 </style>

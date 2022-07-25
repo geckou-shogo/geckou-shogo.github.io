@@ -16,7 +16,6 @@ export default {
       required: true,
       default: () => {},
     }
-    
   }
 } 
 </script>

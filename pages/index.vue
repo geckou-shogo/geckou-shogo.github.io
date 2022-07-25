@@ -2,11 +2,12 @@
   <main id="frontpage">
     <GradationBackground
       :class="$style.screen"
+      :sectionDatas="sectionDatas"
     />
     <GlobalNavigation></GlobalNavigation>
     <div :class="$style.scroll" class="scroll">
       <section 
-        v-for="item in sectionData"
+        v-for="item in sectionDatas"
         :class="[$style.section, 'scroll_item']"
         :key="item.id"
         :data-color="item.color"
@@ -29,12 +30,12 @@
   data() {
     return {
       screenStatus: '',
-      sectionData: [
+      sectionDatas: [
         {
           id: 'vision',
-          color:  '#1c4ac9',
+          color:  'linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);',
         },
-          {
+        {
           id: 'service',
           color:  '#3C62C9',
         },
@@ -97,7 +98,6 @@
             const color = sct.dataset.color
 
             gsap.to(sct, {
-              // backgroundColor: color,
               scrollTrigger: {
                 trigger: sct,
                 start: () => 'top top-=' + (sct.offsetLeft - window.innerWidth/2) * (this.maxWidth / (this.maxWidth - window.innerWidth)),
@@ -112,7 +112,6 @@
             const color = sct.dataset.color
 
             gsap.to(sct, {
-              // backgroundColor: color,
               scrollTrigger: {
                 trigger: sct,
                 start: 'top center',
@@ -163,9 +162,4 @@
   left: calc(50vw - 1px);
 }
 
-.screen {
-  position: fixed;
-  top: 0;
-  left:0;
-}
 </style>
