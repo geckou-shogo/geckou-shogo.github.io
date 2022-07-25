@@ -32,16 +32,20 @@
       screenStatus: '',
       sectionDatas: [
         {
+          id: 'top',
+          color: 'linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);',
+        },
+        {
           id: 'vision',
-          color:  'linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);',
+          color:  'linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);',
         },
         {
           id: 'service',
-          color:  '#3C62C9',
+          color:  'linear-gradient(to bottom, #192c38, #15324f 34%,  #31527b);',
         },
         {
           id: 'information',
-          color:  '#798EC9',
+          color:  'linear-gradient(to bottom, #31527b, #246495 66%,  #086c92);',
         },
         {
           id: 'contact',
@@ -95,22 +99,17 @@
           })
 
           sections.forEach((sct) => {
-            const color = sct.dataset.color
-
             gsap.to(sct, {
               scrollTrigger: {
                 trigger: sct,
                 start: () => 'top top-=' + (sct.offsetLeft - window.innerWidth/2) * (this.maxWidth / (this.maxWidth - window.innerWidth)),
                 end: () => '+=' + sct.offsetWidth * (this.maxWidth / (this.maxWidth - window.innerWidth)),
-                toggleClass: {targets: sct, className: 'active'}
               }
             })
           })
         } else {
           const sections = gsap.utils.toArray('.scroll_item')
           sections.forEach((sct) => {
-            const color = sct.dataset.color
-
             gsap.to(sct, {
               scrollTrigger: {
                 trigger: sct,
@@ -150,7 +149,6 @@
   justify-content: center;
   font-size: 5rem;
   font-weight: 900;
-  transition: background-color .3s;
 }
 
 .center_marker {
