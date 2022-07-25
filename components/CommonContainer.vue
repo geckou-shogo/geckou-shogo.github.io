@@ -1,10 +1,12 @@
 <template>
   <div 
+      :id="[sectionData.id]"
       :class="[$style.wrapper, $style[sectionData.id]]"
   >
     <div 
     :class="$style.container"
     >
+    <h2 >{{ sectionData.id }}</h2>
     </div>
   </div>
 </template>
@@ -33,6 +35,10 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  h2 {
+    font-size: 100px;
+    color: #fff;
+  }
 }
 
 

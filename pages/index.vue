@@ -74,7 +74,7 @@
       scrollPreference() {
         if (window.innerWidth > window.innerHeight) {
           const sections = gsap.utils.toArray('.scroll_item')
-
+          const screens  = document.getElementsByClassName('screen')
           const getMaxWidth = () => {
             this.maxWidth = 0
             sections.forEach((section) => {
@@ -83,7 +83,6 @@
           }
 
           getMaxWidth()
-
           ScrollTrigger.addEventListener('refreshInit', getMaxWidth)
 
           gsap.to(sections, {
@@ -105,14 +104,16 @@
                 end: () => '+=' + sct.offsetWidth * (this.maxWidth / (this.maxWidth - window.innerWidth)),
               }
             })
+              gsap.to(screens,{
+              y: '',
+              scrollTrigger: {
+                trigger: '.scroll',
+                start: () => 'top top-=' + (sct.offsetLeft - window.innerWidth/2) * (this.maxWidth / (this.maxWidth - window.innerWidth)),
+                end: () => '+=' + sct.offsetWidth * (this.maxWidth / (this.maxWidth - window.innerWidth)),
+                scrub: true,
+              }
+            })  
           })
-          gsap.to(this.$style.screen,{
-            scrollTrigger: {
-              trigger: '.scroll',
-              start: 'start start',
-              end: '+=100%',
-            }
-          })  
         } else {
           const sections = gsap.utils.toArray('.scroll_item')
           sections.forEach((sct) => {
