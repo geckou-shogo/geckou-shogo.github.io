@@ -13,7 +13,6 @@
               <CommonContainer
                 :sectionData="item"
               >
-
               </CommonContainer>
           </section>
         </div>
@@ -68,20 +67,32 @@
       },
       scrollPreference() {
         const scrollWrapperEl = document.querySelector('.scroll_container');
-        const scrollItemEl = document.querySelector('.scroll_item');
-        gsap.to(scrollItemEl, {
-          x: () => -(scrollItemEl.clientWidth - scrollWrapperEl.clientWidth),
-          ease: 'none',
-          scrollTrigger: {
-            trigger: '.scroll',
-            start: 'top top', // 要素の上端（top）が、ビューポートの上端（top）にきた時
-            end: () => `+=${scrollItemEl.clientWidth - scrollWrapperEl.clientWidth}`,
-            scrub: true,
-            pin: true,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-          },
-        });
+        const scrollItemEl = document.querySelector('.scroll_list');
+          if (window.innerWidth > window.innerHeight) {
+            gsap.to(scrollItemEl, {
+            x: () => -(scrollItemEl.clientWidth - scrollWrapperEl.clientWidth),
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '.scroll',
+              start: 'top top', // 要素の上端（top）が、ビューポートの上端（top）にきた時
+              end: () => `+=${scrollItemEl.clientWidth - scrollWrapperEl.clientWidth}`,
+              scrub: true,
+              pin: true,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+            },
+          });
+        } else {
+          gsap.to(scrollItemEl, {
+            x: () => -(scrollItemEl.clientWidth - scrollWrapperEl.clientWidth),
+            ease: 'none',
+            scrollTrigger: {
+              start: 'top center',
+              end: 'bottom center',
+              markers: true,
+            },
+          });
+        }
       }
     }
   }
@@ -94,21 +105,27 @@
 @use '~/assets/scss/color' as c;
 
 .scroll {
-  overflow: hidden;
   display: flex;
+  @include v.mq(md) {
+    display: block;
+  }
   &_container {
     position: relative;
     width: 100%;
     height: 100vh;
+    @include v.mq(md) {
+      position: static;
+    }
   }
   &_list {
     position: absolute;
     display: flex;
+    @include v.mq(md) {
+      position: static;
+      display: block;
+    }
   }
-
-  @include v.mq(md) {
-    display: block;
-  }
+  
 }
 
 .section {
