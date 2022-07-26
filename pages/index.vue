@@ -4,7 +4,9 @@
       :class="$style.screen"
       :sectionDatas="sectionDatas"
     />
-    <GlobalNavigation></GlobalNavigation>
+    <GlobalNavigation
+      :sectionDatas="sectionDatas"
+    ></GlobalNavigation>
     <div :class="$style.scroll" class="scroll">
       <section 
         v-for="item in sectionDatas"
@@ -139,7 +141,6 @@
 @use '~/assets/scss/color' as c;
 
 .scroll {
-  overflow: hidden;
   display: flex;
 
   @include v.mq(md) {

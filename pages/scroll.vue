@@ -1,10 +1,13 @@
 <template>
-  <main id="frontpage">
+  <main id="frontpage" style="position: relateive;">
     <GradationBackground
       :class="$style.screen"
       :sectionDatas="sectionDatas"
     />
-    <GlobalNavigation></GlobalNavigation>
+    <GlobalNavigation
+      :sectionDatas="sectionDatas"
+    >
+    </GlobalNavigation>
     <div :class="$style.scroll" class="scroll">
       <div :class="$style.scroll_container" class="scroll_container">
         <div :class="$style.scroll_list" class="scroll_list">
@@ -38,22 +41,27 @@
       sectionDatas: [
         {
           id: 'top',
+          name: 'TOP',
           color: 'linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);',
         },
         {
           id: 'vision',
+          name: 'VISION',
           color:  'linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);',
         },
         {
           id: 'service',
+          name: 'SERVICE',
           color:  'linear-gradient(to bottom, #192c38, #15324f 34%,  #31527b);',
         },
         {
           id: 'information',
+          name: 'INFORMATION',
           color:  'linear-gradient(to bottom, #31527b, #246495 66%,  #31527b);',
         },
         {
           id: 'contact',
+          name: 'CONTACT',
           color:  '#B5BBC9',
         },
       ],
@@ -116,6 +124,7 @@
 
 .scroll {
   display: flex;
+  transition: all .3s;
   @include v.mq(md) {
     display: block;
   }

@@ -1,13 +1,17 @@
 <template>
 <div>
   <div :class="$style.navi">
-    <div :class="$style.navi__inner">
-      <ul :class="$style.navi__list">
-        <li :class="$style.navi__li"><nuxt-link to="#top">TOP</nuxt-link></li>
-        <li :class="$style.navi__li"><nuxt-link to="#vision">VISION</nuxt-link></li>
-        <li :class="$style.navi__li"><nuxt-link to="#service">SERVICE</nuxt-link></li>
-        <li :class="$style.navi__li">INFORMATION</li>
-        <li :class="$style.navi__li">CONTACT</li> 
+    <div :class="$style.navi_inner">
+      <ul :class="$style.navi_list">
+      <li
+        v-for="list in sectionDatas"
+        :class="$style.navi_li"
+        :key="list.id"
+        @click="scrollTo(list.id)"
+      >
+        {{list.name}}
+      </li>
+        
       </ul>
     </div>
   </div>
@@ -17,28 +21,27 @@
 <script>
 
   export default {
+    props: {
+      sectionDatas: {
+        required: true,
+        type: Array,
+      }
+    },
+    methods: {
+      scrollTo(id) {
+        const scrollWrapperEl = document.querySelector('.scroll_container');
+        const scrollItemEl = document.querySelector('.scroll_list');
+        const el         = document.querySelector(`#${id}`)
+        console.log(el);
+        const clientLeft = el.getBoundingClientRect().left // 画面の左端から見た要素の位置
+        console.log(clientLeft);
 
-    // methods: {
-    //   smoothScroll() {
-    //       window.addEventListener('DOMContentLoaded', () => {
-    //       const anchorLinks = document.querySelectorAll('a[href^="#"]');
-    //       const anchorLinksArr = Array.prototype.slice.call(anchorLinks);
+        const scrollEl   = document.querySelector('.scroll')
+        console.log(scrollEl);
 
-    //       anchorLinksArr.forEach(link => {
-    //         link.addEventListener('click', e => {
-    //           e.preventDefault();
-    //           const targetId = link.hash;
-    //           const targetElement = document.querySelector(targetId);
-    //           const targetOffsetTop = window.pageYOffset + targetElement.getBoundingClientRect().top;
-    //           window.scrollTo({
-    //             top: targetOffsetTop,
-    //             behavior: "smooth"
-    //           });
-    //         });
-    //       });
-    //     });
-    //   }
-    // }
+        scrollEl.style.left = `-${scrollItemEl.clientWidth - scrollWrapperEl.clientWidth}px`
+      }
+    },
   }
 </script>
 
@@ -54,7 +57,7 @@
     bottom:  64px;
     z-index: v.zIndex(navi);
   }
-  .navi__list {
+  .navi_list {
     display: flex;
     gap: 0 calc(100% - 85%);
     align-items: center;
@@ -62,7 +65,7 @@
     font-family: f.family(english);
     color: c.$white;
   }
-  .navi__li {
+  .navi_li {
     cursor: pointer;
     transition: opacity .3s;
     &:hover {
