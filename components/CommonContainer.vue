@@ -38,6 +38,9 @@ export default {
   h2 {
     font-size: 100px;
     color: #333;
+    @include v.mq(md) {
+      font-size: 40px;
+    }
   }
 }
 

@@ -3,9 +3,9 @@
   <div :class="$style.navi">
     <div :class="$style.navi__inner">
       <ul :class="$style.navi__list">
-        <li :class="$style.navi__li"><a href="#">TOP</a></li>
-        <li :class="$style.navi__li"><a href="#vision">VISION</a></li>
-        <li :class="$style.navi__li"><a href="#service">SERVICE</a></li>
+        <li :class="$style.navi__li"><nuxt-link to="#top">TOP</nuxt-link></li>
+        <li :class="$style.navi__li"><nuxt-link to="#vision">VISION</nuxt-link></li>
+        <li :class="$style.navi__li"><nuxt-link to="#service">SERVICE</nuxt-link></li>
         <li :class="$style.navi__li">INFORMATION</li>
         <li :class="$style.navi__li">CONTACT</li> 
       </ul>
@@ -15,7 +15,30 @@
 </template>
 
 <script>
+
   export default {
+
+    // methods: {
+    //   smoothScroll() {
+    //       window.addEventListener('DOMContentLoaded', () => {
+    //       const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    //       const anchorLinksArr = Array.prototype.slice.call(anchorLinks);
+
+    //       anchorLinksArr.forEach(link => {
+    //         link.addEventListener('click', e => {
+    //           e.preventDefault();
+    //           const targetId = link.hash;
+    //           const targetElement = document.querySelector(targetId);
+    //           const targetOffsetTop = window.pageYOffset + targetElement.getBoundingClientRect().top;
+    //           window.scrollTo({
+    //             top: targetOffsetTop,
+    //             behavior: "smooth"
+    //           });
+    //         });
+    //       });
+    //     });
+    //   }
+    // }
   }
 </script>
 

@@ -1,11 +1,16 @@
 <template>
   <main id="frontpage">
+    <GradationBackground
+      :class="$style.screen"
+      :sectionDatas="sectionDatas"
+    />
     <GlobalNavigation></GlobalNavigation>
     <div :class="$style.scroll" class="scroll">
       <div :class="$style.scroll_container" class="scroll_container">
         <div :class="$style.scroll_list" class="scroll_list">
           <section
             v-for="item in sectionDatas"
+            :id="item.id"
             :class="[$style.section, 'scroll_item']"
             :key="item.id"
             :data-color="item.color"
@@ -33,18 +38,23 @@
       sectionDatas: [
         {
           id: 'top',
+          color: 'linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);',
         },
         {
           id: 'vision',
+          color:  'linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);',
         },
         {
           id: 'service',
+          color:  'linear-gradient(to bottom, #192c38, #15324f 34%,  #31527b);',
         },
         {
           id: 'information',
+          color:  'linear-gradient(to bottom, #31527b, #246495 66%,  #31527b);',
         },
         {
           id: 'contact',
+          color:  '#B5BBC9',
         },
       ],
     }
