@@ -1,20 +1,18 @@
 <template>
   <main id="frontpage" class="scroll">
-    <div class="scroll_wrapper">
-      <GlobalNavigation></GlobalNavigation>
-      <section
-        v-for="item in sectionDatas"
-        :class="[$style.section, 'scroll_item']"
-        :key="item.id"
-        :data-color="item.color"
+    <GlobalNavigation></GlobalNavigation>
+    <section
+      v-for="item in sectionDatas"
+      :class="[$style.section, 'scroll_item']"
+      :key="item.id"
+      :data-color="item.color"
+    >
+      <CommonContainer
+        sectionData="item"
       >
-        <CommonContainer
-          sectionData="item"
-        >
-        </CommonContainer>
-      </section>
-      <div :class="$style.center_marker"></div>
-    </div>
+      </CommonContainer>
+    </section>
+    <div :class="$style.center_marker"></div>
   </main>
 </template>
 
@@ -59,25 +57,19 @@
         else window.removeEventListener('scroll', this.checkIsScreenLandscape)
       },
       scrollPreference() {
-        const area  = document.querySelector(".scroll");
-        const wrap  = document.querySelector(".scroll_wrapper");
-        const items = document.querySelectorAll(".scroll_item");
-        const num   = items.length;
-
-        gsap.set(wrap,  { width: num * 100 + "%" });
-        gsap.set(items, { width: 100 / num + "%" });
-
-        gsap.to(items, {
-        xPercent: -100 * ( num - 1 ), //x方向に移動させる
-        ease: "none",
-        scrollTrigger: {
-          trigger: area, //トリガー
-          start: "top top", //開始位置
-          end: "+=1000", //終了位置
-          pin: true, //ピン留め
-          scrub: true, //スクロール量に応じて動かす
-        }
-      });
+        let sections = document.querySelector(".scroll");
+        gsap.to(sections, {
+          xPercent: -100 * (sections.length - 1),
+          ease: "none"
+          ,
+          scrollTrigger: {
+            trigger: ".scroll",
+            pin: true,
+            scrub: 1,
+            snap: 1 / (sections.length - 1),
+            end: () => "+=" + document.querySelector(".scroll").offsetWidth
+          }
+        });
       }
     }
   }
