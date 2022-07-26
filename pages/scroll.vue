@@ -1,17 +1,24 @@
 <template>
-  <main id="frontpage" class="scroll">
+  <main id="frontpage">
     <GlobalNavigation></GlobalNavigation>
-    <section
-      v-for="item in sectionDatas"
-      :class="[$style.section, 'scroll_item']"
-      :key="item.id"
-      :data-color="item.color"
-    >
-      <CommonContainer
-        sectionData="item"
-      >
-      </CommonContainer>
-    </section>
+    <div :class="$style.scroll" class="scroll">
+      <div :class="$style.scroll_container" class="scroll_container">
+        <div :class="$style.scroll_list" class="scroll_list">
+          <section
+            v-for="item in sectionDatas"
+            :class="[$style.section, 'scroll_item']"
+            :key="item.id"
+            :data-color="item.color"
+          >
+              <CommonContainer
+                :sectionData="item"
+              >
+
+              </CommonContainer>
+          </section>
+        </div>
+      </div>
+    </div>
     <div :class="$style.center_marker"></div>
   </main>
 </template>
@@ -21,28 +28,28 @@
   import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
   export default {
-    data() {
-      return {
-        screenStatus: '',
-        sectionDatas: [
-          {
-            id: 'top',
-          },
-          {
-            id: 'vision',
-          },
-          {
-            id: 'service',
-          },
-          {
-            id: 'information',
-          },
-          {
-            id: 'contact',
-          },
-        ],
-      }
-    },
+  data() {
+    return {
+      screenStatus: '',
+      sectionDatas: [
+        {
+          id: 'top',
+        },
+        {
+          id: 'vision',
+        },
+        {
+          id: 'service',
+        },
+        {
+          id: 'information',
+        },
+        {
+          id: 'contact',
+        },
+      ],
+    }
+  },
     mounted() {
       gsap.registerPlugin(ScrollTrigger)
       this.scrollPreference()
@@ -51,24 +58,29 @@
       window.addEventListener('resize', this.registrationScrollEvent)
     },
     methods: {
+      registrationScrollEvent() {
+      window.addEventListener('scroll', this.checkIsScreenLandscape)
+      },
       checkIsScreenLandscape() {
         const currrentScreenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
         if (this.screenStatus !== currrentScreenStatus) location.reload()
         else window.removeEventListener('scroll', this.checkIsScreenLandscape)
       },
       scrollPreference() {
-        let sections = document.querySelector(".scroll");
-        gsap.to(sections, {
-          xPercent: -100 * (sections.length - 1),
-          ease: "none"
-          ,
+        const scrollWrapperEl = document.querySelector('.scroll_container');
+        const scrollItemEl = document.querySelector('.scroll_item');
+        gsap.to(scrollItemEl, {
+          x: () => -(scrollItemEl.clientWidth - scrollWrapperEl.clientWidth),
+          ease: 'none',
           scrollTrigger: {
-            trigger: ".scroll",
+            trigger: '.scroll',
+            start: 'top top', // 要素の上端（top）が、ビューポートの上端（top）にきた時
+            end: () => `+=${scrollItemEl.clientWidth - scrollWrapperEl.clientWidth}`,
+            scrub: true,
             pin: true,
-            scrub: 1,
-            snap: 1 / (sections.length - 1),
-            end: () => "+=" + document.querySelector(".scroll").offsetWidth
-          }
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
         });
       }
     }
@@ -84,6 +96,15 @@
 .scroll {
   overflow: hidden;
   display: flex;
+  &_container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+  }
+  &_list {
+    position: absolute;
+    display: flex;
+  }
 
   @include v.mq(md) {
     display: block;

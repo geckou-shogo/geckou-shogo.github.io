@@ -37,7 +37,7 @@ export default {
   justify-content: center;
   h2 {
     font-size: 100px;
-    color: #fff;
+    color: #333;
   }
 }
 
