@@ -8,7 +8,7 @@
         class="anchor"
         :class="$style.navi_li"
         :key="list.id"
-        @click="scrollTo(list.id)"
+        @click="smoothScroll(list.id)"
       >
         {{list.name}}
       </li>
@@ -31,49 +31,55 @@ import ScrollToPlugin from 'gsap/ScrollToPlugin';
         type: Array,
       }
     },
+    mounted() {
+      gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+    },
     methods: {
-      scrollTo(id) {
-        if (window.innerWidth > window.innerHeight) {
-          const el         = document.querySelector(`#${id}`) //文書内の一番最初の{ID}を取得
-          console.log(el);
+      // scrollTo(id) {
+      //   if (window.innerWidth > window.innerHeight) {
+          
+      //     const el         = document.querySelectorAll(`#${id}`) //文書内の一番最初の{ID}を取得
+      //     console.log(el);
 
-          const clientLeft = el.getBoundingClientRect().left // 画面の左端から見た要素の位置
-          console.log(clientLeft);
+      //     const elemX = el.getBoundingClientRect().left // 画面の左端から見た要素の位置
+      //     console.log(elemX);
 
-          const scrollEl   = document.querySelector('.scroll')
-          console.log(scrollEl);
-          scrollEl.style.left = `-${scrollEl.clientWidth}px`
-          } else {
+      //     const scrollEl   = document.querySelector('.scroll')
+      //     console.log(scrollEl);
+      //     scrollEl.style.left = `-${scrollEl.clientWidth}px`
+      //     } else {
             
-            }
-      }
-
-      // smoothScroll(id) {
-      //   /* Main navigation */
-      //   let panelsSection = document.querySelector(".scroll"),
-      //     panelsContainer = document.querySelector(".scroll_container"),
-      //     tween;
-      //     document.querySelectorAll(`#${id}`).forEach(anchor => {
-      //     anchor.addEventListener("click", function(e) {
-      //       e.preventDefault();
-      //       let targetElem = document.querySelector(e.target.getAttribute(`#${id}`)),
-      //         y = targetElem;
-      //       if (targetElem && panelsContainer.isSameNode(targetElem.parentElement)) {
-      //         let totalScroll = tween.scrollTrigger.end - tween.scrollTrigger.start,
-      //           totalMovement = (panels.length - 1) * targetElem.offsetWidth;
-      //         y = Math.round(tween.scrollTrigger.start + (targetElem.offsetLeft / totalMovement) * totalScroll);
       //       }
-      //       console.log();
-      //       gsap.to(window, {
-      //         scrollTo: {
-      //           y: y,
-      //           autoKill: false
-      //         },
-      //         duration: 1
-      //       });
-      //     });
-      //   });
       // }
+
+      smoothScroll(id) {
+        let href = document.querySelector(`#${id}`) 
+        /* Main navigation */
+        let panelsSection = document.querySelector(".scroll"),
+          panelsContainer = document.querySelector(".scroll_container"),
+          tween;
+          document.querySelectorAll(".anchor").forEach(anchor => {
+          anchor.addEventListener("click", function(e) {
+            e.preventDefault();
+            let targetElem = document.querySelector(e.target.getAttribute(href)),
+              y = targetElem;
+              console.log(targetElem);
+            if (targetElem && panelsContainer.isSameNode(targetElem.parentElement)) {
+              let totalScroll = tween.scrollTrigger.end - tween.scrollTrigger.start,
+                totalMovement = (panels.length - 1) * targetElem.offsetWidth;
+              y = Math.round(tween.scrollTrigger.start + (targetElem.offsetLeft / totalMovement) * totalScroll);
+            }
+            console.log();
+            gsap.to(window, {
+              scrollTo: {
+                y: y,
+                autoKill: false
+              },
+              duration: 1
+            });
+          });
+        });
+      }
     },
   }
 </script>

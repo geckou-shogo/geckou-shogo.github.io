@@ -6,7 +6,7 @@
     <div 
     :class="$style.container"
     >
-    <h2>{{ sectionData.id }}</h2>
+    <h2>{{ sectionData.name }}</h2>
     </div>
   </div>
 </template>
