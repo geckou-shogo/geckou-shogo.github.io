@@ -156,7 +156,7 @@
   justify-content: center;
   font-size: 5rem;
   font-weight: 900;
-  border: solid 2px #fff;
+  border-right: solid 2px #fff;
 }
 
 .center_marker {

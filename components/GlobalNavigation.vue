@@ -29,17 +29,27 @@
     },
     methods: {
       scrollTo(id) {
-        const scrollWrapperEl = document.querySelector('.scroll_container');
-        const scrollItemEl = document.querySelector('.scroll_list');
-        const el         = document.querySelector(`#${id}`)
-        console.log(el);
-        const clientLeft = el.getBoundingClientRect().left // 画面の左端から見た要素の位置
-        console.log(clientLeft);
+        if (window.innerWidth > window.innerHeight) {
+          const el         = document.querySelector(`#${id}`) //文書内の一番最初の{ID}を取得
+          console.log(el);
 
-        const scrollEl   = document.querySelector('.scroll')
-        console.log(scrollEl);
+          // const clientLeft = el.getBoundingClientRect().left // 画面の左端から見た要素の位置
+          // console.log(clientLeft);
 
-        scrollEl.style.left = `-${scrollItemEl.clientWidth - scrollWrapperEl.clientWidth}px`
+          const elemX = el.getBoundingClientRect().left;
+          console.log(elemX);
+
+          const scrollX = window.pageXOffset;
+
+          const scrollEl = elemX - scrollX
+          console.log(scrollEl);
+
+          // const scrollEl   = document.querySelector('.scroll')
+          // console.log(scrollEl);
+          // scrollEl.style.left = `-${scrollEl.clientWidth}px`
+          } else {
+            
+            }
       }
     },
   }
