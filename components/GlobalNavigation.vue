@@ -8,7 +8,7 @@
         class="anchor"
         :class="$style.navi_li"
         :key="list.id"
-        @click="smoothScroll(list.id)"
+        @click.prevent="smoothScroll(list.id)"
       >
         {{list.name}}
       </li>
@@ -51,14 +51,14 @@ import ScrollToPlugin from 'gsap/ScrollToPlugin';
       //       }
       // },
       smoothScroll(id) {
-        let panelsContainer = document.querySelector(".scroll_container") // スクロールを包括している要素
+        let panelsContainer = document.querySelector(".scroll_container"),tween; // スクロールを包括している要素
         document.querySelectorAll(".anchor").forEach(anchor => { //".anchor"の要素を全て取得し、forで回す
         anchor.addEventListener("click", function(e) { //.anchorがクリックされた時、
-        e.preventDefault();
+        console.log(anchor);
         let targetElem = document.querySelector(e.target.getAttribute(`#${id}`)), // 指定された属性の値を返す記述がされている
           y = targetElem;
           console.log(targetElem);
-        if (targetElem && panelsContainer.isSameNode(targetElem.parentElement)) {
+        if (targetElem && panelsContainer === (targetElem.parentElement)) {
           let totalScroll = tween.scrollTrigger.end - tween.scrollTrigger.start,
             totalMovement = (panels.length - 1) * targetElem.offsetWidth;
           y = Math.round(tween.scrollTrigger.start + (targetElem.offsetLeft / totalMovement) * totalScroll);
