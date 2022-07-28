@@ -88,26 +88,26 @@
         const scrollItemEl = document.querySelector('.scroll_list');
           if (window.innerWidth > window.innerHeight) {
             gsap.to(scrollItemEl, {
-            x: () => -(scrollItemEl.clientWidth - scrollWrapperEl.clientWidth),
-            ease: 'none',
-            scrollTrigger: {
-              trigger: '.scroll',
-              start: 'top top', // 要素の上端（top）が、ビューポートの上端（top）にきた時
-              end: () => `+=${scrollItemEl.clientWidth - scrollWrapperEl.clientWidth}`,
-              scrub: true,
-              pin: true,
-              anticipatePin: 1,
-              invalidateOnRefresh: true,
-            },
-          });
-        } else {
-          gsap.to(scrollItemEl, {
-            x: () => -(scrollItemEl.clientWidth - scrollWrapperEl.clientWidth),
-            ease: 'none',
-            scrollTrigger: {
-              start: 'top center',
-              end: 'bottom center',
-              markers: true,
+              x: () => -(scrollItemEl.clientWidth - scrollWrapperEl.clientWidth),
+              ease: 'none',
+              scrollTrigger: {
+                trigger: '.scroll',
+                start: 'top top', // 要素の上端（top）が、ビューポートの上端（top）にきた時
+                end: () => `+=${scrollItemEl.clientWidth - scrollWrapperEl.clientWidth}`,
+                scrub: true,
+                pin: true,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+              },
+            });
+          } else {
+            gsap.to(scrollItemEl, {
+              x: () => -(scrollItemEl.clientWidth - scrollWrapperEl.clientWidth),
+              ease: 'none',
+              scrollTrigger: {
+                start: 'top center',
+                end: 'bottom center',
+                markers: true,
             },
           });
         }

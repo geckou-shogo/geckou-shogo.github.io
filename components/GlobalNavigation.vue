@@ -5,10 +5,9 @@
       <ul :class="$style.navi_list">
       <li
         v-for="list in sectionDatas"
-        class="anchor"
         :class="$style.navi_li"
         :key="list.id"
-        @click.prevent="smoothScroll(list.id)"
+        @click.prevent="scrollTo(list.id)"
       >
         {{list.name}}
       </li>
@@ -35,47 +34,55 @@ import ScrollToPlugin from 'gsap/ScrollToPlugin';
       gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
     },
     methods: {
-      // scrollTo(id) {
-      //   if (window.innerWidth > window.innerHeight) {
-      //     const el         = document.querySelector(`#${id}`) //文書内の一番最初の{ID}を取得
-      //     console.log(el);
+      scrollTo(id) {
+        if (window.innerWidth > window.innerHeight) {
+          const el         = document.querySelector(`#${id}`) //文書内の一番最初の{ID}を取得
+          console.log(el);
 
-      //     const clientLeft = el.getBoundingClientRect().left // 画面の左端から見た要素の位置
-      //     console.log(clientLeft);
+          const clientLeft = el.getBoundingClientRect().left // 画面の左端から見た要素の位置
+          console.log(clientLeft);
 
-      //     const scrollEl   = document.querySelector('.scroll')
-      //     console.log(scrollEl);
-      //     scrollEl.style.left = `-${scrollEl.clientWidth}px`
-      //     } else {
+          const offset = window.pageXOffset; // 現在のスクロール量を取得
+          console.log(offset);
+
+          const scrollItem = window.innerWidth;
+
+          const scrollEl   = document.querySelector('.scroll_list')
+          
+          gsap.to(scrollEl, {
             
-      //       }
-      // },
-      smoothScroll(id) {
-        let panelsContainer = document.querySelector(".scroll_container"),tween; // スクロールを包括している要素
-        document.querySelectorAll(".anchor").forEach(anchor => { //".anchor"の要素を全て取得し、forで回す
-        anchor.addEventListener("click", function() { //.anchorがクリックされた時、
-        console.log(anchor);
-        
-        let targetElem = document.querySelector(`#${id}`), // 指定された属性の値を返す記述がされている
-          y = targetElem;
-          console.log(targetElem);
-        if (targetElem && panelsContainer === (targetElem.parentElement)) {
-          let totalScroll = tween.scrollTrigger.end - tween.scrollTrigger.start,
-            totalMovement = (panels.length - 1) * targetElem.offsetWidth;
-          y = Math.round(tween.scrollTrigger.start + (targetElem.offsetLeft / totalMovement) * totalScroll);
-        }
-        gsap.to(window, {
-          scrollTo: {
-            y: y,
-            autoKill: false
-          },
-          duration: 1
-    });
-	});
-});
-
+            x: -clientLeft - scrollItem,
+          })
+          // scrollEl.style.transform = `translate3d(px, 0px, 0px)`
+          console.log(scrollEl.clientWidth);
+          } else {
+            
+            }
       },
-      
+      // smoothScroll(id) {
+      //   let panelsContainer = document.querySelector(".scroll_container"),tween; // スクロールを包括している要素
+      //   document.querySelectorAll(".anchor").forEach(anchor => { //".anchor"の要素を全て取得し、forで回す
+      //   anchor.addEventListener("click", function() { //.anchorがクリックされた時、
+      //   console.log(anchor);
+        
+      //   let targetElem = document.querySelector(`#${id}`), // 指定された属性の値を返す記述がされている
+      //     y = targetElem;
+      //     console.log(targetElem);
+      //   if (targetElem && panelsContainer === (targetElem.parentElement)) {
+      //     let totalScroll = tween.scrollTrigger.end - tween.scrollTrigger.start,
+      //       totalMovement = (panels.length - 1) * targetElem.offsetWidth;
+      //     y = Math.round(tween.scrollTrigger.start + (targetElem.offsetLeft / totalMovement) * totalScroll);
+      //   }
+      //     gsap.to(window, {
+      //       scrollTo: {
+      //         y: y,
+      //         autoKill: false
+      //       },
+      //       duration: 1
+      //       });
+      //     });
+      //   });
+      // },
     },
   }
 </script>
