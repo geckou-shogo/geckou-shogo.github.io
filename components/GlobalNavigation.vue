@@ -53,9 +53,10 @@ import ScrollToPlugin from 'gsap/ScrollToPlugin';
       smoothScroll(id) {
         let panelsContainer = document.querySelector(".scroll_container"),tween; // スクロールを包括している要素
         document.querySelectorAll(".anchor").forEach(anchor => { //".anchor"の要素を全て取得し、forで回す
-        anchor.addEventListener("click", function(e) { //.anchorがクリックされた時、
+        anchor.addEventListener("click", function() { //.anchorがクリックされた時、
         console.log(anchor);
-        let targetElem = document.querySelector(e.target.getAttribute(`#${id}`)), // 指定された属性の値を返す記述がされている
+        
+        let targetElem = document.querySelector(`#${id}`), // 指定された属性の値を返す記述がされている
           y = targetElem;
           console.log(targetElem);
         if (targetElem && panelsContainer === (targetElem.parentElement)) {
