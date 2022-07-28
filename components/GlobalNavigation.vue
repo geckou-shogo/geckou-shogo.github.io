@@ -39,14 +39,8 @@ import { gsap } from 'gsap';
           const clientLeft = el.offsetLeft  // 親要素から見た要素の位置
           console.log(clientLeft);
 
-          const pageX = window.pageXOffset
-
           const scrollEl   = document.querySelector('.scroll_list')
-          console.log(scrollEl);
 
-          gsap.set(scrollEl,{
-            x: pageX,
-          }) 
           gsap.to(scrollEl, {
             x: -clientLeft,
           })

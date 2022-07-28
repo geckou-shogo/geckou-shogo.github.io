@@ -35,22 +35,27 @@
       sectionDatas: [
         {
           id: 'top',
+          name: 'TOP',
           color: 'linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);',
         },
         {
           id: 'vision',
+          name: 'VISION',
           color:  'linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);',
         },
         {
           id: 'service',
+          name: 'SERVICE',
           color:  'linear-gradient(to bottom, #192c38, #15324f 34%,  #31527b);',
         },
         {
           id: 'information',
+          name: 'INFORMATION',
           color:  'linear-gradient(to bottom, #31527b, #246495 66%,  #31527b);',
         },
         {
           id: 'contact',
+          name: 'CONTACT',
           color:  '#B5BBC9',
         },
       ],
@@ -75,7 +80,7 @@
       scrollPreference() {
         if (window.innerWidth > window.innerHeight) {
           const sections = gsap.utils.toArray('.scroll_item')
-          const screens  = document.getElementsByClassName('screen')
+          // const screens  = document.getElementsByClassName('screen')
           const getMaxWidth = () => {
             this.maxWidth = 0
             sections.forEach((section) => {
@@ -105,15 +110,15 @@
                 end: () => '+=' + sct.offsetWidth * (this.maxWidth / (this.maxWidth - window.innerWidth)),
               }
             })
-              gsap.to(screens,{
-              y: '-100vh',
-              scrollTrigger: {
-                trigger: '.scroll',
-                start: () => 'top top-=' + (sct.offsetLeft - window.innerWidth/2) * (this.maxWidth / (this.maxWidth - window.innerWidth)),
-                end: () => '+=' + sct.offsetWidth * (this.maxWidth / (this.maxWidth - window.innerWidth)),
-                scrub: true,
-              }
-            })  
+            //   gsap.to(screens,{
+            //   y: '-100vh',
+            //   scrollTrigger: {
+            //     trigger: '.scroll',
+            //     start: () => 'top top-=' + (sct.offsetLeft - window.innerWidth/2) * (this.maxWidth / (this.maxWidth - window.innerWidth)),
+            //     end: () => '+=' + sct.offsetWidth * (this.maxWidth / (this.maxWidth - window.innerWidth)),
+            //     scrub: true,
+            //   }
+            // })  
           })
         } else {
           const sections = gsap.utils.toArray('.scroll_item')
