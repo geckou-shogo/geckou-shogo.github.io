@@ -20,8 +20,8 @@
 
 <script>
 import { gsap } from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
-import ScrollToPlugin from 'gsap/ScrollToPlugin';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
 
   export default {
     props: {
@@ -30,26 +30,25 @@ import ScrollToPlugin from 'gsap/ScrollToPlugin';
         type: Array,
       }
     },
-    mounted() {
-      gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
-    },
     methods: {
       scrollTo(id) {
         if (window.innerWidth > window.innerHeight) {
           const el         = document.querySelector(`#${id}`) //文書内の一番最初の{ID}を取得
           console.log(el);
 
-          const clientLeft = el.offsetLeft  // 画面の左端から見た要素の位置
+          const clientLeft = el.offsetLeft  // 親要素から見た要素の位置
           console.log(clientLeft);
 
-          const offset = window.pageXOffset; // 現在のスクロール量を取得
-          console.log(offset);
+          const pageX = window.pageXOffset
 
           const scrollEl   = document.querySelector('.scroll_list')
           console.log(scrollEl);
+
+          gsap.set(scrollEl,{
+            x: pageX,
+          }) 
           gsap.to(scrollEl, {
             x: -clientLeft,
-            duration: 1.2,
           })
           // scrollEl.style.transform = `translate3d(px, 0px, 0px)`
           console.log(scrollEl.clientWidth);
@@ -57,30 +56,7 @@ import ScrollToPlugin from 'gsap/ScrollToPlugin';
             
             }
       },
-      // smoothScroll(id) {
-      //   let panelsContainer = document.querySelector(".scroll_container"),tween; // スクロールを包括している要素
-      //   document.querySelectorAll(".anchor").forEach(anchor => { //".anchor"の要素を全て取得し、forで回す
-      //   anchor.addEventListener("click", function() { //.anchorがクリックされた時、
-      //   console.log(anchor);
-        
-      //   let targetElem = document.querySelector(`#${id}`), // 指定された属性の値を返す記述がされている
-      //     y = targetElem;
-      //     console.log(targetElem);
-      //   if (targetElem && panelsContainer === (targetElem.parentElement)) {
-      //     let totalScroll = tween.scrollTrigger.end - tween.scrollTrigger.start,
-      //       totalMovement = (panels.length - 1) * targetElem.offsetWidth;
-      //     y = Math.round(tween.scrollTrigger.start + (targetElem.offsetLeft / totalMovement) * totalScroll);
-      //   }
-      //     gsap.to(window, {
-      //       scrollTo: {
-      //         y: y,
-      //         autoKill: false
-      //       },
-      //       duration: 1
-      //       });
-      //     });
-      //   });
-      // },
+      
     },
   }
 </script>
