@@ -7,7 +7,7 @@
         v-for="list in sectionDatas"
         :class="$style.navi_li"
         :key="list.id"
-        @click.prevent="scrollTo(list.id)"
+        @click.prevent="smoothScroll(list.id)"
       >
         {{list.name}}
       </li>
@@ -31,26 +31,39 @@ import { gsap } from 'gsap';
       }
     },
     methods: {
-      scrollTo(id) {
+      // scrollTo(id) {
+      //   if (window.innerWidth > window.innerHeight) {
+      //     const el         = document.querySelector(`#${id}`) //文書内の一番最初の{ID}を取得
+      //     console.log(el);
+
+      //     const clientLeft = el.offsetLeft  // 親要素から見た要素の位置
+      //     console.log(clientLeft);
+
+      //     const scrollEl   = document.querySelector('.scroll_wrapper')
+
+      //     gsap.to(scrollEl, {
+      //       x: -clientLeft,
+      //     })
+      //     // scrollEl.style.transform = `translate3d(px, 0px, 0px)`
+      //     console.log(scrollEl.clientWidth);
+      //     } else {
+            
+      //       }
+      // },
+      smoothScroll(id) {
+        let scrollWrapper = document.querySelector(".scroll_wrapper");
         if (window.innerWidth > window.innerHeight) {
           const el         = document.querySelector(`#${id}`) //文書内の一番最初の{ID}を取得
+          const scrollItem = document.querySelector('.scroll_item')
+          const scrollToHere = (scrollItem.offsetLeft ) * ( scrollWrapper.scrollWidth / (scrollWrapper.scrollWidth - window.innerWidth))
           console.log(el);
-
-          const clientLeft = el.offsetLeft  // 親要素から見た要素の位置
-          console.log(clientLeft);
-
-          const scrollEl   = document.querySelector('.scroll_list')
-
-          gsap.to(scrollEl, {
-            x: -clientLeft,
+          console.log(scrollToHere);
+          gsap.to(window, {
+          scrollTo: scrollToHere,
+          duration: 2
           })
-          // scrollEl.style.transform = `translate3d(px, 0px, 0px)`
-          console.log(scrollEl.clientWidth);
-          } else {
-            
-            }
-      },
-      
+        }
+      }
     },
   }
 </script>

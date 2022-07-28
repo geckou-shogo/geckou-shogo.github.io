@@ -98,6 +98,7 @@
                 pin: true,
                 anticipatePin: 1,
                 invalidateOnRefresh: true,
+                
               },
             });
           } else {

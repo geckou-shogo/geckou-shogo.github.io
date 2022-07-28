@@ -7,18 +7,20 @@
     <GlobalNavigation
       :sectionDatas="sectionDatas"
     ></GlobalNavigation>
-    <div :class="$style.scroll" class="scroll">
-      <section 
-        v-for="item in sectionDatas"
-        :class="[$style.section, 'scroll_item']"
-        :key="item.id"
-        :data-color="item.color"
-      >
-        <CommonContainer
-          :sectionData="item"
+    <div class="scroll_wrapper">
+      <div :class="$style.scroll" class="scroll">
+        <section 
+          v-for="item in sectionDatas"
+          :class="[$style.section, 'scroll_item']"
+          :key="item.id"
+          :data-color="item.color"
         >
-        </CommonContainer>
-      </section>
+          <CommonContainer
+            :sectionData="item"
+          >
+          </CommonContainer>
+        </section>
+      </div>
     </div>
     <div :class="$style.center_marker"></div>
   </main>
