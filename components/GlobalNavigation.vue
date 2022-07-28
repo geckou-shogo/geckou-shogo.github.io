@@ -39,19 +39,17 @@ import ScrollToPlugin from 'gsap/ScrollToPlugin';
           const el         = document.querySelector(`#${id}`) //文書内の一番最初の{ID}を取得
           console.log(el);
 
-          const clientLeft = el.getBoundingClientRect().left // 画面の左端から見た要素の位置
+          const clientLeft = el.offsetLeft  // 画面の左端から見た要素の位置
           console.log(clientLeft);
 
           const offset = window.pageXOffset; // 現在のスクロール量を取得
           console.log(offset);
 
-          const scrollItem = window.innerWidth;
-
           const scrollEl   = document.querySelector('.scroll_list')
-          
+          console.log(scrollEl);
           gsap.to(scrollEl, {
-            
-            x: -clientLeft - scrollItem,
+            x: -clientLeft,
+            duration: 1.2,
           })
           // scrollEl.style.transform = `translate3d(px, 0px, 0px)`
           console.log(scrollEl.clientWidth);
