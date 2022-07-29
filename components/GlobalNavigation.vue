@@ -1,13 +1,17 @@
 <template>
 <div>
   <div :class="$style.navi">
-    <div :class="$style.navi__inner">
-      <ul :class="$style.navi__list">
-        <li :class="$style.navi__li"><a href="#">TOP</a></li>
-        <li :class="$style.navi__li"><a href="#vision">VISION</a></li>
-        <li :class="$style.navi__li"><a href="#service">SERVICE</a></li>
-        <li :class="$style.navi__li">INFORMATION</li>
-        <li :class="$style.navi__li">CONTACT</li> 
+    <div :class="$style.navi_inner">
+      <ul :class="$style.navi_list">
+      <li
+        v-for="list in sectionDatas"
+        :class="$style.navi_li"
+        :key="list.id"
+        @click.prevent="smoothScroll(list.id)"
+      >
+        {{list.name}}
+      </li>
+        
       </ul>
     </div>
   </div>
@@ -15,7 +19,52 @@
 </template>
 
 <script>
+import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+
   export default {
+    props: {
+      sectionDatas: {
+        required: true,
+        type: Array,
+      }
+    },
+    methods: {
+      // scrollTo(id) {
+      //   if (window.innerWidth > window.innerHeight) {
+      //     const el         = document.querySelector(`#${id}`) //文書内の一番最初の{ID}を取得
+      //     console.log(el);
+
+      //     const clientLeft = el.offsetLeft  // 親要素から見た要素の位置
+      //     console.log(clientLeft);
+
+      //     const scrollEl   = document.querySelector('.scroll_wrapper')
+
+      //     gsap.to(scrollEl, {
+      //       x: -clientLeft,
+      //     })
+      //     // scrollEl.style.transform = `translate3d(px, 0px, 0px)`
+      //     console.log(scrollEl.clientWidth);
+      //     } else {
+            
+      //       }
+      // },
+      smoothScroll(id) {
+        let scrollWrapper = document.querySelector(".scroll_wrapper");
+        if (window.innerWidth > window.innerHeight) {
+          const el         = document.querySelector(`#${id}`) //文書内の一番最初の{ID}を取得
+          const scrollItem = document.querySelector('.scroll_item')
+          const scrollToHere = (scrollItem.offsetLeft ) * ( scrollWrapper.scrollWidth / (scrollWrapper.scrollWidth - window.innerWidth))
+          console.log(el);
+          console.log(scrollToHere);
+          gsap.to(window, {
+          scrollTo: scrollToHere,
+          duration: 2
+          })
+        }
+      }
+    },
   }
 </script>
 
@@ -31,7 +80,7 @@
     bottom:  64px;
     z-index: v.zIndex(navi);
   }
-  .navi__list {
+  .navi_list {
     display: flex;
     gap: 0 calc(100% - 85%);
     align-items: center;
@@ -39,7 +88,7 @@
     font-family: f.family(english);
     color: c.$white;
   }
-  .navi__li {
+  .navi_li {
     cursor: pointer;
     transition: opacity .3s;
     &:hover {

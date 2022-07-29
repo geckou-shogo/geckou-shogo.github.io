@@ -6,7 +6,7 @@
     <div 
     :class="$style.container"
     >
-    <h2>{{ sectionData.id }}</h2>
+    <h2>{{ sectionData.name }}</h2>
     </div>
   </div>
 </template>
@@ -37,7 +37,10 @@ export default {
   justify-content: center;
   h2 {
     font-size: 100px;
-    color: #fff;
+    color: #333;
+    @include v.mq(md) {
+      font-size: 40px;
+    }
   }
 }
 
