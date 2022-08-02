@@ -138,7 +138,7 @@ data() {
         trigger: sct,
         start: () => 'top top-=' + (sct.offsetLeft - window.innerWidth/2) * (maxWidth / (maxWidth - window.innerWidth)),
         end: () => '+=' + sct.offsetWidth * (maxWidth / (maxWidth - window.innerWidth)),
-        toggleClass: {targets: target, className: "active"}
+        toggleClass: {targets: target, className: "is-current"}
       });
     }); 
   },

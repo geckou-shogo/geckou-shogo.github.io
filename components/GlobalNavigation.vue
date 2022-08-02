@@ -63,47 +63,49 @@
       opacity: .7;
     }
   }
-  .navi_link {
-    position: relative;
-    &::before {
-      content: "";
-      position: absolute;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100px;
-      height: 2px;
-      background-color: c.$white;
-    }
-    &::after {
-      content: "";
-      position: absolute;
-      top: 8px;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      display: block;
-      width: 54px;
-      height: 54px;
-      background-image: url("../assets/img/gecko.png");
-      background-size: 100%;
-    }
-    
-  }
-
 </style>
 
 <style lang="scss">
+@use '~/assets/scss/value' as v;
+@use '~/assets/scss/font' as f;
+@use '~/assets/scss/color' as c;
+
  .navi_li.is-current {
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background-color: rgba(224, 224, 228, 0.08);
+    }
+    .anchor {
       position: relative;
-      &::after {
+      &::before {
         content: "";
         position: absolute;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        background-color: rgba(224, 224, 228, 0.08);
+        width: 100px;
+        height: 2px;
+        background-color: c.$white;
       }
+      &::after {
+        content: "";
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: block;
+        width: 54px;
+        height: 54px;
+        background-image: url("../assets/img/gecko.png");
+        background-size: 100%;
+      }
+    }
     }
 
 </style>
