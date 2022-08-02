@@ -7,9 +7,14 @@
         v-for="list in sections"
         :class="$style.navi_li"
         :key="list.id"
-        @click.prevent="smoothScroll(list.id)"
       >
-        {{list.name}}
+        <a 
+          :href="`#${list.id}`"
+          :class="[$style.item, 'anchor']"
+          
+        >
+          {{list.name}}
+        </a>
       </li>
         
       </ul>
@@ -19,50 +24,12 @@
 </template>
 
 <script>
-import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
 
   export default {
     props: {
       sections: {
         required: true,
         type: Array,
-      }
-    },
-    methods: {
-      // scrollTo(id) {
-      //   if (window.innerWidth > window.innerHeight) {
-      //     const el         = document.querySelector(`#${id}`) //文書内の一番最初の{ID}を取得
-      //     console.log(el);
-
-      //     const clientLeft = el.offsetLeft  // 親要素から見た要素の位置
-      //     console.log(clientLeft);
-
-      //     const scrollEl   = document.querySelector('.scroll_wrapper')
-
-      //     gsap.to(scrollEl, {
-      //       x: -clientLeft,
-      //     })
-      //     // scrollEl.style.transform = `translate3d(px, 0px, 0px)`
-      //     console.log(scrollEl.clientWidth);
-      //     } else {
-            
-      //       }
-      // },
-      smoothScroll(id) {
-        let scrollWrapper = document.querySelector(".scroll_wrapper");
-        if (window.innerWidth > window.innerHeight) {
-          const el         = document.querySelector(`#${id}`) //文書内の一番最初の{ID}を取得
-          const scrollItem = document.querySelector('.scroll_item')
-          const scrollToHere = (scrollItem.offsetLeft ) * ( scrollWrapper.scrollWidth / (scrollWrapper.scrollWidth - window.innerWidth))
-          console.log(el);
-          console.log(scrollToHere);
-          gsap.to(window, {
-          scrollTo: scrollToHere,
-          duration: 2
-          })
-        }
       }
     },
   }
