@@ -6,6 +6,7 @@
         v-for="list in sections"
         :class="$style.navi_li"
         :key="list.id"
+        :id="`navi-${list.id}`"
       >
         <a 
           :href="`#${list.id}`"
