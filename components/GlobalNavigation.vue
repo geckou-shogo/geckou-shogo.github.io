@@ -9,7 +9,7 @@
       >
         <a 
           :href="`#${list.id}`"
-          :class="[$style.item, 'anchor']"
+          :class="[$style.navi_link, 'anchor']"
           
         >
           {{list.name}}
@@ -30,6 +30,16 @@
         type: Array,
       }
     },
+    methods: {
+      navigationCurrent() {
+        let navLink = document.getElementsByClassName('anchor');
+        for (let i = 0; i < navLink.length; i++) {
+          if(navLink[i].href === location.href) {
+              navLink[i].classList.add('style-change');
+            }
+        }
+      }
+    }
   }
 </script>
 
@@ -58,10 +68,33 @@
     color: c.$white;
   }
   .navi_li {
-    cursor: pointer;
     transition: opacity .3s;
     &:hover {
       opacity: .7;
+    }
+  }
+  .navi_link {
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100px;
+      height: 2px;
+      background-color: c.$white;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: block;
+      width: 54px;
+      height: 54px;
+      background-image: url("../assets/img/gecko.png");
+      background-size: 100%;
     }
     
   }
