@@ -109,7 +109,6 @@ data() {
     })
     document.querySelectorAll('.section').forEach(section => {
       const target = document.querySelector(`#navi-${section.id}`)
-
       gsap.to(target,{
         scrollTrigger: {
           trigger: section,
