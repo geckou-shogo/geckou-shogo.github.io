@@ -2,6 +2,10 @@
   <main
     :class="$style.frontpage"
   >
+    <GradationBackground
+      :class="$style.screen"
+      :sectionDatas="sectionDatas"
+    />
     <GlobalNavigation
       :sections="sectionDatas"
     />
