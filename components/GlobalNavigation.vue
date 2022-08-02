@@ -1,68 +1,33 @@
 <template>
-<div>
   <div :class="$style.navi">
     <div :class="$style.navi_inner">
       <ul :class="$style.navi_list">
       <li
-        v-for="list in sectionDatas"
-        :class="$style.navi_li"
+        v-for="list in sections"
+        :class="[$style.navi_li, 'navi_li']"
         :key="list.id"
-        @click.prevent="smoothScroll(list.id)"
+        :id="`navi-${list.id}`"
       >
-        {{list.name}}
+        <a 
+          :href="`#${list.id}`"
+          :class="[$style.navi_link, 'anchor']"
+        >
+          {{list.name}}
+        </a>
       </li>
         
       </ul>
     </div>
   </div>
-</div>
 </template>
 
 <script>
-import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
 
   export default {
     props: {
-      sectionDatas: {
+      sections: {
         required: true,
         type: Array,
-      }
-    },
-    methods: {
-      // scrollTo(id) {
-      //   if (window.innerWidth > window.innerHeight) {
-      //     const el         = document.querySelector(`#${id}`) //文書内の一番最初の{ID}を取得
-      //     console.log(el);
-
-      //     const clientLeft = el.offsetLeft  // 親要素から見た要素の位置
-      //     console.log(clientLeft);
-
-      //     const scrollEl   = document.querySelector('.scroll_wrapper')
-
-      //     gsap.to(scrollEl, {
-      //       x: -clientLeft,
-      //     })
-      //     // scrollEl.style.transform = `translate3d(px, 0px, 0px)`
-      //     console.log(scrollEl.clientWidth);
-      //     } else {
-            
-      //       }
-      // },
-      smoothScroll(id) {
-        let scrollWrapper = document.querySelector(".scroll_wrapper");
-        if (window.innerWidth > window.innerHeight) {
-          const el         = document.querySelector(`#${id}`) //文書内の一番最初の{ID}を取得
-          const scrollItem = document.querySelector('.scroll_item')
-          const scrollToHere = (scrollItem.offsetLeft ) * ( scrollWrapper.scrollWidth / (scrollWrapper.scrollWidth - window.innerWidth))
-          console.log(el);
-          console.log(scrollToHere);
-          gsap.to(window, {
-          scrollTo: scrollToHere,
-          duration: 2
-          })
-        }
       }
     },
   }
@@ -75,26 +40,70 @@ import { gsap } from 'gsap';
 
   .navi {
     position: fixed;
-    width: calc(100% / 2);
-    left: calc(100% - 78%);
+    width: 100%;
     bottom:  64px;
     z-index: v.zIndex(navi);
   }
+  .navi_inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .navi_list {
     display: flex;
-    gap: 0 calc(100% - 85%);
+    gap: 0 60px;
     align-items: center;
     font-size: f.size(small);
     font-family: f.family(english);
     color: c.$white;
   }
   .navi_li {
-    cursor: pointer;
     transition: opacity .3s;
     &:hover {
       opacity: .7;
     }
+  }
+  .navi_link {
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100px;
+      height: 2px;
+      background-color: c.$white;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: block;
+      width: 54px;
+      height: 54px;
+      background-image: url("../assets/img/gecko.png");
+      background-size: 100%;
+    }
     
   }
+
+</style>
+
+<style lang="scss">
+ .navi_li.is-current {
+      position: relative;
+      &::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background-color: rgba(224, 224, 228, 0.08);
+      }
+    }
 
 </style>

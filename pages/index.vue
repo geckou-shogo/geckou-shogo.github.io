@@ -6,7 +6,7 @@
     />
     <GlobalNavigation
       :sectionDatas="sectionDatas"
-    ></GlobalNavigation>
+    />
     <div class="scroll_wrapper">
       <div :class="$style.scroll" class="scroll">
         <section 
