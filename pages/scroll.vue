@@ -79,12 +79,12 @@ data() {
         trigger: '#sectionsContainer',
         pin: true,
         start: 'top top',
-        scrub: 1,
-        snap: {
-          snapTo: 1 / (panels.length - 1),
-          inertia: false,
-          duration: {min: 0.1, max: 0.1}
-        },
+        scrub: true,
+        // snap: {
+        //   snapTo: 1 / (panels.length - 1),
+        //   inertia: false,
+        //   duration: {min: 0.1, max: 0.1}
+        // },
         end: () => `+=${panelsContainer.offsetWidth - innerWidth}`
       }
     })
@@ -107,17 +107,41 @@ data() {
         })
       })
     })
-    document.querySelectorAll('.section').forEach(currentArea => {
-      const target = document.querySelector(`#navi-${currentArea.id}`)
-      gsap.to(target,{
-        scrollTrigger: {
-          trigger: currentArea,
-          start: 'top top',
-          end: `+=${panelsContainer.offsetWidth - innerWidth}`,
-          toggleClass: { targets: target, className: "is-scroll" },
-        }
-      })
-    })
+
+    let maxWidth = 0;
+
+    const getMaxWidth = () => {
+      maxWidth = 0;
+      panels.forEach((section) => {
+        maxWidth += section.offsetWidth;
+      });
+    };
+
+    getMaxWidth();
+    ScrollTrigger.addEventListener("refreshInit", getMaxWidth);
+
+    // gsap.to(panels, {
+    //   x: () => `-${maxWidth - window.innerWidth}`,
+    //   ease: "none",
+    //   scrollTrigger: {
+    //     trigger: ".wrapper",
+    //     pin: true,
+    //     scrub: true,
+    //     end: () => `+=${maxWidth}`,
+    //     invalidateOnRefresh: true
+    //   }
+    // });
+
+    panels.forEach((sct, i) => {
+      const target = document.querySelector(`#navi-${sct.id}`)
+      ScrollTrigger.create({
+        trigger: sct,
+        start: () => 'top top-=' + (sct.offsetLeft - window.innerWidth/2) * (maxWidth / (maxWidth - window.innerWidth)),
+        end: () => '+=' + sct.offsetWidth * (maxWidth / (maxWidth - window.innerWidth)),
+        toggleClass: {targets: target, className: "active"}
+      });
+    }); 
+
   },
   methods: {
     registrationScrollEvent() {
