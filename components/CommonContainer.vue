@@ -37,7 +37,7 @@ export default {
   justify-content: center;
   h2 {
     font-size: 100px;
-    color: #333;
+    color: c.$white;
     @include v.mq(md) {
       font-size: 40px;
     }
