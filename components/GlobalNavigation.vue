@@ -4,7 +4,7 @@
     <div :class="$style.navi_inner">
       <ul :class="$style.navi_list">
       <li
-        v-for="list in sectionDatas"
+        v-for="list in sections"
         :class="$style.navi_li"
         :key="list.id"
         @click.prevent="smoothScroll(list.id)"
@@ -25,7 +25,7 @@ import { gsap } from 'gsap';
 
   export default {
     props: {
-      sectionDatas: {
+      sections: {
         required: true,
         type: Array,
       }
