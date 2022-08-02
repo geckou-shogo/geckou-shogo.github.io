@@ -1,5 +1,4 @@
 <template>
-<div>
   <div :class="$style.navi">
     <div :class="$style.navi_inner">
       <ul :class="$style.navi_list">
@@ -20,7 +19,6 @@
       </ul>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -42,14 +40,18 @@
 
   .navi {
     position: fixed;
-    width: calc(100% / 2);
-    left: calc(100% - 78%);
+    width: 100%;
     bottom:  64px;
     z-index: v.zIndex(navi);
   }
+  .navi_inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .navi_list {
     display: flex;
-    gap: 0 calc(100% - 85%);
+    gap: 0 60px;
     align-items: center;
     font-size: f.size(small);
     font-family: f.family(english);
