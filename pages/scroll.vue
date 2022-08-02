@@ -111,7 +111,7 @@ data() {
       let navigation = document.querySelector('.anchor')
       gsap.to('.anchor',{
         scrollTrigger: {
-          trigger: 'currentArea',
+          trigger: currentArea,
           start: 'top top',
           end: `+=${panelsContainer.offsetWidth - innerWidth}`,
           toggleClass: { targets: navigation, className: "is-scroll" },
@@ -144,21 +144,21 @@ data() {
   overflow : hidden;
 }
 .section {
+  position: relative;
   display : flex;
   width   : 100%;
   height  : 100vh;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  position: relative;
 }
 
 .center_marker {
   position: fixed;
+  top: 0;
+  left: calc(50vw - 1px);
   width: 2px;
   height: 100vh;
   background: tomato;
-  top: 0;
-  left: calc(50vw - 1px);
 }
 </style>
