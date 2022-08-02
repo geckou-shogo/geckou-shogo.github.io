@@ -110,8 +110,12 @@ data() {
     document.querySelectorAll('.section').forEach(currentArea => {
       let navigation = document.querySelector('.anchor')
       gsap.to('.anchor',{
-        trigger: 'currentArea',
-        toggleClass: { targets: navigation, className: "is-scroll" },
+        scrollTrigger: {
+          trigger: 'currentArea',
+          start: 'top top',
+          end: `+=${panelsContainer.offsetWidth - innerWidth}`,
+          toggleClass: { targets: navigation, className: "is-scroll" },
+        }
       })
     })
   },
