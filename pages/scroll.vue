@@ -93,7 +93,7 @@ data() {
         e.preventDefault()
         const targetElem = document.querySelector(e.target.getAttribute('href'))
         let y = targetElem
-        if (targetElem && panelsContainer.isSameNode(targetElem.parentElement)) {
+        if (targetElem && panelsContainer === targetElem.parentElement) {
           const totalScroll   = tween.scrollTrigger.end - tween.scrollTrigger.start
           const totalMovement = (panels.length - 1) * targetElem.offsetWidth
           y = Math.round(tween.scrollTrigger.start + (targetElem.offsetLeft / totalMovement) * totalScroll)
@@ -107,14 +107,15 @@ data() {
         })
       })
     })
-    document.querySelectorAll('.section').forEach(currentArea => {
-      const target = document.querySelector(`#navi-${currentArea.id}`)
+    document.querySelectorAll('.section').forEach(section => {
+      const target = document.querySelector(`#navi-${section.id}`)
+
       gsap.to(target,{
         scrollTrigger: {
-          trigger: currentArea,
+          trigger: section,
           start: 'top top',
           end: `+=${panelsContainer.offsetWidth - innerWidth}`,
-          toggleClass: { targets: target, className: "is-scroll" },
+          toggleClass: { targets: target, className: "is-current" },
         }
       })
     })

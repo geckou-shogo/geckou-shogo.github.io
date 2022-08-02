@@ -4,7 +4,7 @@
       <ul :class="$style.navi_list">
       <li
         v-for="list in sections"
-        :class="$style.navi_li"
+        :class="[$style.navi_li, 'navi_li']"
         :key="list.id"
         :id="`navi-${list.id}`"
       >
@@ -88,5 +88,22 @@
     }
     
   }
+
+</style>
+
+<style lang="scss">
+ .navi_li.is-current {
+      position: relative;
+      &::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background-color: rgba(224, 224, 228, 0.08);
+      }
+    }
 
 </style>
