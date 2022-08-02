@@ -93,7 +93,7 @@ data() {
         e.preventDefault()
         const targetElem = document.querySelector(e.target.getAttribute('href'))
         let y = targetElem
-        if (targetElem && panelsContainer.isSameNode(targetElem.parentElement)) {
+        if (targetElem && panelsContainer === targetElem.parentElement) {
           const totalScroll   = tween.scrollTrigger.end - tween.scrollTrigger.start
           const totalMovement = (panels.length - 1) * targetElem.offsetWidth
           y = Math.round(tween.scrollTrigger.start + (targetElem.offsetLeft / totalMovement) * totalScroll)
@@ -141,7 +141,6 @@ data() {
         toggleClass: {targets: target, className: "active"}
       });
     }); 
-
   },
   methods: {
     registrationScrollEvent() {
@@ -168,21 +167,21 @@ data() {
   overflow : hidden;
 }
 .section {
+  position: relative;
   display : flex;
   width   : 100%;
   height  : 100vh;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  position: relative;
 }
 
 .center_marker {
   position: fixed;
+  top: 0;
+  left: calc(50vw - 1px);
   width: 2px;
   height: 100vh;
   background: tomato;
-  top: 0;
-  left: calc(50vw - 1px);
 }
 </style>
