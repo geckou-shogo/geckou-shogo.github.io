@@ -26,6 +26,7 @@
         />
       </section>
     </div>
+    <div :class="$style.center_marker"></div>
   </main>
 </template>
 
@@ -106,6 +107,13 @@ data() {
         })
       })
     })
+    document.querySelectorAll('.section').forEach(currentArea => {
+      let navigation = document.querySelector('.anchor')
+      gsap.to('.anchor',{
+        trigger: 'currentArea',
+        toggleClass: { targets: navigation, className: "is-scroll" },
+      })
+    })
   },
   methods: {
     registrationScrollEvent() {
@@ -139,5 +147,14 @@ data() {
   justify-content: center;
   overflow: hidden;
   position: relative;
+}
+
+.center_marker {
+  position: fixed;
+  width: 2px;
+  height: 100vh;
+  background: tomato;
+  top: 0;
+  left: calc(50vw - 1px);
 }
 </style>

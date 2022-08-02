@@ -10,7 +10,6 @@
         <a 
           :href="`#${list.id}`"
           :class="[$style.navi_link, 'anchor']"
-          
         >
           {{list.name}}
         </a>
@@ -30,16 +29,6 @@
         type: Array,
       }
     },
-    methods: {
-      navigationCurrent() {
-        let navLink = document.getElementsByClassName('anchor');
-        for (let i = 0; i < navLink.length; i++) {
-          if(navLink[i].href === location.href) {
-              navLink[i].classList.add('style-change');
-            }
-        }
-      }
-    }
   }
 </script>
 
