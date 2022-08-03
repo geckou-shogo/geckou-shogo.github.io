@@ -108,4 +108,8 @@
     }
     }
 
+    .active {
+      background-color: #fff;
+    }
+
 </style>

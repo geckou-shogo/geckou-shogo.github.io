@@ -38,122 +38,103 @@ import gsap from 'gsap'
 import { ScrollTrigger, ScrollToPlugin } from 'gsap/all'
 import SectionHeader from '../components/SectionHeader.vue'
 export default {
-    data() {
-        return {
-            screenStatus: "",
-            sectionDatas: [
-                {
-                    id: "top",
-                    name: "TOP",
-                    color: "linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);",
-                },
-                {
-                    id: "vision",
-                    name: "VISION",
-                    color: "linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);",
-                },
-                {
-                    id: "service",
-                    name: "SERVICE",
-                    color: "linear-gradient(to bottom, #192c38, #15324f 34%,  #31527b);",
-                },
-                {
-                    id: "information",
-                    name: "INFORMATION",
-                    color: "linear-gradient(to bottom, #31527b, #246495 66%,  #31527b);",
-                },
-                {
-                    id: "contact",
-                    name: "CONTACT",
-                    color: "#B5BBC9",
-                },
-            ],
-        };
+data() {
+  return {
+    screenStatus: '',
+    sectionDatas   : [
+      {
+        id   : 'top',
+        name : 'TOP',
+        color: 'linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);',
+      },
+      {
+        id   : 'vision',
+        name : 'VISION',
+        color: 'linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);',
+      },
+      {
+        id   : 'service',
+        name : 'SERVICE',
+        color: 'linear-gradient(to bottom, #192c38, #15324f 34%,  #31527b);',
+      },
+      {
+        id   : 'information',
+        name : 'INFORMATION',
+        color: 'linear-gradient(to bottom, #31527b, #246495 66%,  #31527b);',
+      },
+      {
+        id   : 'contact',
+        name : 'CONTACT',
+        color: '#B5BBC9',
+      },
+    ],
+  }
+},
+  mounted() {
+    gsap.registerPlugin(ScrollToPlugin, ScrollTrigger)
+    this.screenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
+    window.addEventListener('resize', this.registrationScrollEvent)
+    const panelsContainer = document.querySelector('#sectionsContainer')
+    const panels = gsap.utils.toArray(`.${this.$style.section}`)
+    const tween = gsap.to(panels, {
+      xPercent: -100 * ( panels.length - 1 ),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#sectionsContainer',
+        pin: true,
+        start: 'top top',
+        scrub: true,
+        // snap: {
+        //   snapTo: 1 / (panels.length - 1),
+        //   inertia: false,
+        //   duration: {min: 0.1, max: 0.1}
+        // },
+        end: () => `+=${panelsContainer.offsetWidth - innerWidth}`
+      }
+    })
+    document.querySelectorAll('.anchor').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault()
+        const targetElem = document.querySelector(e.target.getAttribute('href'))
+        let y = targetElem
+        if (targetElem && panelsContainer === targetElem.parentElement) {
+          const totalScroll   = tween.scrollTrigger.end - tween.scrollTrigger.start
+          const totalMovement = (panels.length - 1) * targetElem.offsetWidth
+          y = Math.round(tween.scrollTrigger.start + (targetElem.offsetLeft / totalMovement) * totalScroll)
+        }
+        gsap.to(window, {
+          scrollTo: {
+            y: y,
+            autoKill: false
+          },
+          duration: 1
+        })
+      })
+    })
+
+    panels.forEach(sct => {
+      const target = document.querySelector(`#navi-${sct.id}`)
+      ScrollTrigger.create({
+        trigger: sct,
+        start: () => 'top top-=' + sct.offsetLeft - 1,
+        end: () => '+=' + sct.offsetWidth/2,
+        toggleClass: {targets: target, className: "active"},
+        markers: true,
+      });
+    }); 
+  },
+  methods: {
+    registrationScrollEvent() {
+        window.addEventListener("scroll", this.checkIsScreenLandscape);
     },
-    mounted() {
-        gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
-        this.screenStatus = window?.innerWidth > window?.innerHeight ? "landscape" : "portrait";
-        window.addEventListener("resize", this.registrationScrollEvent);
-        const panelsContainer = document.querySelector("#sectionsContainer");
-        const panels = gsap.utils.toArray(`.${this.$style.section}`);
-        const tween = gsap.to(panels, {
-            xPercent: -100 * (panels.length - 1),
-            ease: "none",
-            scrollTrigger: {
-                trigger: "#sectionsContainer",
-                pin: true,
-                start: "top top",
-                scrub: true,
-                // snap: {
-                //   snapTo: 1 / (panels.length - 1),
-                //   inertia: false,
-                //   duration: {min: 0.1, max: 0.1}
-                // },
-                end: () => `+=${panelsContainer.offsetWidth - innerWidth}`
-            }
-        });
-        document.querySelectorAll(".anchor").forEach(anchor => {
-            anchor.addEventListener("click", function (e) {
-                e.preventDefault();
-                const targetElem = document.querySelector(e.target.getAttribute("href"));
-                let y = targetElem;
-                if (targetElem && panelsContainer === targetElem.parentElement) {
-                    const totalScroll = tween.scrollTrigger.end - tween.scrollTrigger.start;
-                    const totalMovement = (panels.length - 1) * targetElem.offsetWidth;
-                    y = Math.round(tween.scrollTrigger.start + (targetElem.offsetLeft / totalMovement) * totalScroll);
-                }
-                gsap.to(window, {
-                    scrollTo: {
-                        y: y,
-                        autoKill: false
-                    },
-                    duration: 1
-                });
-            });
-        });
-        let maxWidth = 0;
-        const getMaxWidth = () => {
-            maxWidth = 0;
-            panels.forEach((section) => {
-                maxWidth += section.offsetWidth;
-            });
-        };
-        getMaxWidth();
-        ScrollTrigger.addEventListener("refreshInit", getMaxWidth);
-        // gsap.to(panels, {
-        //   x: () => `-${maxWidth - window.innerWidth}`,
-        //   ease: "none",
-        //   scrollTrigger: {
-        //     trigger: ".wrapper",
-        //     pin: true,
-        //     scrub: true,
-        //     end: () => `+=${maxWidth}`,
-        //     invalidateOnRefresh: true
-        //   }
-        // });
-        panels.forEach((sct, i) => {
-            const target = document.querySelector(`#navi-${sct.id}`);
-            ScrollTrigger.create({
-                trigger: sct,
-                start: () => "top top-=" + (sct.offsetLeft - window.innerWidth / 2) * (maxWidth / (maxWidth - window.innerWidth)),
-                end: () => "+=" + sct.offsetWidth * (maxWidth / (maxWidth - window.innerWidth)),
-                toggleClass: { targets: target, className: "is-current" }
-            });
-        });
+    checkIsScreenLandscape() {
+        const currrentScreenStatus = window?.innerWidth > window?.innerHeight ? "landscape" : "portrait";
+        if (this.screenStatus !== currrentScreenStatus)
+            location.reload();
+        else
+            window.removeEventListener("scroll", this.checkIsScreenLandscape);
     },
-    methods: {
-        registrationScrollEvent() {
-            window.addEventListener("scroll", this.checkIsScreenLandscape);
-        },
-        checkIsScreenLandscape() {
-            const currrentScreenStatus = window?.innerWidth > window?.innerHeight ? "landscape" : "portrait";
-            if (this.screenStatus !== currrentScreenStatus)
-                location.reload();
-            else
-                window.removeEventListener("scroll", this.checkIsScreenLandscape);
-        },
-    },
-    components: { SectionHeader }
+  }
 }
 </script>
 <style lang="scss" module>
