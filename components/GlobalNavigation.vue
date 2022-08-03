@@ -61,6 +61,18 @@ export default {
     &:hover {
       opacity: .7;
     }
+    &::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background-color: rgba(224, 224, 228, 0.08);
+      opacity: 0;
+      transition: all .5s;
+    }
   }
 </style>
 
@@ -73,13 +85,7 @@ export default {
     position: relative;
     &::after {
       content: "";
-      position: absolute;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background-color: rgba(224, 224, 228, 0.08);
+      opacity: 1;
     }
       .anchor {
         position: relative;
