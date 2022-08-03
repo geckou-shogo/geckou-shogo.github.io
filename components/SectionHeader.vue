@@ -43,7 +43,7 @@ export default {
 .heading {
   font-size: 60px;
   color: c.$white;
-  letter-spacing: 0.16;
+  letter-spacing: letterSpacing(normal);
   &::first-letter {
     color: c.$blue;
   }

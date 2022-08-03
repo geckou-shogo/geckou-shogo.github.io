@@ -70,7 +70,7 @@
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
- .navi_li.is-current {
+ .navi_li.current {
     position: relative;
     &::after {
       content: "";
@@ -82,34 +82,30 @@
       border-radius: 50%;
       background-color: rgba(224, 224, 228, 0.08);
     }
-    .anchor {
-      position: relative;
-      &::before {
-        content: "";
-        position: absolute;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100px;
-        height: 2px;
-        background-color: c.$white;
+      .anchor {
+        position: relative;
+        &::before {
+          content: "";
+          position: absolute;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 100px;
+          height: 2px;
+          background-color: c.$white;
+        }
+        &::after {
+          content: "";
+          position: absolute;
+          top: 8px;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          display: block;
+          width: 54px;
+          height: 54px;
+          background-image: url("../assets/img/gecko.png");
+          background-size: 100%;
+        }
       }
-      &::after {
-        content: "";
-        position: absolute;
-        top: 8px;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        display: block;
-        width: 54px;
-        height: 54px;
-        background-image: url("../assets/img/gecko.png");
-        background-size: 100%;
-      }
-    }
-    }
-
-    .active {
-      background-color: #fff;
     }
 
 </style>

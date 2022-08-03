@@ -140,7 +140,6 @@ export default {
 .frontpage {
   overscroll-behavior-y: none;
   overflow             : hidden;
-  background-color     : #ccc;
 }
 .sections_container {
   height   : 100vh;
