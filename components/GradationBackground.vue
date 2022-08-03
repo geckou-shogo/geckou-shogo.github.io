@@ -1,15 +1,14 @@
 <template>
-  <div 
+  <div
     class="screen"
     :class="$style.screen"
   >
     <div
       v-for="item in sectionDatas"
-      :class="$style.screen_item"
       :key="item.id"
+      :class="$style.screen_item"
       :style="{backgroundImage: item.color}"
     />
-
   </div>
 </template>
 
@@ -18,10 +17,10 @@ export default {
   props: {
     sectionDatas: {
       required: true,
-      type: Array,
+      type    : Array,
     },
-  }
-} 
+  },
+}
 </script>
 
 <style lang="scss" module>
