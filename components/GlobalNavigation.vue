@@ -2,20 +2,19 @@
   <div :class="$style.navi">
     <div :class="$style.navi_inner">
       <ul :class="$style.navi_list">
-      <li
-        v-for="list in sections"
-        :class="[$style.navi_li, 'navi_li']"
-        :key="list.id"
-        :id="`navi-${list.id}`"
-      >
-        <a 
-          :href="`#${list.id}`"
-          :class="[$style.navi_link, 'anchor']"
+        <li
+          v-for="list in sections"
+          :id="`navi-${list.id}`"
+          :key="list.id"
+          :class="[$style.navi_li, 'navi_li']"
         >
-          {{list.name}}
-        </a>
-      </li>
-        
+          <a
+            :href="`#${list.id}`"
+            :class="[$style.navi_link, 'anchor']"
+          >
+            {{ list.name }}
+          </a>
+        </li>
       </ul>
     </div>
   </div>
@@ -23,14 +22,14 @@
 
 <script>
 
-  export default {
-    props: {
-      sections: {
-        required: true,
-        type: Array,
-      }
+export default {
+  props: {
+    sections: {
+      required: true,
+      type    : Array,
     },
-  }
+  },
+}
 </script>
 
 <style lang="scss" module>
