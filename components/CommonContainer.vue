@@ -1,13 +1,11 @@
 <template>
-  <div 
-      :id="[sectionData.id]"
-      :class="[$style.wrapper, $style[sectionData.id]]"
+  <div
+    :id="[sectionData.id]"
+    :class="[$style.wrapper, $style[sectionData.id]]"
   >
-    <div 
-    :class="$style.container"
-    >
-    
-    </div>
+    <div
+      :class="$style.container"
+    />
   </div>
 </template>
 
@@ -16,10 +14,10 @@ export default {
   props: {
     sectionData: {
       required: true,
-      default: () => {},
-    }
-  }
-} 
+      default : () => {},
+    },
+  },
+}
 </script>
 
 <style lang="scss" module>
@@ -43,6 +41,5 @@ export default {
     }
   }
 }
-
 
 </style>

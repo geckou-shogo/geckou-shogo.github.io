@@ -15,7 +15,7 @@
       :style="{width: `${sectionDatas.length * 100}%`}"
     >
       <section
-        v-for="section in sectionDatas"
+        v-for="(section, index) in sectionDatas"
         :id="section.id"
         :key="section.id"
         :class="$style.section"
@@ -120,7 +120,7 @@ export default {
         end        : `+=${sct.offsetWidth / 2}`,
         toggleClass: {
           targets  : target,
-          className: 'active',
+          className: 'current',
         },
       },)
     },)
