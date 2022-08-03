@@ -4,7 +4,7 @@
   >
     <GradationBackground
       :class="$style.screen"
-      :section-datas="sectionDatas"
+      :sectionDatas="sectionDatas"
     />
     <GlobalNavigation
       :sections="sectionDatas"
@@ -23,10 +23,10 @@
       >
         <SectionHeader
           v-if="index"
-          :section-data="section"
+          :sectionData="section"
         />
         <CommonContainer
-          :section-data="section"
+          :sectionData="section"
         >
           <GeckouLogo
             v-if="!index"
