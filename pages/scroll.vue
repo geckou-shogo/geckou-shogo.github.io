@@ -37,7 +37,7 @@ export default {
 data() {
   return {
     screenStatus: '',
-    sectionDatas   : [
+    sectionDatas: [
       {
         id   : 'top',
         name : 'TOP',
@@ -108,40 +108,18 @@ data() {
       })
     })
 
-    let maxWidth = 0;
-
-    const getMaxWidth = () => {
-      maxWidth = 0;
-      panels.forEach((section) => {
-        maxWidth += section.offsetWidth;
-      });
-    };
-
-    getMaxWidth();
-    ScrollTrigger.addEventListener("refreshInit", getMaxWidth);
-
-    // gsap.to(panels, {
-    //   x: () => `-${maxWidth - window.innerWidth}`,
-    //   ease: "none",
-    //   scrollTrigger: {
-    //     trigger: ".wrapper",
-    //     pin: true,
-    //     scrub: true,
-    //     end: () => `+=${maxWidth}`,
-    //     invalidateOnRefresh: true
-    //   }
-    // });
-
-    panels.forEach((sct, i) => {
+    panels.forEach(sct => {
       const target = document.querySelector(`#navi-${sct.id}`)
       ScrollTrigger.create({
-        trigger: sct,
-        start: () => 'top top-=' + sct.offsetLeft - 1,
-        end: () => '+=' + sct.offsetWidth/2,
-        toggleClass: {targets: target, className: "active"},
-        markers: true,
-      });
-    }); 
+        trigger    : sct,
+        start      : `top top-=${sct.offsetLeft - 1}`,
+        end        : `+=${sct.offsetWidth / 2}`,
+        toggleClass: {
+          targets: target,
+          className: 'active'
+        },
+      })
+    })
   },
   methods: {
     registrationScrollEvent() {
