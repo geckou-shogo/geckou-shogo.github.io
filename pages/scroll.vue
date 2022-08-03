@@ -136,9 +136,10 @@ data() {
       const target = document.querySelector(`#navi-${sct.id}`)
       ScrollTrigger.create({
         trigger: sct,
-        start: () => 'top top-=' + (sct.offsetLeft - window.innerWidth/2) * (maxWidth / (maxWidth - window.innerWidth)),
-        end: () => '+=' + sct.offsetWidth * (maxWidth / (maxWidth - window.innerWidth)),
-        toggleClass: {targets: target, className: "active"}
+        start: () => 'top top-=' + sct.offsetLeft - 1,
+        end: () => '+=' + sct.offsetWidth/2,
+        toggleClass: {targets: target, className: "active"},
+        markers: true,
       });
     }); 
   },

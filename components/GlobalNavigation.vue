@@ -65,6 +65,9 @@
   }
   .navi_link {
     position: relative;
+
+    
+
     &::before {
       content: "";
       position: absolute;
@@ -104,6 +107,10 @@
         border-radius: 50%;
         background-color: rgba(224, 224, 228, 0.08);
       }
+    }
+
+    .active {
+      background-color: #fff;
     }
 
 </style>
