@@ -139,9 +139,15 @@ export default {
 }
 </script>
 <style lang="scss" module>
+@use '~/assets/scss/value' as v;
+@use '~/assets/scss/font' as f;
+@use '~/assets/scss/color' as c;
+
 .frontpage {
   overscroll-behavior-y: none;
   overflow             : hidden;
+  color                : c.$white;
+  font-family          : f.family(base);
 }
 .sections_container {
   height   : 100vh;

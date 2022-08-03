@@ -41,14 +41,16 @@ export default {
 .inner {
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
 .heading {
   font-size: 60px;
+  font-family: f.family('english');
   color: c.$white;
-  letter-spacing: letterSpacing(normal);
+  letter-spacing: f.letterSpacing(normal);
   &::first-letter {
     color: c.$blue;
   }

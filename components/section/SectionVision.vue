@@ -6,7 +6,8 @@
       :heading="section.name"
     >
       <p :class="$style.description">
-        テキストテキストテキストテキスト
+        Geckouは人々が自身の望む道を歩めるよう<br>
+        WEB開発を通じてお手伝いいたします。
       </p>
     </SectionHeader>
   </SectionContainer>
