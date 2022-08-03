@@ -73,7 +73,7 @@ export default {
       border-radius: 50%;
       background-color: rgba(224, 224, 228, 0.08);
       opacity: 0;
-      transition: all .5s;
+      transition: opacity .8s;
     }
   }
 </style>

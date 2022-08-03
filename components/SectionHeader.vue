@@ -1,5 +1,5 @@
 <template>
-  <div 
+  <div
     :class="$style.section_header"
   >
     <div
@@ -7,7 +7,9 @@
     >
       <h2
         :class="$style.heading"
-      >{{ sectionData.name }}</h2>
+      >
+        {{ sectionData.name }}
+      </h2>
     </div>
   </div>
 </template>
@@ -17,10 +19,10 @@ export default {
   props: {
     sectionData: {
       required: true,
-      default: () => {},
-    }
-  }
-} 
+      default : () => {},
+    },
+  },
+}
 </script>
 
 <style lang="scss" module>
