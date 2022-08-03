@@ -57,6 +57,7 @@ export default {
     color: c.$white;
   }
   .navi_li {
+    position: relative;
     transition: opacity .3s;
     &:hover {
       opacity: .7;
@@ -65,7 +66,8 @@ export default {
       content: "";
       position: absolute;
       left: 50%;
-      transform: translate(-50%, -50%);
+      right: auto;
+      transform: translate(-50% , -50%);
       width: 120px;
       height: 120px;
       border-radius: 50%;
@@ -82,7 +84,6 @@ export default {
 @use '~/assets/scss/color' as c;
 
  .navi_li.current {
-    position: relative;
     &::after {
       content: "";
       opacity: 1;
