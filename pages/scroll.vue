@@ -21,6 +21,9 @@
         class="section"
         :key="section.id"
       >
+      <SectionHeader 
+        :sectionData="section"
+      />
         <CommonContainer
           :sectionData="section"
         />
@@ -33,6 +36,7 @@
 <script>
 import gsap from 'gsap'
 import { ScrollTrigger, ScrollToPlugin } from 'gsap/all'
+import SectionHeader from '../components/SectionHeader.vue'
 export default {
 data() {
   return {
@@ -123,12 +127,14 @@ data() {
   },
   methods: {
     registrationScrollEvent() {
-      window.addEventListener('scroll', this.checkIsScreenLandscape)
+        window.addEventListener("scroll", this.checkIsScreenLandscape);
     },
     checkIsScreenLandscape() {
-      const currrentScreenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
-      if (this.screenStatus !== currrentScreenStatus) location.reload()
-      else window.removeEventListener('scroll', this.checkIsScreenLandscape)
+        const currrentScreenStatus = window?.innerWidth > window?.innerHeight ? "landscape" : "portrait";
+        if (this.screenStatus !== currrentScreenStatus)
+            location.reload();
+        else
+            window.removeEventListener("scroll", this.checkIsScreenLandscape);
     },
   }
 }
