@@ -22,7 +22,8 @@ $zIndexMap: (
   'max'     : 100,
   'navi'    : 80,
   'overlay' : 70,
-  'contents': 50
+  'contents': 50,
+  'off'     : -1,
 ) !default;
 
 @function zIndex( $key ) {
