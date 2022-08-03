@@ -41,7 +41,7 @@ export default {
 data() {
   return {
     screenStatus: '',
-    sectionDatas   : [
+    sectionDatas: [
       {
         id   : 'top',
         name : 'TOP',
@@ -115,13 +115,15 @@ data() {
     panels.forEach(sct => {
       const target = document.querySelector(`#navi-${sct.id}`)
       ScrollTrigger.create({
-        trigger: sct,
-        start: () => 'top top-=' + sct.offsetLeft - 1,
-        end: () => '+=' + sct.offsetWidth/2,
-        toggleClass: {targets: target, className: "active"},
-        markers: true,
-      });
-    }); 
+        trigger    : sct,
+        start      : `top top-=${sct.offsetLeft - 1}`,
+        end        : `+=${sct.offsetWidth / 2}`,
+        toggleClass: {
+          targets: target,
+          className: 'active'
+        },
+      })
+    })
   },
   methods: {
     registrationScrollEvent() {
