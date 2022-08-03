@@ -14,6 +14,9 @@ module.exports = {
     'key-spacing': ['error', {
       align: 'colon',
     },],
-    'comma-dangle': ['error', 'always',],
+    'comma-dangle'             : ['error', 'always',],
+    'vue/attribute-hyphenation': ['error', 'never', {
+      ignore: [],
+    },],
   },
 }

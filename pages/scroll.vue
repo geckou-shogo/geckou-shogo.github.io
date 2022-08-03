@@ -4,7 +4,7 @@
   >
     <GradationBackground
       :class="$style.screen"
-      :section-datas="sectionDatas"
+      :sectionDatas="sectionDatas"
     />
     <GlobalNavigation
       :sections="sectionDatas"
@@ -22,10 +22,10 @@
         class="section"
       >
         <SectionHeader
-          :section-data="section"
+          :sectionData="section"
         />
         <CommonContainer
-          :section-data="section"
+          :sectionData="section"
         />
       </section>
     </div>
