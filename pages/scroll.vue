@@ -120,7 +120,7 @@ data() {
         end        : `+=${sct.offsetWidth / 2}`,
         toggleClass: {
           targets: target,
-          className: 'active'
+          className: 'current'
         },
       })
     })
@@ -143,7 +143,6 @@ data() {
 .frontpage {
   overscroll-behavior-y: none;
   overflow             : hidden;
-  background-color     : #ccc;
 }
 .sections_container {
   height   : 100vh;
