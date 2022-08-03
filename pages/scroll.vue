@@ -22,12 +22,26 @@
         class="section"
       >
         <SectionHeader
+          v-if="index"
           :section-data="section"
         />
         <CommonContainer
           :section-data="section"
-        />
+        >
+          <GeckouLogo
+            v-if="!index"
+          />
+        </CommonContainer>
       </section>
+      <!-- <component
+        :is="section.component"
+        v-for="section in sectionDatas"
+        :id="section.id"
+        :key="section.id"
+        :class="$style.section"
+        class="section"
+        :section-data="section"
+      /> -->
     </div>
     <div :class="$style.center_marker" />
   </main>
@@ -36,36 +50,40 @@
 <script>
 import gsap from 'gsap'
 import { ScrollTrigger, ScrollToPlugin, } from 'gsap/all'
-import SectionHeader from '../components/SectionHeader.vue'
 export default {
   data () {
     return {
       screenStatus: '',
       sectionDatas: [
         {
-          id   : 'top',
-          name : 'TOP',
-          color: 'linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);',
+          id      : 'top',
+          name    : 'TOP',
+          componet: 'TopSection',
+          color   : 'linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);',
         },
         {
-          id   : 'vision',
-          name : 'VISION',
-          color: 'linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);',
+          id      : 'vision',
+          name    : 'VISION',
+          componet: 'VisionSection',
+          color   : 'linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);',
         },
         {
-          id   : 'service',
-          name : 'SERVICE',
-          color: 'linear-gradient(to bottom, #192c38, #15324f 34%,  #31527b);',
+          id      : 'service',
+          name    : 'SERVICE',
+          componet: 'VisionSection',
+          color   : 'linear-gradient(to bottom, #192c38, #15324f 34%,  #31527b);',
         },
         {
-          id   : 'information',
-          name : 'INFORMATION',
-          color: 'linear-gradient(to bottom, #31527b, #246495 66%,  #31527b);',
+          id      : 'information',
+          name    : 'INFORMATION',
+          componet: 'VisionSection',
+          color   : 'linear-gradient(to bottom, #31527b, #246495 66%,  #31527b);',
         },
         {
-          id   : 'contact',
-          name : 'CONTACT',
-          color: '#B5BBC9',
+          id      : 'contact',
+          name    : 'CONTACT',
+          componet: 'VisionSection',
+          color   : '#B5BBC9',
         },
       ],
     }

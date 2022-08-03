@@ -6,6 +6,7 @@
     <div
       :class="$style.container"
     >
+      top
       <slot />
     </div>
   </div>
