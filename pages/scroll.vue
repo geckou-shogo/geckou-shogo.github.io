@@ -4,46 +4,28 @@
   >
     <GradationBackground
       :class="$style.screen"
-      :sectionDatas="sectionDatas"
+      :sectionDatas="sections"
     />
     <GlobalNavigation
-      :sections="sectionDatas"
+      :sections="sections"
     />
     <div
       id="sectionsContainer"
       :class="$style.sections_container"
-      :style="{width: `${sectionDatas.length * 100}%`}"
+      :style="{width: `${sections.length * 100}%`}"
     >
       <section
-        v-for="(section, index) in sectionDatas"
+        v-for="section in sections"
         :id="section.id"
         :key="section.id"
         :class="$style.section"
-        class="section"
       >
-        <SectionHeader
-          v-if="index"
-          :sectionData="section"
+        <component
+          :is="section.component"
+          :section="section"
         />
-        <CommonContainer
-          :sectionData="section"
-        >
-          <GeckouLogo
-            v-if="!index"
-          />
-        </CommonContainer>
       </section>
-      <!-- <component
-        :is="section.component"
-        v-for="section in sectionDatas"
-        :id="section.id"
-        :key="section.id"
-        :class="$style.section"
-        class="section"
-        :section-data="section"
-      /> -->
     </div>
-    <div :class="$style.center_marker" />
   </main>
 </template>
 
@@ -54,35 +36,35 @@ export default {
   data () {
     return {
       screenStatus: '',
-      sectionDatas: [
+      sections    : [
         {
           id       : 'top',
           name     : 'TOP',
-          component: 'TopSection',
+          component: 'SectionTop',
           color    : 'linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);',
         },
         {
           id       : 'vision',
           name     : 'VISION',
-          component: 'VisionSection',
+          component: 'SectionVision',
           color    : 'linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);',
         },
         {
           id       : 'service',
           name     : 'SERVICE',
-          component: 'VisionSection',
+          component: 'SectionService',
           color    : 'linear-gradient(to bottom, #192c38, #15324f 34%,  #31527b);',
         },
         {
           id       : 'information',
           name     : 'INFORMATION',
-          component: 'VisionSection',
+          component: 'SectionInfo',
           color    : 'linear-gradient(to bottom, #31527b, #246495 66%,  #31527b);',
         },
         {
           id       : 'contact',
           name     : 'CONTACT',
-          component: 'VisionSection',
+          component: 'SectionContact',
           color    : '#B5BBC9',
         },
       ],
@@ -111,7 +93,7 @@ export default {
       },
     },)
     document.querySelectorAll('.anchor',).forEach((anchor,) => {
-      anchor.addEventListener('click', function (e,) {
+      anchor.addEventListener('click', (e,) => {
         e.preventDefault()
         const targetElem = document.querySelector(e.target.getAttribute('href',),)
         let y = targetElem
@@ -165,6 +147,7 @@ export default {
   flex-wrap: nowrap;
   overflow : hidden;
 }
+
 .section {
   position: relative;
   display : flex;
@@ -173,14 +156,5 @@ export default {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-}
-
-.center_marker {
-  position: fixed;
-  top: 0;
-  left: calc(50vw - 1px);
-  width: 2px;
-  height: 100vh;
-  background: tomato;
 }
 </style>
