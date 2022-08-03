@@ -1,21 +1,18 @@
 <template>
-  <div
-    :id="[sectionData.id]"
-    :class="[$style.wrapper, $style[sectionData.id]]"
+  <SectionContainer
+    :section="section"
   >
-    <div
-      :class="$style.container"
-    >
-      <slot />
-    </div>
-  </div>
+    <h2>{{ section.name }}</h2>
+  </SectionContainer>
 </template>
 
 <script>
 export default {
+  name : 'SectionVision',
   props: {
-    sectionData: {
+    section: {
       required: true,
+      type    : Object,
       default : () => {},
     },
   },
@@ -27,17 +24,16 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
-.heading {
-  font-size: 100px;
-}
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.section {
+  display        : flex;
+  flex-direction : column;
+  align-items    : center;
   justify-content: center;
+
   h2 {
     font-size: 100px;
-    color: c.$white;
+    color    : c.$white;
+
     @include v.mq(md) {
       font-size: 40px;
     }

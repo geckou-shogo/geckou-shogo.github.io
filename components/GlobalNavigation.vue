@@ -83,35 +83,37 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
- .navi_li.current {
+.navi_li.current {
+  &::after {
+    content: "";
+    opacity: 1;
+  }
+
+  .anchor {
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100px;
+      height: 2px;
+      background-color: c.$white;
+    }
     &::after {
       content: "";
-      opacity: 1;
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: block;
+      width: 54px;
+      height: 54px;
+      background-image: url("../assets/img/gecko.png");
+      background-size: 100%;
+      pointer-events: none;
     }
-      .anchor {
-        position: relative;
-        &::before {
-          content: "";
-          position: absolute;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: 100px;
-          height: 2px;
-          background-color: c.$white;
-        }
-        &::after {
-          content: "";
-          position: absolute;
-          top: 8px;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          display: block;
-          width: 54px;
-          height: 54px;
-          background-image: url("../assets/img/gecko.png");
-          background-size: 100%;
-        }
-      }
-    }
+  }
+}
 
 </style>

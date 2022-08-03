@@ -18,5 +18,6 @@ module.exports = {
     'vue/attribute-hyphenation': ['error', 'never', {
       ignore: [],
     },],
+    'vue/multi-word-component-names': 'off',
   },
 }
