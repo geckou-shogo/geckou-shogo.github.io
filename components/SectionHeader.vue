@@ -1,12 +1,13 @@
 <template>
   <div 
-      :id="[sectionData.id]"
-      :class="[$style.wrapper, $style[sectionData.id]]"
+    :class="$style.section_header"
   >
-    <div 
-    :class="$style.container"
+    <div
+      :class="$style.inner"
     >
-    
+      <h2
+        :class="$style.heading"
+      >{{ sectionData.name }}</h2>
     </div>
   </div>
 </template>
@@ -27,22 +28,25 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
-.heading {
-  font-size: 100px;
-}
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  h2 {
-    font-size: 100px;
-    color: c.$white;
-    @include v.mq(md) {
-      font-size: 40px;
-    }
-  }
+.section_header {
+  width: 50%;
+  background-color: c.$bgBlack;
 }
 
+.inner {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heading {
+  font-size: 60px;
+  color: c.$white;
+  letter-spacing: 0.16;
+  &::first-letter {
+    color: c.$blue;
+  }
+}
 
 </style>
