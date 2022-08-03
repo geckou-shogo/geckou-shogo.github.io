@@ -38,16 +38,18 @@ export default {
       screenStatus: '',
       sections    : [
         {
-          id       : 'top',
-          name     : 'TOP',
-          component: 'SectionTop',
-          color    : 'linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);',
+          id         : 'top',
+          name       : 'TOP',
+          description: 'テキストテキストテキストテキスト',
+          component  : 'SectionTop',
+          color      : 'linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);',
         },
         {
-          id       : 'vision',
-          name     : 'VISION',
-          component: 'SectionVision',
-          color    : 'linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);',
+          id         : 'vision',
+          name       : 'VISION',
+          description: 'テキストテキストテキストテキスト',
+          component  : 'SectionVision',
+          color      : 'linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);',
         },
         {
           id       : 'service',

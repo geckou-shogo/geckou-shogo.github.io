@@ -8,8 +8,11 @@
       <h2
         :class="$style.heading"
       >
-        {{ sectionData.name }}
+        {{ heading }}
       </h2>
+      <div>
+        <slot />
+      </div>
     </div>
   </div>
 </template>
@@ -17,9 +20,9 @@
 <script>
 export default {
   props: {
-    sectionData: {
+    heading: {
       required: true,
-      default : () => {},
+      type    : String,
     },
   },
 }

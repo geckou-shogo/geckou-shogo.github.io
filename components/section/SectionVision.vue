@@ -2,7 +2,13 @@
   <SectionContainer
     :section="section"
   >
-    <h2>{{ section.name }}</h2>
+    <SectionHeader
+      :heading="section.name"
+    >
+      <p :class="$style.description">
+        テキストテキストテキストテキスト
+      </p>
+    </SectionHeader>
   </SectionContainer>
 </template>
 
@@ -39,4 +45,5 @@ export default {
     }
   }
 }
+
 </style>
