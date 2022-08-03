@@ -15,13 +15,15 @@
       :style="{width: `${sectionDatas.length * 100}%`}"
     >
       <section
-        v-for="section in sectionDatas"
+        v-for="(section, index) in sectionDatas"
         :id="section.id"
         :class="$style.section"
         class="section"
         :key="section.id"
       >
-      <SectionHeader 
+      
+      <SectionHeader
+        v-if="index"
         :sectionData="section"
       />
         <CommonContainer
