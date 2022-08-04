@@ -3,13 +3,13 @@
     :class="$style.section_header"
   >
     <div
+      v-inview:enter="change"
       :class="$style.marker"
     />
     <div
       :class="$style.inner"
     >
       <h2
-        v-inview:enter="change"
         :class="[$style.heading, status ? $style.fadeInLeft : '']"
       >
         {{ heading }}
@@ -69,26 +69,38 @@ export default {
 
 .heading {
   position: relative;
+  width: 100%;
   font-size: 60px;
   font-family: f.family('english');
   color: c.$white;
   letter-spacing: f.letterSpacing(normal);
+  text-align: center;
   &::first-letter {
     color: c.$blue;
   }
   &::before {
     content: "";
     position: absolute;
-    bottom: 0;
+    left: 0;
+    bottom: 10px;
     width: 100%;
     height: 2px;
     background-color: c.$white;
+    opacity: 0;
+  }
+  &.fadeInLeft {
+    &::before {
+      animation-name: fadeIn;
+      animation-duration: 1.5s;
+      animation-timing-function: ease-out;
+      animation-fill-mode: forwards;
+    }
   }
 }
 
 .marker {
   position: absolute;
-  left: 0;
+  left: 50%;
   width: 2px;
   height: 100vh;
   background: tomato;
@@ -97,20 +109,12 @@ export default {
 @keyframes fadeIn {
   0% {
     opacity: 0;
-    transform: translateY(50px);
+    width: 0%;
   }
   100% {
     opacity: 1;
-    transform: translateY(1);
+    width: 100%;
   }
-}
-
-.fadeInLeft {
-  animation-name: fadeIn;
-  animation-duration: 1.5s;
-  animation-timing-function: ease-out;
-  animation-fill-mode: forwards;
-  color: c.$blue;
 }
 
 </style>
