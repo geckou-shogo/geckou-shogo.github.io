@@ -9,6 +9,10 @@
     <GlobalNavigation
       :sections="sections"
     />
+    <GeckouMoon
+      :sections="sections"
+      v-if="!sections.component.`${SectionTop}`"
+    />
     <div
       id="sectionsContainer"
       :class="$style.sections_container"
