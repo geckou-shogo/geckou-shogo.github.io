@@ -2,7 +2,7 @@
   <SectionContainer
     :section="section"
   >
-    <h2>{{ section.name }}</h2>
+    <GeckouLogo />
   </SectionContainer>
 </template>
 

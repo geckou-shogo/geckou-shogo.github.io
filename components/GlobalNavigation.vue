@@ -74,6 +74,7 @@ export default {
       background-color: rgba(224, 224, 228, 0.08);
       opacity: 0;
       transition: opacity .8s;
+      pointer-events: none;
     }
   }
 </style>
@@ -111,7 +112,6 @@ export default {
       height: 54px;
       background-image: url("../assets/img/gecko.png");
       background-size: 100%;
-      pointer-events: none;
     }
   }
 }
