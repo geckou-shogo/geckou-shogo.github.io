@@ -73,8 +73,6 @@ export default {
     }
   },
   mounted () {
-    const scrollY = window.scrollY
-    console.log(scrollY,)
     gsap.registerPlugin(ScrollToPlugin, ScrollTrigger,)
     this.screenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
     window.addEventListener('resize', this.registrationScrollEvent,)

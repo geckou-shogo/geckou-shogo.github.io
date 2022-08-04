@@ -1,5 +1,6 @@
 <template>
   <div
+    v-observe-visibility="change()"
     :class="$style.section_header"
   >
     <div
@@ -18,11 +19,17 @@
 </template>
 
 <script>
+
 export default {
   props: {
     heading: {
       required: true,
       type    : String,
+    },
+  },
+  methods: {
+    change () {
+      console.log('change',)
     },
   },
 }
