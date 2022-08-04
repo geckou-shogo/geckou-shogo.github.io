@@ -11,7 +11,7 @@
     />
     <GeckouMoon
       :sections="sections"
-      v-if="!sections.component.`${SectionTop}`"
+      v-if="sections.component === `${SectionTop}`"
     />
     <div
       id="sectionsContainer"
