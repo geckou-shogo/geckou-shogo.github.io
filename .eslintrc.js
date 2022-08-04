@@ -14,8 +14,9 @@ module.exports = {
     'key-spacing': ['error', {
       align: 'colon',
     },],
-    'comma-dangle'             : ['error', 'always',],
-    'vue/attribute-hyphenation': ['error', 'never', {
+    'comma-dangle'               : ['error', 'always',],
+    'space-before-function-paren': ['error', 'never',],
+    'vue/attribute-hyphenation'  : ['error', 'never', {
       ignore: [],
     },],
     'vue/multi-word-component-names': 'off',
