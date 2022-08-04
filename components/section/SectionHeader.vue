@@ -1,12 +1,12 @@
 <template>
   <div
-    v-observe-visibility="change()"
     :class="$style.section_header"
   >
     <div
       :class="$style.inner"
     >
       <h2
+        v-inview:animate="change()"
         :class="$style.heading"
       >
         {{ heading }}
@@ -19,7 +19,6 @@
 </template>
 
 <script>
-
 export default {
   props: {
     heading: {

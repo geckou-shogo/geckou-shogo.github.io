@@ -147,7 +147,6 @@ export default {
   overscroll-behavior-y: none;
   overflow             : hidden;
   color                : c.$white;
-  font-family          : f.family(base);
 }
 .sections_container {
   height   : 100vh;

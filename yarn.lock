@@ -6812,6 +6812,13 @@
   "resolved" "https://registry.npmjs.org/imurmurhash/-/imurmurhash-0.1.4.tgz"
   "version" "0.1.4"
 
+"in-view@^0.6.1":
+  "integrity" "sha512-vgoymXcD8MY7PBOnd1fflA6vYGlNi16ZNgFR6dt8Ayr2i6kChFh1CiqDFRNgGGd10tzn8sH4QoqsqNIszmpGOQ=="
+  "resolved" "https://registry.npmjs.org/in-view/-/in-view-0.6.1.tgz"
+  "version" "0.6.1"
+  dependencies:
+    "lodash" "^4.15.0"
+
 "indent-string@^4.0.0", "indent-string@4":
   "integrity" "sha512-EdDDZu4A2OyIK7Lr/2zG+w5jmbuk1DVBnEwREQvBzspBJkCEbRa8GxU1lghYcaGJCnRWibjDXlq779X1/y5xwg=="
   "resolved" "https://registry.npmjs.org/indent-string/-/indent-string-4.0.0.tgz"
@@ -8787,6 +8794,11 @@
   "integrity" "sha512-M2ufzIiINKCuDfBSAUr1vWQ+vuVcA9kqx8JJUsbQi6yf1uGRyb7HfpdfUr5qLXf3B/t8dPvcjhKMmlfnP47EzQ=="
   "resolved" "https://registry.npmjs.org/nan/-/nan-2.14.2.tgz"
   "version" "2.14.2"
+
+"nanoid@^2.1.0":
+  "integrity" "sha512-s/snB+WGm6uwi0WjsZdaVcuf3KJXlfGl2LcxgwkEwJF0D/BWzVWAZW/XY4bFaiR7s0Jk3FPvlnepg1H1b1UwlA=="
+  "resolved" "https://registry.npmjs.org/nanoid/-/nanoid-2.1.11.tgz"
+  "version" "2.1.11"
 
 "nanoid@^3.1.23":
   "integrity" "sha512-FiB0kzdP0FFVGDKlRLEQ1BgDzU87dy5NnzjeW9YZNt+/c3+q82EQDUwniSAUxp/F0gFNI1ZhKU1FqYsMuqZVnw=="
@@ -11280,6 +11292,13 @@
   "resolved" "https://registry.npmjs.org/shell-quote/-/shell-quote-1.7.2.tgz"
   "version" "1.7.2"
 
+"shortid@^2.2.6":
+  "integrity" "sha512-Ugt+GIZqvGXCIItnsL+lvFJOiN7RYqlGy7QE41O3YC1xbNSeDGIRO7xg2JJXIAj1cAGnOeC1r7/T9pgrtQbv4g=="
+  "resolved" "https://registry.npmjs.org/shortid/-/shortid-2.2.16.tgz"
+  "version" "2.2.16"
+  dependencies:
+    "nanoid" "^2.1.0"
+
 "side-channel@^1.0.4":
   "integrity" "sha512-q5XPytqFEIKHkGdiMIrY10mvLRvnQh42/+GoBlFW3b2LXLE2xxJpZFdm94we0BaoV3RwJyGqg5wS7epxTv0Zvw=="
   "resolved" "https://registry.npmjs.org/side-channel/-/side-channel-1.0.4.tgz"
@@ -12744,6 +12763,14 @@
   dependencies:
     "@vue/compiler-sfc" "2.7.7"
     "csstype" "^3.1.0"
+
+"vueinview@^1.0.7":
+  "integrity" "sha512-9ygdhSAIpAYe35IfduWl+NmyHKspALsCu8lShLTtGl65O3Yh/sewlP6PcEtaraNMN4C5vBEfCxoY+ujFqyD1TQ=="
+  "resolved" "https://registry.npmjs.org/vueinview/-/vueinview-1.0.7.tgz"
+  "version" "1.0.7"
+  dependencies:
+    "in-view" "^0.6.1"
+    "shortid" "^2.2.6"
 
 "vuex@^3.6.2":
   "integrity" "sha512-ETW44IqCgBpVomy520DT5jf8n0zoCac+sxWnn+hMe/CzaSejb/eVw2YToiXYX+Ex/AuHHia28vWTq4goAexFbw=="
