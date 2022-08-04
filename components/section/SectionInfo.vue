@@ -2,13 +2,19 @@
   <SectionContainer
     :section="section"
   >
-    <h2>{{ section.name }}</h2>
+    <SectionHeader
+      :heading="section.name"
+    >
+      <p :class="$style.description">
+        合同会社Geckouの会社情報です。
+      </p>
+    </SectionHeader>
   </SectionContainer>
 </template>
 
 <script>
 export default {
-  name : 'SectionInfo',
+  name : 'SectionVision',
   props: {
     section: {
       required: true,
@@ -39,4 +45,5 @@ export default {
     }
   }
 }
+
 </style>
