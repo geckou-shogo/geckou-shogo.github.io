@@ -2,13 +2,15 @@
   <div
     :class="$style.section_header"
   >
-    <div :class="$style.marker" />
+    <div
+      :class="$style.marker"
+    />
     <div
       :class="$style.inner"
     >
       <h2
-        v-inview:animate="'fadeInLeft'"
-        :class="$style.heading"
+        v-inview:once="change"
+        :class="[$style.heading, status ? $style.is_view : '']"
       >
         {{ heading }}
       </h2>
@@ -20,6 +22,7 @@
 </template>
 
 <script>
+
 export default {
   props: {
     heading: {
@@ -27,9 +30,19 @@ export default {
       type    : String,
     },
   },
+  data () {
+    return {
+      status: false,
+    }
+  },
+  moutend () {
+    this.$nextTick(() => {
+      this.change()
+    },)
+  },
   methods: {
     change () {
-      console.log('change',)
+      this.status = true
     },
   },
 }
@@ -72,4 +85,7 @@ export default {
   background: tomato;
 }
 
+.is_view {
+  color: c.$blue;
+}
 </style>
