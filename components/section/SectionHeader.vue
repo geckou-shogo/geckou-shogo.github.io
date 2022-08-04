@@ -9,7 +9,7 @@
       :class="$style.inner"
     >
       <h2
-        v-inview:on="change"
+        v-inview:enter="change"
         :class="[$style.heading, status ? $style.fadeInLeft : '']"
       >
         {{ heading }}
@@ -68,12 +68,21 @@ export default {
 }
 
 .heading {
+  position: relative;
   font-size: 60px;
   font-family: f.family('english');
   color: c.$white;
   letter-spacing: f.letterSpacing(normal);
   &::first-letter {
     color: c.$blue;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: c.$white;
   }
 }
 
