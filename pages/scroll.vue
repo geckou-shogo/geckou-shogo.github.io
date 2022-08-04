@@ -33,7 +33,7 @@
 import gsap from 'gsap'
 import { ScrollTrigger, ScrollToPlugin, } from 'gsap/all'
 export default {
-  data () {
+  data() {
     return {
       screenStatus: '',
       sections    : [
@@ -72,7 +72,7 @@ export default {
       ],
     }
   },
-  mounted () {
+  mounted() {
     gsap.registerPlugin(ScrollToPlugin, ScrollTrigger,)
     this.screenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
     window.addEventListener('resize', this.registrationScrollEvent,)
@@ -128,10 +128,10 @@ export default {
     },)
   },
   methods: {
-    registrationScrollEvent () {
+    registrationScrollEvent() {
       window.addEventListener('scroll', this.checkIsScreenLandscape,)
     },
-    checkIsScreenLandscape () {
+    checkIsScreenLandscape() {
       const currrentScreenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
       if (this.screenStatus !== currrentScreenStatus) { location.reload() } else { window.removeEventListener('scroll', this.checkIsScreenLandscape,) }
     },

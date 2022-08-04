@@ -30,18 +30,18 @@ export default {
       type    : String,
     },
   },
-  data () {
+  data() {
     return {
       status: false,
     }
   },
-  moutend () {
+  moutend() {
     this.$nextTick(() => {
       this.change()
     },)
   },
   methods: {
-    change () {
+    change() {
       this.status = true
     },
   },
