@@ -103,7 +103,7 @@ export default {
   left: 50%;
   width: 2px;
   height: 100vh;
-  background: tomato;
+  /* background: tomato; */
 }
 
 @keyframes fadeIn {
