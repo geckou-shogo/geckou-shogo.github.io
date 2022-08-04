@@ -3,10 +3,14 @@
     :class="$style.section_header"
   >
     <div
+      v-inview:enter="change"
+      :class="$style.marker"
+    />
+    <div
       :class="$style.inner"
     >
       <h2
-        :class="$style.heading"
+        :class="[$style.heading, status ? $style.fadeInLeft : '']"
       >
         {{ heading }}
       </h2>
@@ -18,11 +22,27 @@
 </template>
 
 <script>
+
 export default {
   props: {
     heading: {
       required: true,
       type    : String,
+    },
+  },
+  data() {
+    return {
+      status: false,
+    }
+  },
+  moutend() {
+    this.$nextTick(() => {
+      this.change()
+    },)
+  },
+  methods: {
+    change() {
+      this.status = true
     },
   },
 }
@@ -34,6 +54,7 @@ export default {
 @use '~/assets/scss/color' as c;
 
 .section_header {
+  position: relative;
   width: 50%;
   background-color: c.$bgBlack;
 }
@@ -47,13 +68,60 @@ export default {
 }
 
 .heading {
+  position: relative;
+  width: 100%;
   font-size: 60px;
   font-family: f.family('english');
   color: c.$white;
   letter-spacing: f.letterSpacing(normal);
+  text-align: center;
   &::first-letter {
     color: c.$blue;
   }
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+    width: 100%;
+    height: 2px;
+    background-color: c.$white;
+    opacity: 0;
+  }
+  &.fadeInLeft {
+    &::before {
+      animation-name: fadeIn;
+      animation-duration: 1.5s;
+      animation-timing-function: ease-out;
+      animation-fill-mode: forwards;
+    }
+  }
 }
+
+.marker {
+  position: absolute;
+  left: 50%;
+  width: 2px;
+  height: 100vh;
+  /* background: tomato; */
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    width: 0%;
+  }
+  100% {
+    opacity: 1;
+    width: 100%;
+  }
+}
+
+</style>
+
+<style lang="scss">
+@use '~/assets/scss/value' as v;
+@use '~/assets/scss/font' as f;
+@use '~/assets/scss/color' as c;
 
 </style>

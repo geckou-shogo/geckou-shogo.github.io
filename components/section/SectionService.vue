@@ -2,13 +2,20 @@
   <SectionContainer
     :section="section"
   >
-    <h2>{{ section.name }}</h2>
+    <SectionHeader
+      :heading="section.name"
+    >
+      <p :class="$style.description">
+        自社のWEBサービス開発の他、<br>
+        WEB制作や開発の受託も承っております。
+      </p>
+    </SectionHeader>
   </SectionContainer>
 </template>
 
 <script>
 export default {
-  name : 'SectionService',
+  name : 'SectionVision',
   props: {
     section: {
       required: true,
@@ -39,4 +46,5 @@ export default {
     }
   }
 }
+
 </style>
