@@ -3,7 +3,6 @@
     :section="section"
   >
     <SectionHeader
-      v-inview:animate="'fadeInLeft'"
       :heading="section.name"
     >
       <p :class="$style.description">

@@ -2,11 +2,12 @@
   <div
     :class="$style.section_header"
   >
+    <div :class="$style.marker" />
     <div
       :class="$style.inner"
     >
       <h2
-        v-inview:animate="change()"
+        v-inview:animate="'fadeInLeft'"
         :class="$style.heading"
       >
         {{ heading }}
@@ -40,6 +41,7 @@ export default {
 @use '~/assets/scss/color' as c;
 
 .section_header {
+  position: relative;
   width: 50%;
   background-color: c.$bgBlack;
 }
@@ -60,6 +62,14 @@ export default {
   &::first-letter {
     color: c.$blue;
   }
+}
+
+.marker {
+  position: absolute;
+  left: 0;
+  width: 2px;
+  height: 100vh;
+  background: tomato;
 }
 
 </style>
