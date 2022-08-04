@@ -9,8 +9,8 @@
       :class="$style.inner"
     >
       <h2
-        v-inview:once="change"
-        :class="[$style.heading, status ? $style.is_view : '']"
+        v-inview:on="change"
+        :class="[$style.heading, status ? $style.fadeInLeft : '']"
       >
         {{ heading }}
       </h2>
@@ -85,7 +85,30 @@ export default {
   background: tomato;
 }
 
-.is_view {
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(1);
+  }
+}
+
+.fadeInLeft {
+  animation-name: fadeIn;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
   color: c.$blue;
 }
+
+</style>
+
+<style lang="scss">
+@use '~/assets/scss/value' as v;
+@use '~/assets/scss/font' as f;
+@use '~/assets/scss/color' as c;
+
 </style>
