@@ -6,7 +6,7 @@
     <div
       v-for="item in sectionDatas"
       :key="item.id"
-      :class="$style.screen_item"
+      :class="[$style.screen_item, 'screen_item']"
       :style="{backgroundImage: item.color}"
     />
   </div>
