@@ -15,7 +15,7 @@
       :class="$style.show_marker"
     />
     <div
-      v-inview:enter="rain()"
+      v-inview:enter="rain"
       :class="$style.rain_marker"
     />
     <RainScreen
@@ -86,7 +86,7 @@ export default {
 
 .rain_marker {
   position: absolute;
-  right: 0;
+  right: 10px;
   width: 2px;
   height: 100vh;
   background: c.$blue;
