@@ -14,7 +14,7 @@
       >
         {{ heading }}
       </h2>
-      <div>
+      <div :class="$style.description">
         <slot />
       </div>
     </div>
@@ -70,6 +70,7 @@ export default {
 .heading {
   position: relative;
   width: 100%;
+  min-height: 108px;
   font-size: 60px;
   font-family: f.family('english');
   color: c.$white;
@@ -103,6 +104,10 @@ export default {
   left: 50%;
   width: 2px;
   height: 100vh;
+}
+
+.description {
+  min-height: 64px;
 }
 
 @keyframes fadeInLeft {
