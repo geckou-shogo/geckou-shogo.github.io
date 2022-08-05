@@ -70,61 +70,61 @@ export default {
 @keyframes rain-anim {
 
   0% { transform: translate(0px,0px);}
-  4% { transform: translate(0px,600px);}
+  4% { transform: translate(0px,1600px);}
 
   5% { transform: translate(200px,0px);}
-  9% { transform: translate(200px,600px);}
+  9% { transform: translate(200px,1600px);}
 
   10% { transform: translate(-100px,0px);}
-  14% { transform: translate(-100px,600px);}
+  14% { transform: translate(-100px,1600px);}
 
   15% { transform: translate(-200px,0px);}
-  19% { transform: translate(-200px,600px);}
+  19% { transform: translate(-200px,1600px);}
 
   20% { transform: translate(100px,0px);}
-  24% { transform: translate(100px,600px);}
+  24% { transform: translate(100px,1600px);}
 
   25% { transform: translate(-150px,0px);}
-  29% { transform: translate(-150px,600px);}
+  29% { transform: translate(-150px,1600px);}
 
   30% { transform: translate(-80px,0px);}
-  34% { transform: translate(-80px,600px);}
+  34% { transform: translate(-80px,1600px);}
 
   35% { transform: translate(150px,0px);}
-  39% { transform: translate(150px,600px);}
+  39% { transform: translate(150px,1600px);}
 
   40% { transform: translate(-60px,0px);}
-  44% { transform: translate(-60px,600px);}
+  44% { transform: translate(-60px,1600px);}
 
   45% { transform: translate(90px,0px);}
-  49% { transform: translate(90px,600px);}
+  49% { transform: translate(90px,1600px);}
 
   50% { transform: translate(60px,0px);}
-  54% { transform: translate(60px,600px);}
+  54% { transform: translate(60px,1600px);}
 
   55% { transform: translate(-60px,0px);}
-  59% { transform: translate(-60px,600px);}
+  59% { transform: translate(-60px,1600px);}
 
   60% { transform: translate(-40px,0px);}
-  64% { transform: translate(-40px,600px);}
+  64% { transform: translate(-40px,1600px);}
 
   65% { transform: translate(40px,0px);}
-  69% { transform: translate(40px,600px);}
+  69% { transform: translate(40px,1600px);}
 
   70% { transform: translate(-20px,0px);}
-  74% { transform: translate(-20px,600px);}
+  74% { transform: translate(-20px,1600px);}
 
   75% { transform: translate(-110px,0px);}
-  79% { transform: translate(-110px,600px);}
+  79% { transform: translate(-110px,1600px);}
 
   80% { transform: translate(20px,0px);}
-  84% { transform: translate(20px,600px);}
+  84% { transform: translate(20px,1600px);}
 
   85% { transform: translate(-20px,0px);}
-  89% { transform: translate(-20px,600px);}
+  89% { transform: translate(-20px,1600px);}
 
   90% { transform: translate(50px,0px);}
-  99% { transform: translate(50px,600px);}
+  99% { transform: translate(50px,1600px);}
 
   100% { transform: translate(0px,0px);}
 
