@@ -97,23 +97,23 @@ export default {
         end    : () => `+=${panelsContainer.offsetWidth - innerWidth}`,
       },
     },)
-    const screen = gsap.utils.toArray('.screen_item',)
-    gsap.to(screen, {
-      yPercent     : -100 * (panels.length - 1),
-      ease         : 'none',
-      scrollTrigger: {
-        trigger: '#sectionsContainer',
-        pin    : true,
-        start  : 'top top',
-        scrub  : true,
-        // snap: {
-        //   snapTo: 1 / (panels.length - 1),
-        //   inertia: false,
-        //   duration: {min: 0.1, max: 0.1}
-        // },
-        end    : () => `+=${panelsContainer.offsetWidth - innerWidth}`,
-      },
-    },)
+    // const screen = gsap.utils.toArray('.screen_item',)
+    // gsap.to(screen, {
+    //   yPercent     : -100 * (panels.length - 1),
+    //   ease         : 'none',
+    //   scrollTrigger: {
+    //     trigger: '#sectionsContainer',
+    //     pin    : true,
+    //     start  : 'top top',
+    //     scrub  : true,
+    //     // snap: {
+    //     //   snapTo: 1 / (panels.length - 1),
+    //     //   inertia: false,
+    //     //   duration: {min: 0.1, max: 0.1}
+    //     // },
+    //     end    : () => `+=${panelsContainer.offsetWidth - innerWidth}`,
+    //   },
+    // },)
     document.querySelectorAll('.anchor',).forEach((anchor,) => {
       anchor.addEventListener('click', (e,) => {
         e.preventDefault()

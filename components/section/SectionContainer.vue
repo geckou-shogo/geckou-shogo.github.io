@@ -28,16 +28,9 @@ export default {
 
 .section {
   min-width      : 100vw;
-  display        : flex;
-  flex-direction : column;
-  align-items    : center;
-  justify-content: center;
   position       : relative;
   display        : flex;
   width          : 100%;
   height         : 100vh;
-  align-items    : center;
-  justify-content: center;
-  overflow       : hidden;
 }
 </style>

@@ -14,6 +14,7 @@
       v-inview:enter="show"
       :class="$style.event"
     />
+    <SectionVisionRain />
   </SectionContainer>
 </template>
 
@@ -27,11 +28,11 @@ export default {
       default : () => {},
     },
   },
-  // data() {
-  //   return {
-  //     status: false,
-  //   }
-  // },
+  data() {
+    return {
+      rain: false,
+    }
+  },
   mounted() {
     this.$nextTick(() => {
       this.show()
@@ -41,6 +42,9 @@ export default {
     show() {
       this.$emit('viewInScreen',)
     },
+    // rain() {
+    //   this.rain
+    // },
   },
 }
 </script>
@@ -72,6 +76,14 @@ export default {
   width: 2px;
   height: 100vh;
   background: tomato;
+}
+
+.rain {
+  position: absolute;
+  right: 0;
+  width: 2px;
+  height: 100vh;
+  background: c.$blue;
 }
 
 </style>

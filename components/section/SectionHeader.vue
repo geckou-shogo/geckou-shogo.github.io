@@ -55,7 +55,7 @@ export default {
 
 .section_header {
   position: relative;
-  width: 50%;
+  min-width: 690px;
   background-color: c.$bgBlack;
 }
 
