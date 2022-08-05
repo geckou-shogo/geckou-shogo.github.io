@@ -10,8 +10,7 @@
       :sections="sections"
     />
     <GeckouMoon
-      :sections="sections"
-      v-if="sections.component === `${SectionTop}`"
+      v-if="isShowMoon"
     />
     <div
       id="sectionsContainer"
@@ -27,6 +26,7 @@
         <component
           :is="section.component"
           :section="section"
+          @viewInScreen="showMoon"
         />
       </section>
     </div>
@@ -42,18 +42,16 @@ export default {
       screenStatus: '',
       sections    : [
         {
-          id         : 'top',
-          name       : 'TOP',
-          description: 'テキストテキストテキストテキスト',
-          component  : 'SectionTop',
-          color      : 'linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);',
+          id       : 'top',
+          name     : 'TOP',
+          component: 'SectionTop',
+          color    : 'linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);',
         },
         {
-          id         : 'vision',
-          name       : 'VISION',
-          description: 'テキストテキストテキストテキスト',
-          component  : 'SectionVision',
-          color      : 'linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);',
+          id       : 'vision',
+          name     : 'VISION',
+          component: 'SectionVision',
+          color    : 'linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);',
         },
         {
           id       : 'service',
@@ -74,6 +72,7 @@ export default {
           color    : '#B5BBC9',
         },
       ],
+      isShowMoon: false,
     }
   },
   mounted() {
@@ -98,6 +97,23 @@ export default {
         end    : () => `+=${panelsContainer.offsetWidth - innerWidth}`,
       },
     },)
+    // const screen = gsap.utils.toArray('.screen_item',)
+    // gsap.to(screen, {
+    //   yPercent     : -100 * (panels.length - 1),
+    //   ease         : 'none',
+    //   scrollTrigger: {
+    //     trigger: '#sectionsContainer',
+    //     pin    : true,
+    //     start  : 'top top',
+    //     scrub  : true,
+    //     // snap: {
+    //     //   snapTo: 1 / (panels.length - 1),
+    //     //   inertia: false,
+    //     //   duration: {min: 0.1, max: 0.1}
+    //     // },
+    //     end    : () => `+=${panelsContainer.offsetWidth - innerWidth}`,
+    //   },
+    // },)
     document.querySelectorAll('.anchor',).forEach((anchor,) => {
       anchor.addEventListener('click', (e,) => {
         e.preventDefault()
@@ -117,7 +133,6 @@ export default {
         },)
       },)
     },)
-
     panels.forEach((sct,) => {
       const target = document.querySelector(`#navi-${sct.id}`,)
       ScrollTrigger.create({
@@ -138,6 +153,9 @@ export default {
     checkIsScreenLandscape() {
       const currrentScreenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
       if (this.screenStatus !== currrentScreenStatus) { location.reload() } else { window.removeEventListener('scroll', this.checkIsScreenLandscape,) }
+    },
+    showMoon() {
+      this.isShowMoon = true
     },
   },
 }
@@ -168,4 +186,5 @@ export default {
   justify-content: center;
   overflow: hidden;
 }
+
 </style>

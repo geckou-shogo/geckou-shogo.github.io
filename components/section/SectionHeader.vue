@@ -14,7 +14,7 @@
       >
         {{ heading }}
       </h2>
-      <div>
+      <div :class="$style.description">
         <slot />
       </div>
     </div>
@@ -55,7 +55,7 @@ export default {
 
 .section_header {
   position: relative;
-  width: 50%;
+  min-width: 620px;
   background-color: c.$bgBlack;
 }
 
@@ -70,6 +70,7 @@ export default {
 .heading {
   position: relative;
   width: 100%;
+  min-height: 108px;
   font-size: 60px;
   font-family: f.family('english');
   color: c.$white;
@@ -90,7 +91,7 @@ export default {
   }
   &.fadeInLeft {
     &::before {
-      animation-name: fadeIn;
+      animation-name: fadeInLeft;
       animation-duration: 1.5s;
       animation-timing-function: ease-out;
       animation-fill-mode: forwards;
@@ -103,10 +104,13 @@ export default {
   left: 50%;
   width: 2px;
   height: 100vh;
-  /* background: tomato; */
 }
 
-@keyframes fadeIn {
+.description {
+  min-height: 64px;
+}
+
+@keyframes fadeInLeft {
   0% {
     opacity: 0;
     width: 0%;
@@ -116,12 +120,5 @@ export default {
     width: 100%;
   }
 }
-
-</style>
-
-<style lang="scss">
-@use '~/assets/scss/value' as v;
-@use '~/assets/scss/font' as f;
-@use '~/assets/scss/color' as c;
 
 </style>
