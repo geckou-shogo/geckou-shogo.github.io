@@ -10,6 +10,10 @@
         WEB開発を通じてお手伝いいたします。
       </p>
     </SectionHeader>
+    <div
+      v-inview:enter="show"
+      :class="$style.event"
+    />
   </SectionContainer>
 </template>
 
@@ -23,6 +27,21 @@ export default {
       default : () => {},
     },
   },
+  data() {
+    return {
+      status: false,
+    }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.show()
+    },)
+  },
+  methods: {
+    show() {
+      this.status = true
+    },
+  },
 }
 </script>
 
@@ -32,11 +51,11 @@ export default {
 @use '~/assets/scss/color' as c;
 
 .section {
+  position: relative;
   display        : flex;
   flex-direction : column;
   align-items    : center;
   justify-content: center;
-
   h2 {
     font-size: 100px;
     color    : c.$white;
@@ -45,6 +64,14 @@ export default {
       font-size: 40px;
     }
   }
+}
+
+.event {
+  position: absolute;
+  right: 0;
+  width: 2px;
+  height: 100vh;
+  background: tomato;
 }
 
 </style>

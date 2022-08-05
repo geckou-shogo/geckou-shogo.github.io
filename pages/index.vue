@@ -9,10 +9,7 @@
     <GlobalNavigation
       :sections="sections"
     />
-    <GeckouMoon
-      :sections="sections"
-      v-if="sections.component === `${SectionTop}`"
-    />
+    <GeckouMoon />
     <div
       id="sectionsContainer"
       :class="$style.sections_container"
@@ -168,4 +165,5 @@ export default {
   justify-content: center;
   overflow: hidden;
 }
+
 </style>

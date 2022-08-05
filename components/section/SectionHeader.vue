@@ -90,7 +90,7 @@ export default {
   }
   &.fadeInLeft {
     &::before {
-      animation-name: fadeIn;
+      animation-name: fadeInLeft;
       animation-duration: 1.5s;
       animation-timing-function: ease-out;
       animation-fill-mode: forwards;
@@ -103,10 +103,9 @@ export default {
   left: 50%;
   width: 2px;
   height: 100vh;
-  /* background: tomato; */
 }
 
-@keyframes fadeIn {
+@keyframes fadeInLeft {
   0% {
     opacity: 0;
     width: 0%;
@@ -116,12 +115,5 @@ export default {
     width: 100%;
   }
 }
-
-</style>
-
-<style lang="scss">
-@use '~/assets/scss/value' as v;
-@use '~/assets/scss/font' as f;
-@use '~/assets/scss/color' as c;
 
 </style>
