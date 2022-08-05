@@ -15,11 +15,11 @@
       :class="$style.show_marker"
     />
     <div
-      v-inview:enter="rain"
+      v-inview:enter="rain()"
       :class="$style.rain_marker"
     />
-    <SectionVisionRain
-      :inView="screenRain"
+    <RainScreen
+      :inView="screen"
     />
   </SectionContainer>
 </template>
@@ -35,7 +35,7 @@ export default {
   },
   data() {
     return {
-      screenRain: false,
+      screen: false,
     }
   },
   mounted() {
@@ -49,7 +49,7 @@ export default {
       this.$emit('viewInScreen',)
     },
     rain() {
-      this.screenRain = true
+      this.screen = true
     },
   },
 }
@@ -91,12 +91,5 @@ export default {
   height: 100vh;
   background: c.$blue;
 }
-
-/* .rain_area {
-  transition: opacity .7s;
-  &.fadeOutRain {
-    opacity: 0;
-  }
-} */
 
 </style>

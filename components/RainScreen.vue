@@ -2,6 +2,7 @@
   <div
     :class="[$style.container, inView ? $style.stop : '']"
   >
+    {{ inView }}
     <div :class="$style.rain_area">
       <span
         v-for="rain in 20"
