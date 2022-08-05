@@ -12,7 +12,11 @@
     </SectionHeader>
     <div
       v-inview:enter="show"
-      :class="$style.event"
+      :class="$style.show_marker"
+    />
+    <div
+      v-inview:enter="rain"
+      :class="$style.rain_marker"
     />
     <SectionVisionRain />
   </SectionContainer>
@@ -30,21 +34,22 @@ export default {
   },
   data() {
     return {
-      rain: false,
+      screenRain: false,
     }
   },
   mounted() {
     this.$nextTick(() => {
       this.show()
+      this.rain()
     },)
   },
   methods: {
     show() {
       this.$emit('viewInScreen',)
     },
-    // rain() {
-    //   this.rain
-    // },
+    rain() {
+      this.screenRain = true
+    },
   },
 }
 </script>
@@ -70,7 +75,7 @@ export default {
   }
 }
 
-.event {
+.show_marker {
   position: absolute;
   right: 0;
   width: 2px;
@@ -78,12 +83,19 @@ export default {
   background: tomato;
 }
 
-.rain {
+.rain_marker {
   position: absolute;
   right: 0;
   width: 2px;
   height: 100vh;
   background: c.$blue;
 }
+
+/* .rain_area {
+  transition: opacity .7s;
+  &.fadeOutRain {
+    opacity: 0;
+  }
+} */
 
 </style>
