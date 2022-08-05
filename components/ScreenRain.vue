@@ -1,8 +1,11 @@
 <template>
-  <div :class="$style.container">
+  <div
+    :class="[$style.container, inView ? $style.stop : '']"
+  >
     <div :class="$style.rain_area">
       <span
-        v-for="rains in 20"
+        v-for="rain in 20"
+        :key="rain"
       />
     </div>
   </div>
@@ -10,6 +13,13 @@
 
 <script>
 export default {
+  props: {
+    inView: {
+      required: false,
+      type    : Boolean,
+      default : false,
+    },
+  },
 
 }
 </script>
@@ -25,6 +35,10 @@ export default {
   width: 100%;
   justify-content: center;
   align-items: center;
+  transition: opacity .5s;
+  &.stop {
+    opacity: 0;
+  }
 }
 
 .rain_area {

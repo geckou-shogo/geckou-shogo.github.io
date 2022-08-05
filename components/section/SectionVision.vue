@@ -18,7 +18,9 @@
       v-inview:enter="rain"
       :class="$style.rain_marker"
     />
-    <SectionVisionRain />
+    <SectionVisionRain
+      :inView="screenRain"
+    />
   </SectionContainer>
 </template>
 
@@ -29,7 +31,6 @@ export default {
     section: {
       required: true,
       type    : Object,
-      default : () => {},
     },
   },
   data() {
