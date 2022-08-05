@@ -9,7 +9,9 @@
     <GlobalNavigation
       :sections="sections"
     />
-    <GeckouMoon />
+    <GeckouMoon
+      v-if="isShowMoon"
+    />
     <div
       id="sectionsContainer"
       :class="$style.sections_container"
@@ -24,6 +26,7 @@
         <component
           :is="section.component"
           :section="section"
+          @viewInScreen="showMoon"
         />
       </section>
     </div>
@@ -71,6 +74,7 @@ export default {
           color    : '#B5BBC9',
         },
       ],
+      isShowMoon: false,
     }
   },
   mounted() {
@@ -135,6 +139,9 @@ export default {
     checkIsScreenLandscape() {
       const currrentScreenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
       if (this.screenStatus !== currrentScreenStatus) { location.reload() } else { window.removeEventListener('scroll', this.checkIsScreenLandscape,) }
+    },
+    showMoon() {
+      this.isShowMoon = true
     },
   },
 }

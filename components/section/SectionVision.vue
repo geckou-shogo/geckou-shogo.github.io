@@ -27,11 +27,11 @@ export default {
       default : () => {},
     },
   },
-  data() {
-    return {
-      status: false,
-    }
-  },
+  // data() {
+  //   return {
+  //     status: false,
+  //   }
+  // },
   mounted() {
     this.$nextTick(() => {
       this.show()
@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     show() {
-      this.status = true
+      this.$emit('viewInScreen',)
     },
   },
 }
