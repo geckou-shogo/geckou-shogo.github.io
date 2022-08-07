@@ -14,7 +14,7 @@
       >
         {{ heading }}
       </h2>
-      <div :class="[$style.description, status ? $style.fadeInLeft : '']">
+      <div :class="[$style.description, status ? $style.slideIn : '']">
         <slot />
       </div>
     </div>
@@ -108,8 +108,8 @@ export default {
 .description {
   opacity: 0;
   min-height: 64px;
-  &.fadeInLeft {
-    animation-name: fadeIn;
+  &.slideIn {
+    animation-name: slideIn;
     animation-duration: 1.2s;
     animation-delay: .85s;
     animation-timing-function: ease-out;
@@ -138,6 +138,15 @@ export default {
 }
 
 @keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
   0% {
     opacity: 0;
     transform: translateY(30px);
