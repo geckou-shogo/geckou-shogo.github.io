@@ -110,8 +110,8 @@ export default {
   min-height: 64px;
   &.slideIn {
     animation-name: slideIn;
-    animation-duration: 1.2s;
-    animation-delay: .85s;
+    animation-duration: 1s;
+    animation-delay: .3s;
     animation-timing-function: ease-out;
     animation-fill-mode: forwards;
   }
