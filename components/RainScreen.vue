@@ -30,15 +30,26 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
+@keyframes opacity {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 .container {
   position:relative;
   display:flex;
   width: 100%;
   justify-content: center;
   align-items: center;
-  transition: opacity .5s;
   &.stop {
-    opacity: 0;
+    animation-name: opacity;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
   }
 }
 

@@ -49,7 +49,6 @@ export default {
     },
     rain() {
       this.screen = true
-      console.log(this.screen)
     },
   },
 }
