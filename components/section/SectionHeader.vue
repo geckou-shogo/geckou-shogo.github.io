@@ -14,7 +14,7 @@
       >
         {{ heading }}
       </h2>
-      <div :class="$style.description">
+      <div :class="[$style.description, status ? $style.fadeInLeft : '']">
         <slot />
       </div>
     </div>
@@ -76,6 +76,8 @@ export default {
   color: c.$white;
   letter-spacing: f.letterSpacing(normal);
   text-align: center;
+  opacity: 0;
+
   &::first-letter {
     color: c.$blue;
   }
@@ -90,12 +92,28 @@ export default {
     opacity: 0;
   }
   &.fadeInLeft {
+    animation-name: fadeIn;
+    animation-duration: 1.2s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
     &::before {
       animation-name: fadeInLeft;
       animation-duration: 1.5s;
       animation-timing-function: ease-out;
       animation-fill-mode: forwards;
     }
+  }
+}
+
+.description {
+  opacity: 0;
+  min-height: 64px;
+  &.fadeInLeft {
+    animation-name: fadeIn;
+    animation-duration: 1.2s;
+    animation-delay: .85s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
   }
 }
 
@@ -106,9 +124,7 @@ export default {
   height: 100vh;
 }
 
-.description {
-  min-height: 64px;
-}
+
 
 @keyframes fadeInLeft {
   0% {
@@ -118,6 +134,17 @@ export default {
   100% {
     opacity: 1;
     width: 100%;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
