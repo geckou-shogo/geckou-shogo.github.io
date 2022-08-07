@@ -41,7 +41,6 @@ export default {
   mounted() {
     this.$nextTick(() => {
       this.show()
-      this.rain()
     },)
   },
   methods: {
@@ -50,6 +49,7 @@ export default {
     },
     rain() {
       this.screen = true
+      console.log(this.screen)
     },
   },
 }
