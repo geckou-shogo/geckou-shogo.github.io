@@ -1,9 +1,9 @@
 <template>
-  <div
+  <span
     :class="[$style.container, status ? $style.fadeInLeft : '']"
   >
-    <span><slot /></span>
-  </div>
+    <span :class="$style.text"><slot /></span>
+  </span>
 </template>
 
 <script>
@@ -25,13 +25,14 @@ export default {
 
 .container {
   position: relative;
+  display: block;
   width: 100%;
   transform: translate(-100%, 0);
   transition-duration: 2s;
   transition-timing-function: ease-in-out;
   overflow: hidden;
 
-  span {
+  .text {
     display: block;
     transform: translate(100%, 0);
     transition-duration: 2s;
@@ -41,7 +42,7 @@ export default {
   &.fadeInLeft {
     transform: translate(0, 0);
 
-    span {
+    .text {
       transform: translate(0, 0);
     }
   }

@@ -101,7 +101,7 @@ export default {
     bottom: 1rem;
     width: 100%;
     height: 1px;
-    background-color: rgba(224, 224, 228, .28);
+    background-color: rgba($color: c.$white, $alpha: .28);
     opacity: 0;
   }
   &.fadeInLeft {
