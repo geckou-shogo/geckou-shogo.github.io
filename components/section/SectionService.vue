@@ -6,8 +6,8 @@
       :heading="section.name"
     >
       <p :class="$style.description">
-        自社のWEBサービス開発の他、<br>
-        WEB制作や開発の受託も承っております。
+        <span>自社のWEBサービス開発の他、<br>
+          WEB制作や開発の受託も承っております。</span>
       </p>
     </SectionHeader>
   </SectionContainer>

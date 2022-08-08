@@ -5,7 +5,7 @@
     <SectionHeader
       :heading="section.name"
     >
-      <p :class="$style.description">
+      <p>
         Geckouは人々が自身の望む道を歩めるよう<br>
         WEB開発を通じてお手伝いいたします。
       </p>
@@ -65,14 +65,6 @@ export default {
   flex-direction : column;
   align-items    : center;
   justify-content: center;
-  h2 {
-    font-size: 100px;
-    color    : c.$white;
-
-    @include v.mq(md) {
-      font-size: 40px;
-    }
-  }
 }
 
 .show_marker {

@@ -10,14 +10,25 @@
       :class="$style.inner"
     >
       <h2
-        id="split_text"
+        id="heading"
         :class="[$style.heading, status ? $style.fadeInLeft : '']"
       >
-        {{ heading }}
+        <FlowLeft
+          :status="status"
+        >
+          {{ heading }}
+        </FlowLeft>
       </h2>
-      <div :class="[$style.description, status ? $style.slideIn : '']">
-        <slot />
-      </div>
+      <FlowLeft
+        :status="status"
+      >
+        <div
+          id="description"
+          :class="[$style.description, status ? $style.fadeInLeft : '']"
+        >
+          <slot />
+        </div>
+      </FlowLeft>
     </div>
   </div>
 </template>
@@ -62,8 +73,8 @@ export default {
 }
 
 .inner {
-  height: 100vh;
   display: flex;
+  height: 100vh;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -78,7 +89,6 @@ export default {
   color: c.$white;
   letter-spacing: f.letterSpacing(normal);
   text-align: center;
-  opacity: 0;
 
   &::first-letter {
     color: c.$blue;
@@ -94,10 +104,6 @@ export default {
     opacity: 0;
   }
   &.fadeInLeft {
-    animation-name: fadeIn;
-    animation-duration: 1.2s;
-    animation-timing-function: ease-out;
-    animation-fill-mode: forwards;
     &::after {
       animation-name: fadeInLeft;
       animation-duration: 2s;
@@ -109,6 +115,7 @@ export default {
 
 .description {
   min-height: 64px;
+  text-align: center;
 }
 
 .marker {
@@ -132,14 +139,4 @@ export default {
     width: 100%;
   }
 }
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
 </style>
