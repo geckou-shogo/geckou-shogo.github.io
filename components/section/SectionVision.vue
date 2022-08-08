@@ -20,6 +20,7 @@
     />
     <RainScreen
       :inView="screen"
+      :class="$style.vision_rain"
     />
     <div
       :class="$style.content"
@@ -98,6 +99,12 @@ export default {
   width: 2px;
   height: 100vh;
   background: c.$blue;
+}
+
+.vision_rain {
+  position: absolute;
+  width: 50%;
+  left: 50%;
 }
 
 </style>

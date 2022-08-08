@@ -2,7 +2,7 @@
   <div
     :class="[$style.container, inView ? $style.stop : '']"
   >
-    {{ inView }}
+    <!-- {{ inView }} -->
     <div :class="$style.rain_area">
       <span
         v-for="rain in 20"
@@ -40,11 +40,6 @@ export default {
 }
 
 .container {
-  position:relative;
-  display:flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
   &.stop {
     animation-name: opacity;
     animation-duration: 1s;
