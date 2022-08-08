@@ -116,6 +116,7 @@ export default {
   justify-content: center;
   &_content {
     position: relative;
+    min-width: 1500px;
   }
 }
 
