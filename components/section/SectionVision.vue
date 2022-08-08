@@ -19,7 +19,7 @@
       </p>
     </SectionHeader>
     <div
-      :class="$style.section_content "
+      :class="$style.section_content"
     >
       <RainScreen
         :inView="screen"
