@@ -13,13 +13,13 @@
         id="heading"
         :class="[$style.heading, status ? $style.fadeInLeft : '']"
       >
-        <FlowLeft
+        <FlowFromLeft
           :status="status"
         >
           {{ heading }}
-        </FlowLeft>
+        </FlowFromLeft>
       </h2>
-      <FlowLeft
+      <FlowFromLeft
         :status="status"
       >
         <div
@@ -28,7 +28,7 @@
         >
           <slot />
         </div>
-      </FlowLeft>
+      </FlowFromLeft>
     </div>
   </div>
 </template>

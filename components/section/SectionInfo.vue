@@ -6,9 +6,7 @@
       :heading="section.name"
     >
       <p :class="$style.description">
-        <span>
-          合同会社Geckouの会社情報です。
-        </span>
+        合同会社Geckouの会社情報です。
       </p>
     </SectionHeader>
   </SectionContainer>
