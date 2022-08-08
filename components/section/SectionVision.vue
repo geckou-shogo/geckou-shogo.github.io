@@ -40,6 +40,33 @@
               名づけられました。
             </p>
           </div>
+          <div :class="$style.content_box">
+            <p :class="$style.content_description">
+              合同会社Geckouは、<br>
+              月明かりが、暗闇で迷う人を<br>
+              照らして導くように、<br>
+              人々の助けとなれるよう、<br>
+              名づけられました。
+            </p>
+          </div>
+          <div :class="$style.content_box">
+            <p :class="$style.content_description">
+              合同会社Geckouは、<br>
+              月明かりが、暗闇で迷う人を<br>
+              照らして導くように、<br>
+              人々の助けとなれるよう、<br>
+              名づけられました。
+            </p>
+          </div>
+          <div :class="$style.content_box">
+            <p :class="$style.content_description">
+              合同会社Geckouは、<br>
+              月明かりが、暗闇で迷う人を<br>
+              照らして導くように、<br>
+              人々の助けとなれるよう、<br>
+              名づけられました。
+            </p>
+          </div>
         </div>
       </div>
     </div>
