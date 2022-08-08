@@ -1,5 +1,6 @@
 <template>
   <div
+    id="section_header"
     :class="$style.section_header"
   >
     <div

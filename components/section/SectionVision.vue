@@ -2,6 +2,14 @@
   <SectionContainer
     :section="section"
   >
+    <div
+      v-inview:enter="show"
+      :class="$style.show_marker"
+    />
+    <div
+      v-inview:enter="rain"
+      :class="$style.rain_marker"
+    />
     <SectionHeader
       :heading="section.name"
     >
@@ -11,31 +19,27 @@
       </p>
     </SectionHeader>
     <div
-      v-inview:enter="show"
-      :class="$style.show_marker"
-    />
-    <div
-      v-inview:enter="rain"
-      :class="$style.rain_marker"
-    />
-    <RainScreen
-      :inView="screen"
-      :class="$style.vision_rain"
-    />
-    <div
-      :class="$style.content"
+      :class="$style.section_content "
     >
+      <RainScreen
+        :inView="screen"
+        :class="$style.vision_rain"
+      />
       <div
-        :class="$style.content_inner"
+        :class="$style.content"
       >
-        <div :class="$style.content_box">
-          <p :class="$style.content_description">
-            合同会社Geckouは、<br>
-            月明かりが、暗闇で迷う人を<br>
-            照らして導くように、<br>
-            人々の助けとなれるよう、<br>
-            名づけられました。
-          </p>
+        <div
+          :class="$style.content_inner"
+        >
+          <div :class="$style.content_box">
+            <p :class="$style.content_description">
+              合同会社Geckouは、<br>
+              月明かりが、暗闇で迷う人を<br>
+              照らして導くように、<br>
+              人々の助けとなれるよう、<br>
+              名づけられました。
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -83,6 +87,9 @@ export default {
   flex-direction : column;
   align-items    : center;
   justify-content: center;
+  &_content {
+    position: relative;
+  }
 }
 
 .show_marker {
@@ -103,8 +110,17 @@ export default {
 
 .vision_rain {
   position: absolute;
-  width: 50%;
-  left: 50%;
+}
+
+.content {
+  width: 100vw;
+  height: 100vh;
+  &_inner {
+    position: absolute;
+    display: flex;
+    top: 50%;
+  }
+
 }
 
 </style>
