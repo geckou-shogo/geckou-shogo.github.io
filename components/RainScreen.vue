@@ -2,7 +2,7 @@
   <div
     :class="[$style.container, inView ? $style.stop : '']"
   >
-    {{ inView }}
+    <!-- {{ inView }} デバッグ用の記述です  -->
     <div :class="$style.rain_area">
       <span
         v-for="rain in 20"
@@ -40,11 +40,8 @@ export default {
 }
 
 .container {
-  position:relative;
-  display:flex;
   width: 100%;
-  justify-content: center;
-  align-items: center;
+  height: 100vh;
   &.stop {
     animation-name: opacity;
     animation-duration: 1s;
@@ -58,8 +55,8 @@ export default {
   right:0;
   top:auto;
   width: 100%;
-  height:100%;
-  z-index: zIndex(off);
+  height:100vh;
+  z-index: v.zIndex(off);
   overflow: hidden;
   span {
     position: absolute;

@@ -2,14 +2,6 @@
   <SectionContainer
     :section="section"
   >
-    <SectionHeader
-      :heading="section.name"
-    >
-      <p :class="$style.description">
-        Geckouは人々が自身の望む道を歩めるよう<br>
-        WEB開発を通じてお手伝いいたします。
-      </p>
-    </SectionHeader>
     <div
       v-inview:enter="show"
       :class="$style.show_marker"
@@ -18,9 +10,66 @@
       v-inview:enter="rain"
       :class="$style.rain_marker"
     />
-    <RainScreen
-      :inView="screen"
-    />
+    <SectionHeader
+      :heading="section.name"
+    >
+      <p>
+        Geckouは人々が自身の望む道を歩めるよう<br>
+        WEB開発を通じてお手伝いいたします。
+      </p>
+    </SectionHeader>
+    <div
+      :class="$style.section_content"
+    >
+      <RainScreen
+        :inView="screen"
+        :class="$style.vision_rain"
+      />
+      <div
+        :class="$style.content"
+      >
+        <div
+          :class="$style.content_inner"
+        >
+          <div :class="$style.content_box">
+            <p :class="$style.content_description">
+              合同会社Geckouは、<br>
+              月明かりが、暗闇で迷う人を<br>
+              照らして導くように、<br>
+              人々の助けとなれるよう、<br>
+              名づけられました。
+            </p>
+          </div>
+          <div :class="$style.content_box">
+            <p :class="$style.content_description">
+              合同会社Geckouは、<br>
+              月明かりが、暗闇で迷う人を<br>
+              照らして導くように、<br>
+              人々の助けとなれるよう、<br>
+              名づけられました。
+            </p>
+          </div>
+          <div :class="$style.content_box">
+            <p :class="$style.content_description">
+              合同会社Geckouは、<br>
+              月明かりが、暗闇で迷う人を<br>
+              照らして導くように、<br>
+              人々の助けとなれるよう、<br>
+              名づけられました。
+            </p>
+          </div>
+          <div :class="$style.content_box">
+            <p :class="$style.content_description">
+              合同会社Geckouは、<br>
+              月明かりが、暗闇で迷う人を<br>
+              照らして導くように、<br>
+              人々の助けとなれるよう、<br>
+              名づけられました。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </SectionContainer>
 </template>
 
@@ -65,13 +114,9 @@ export default {
   flex-direction : column;
   align-items    : center;
   justify-content: center;
-  h2 {
-    font-size: 100px;
-    color    : c.$white;
-
-    @include v.mq(md) {
-      font-size: 40px;
-    }
+  &_content {
+    position: relative;
+    min-width: 1500px;
   }
 }
 
@@ -89,6 +134,21 @@ export default {
   width: 2px;
   height: 100vh;
   background: c.$blue;
+}
+
+.vision_rain {
+  position: absolute;
+}
+
+.content {
+  width: 100vw;
+  height: 100vh;
+  &_inner {
+    position: absolute;
+    display: flex;
+    top: 50%;
+  }
+
 }
 
 </style>

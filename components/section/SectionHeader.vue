@@ -1,5 +1,6 @@
 <template>
   <div
+    id="section_header"
     :class="$style.section_header"
   >
     <div
@@ -10,13 +11,25 @@
       :class="$style.inner"
     >
       <h2
+        id="heading"
         :class="[$style.heading, status ? $style.fadeInLeft : '']"
       >
-        {{ heading }}
+        <FlowFromLeft
+          :status="status"
+        >
+          {{ heading }}
+        </FlowFromLeft>
       </h2>
-      <div :class="[$style.description, status ? $style.slideIn : '']">
-        <slot />
-      </div>
+      <FlowFromLeft
+        :status="status"
+      >
+        <div
+          id="description"
+          :class="[$style.description, status ? $style.fadeInLeft : '']"
+        >
+          <slot />
+        </div>
+      </FlowFromLeft>
     </div>
   </div>
 </template>
@@ -36,13 +49,13 @@ export default {
     }
   },
   moutend() {
-    this.$nextTick(() => {
-      this.change()
-    },)
+
   },
   methods: {
     change() {
       this.status = true
+    },
+    textAnimetion() {
     },
   },
 }
@@ -55,13 +68,14 @@ export default {
 
 .section_header {
   position: relative;
-  min-width: 620px;
+  min-width: calc(#{f.size('heading')} * 11);
+  aspect-ratio: 1 / 1.62;
   background-color: c.$bgBlack;
 }
 
 .inner {
-  height: 100vh;
   display: flex;
+  height: 100vh;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -71,34 +85,29 @@ export default {
   position: relative;
   width: 100%;
   min-height: 108px;
-  font-size: 60px;
+  font-size: f.size('heading');
   font-family: f.family('english');
   color: c.$white;
   letter-spacing: f.letterSpacing(normal);
   text-align: center;
-  opacity: 0;
 
   &::first-letter {
     color: c.$blue;
   }
-  &::before {
+  &::after {
     content: "";
     position: absolute;
     left: 0;
-    bottom: 10px;
+    bottom: 1rem;
     width: 100%;
-    height: 2px;
-    background-color: c.$white;
+    height: 1px;
+    background-color: rgba(224, 224, 228, .28);
     opacity: 0;
   }
   &.fadeInLeft {
-    animation-name: fadeIn;
-    animation-duration: 1.2s;
-    animation-timing-function: ease-out;
-    animation-fill-mode: forwards;
-    &::before {
+    &::after {
       animation-name: fadeInLeft;
-      animation-duration: 1.5s;
+      animation-duration: 2s;
       animation-timing-function: ease-out;
       animation-fill-mode: forwards;
     }
@@ -106,15 +115,8 @@ export default {
 }
 
 .description {
-  opacity: 0;
   min-height: 64px;
-  &.slideIn {
-    animation-name: slideIn;
-    animation-duration: 1s;
-    animation-delay: .3s;
-    animation-timing-function: ease-out;
-    animation-fill-mode: forwards;
-  }
+  text-align: center;
 }
 
 .marker {
@@ -124,37 +126,18 @@ export default {
   height: 100vh;
 }
 
-
-
 @keyframes fadeInLeft {
   0% {
     opacity: 0;
     width: 0%;
+  }
+  50% {
+    opacity: .5;
+    width: 50%;
   }
   100% {
     opacity: 1;
     width: 100%;
   }
 }
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes slideIn {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 </style>
