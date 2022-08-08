@@ -58,8 +58,8 @@ export default {
   right:0;
   top:auto;
   width: 100%;
-  height:100%;
-  z-index: zIndex(off);
+  height:100vh;
+  z-index: v.zIndex(off);
   overflow: hidden;
   span {
     position: absolute;
