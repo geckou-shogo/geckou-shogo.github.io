@@ -3,16 +3,17 @@
     <SectionContainer
       :section="section"
     >
-      <SectionHeaderTransparent
+      <SectionHeader
         :heading="section.name"
-        :class="$style.contact_header"
+        :class="[$style.contact_header, transparent ? $style.transparent : '']"
+        :transparent="true"
       >
         <p :class="$style.description">
           Geckouに関する質問、<br>
           WEB開発のご相談など、<br>
           お気軽にお問い合わせください。
         </p>
-      </SectionHeaderTransparent>
+      </SectionHeader>
     </SectionContainer>
   </div>
 </template>
@@ -27,6 +28,11 @@ export default {
       default : () => { },
     },
   },
+  data() {
+    return {
+      transparent: true,
+    }
+  },
 }
 </script>
 
@@ -35,7 +41,7 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
-.contact_header {
+.contact_header.transparent {
   background-color: transparent;
 }
 </style>

@@ -152,8 +152,8 @@ export default {
       window.addEventListener('scroll', this.checkIsScreenLandscape,)
     },
     checkIsScreenLandscape() {
-      const currrentScreenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
-      if (this.screenStatus !== currrentScreenStatus) { location.reload() } else { window.removeEventListener('scroll', this.checkIsScreenLandscape,) }
+      const currentScreenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
+      if (this.screenStatus !== currentScreenStatus) { location.reload() } else { window.removeEventListener('scroll', this.checkIsScreenLandscape,) }
     },
     showMoon() {
       this.isShowMoon = true
