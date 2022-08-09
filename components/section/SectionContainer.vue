@@ -28,6 +28,7 @@ export default {
   position       : relative;
   display        : flex;
   min-width      : 100vw;
+  width          : 100%;
   height         : 100vh;
 }
 </style>

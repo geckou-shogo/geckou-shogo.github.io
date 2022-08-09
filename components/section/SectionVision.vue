@@ -33,38 +33,19 @@
         >
           <div :class="$style.content_box">
             <p :class="$style.content_description">
-              合同会社Geckouは、<br>
-              月明かりが、暗闇で迷う人を<br>
-              照らして導くように、<br>
-              人々の助けとなれるよう、<br>
+              合同会社Geckouは、
+              月明かりが、暗闇で迷う人を
+              照らして導くように、
+              人々の助けとなれるよう、
               名づけられました。
             </p>
           </div>
           <div :class="$style.content_box">
             <p :class="$style.content_description">
-              合同会社Geckouは、<br>
-              月明かりが、暗闇で迷う人を<br>
-              照らして導くように、<br>
-              人々の助けとなれるよう、<br>
-              名づけられました。
-            </p>
-          </div>
-          <div :class="$style.content_box">
-            <p :class="$style.content_description">
-              合同会社Geckouは、<br>
-              月明かりが、暗闇で迷う人を<br>
-              照らして導くように、<br>
-              人々の助けとなれるよう、<br>
-              名づけられました。
-            </p>
-          </div>
-          <div :class="$style.content_box">
-            <p :class="$style.content_description">
-              合同会社Geckouは、<br>
-              月明かりが、暗闇で迷う人を<br>
-              照らして導くように、<br>
-              人々の助けとなれるよう、<br>
-              名づけられました。
+              エンタテインメントや娯楽といった
+              付加価値の提供だけではなく、
+              WEBサービスや、WEB開発の効率化により、悩みや不満を解消することで、<br>
+              希望を叶えられるよう応援いたします。
             </p>
           </div>
         </div>
@@ -140,7 +121,9 @@ export default {
     display: flex;
     top: 50%;
   }
-
+  &_box {
+    position: relative;
+  }
 }
 
 </style>
