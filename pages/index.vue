@@ -19,8 +19,10 @@
     >
       <section
         v-for="section in sections"
+        :id="section.id"
         :key="section.id"
         :class="$style.section"
+        class="section"
       >
         <component
           :is="section.component"
@@ -150,8 +152,8 @@ export default {
       window.addEventListener('scroll', this.checkIsScreenLandscape,)
     },
     checkIsScreenLandscape() {
-      const currrentScreenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
-      if (this.screenStatus !== currrentScreenStatus) { location.reload() } else { window.removeEventListener('scroll', this.checkIsScreenLandscape,) }
+      const currentScreenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
+      if (this.screenStatus !== currentScreenStatus) { location.reload() } else { window.removeEventListener('scroll', this.checkIsScreenLandscape,) }
     },
     showMoon() {
       this.isShowMoon = true
@@ -178,12 +180,6 @@ export default {
 
 .section {
   position: relative;
-  display : flex;
-  width   : 100%;
-  height  : 100vh;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
 }
 
 </style>

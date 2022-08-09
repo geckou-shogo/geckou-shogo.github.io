@@ -1,7 +1,7 @@
 <template>
   <div
     id="section_header"
-    :class="[$style.section_header, transparent ? $style.transparent : '']"
+    :class="$style.section_header"
   >
     <div
       v-inview:enter="change"
@@ -13,7 +13,6 @@
       <h2
         id="heading"
         :class="[$style.heading, status ? $style.fadeInLeft : '']"
-        :style="{fontSize: `${headingFontSize}px`}"
       >
         <FlowFromLeft
           :status="status"
@@ -43,11 +42,6 @@ export default {
       required: true,
       type    : String,
     },
-    transparent: {
-      required: false,
-      type    : Boolean,
-      default : false,
-    },
   },
   data() {
     return {
@@ -56,19 +50,6 @@ export default {
   },
   moutend() {
 
-  },
-  computed: {
-    headingFontSize() {
-      if (process.client) {
-        const windowHeight     = window?.innerHeight
-        const headerWidth      = windowHeight / 1.62
-        const headingMaxLength = 'INFORMATION'.length
-        const letterSpacing    = 1.16
-        return Math.floor(headerWidth / headingMaxLength / letterSpacing,)
-      } else {
-        return 0
-      }
-    },
   },
   methods: {
     change() {
@@ -87,11 +68,8 @@ export default {
 
 .section_header {
   position: relative;
+  min-width: calc(#{f.size('heading')} * 11);
   aspect-ratio: 1 / 1.62;
-  background-color: c.$bgBlack;
-  &.transparent {
-    background-color: transparent;
-  }
 }
 
 .inner {
@@ -106,6 +84,7 @@ export default {
   position: relative;
   width: 100%;
   min-height: 108px;
+  font-size: f.size('heading');
   font-family: f.family('english');
   color: c.$white;
   letter-spacing: f.letterSpacing(normal);
@@ -118,7 +97,7 @@ export default {
     content: "";
     position: absolute;
     left: 0;
-    bottom: 2rem;
+    bottom: 1rem;
     width: 100%;
     height: 1px;
     background-color: rgba($color: c.$white, $alpha: .28);
