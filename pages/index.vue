@@ -19,8 +19,10 @@
     >
       <section
         v-for="section in sections"
+        :id="section.id"
         :key="section.id"
         :class="$style.section"
+        class="section"
       >
         <component
           :is="section.component"

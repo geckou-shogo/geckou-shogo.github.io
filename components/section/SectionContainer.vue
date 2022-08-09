@@ -1,8 +1,6 @@
 <template>
   <section
-    :id="section.id"
     :class="$style.section"
-    class="section"
   >
     <slot />
   </section>
