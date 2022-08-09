@@ -15,6 +15,7 @@ module.exports = {
       align: 'colon',
     },],
     'comma-dangle'               : ['error', 'always',],
+    'exceptions'                 : { 'VariableDeclarator': true, },
     'space-before-function-paren': ['error', 'never',],
     'vue/attribute-hyphenation'  : ['error', 'never', {
       ignore: [],
