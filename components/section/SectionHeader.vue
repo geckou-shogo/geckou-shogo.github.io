@@ -124,8 +124,6 @@ export default {
   height: 100vh;
 }
 
-
-
 @keyframes fadeInLeft {
   0% {
     opacity: 0;
