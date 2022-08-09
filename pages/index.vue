@@ -180,12 +180,6 @@ export default {
 
 .section {
   position: relative;
-  display : flex;
-  width   : 100%;
-  height  : 100vh;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
 }
 
 </style>

@@ -108,16 +108,8 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
-.section {
+.section_content {
   position: relative;
-  display        : flex;
-  flex-direction : column;
-  align-items    : center;
-  justify-content: center;
-  &_content {
-    position: relative;
-    min-width: 1500px;
-  }
 }
 
 .show_marker {

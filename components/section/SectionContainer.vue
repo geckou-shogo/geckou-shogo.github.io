@@ -1,9 +1,9 @@
 <template>
-  <section
+  <div
     :class="$style.section"
   >
     <slot />
-  </section>
+  </div>
 </template>
 
 <script>
@@ -25,10 +25,9 @@ export default {
 @use '~/assets/scss/color' as c;
 
 .section {
-  min-width      : 100vw;
   position       : relative;
   display        : flex;
-  width          : 100%;
+  min-width      : 100vw;
   height         : 100vh;
 }
 </style>

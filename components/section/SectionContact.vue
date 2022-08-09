@@ -18,11 +18,9 @@
 </template>
 
 <script>
-import SectionHeaderTransparent from './SectionHeaderTransparent.vue'
 export default {
-  name      : 'SectionContact',
-  components: { SectionHeaderTransparent, },
-  props     : {
+  name : 'SectionContact',
+  props: {
     section: {
       required: true,
       type    : Object,
