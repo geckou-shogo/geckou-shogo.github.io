@@ -2,14 +2,6 @@
   <SectionContainer
     :section="section"
   >
-    <SectionHeader
-      :heading="section.name"
-    >
-      <p :class="$style.description">
-        Geckouは人々が自身の望む道を歩めるよう<br>
-        WEB開発を通じてお手伝いいたします。
-      </p>
-    </SectionHeader>
     <div
       v-inview:enter="show"
       :class="$style.show_marker"
@@ -18,9 +10,47 @@
       v-inview:enter="rain"
       :class="$style.rain_marker"
     />
-    <RainScreen
-      :inView="screen"
-    />
+    <SectionHeader
+      :heading="section.name"
+    >
+      <p>
+        Geckouは人々が自身の望む道を歩めるよう<br>
+        WEB開発を通じてお手伝いいたします。
+      </p>
+    </SectionHeader>
+    <div
+      :class="$style.section_content"
+    >
+      <RainScreen
+        :inView="screen"
+        :class="$style.vision_rain"
+      />
+      <div
+        :class="$style.content"
+      >
+        <div
+          :class="$style.content_inner"
+        >
+          <div :class="$style.content_box">
+            <p :class="$style.content_description">
+              合同会社Geckouは、
+              月明かりが、暗闇で迷う人を
+              照らして導くように、
+              人々の助けとなれるよう、
+              名づけられました。
+            </p>
+          </div>
+          <div :class="$style.content_box">
+            <p :class="$style.content_description">
+              エンタテインメントや娯楽といった
+              付加価値の提供だけではなく、
+              WEBサービスや、WEB開発の効率化により、悩みや不満を解消することで、<br>
+              希望を叶えられるよう応援いたします。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </SectionContainer>
 </template>
 
@@ -59,20 +89,8 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
-.section {
+.section_content {
   position: relative;
-  display        : flex;
-  flex-direction : column;
-  align-items    : center;
-  justify-content: center;
-  h2 {
-    font-size: 100px;
-    color    : c.$white;
-
-    @include v.mq(md) {
-      font-size: 40px;
-    }
-  }
 }
 
 .show_marker {
@@ -89,6 +107,23 @@ export default {
   width: 2px;
   height: 100vh;
   background: c.$blue;
+}
+
+.vision_rain {
+  position: absolute;
+}
+
+.content {
+  width: 100vw;
+  height: 100vh;
+  &_inner {
+    position: absolute;
+    display: flex;
+    top: 50%;
+  }
+  &_box {
+    position: relative;
+  }
 }
 
 </style>

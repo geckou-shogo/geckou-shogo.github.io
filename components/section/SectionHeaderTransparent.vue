@@ -70,7 +70,6 @@ export default {
   position: relative;
   min-width: calc(#{f.size('heading')} * 11);
   aspect-ratio: 1 / 1.62;
-  background-color: c.$bgBlack;
 }
 
 .inner {

@@ -31,20 +31,4 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
-.section {
-  display        : flex;
-  flex-direction : column;
-  align-items    : center;
-  justify-content: center;
-
-  h2 {
-    font-size: 100px;
-    color    : c.$white;
-
-    @include v.mq(md) {
-      font-size: 40px;
-    }
-  }
-}
-
 </style>
