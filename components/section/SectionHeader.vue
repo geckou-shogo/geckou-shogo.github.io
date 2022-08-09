@@ -13,6 +13,7 @@
       <h2
         id="heading"
         :class="[$style.heading, status ? $style.fadeInLeft : '']"
+        :style="{fontSize: `${headingFontSize}px`}"
       >
         <FlowFromLeft
           :status="status"
@@ -51,6 +52,19 @@ export default {
   },
   moutend() {
 
+  },
+  computed: {
+    headingFontSize() {
+      if (process.client) {
+        const windowHeight     = window?.innerHeight
+        const headerWidth      = windowHeight / 1.62
+        const headingMaxLength = 'INFORMATION'.length
+        const letterSpacing    = 1.16
+        return Math.floor(headerWidth / headingMaxLength / letterSpacing,)
+      } else {
+        return 0
+      }
+    },
   },
   methods: {
     change() {
