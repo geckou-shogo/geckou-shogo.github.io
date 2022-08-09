@@ -5,7 +5,6 @@
     >
       <SectionHeader
         :heading="section.name"
-        :class="[$style.contact_header, transparent ? $style.transparent : '']"
         :transparent="true"
       >
         <p :class="$style.description">
@@ -27,11 +26,6 @@ export default {
       type    : Object,
       default : () => { },
     },
-  },
-  data() {
-    return {
-      transparent: true,
-    }
   },
 }
 </script>

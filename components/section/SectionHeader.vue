@@ -1,7 +1,7 @@
 <template>
   <div
     id="section_header"
-    :class="$style.section_header"
+    :class="[$style.section_header, transparent ? $style.transparent : '']"
   >
     <div
       v-inview:enter="change"
@@ -43,7 +43,11 @@ export default {
       required: true,
       type    : String,
     },
-
+    transparent: {
+      required: false,
+      type    : Boolean,
+      default : false,
+    },
   },
   data() {
     return {
@@ -83,9 +87,11 @@ export default {
 
 .section_header {
   position: relative;
-  min-width: calc(#{f.size('heading')} * 11);
   aspect-ratio: 1 / 1.62;
   background-color: c.$bgBlack;
+  &.transparent {
+    background-color: transparent;
+  }
 }
 
 .inner {
@@ -100,7 +106,6 @@ export default {
   position: relative;
   width: 100%;
   min-height: 108px;
-  font-size: f.size('heading');
   font-family: f.family('english');
   color: c.$white;
   letter-spacing: f.letterSpacing(normal);
@@ -113,7 +118,7 @@ export default {
     content: "";
     position: absolute;
     left: 0;
-    bottom: 1rem;
+    bottom: 2rem;
     width: 100%;
     height: 1px;
     background-color: rgba($color: c.$white, $alpha: .28);
