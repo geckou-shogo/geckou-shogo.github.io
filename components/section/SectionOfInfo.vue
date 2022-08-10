@@ -1,14 +1,10 @@
 <template>
-  <SectionContainer
-    :section="section"
-  >
-    <GeckouLogo />
-  </SectionContainer>
+  <div />
 </template>
 
 <script>
 export default {
-  name : 'SectionTop',
+  name : 'SectionVision',
   props: {
     section: {
       required: true,

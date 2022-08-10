@@ -1,5 +1,5 @@
 <template>
-  <SectionContainer
+  <div
     :section="section"
   >
     <div
@@ -10,14 +10,6 @@
       v-inview:enter="rain"
       :class="$style.rain_marker"
     />
-    <SectionHeader
-      :heading="section.name"
-    >
-      <p>
-        Geckouは人々が自身の望む道を歩めるよう<br>
-        WEB開発を通じてお手伝いいたします。
-      </p>
-    </SectionHeader>
     <div
       :class="$style.section_content"
     >
@@ -52,7 +44,7 @@
         </div>
       </div>
     </div>
-  </SectionContainer>
+  </div>
 </template>
 
 <script>
