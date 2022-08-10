@@ -1,6 +1,6 @@
 <template>
   <div
-    :section="section"
+    :class="$style.section"
   >
     <GeckouLogo />
   </div>
@@ -23,5 +23,11 @@ export default {
 @use '~/assets/scss/value' as v;
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
+
+.section {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+}
 
 </style>

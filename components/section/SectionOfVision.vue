@@ -1,6 +1,6 @@
 <template>
   <div
-    :section="section"
+    :class="$style.section"
   >
     <div
       v-inview:enter="show"

@@ -137,6 +137,7 @@ export default {
 
 .description {
   display        : flex;
+  min-height: 64px;
   justify-content: center;
   flex-wrap      : wrap;
   padding        : v.$val * 2 v.$val * 4;

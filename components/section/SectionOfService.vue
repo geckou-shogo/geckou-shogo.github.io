@@ -1,15 +1,7 @@
 <template>
-  <SectionContainer
-    :section="section"
+  <div
+    :class="$style.section"
   >
-    <SectionHeader
-      :heading="section.name"
-    >
-      <p :class="$style.description">
-        自社のWEBサービス開発の他、<br>
-        WEB制作や開発の受託も承っております。
-      </p>
-    </SectionHeader>
     <div
       :class="$style.section_content"
     >
@@ -38,7 +30,7 @@
         </div>
       </div>
     </div>
-  </SectionContainer>
+  </div>
 </template>
 
 <script>

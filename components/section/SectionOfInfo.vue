@@ -1,5 +1,7 @@
 <template>
-  <div />
+  <div
+    :class="$style.section"
+  />
 </template>
 
 <script>
