@@ -32,21 +32,22 @@
           :class="$style.content_inner"
         >
           <div :class="$style.content_box">
-            <p :class="$style.content_description">
-              合同会社Geckouは、
-              月明かりが、暗闇で迷う人を
-              照らして導くように、
-              人々の助けとなれるよう、
-              名づけられました。
-            </p>
+            <LightCircle
+              :htmlString="`
+                合同会社Geckouは、<br>
+                月明かりが、暗闇で迷う人を照らして導くように、人々の助けとなれるよう、名づけられました。`
+              "
+            />
           </div>
           <div :class="$style.content_box">
-            <p :class="$style.content_description">
-              エンタテインメントや娯楽といった
-              付加価値の提供だけではなく、
-              WEBサービスや、WEB開発の効率化により、悩みや不満を解消することで、<br>
-              希望を叶えられるよう応援いたします。
-            </p>
+            <LightCircle
+              :htmlString="`
+                エンタテインメントや娯楽といった
+                付加価値の提供だけではなく、
+                WEBサービスや、WEB開発の効率化により、悩みや不満を解消することで、<br>
+                希望を叶えられるよう応援いたします。
+              `"
+            />
           </div>
         </div>
       </div>
@@ -71,11 +72,11 @@ export default {
   mounted() {
     this.$nextTick(() => {
       this.show()
-    },)
+    })
   },
   methods: {
     show() {
-      this.$emit('viewInScreen',)
+      this.$emit('viewInScreen')
     },
     rain() {
       this.screen = true

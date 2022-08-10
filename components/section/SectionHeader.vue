@@ -64,7 +64,7 @@ export default {
         const headerWidth      = windowHeight / 1.62
         const headingMaxLength = 'INFORMATION'.length
         const letterSpacing    = 1.16
-        return Math.floor(headerWidth / headingMaxLength / letterSpacing,)
+        return Math.floor(headerWidth / headingMaxLength / letterSpacing)
       } else {
         return 0
       }
