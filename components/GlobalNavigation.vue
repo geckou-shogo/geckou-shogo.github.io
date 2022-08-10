@@ -81,10 +81,6 @@ export default {
       transition: opacity .8s;
       pointer-events: none;
     }
-
-    &.current {
-      color: #f00;
-    }
   }
 </style>
 

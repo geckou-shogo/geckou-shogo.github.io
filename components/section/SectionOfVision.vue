@@ -36,7 +36,7 @@
               :htmlString="`
                 エンタテインメントや娯楽といった
                 付加価値の提供だけではなく、
-                WEBサービスや、WEB開発の効率化により、悩みや不満を解消することで、<br>
+                WEBサービスや、WEB開発の効率化により、悩みや不満を解消することで、
                 希望を叶えられるよう応援いたします。
               `"
             />
@@ -112,10 +112,15 @@ export default {
   &_inner {
     position: absolute;
     display: flex;
-    top: 50%;
+    top: 20%;
+    left: 20%;
+    gap: 0 10rem;
   }
   &_box {
     position: relative;
+    &:nth-of-type(2) {
+      margin-top: 3em;
+    }
   }
 }
 
