@@ -103,8 +103,8 @@ export default {
 
 .heading {
   position      : relative;
-  width         : 100%;
   padding-bottom: v.$val * 2;
+  width         : 100%;
   color         : c.$white;
   font-family   : f.family('english');
   text-align    : center;
@@ -116,8 +116,8 @@ export default {
 
   &::after {
     content         : '';
-    display         : block;
     position        : absolute;
+    display         : block;
     left            : 0;
     bottom          : 0;
     width           : 100%;
@@ -136,11 +136,11 @@ export default {
 }
 
 .description {
+  padding        : v.$val * 2 v.$val * 4;
   display        : flex;
   min-height: 64px;
   justify-content: center;
   flex-wrap      : wrap;
-  padding        : v.$val * 2 v.$val * 4;
 }
 
 @keyframes displayBorder {

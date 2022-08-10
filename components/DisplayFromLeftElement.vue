@@ -1,11 +1,11 @@
 <template>
-  <div
+  <span
     :class="[$style.container, isDisplay ? $style.fadeInLeft : '']"
   >
     <span>
       <slot />
     </span>
-  </div>
+  </span>
 </template>
 
 <script>
@@ -27,6 +27,7 @@ export default {
 
 .container {
   position                  : relative;
+  display                   : block;
   width                     : 100%;
   transform                 : translate(-100%, 0);
   transition-duration       : 2s;

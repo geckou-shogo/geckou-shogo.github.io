@@ -149,8 +149,8 @@ export default {
 }
 
 .sections_container {
-  height   : 100vh;
   display  : flex;
+  height   : 100vh;
   flex-wrap: nowrap;
   overflow : hidden;
 

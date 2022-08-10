@@ -4,12 +4,12 @@
       <ul :class="$style.nav_list">
         <li
           v-for="section in sections"
-          :id="`nav-${section.id}`"
-          :key="section.id"
+          :id="`nav-${section.idName}`"
+          :key="section.idName"
           :class="[$style.nav_li, 'nav_li', currentSection === section.id ? $style.current : '']"
         >
           <a
-            :href="`#${section.id}`"
+            :href="`#${section.idName}`"
             :class="[$style.nav_link, 'anchor']"
           >
             {{ section.name }}
