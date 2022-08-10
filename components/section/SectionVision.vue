@@ -104,7 +104,7 @@ export default {
 
 .rain_marker {
   position: absolute;
-  right: 10px;
+  right: -100px;
   width: 2px;
   height: 100vh;
   background: c.$blue;
@@ -115,7 +115,7 @@ export default {
 }
 
 .content {
-  width: 100vw;
+  width: 85vw;
   height: 100vh;
   &_inner {
     position: absolute;
