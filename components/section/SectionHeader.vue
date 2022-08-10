@@ -1,44 +1,37 @@
 <template>
   <div
-    id="section_header"
+    v-inview:enter="() => {contentsDisplay = true}"
     :class="[$style.section_header, transparent ? $style.transparent : '']"
   >
-    <div
-      v-inview:enter="change"
-      :class="$style.marker"
-    />
-    <div
-      :class="$style.inner"
+    <h2
+      :class="[$style.heading, contentsDisplay ? $style.displayed_border: '']"
+      :style="{fontSize: `${headingFontSize}px`}"
     >
-      <h2
-        id="heading"
-        :class="[$style.heading, status ? $style.fadeInLeft : '']"
-        :style="{fontSize: `${headingFontSize}px`}"
+      <DisplayFromLeftElement
+        :isDisplay="contentsDisplay"
       >
-        <FlowFromLeft
-          :status="status"
-        >
-          {{ heading }}
-        </FlowFromLeft>
-      </h2>
-      <FlowFromLeft
-        :status="status"
-      >
-        <div
-          id="description"
-          :class="[$style.description, status ? $style.fadeInLeft : '']"
-        >
-          <slot />
-        </div>
-      </FlowFromLeft>
-    </div>
+        {{ heading }}
+      </DisplayFromLeftElement>
+    </h2>
+    <DisplayFromLeftElement
+      :isDisplay="contentsDisplay"
+    >
+      <p
+        :class="$style.description"
+        v-html="descriptions[idName]"
+      />
+    </DisplayFromLeftElement>
   </div>
 </template>
 
 <script>
-
 export default {
+  name : 'SectionHeader',
   props: {
+    idName: {
+      required: true,
+      type    : String,
+    },
     heading: {
       required: true,
       type    : String,
@@ -51,11 +44,26 @@ export default {
   },
   data() {
     return {
-      status: false,
+      contentsDisplay: false,
+      descriptions   : {
+        vision: `
+          <span>Geckouは人々が自身の望む道を歩めるよう、</span>
+          <span>WEB開発を通じてお手伝いいたします。</span>
+        `,
+        service: `
+          <span>自社のWEBサービス開発の他、</span>
+          <span>WEB制作や開発の受託も承っております。</span>
+        `,
+        information: `
+          合同会社Geckouの会社情報です。
+        `,
+        contact: `
+          <span>Geckouに関する質問、</span>
+          <span>WEB開発のご相談など、</span>
+          <span>お気軽にお問い合わせください。</span>
+        `,
+      },
     }
-  },
-  moutend() {
-
   },
   computed: {
     headingFontSize() {
@@ -64,17 +72,10 @@ export default {
         const headerWidth      = windowHeight / 1.62
         const headingMaxLength = 'INFORMATION'.length
         const letterSpacing    = 1.16
-        return Math.floor(headerWidth / headingMaxLength / letterSpacing,)
+        return Math.floor(headerWidth / headingMaxLength / letterSpacing)
       } else {
         return 0
       }
-    },
-  },
-  methods: {
-    change() {
-      this.status = true
-    },
-    textAnimetion() {
     },
   },
 }
@@ -86,77 +87,68 @@ export default {
 @use '~/assets/scss/color' as c;
 
 .section_header {
-  position: relative;
-  aspect-ratio: 1 / 1.62;
+  display         : flex;
+  height          : 100vh;
+  flex-direction  : column;
+  align-items     : center;
+  justify-content : center;
+  position        : relative;
+  aspect-ratio    : 1 / 1.62;
   background-color: c.$bgBlack;
+
   &.transparent {
     background-color: transparent;
   }
 }
 
-.inner {
-  display: flex;
-  height: 100vh;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
 .heading {
-  position: relative;
-  width: 100%;
-  min-height: 108px;
-  font-family: f.family('english');
-  color: c.$white;
-  letter-spacing: f.letterSpacing(normal);
-  text-align: center;
+  position      : relative;
+  width         : 100%;
+  padding-bottom: v.$val * 2;
+  color         : c.$white;
+  font-family   : f.family('english');
+  text-align    : center;
+  line-height   : 1;
 
   &::first-letter {
-    color: c.$blue;
+    color: c.$mainColor;
   }
+
   &::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 2rem;
-    width: 100%;
-    height: 1px;
-    background-color: rgba($color: c.$white, $alpha: .28);
-    opacity: 0;
+    content         : '';
+    display         : block;
+    position        : absolute;
+    left            : 0;
+    bottom          : 0;
+    width           : 100%;
+    height          : 1px;
+    background-color: rgba(c.$white, .28);
   }
-  &.fadeInLeft {
+
+  &.displayed_border {
     &::after {
-      animation-name: fadeInLeft;
-      animation-duration: 2s;
+      animation-name           : displayBorder;
+      animation-duration       : 2s;
       animation-timing-function: ease-out;
-      animation-fill-mode: forwards;
+      animation-fill-mode      : forwards;
     }
   }
 }
 
 .description {
+  display        : flex;
   min-height: 64px;
-  text-align: center;
+  justify-content: center;
+  flex-wrap      : wrap;
+  padding        : v.$val * 2 v.$val * 4;
 }
 
-.marker {
-  position: absolute;
-  left: 50%;
-  width: 2px;
-  height: 100vh;
-}
-
-@keyframes fadeInLeft {
+@keyframes displayBorder {
   0% {
-    opacity: 0;
     width: 0%;
   }
-  50% {
-    opacity: .5;
-    width: 50%;
-  }
+
   100% {
-    opacity: 1;
     width: 100%;
   }
 }

@@ -1,6 +1,6 @@
 <template>
-  <SectionContainer
-    :section="section"
+  <div
+    :class="$style.section"
   >
     <div
       v-inview:enter="show"
@@ -10,14 +10,6 @@
       v-inview:enter="rain"
       :class="$style.rain_marker"
     />
-    <SectionHeader
-      :heading="section.name"
-    >
-      <p>
-        Geckouは人々が自身の望む道を歩めるよう<br>
-        WEB開発を通じてお手伝いいたします。
-      </p>
-    </SectionHeader>
     <div
       :class="$style.section_content"
     >
@@ -32,26 +24,27 @@
           :class="$style.content_inner"
         >
           <div :class="$style.content_box">
-            <p :class="$style.content_description">
-              合同会社Geckouは、
-              月明かりが、暗闇で迷う人を
-              照らして導くように、
-              人々の助けとなれるよう、
-              名づけられました。
-            </p>
+            <LightCircle
+              :htmlString="`
+                合同会社Geckouは、<br>
+                月明かりが、暗闇で迷う人を照らして導くように、人々の助けとなれるよう、名づけられました。`
+              "
+            />
           </div>
           <div :class="$style.content_box">
-            <p :class="$style.content_description">
-              エンタテインメントや娯楽といった
-              付加価値の提供だけではなく、
-              WEBサービスや、WEB開発の効率化により、悩みや不満を解消することで、<br>
-              希望を叶えられるよう応援いたします。
-            </p>
+            <LightCircle
+              :htmlString="`
+                エンタテインメントや娯楽といった
+                付加価値の提供だけではなく、
+                WEBサービスや、WEB開発の効率化により、悩みや不満を解消することで、
+                希望を叶えられるよう応援いたします。
+              `"
+            />
           </div>
         </div>
       </div>
     </div>
-  </SectionContainer>
+  </div>
 </template>
 
 <script>
@@ -71,11 +64,11 @@ export default {
   mounted() {
     this.$nextTick(() => {
       this.show()
-    },)
+    })
   },
   methods: {
     show() {
-      this.$emit('viewInScreen',)
+      this.$emit('viewInScreen')
     },
     rain() {
       this.screen = true
@@ -103,7 +96,7 @@ export default {
 
 .rain_marker {
   position: absolute;
-  right: 10px;
+  right: -100px;
   width: 2px;
   height: 100vh;
   background: c.$blue;
@@ -114,15 +107,20 @@ export default {
 }
 
 .content {
-  width: 100vw;
+  width: 85vw;
   height: 100vh;
   &_inner {
     position: absolute;
     display: flex;
-    top: 50%;
+    top: 20%;
+    left: 20%;
+    gap: 0 10rem;
   }
   &_box {
     position: relative;
+    &:nth-of-type(2) {
+      margin-top: 3em;
+    }
   }
 }
 

@@ -1,20 +1,14 @@
 <template>
-  <SectionContainer
-    :section="section"
+  <div
+    :class="$style.section"
   >
-    <SectionHeader
-      :heading="section.name"
-    >
-      <p :class="$style.description">
-        合同会社Geckouの会社情報です。
-      </p>
-    </SectionHeader>
-  </SectionContainer>
+    <GeckouLogo />
+  </div>
 </template>
 
 <script>
 export default {
-  name : 'SectionVision',
+  name : 'SectionTop',
   props: {
     section: {
       required: true,
@@ -29,5 +23,11 @@ export default {
 @use '~/assets/scss/value' as v;
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
+
+.section {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+}
 
 </style>

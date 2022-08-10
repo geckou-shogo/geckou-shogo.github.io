@@ -2,15 +2,9 @@
   <main
     :class="$style.frontpage"
   >
-    <GradationBackground
-      :class="$style.screen"
-      :sectionDatas="sections"
-    />
     <GlobalNavigation
       :sections="sections"
-    />
-    <GeckouMoon
-      v-if="isShowMoon"
+      :currentSection="currentSection"
     />
     <div
       id="sectionsContainer"
@@ -19,15 +13,13 @@
     >
       <section
         v-for="section in sections"
-        :id="section.id"
-        :key="section.id"
-        :class="$style.section"
+        :id="section.idName"
+        :key="section.idName"
+        v-inview:enter="() => {currentSection = section.idName}"
         class="section"
       >
-        <component
-          :is="section.component"
+        <SectionContainer
           :section="section"
-          @viewInScreen="showMoon"
         />
       </section>
     </div>
@@ -36,94 +28,77 @@
 
 <script>
 import gsap from 'gsap'
-import { ScrollTrigger, ScrollToPlugin, } from 'gsap/all'
+import { ScrollTrigger, ScrollToPlugin } from 'gsap/all'
 export default {
   data() {
     return {
-      screenStatus: '',
-      sections    : [
+      currentSection: 'top',
+      screenStatus  : '',
+      sections      : [
         {
-          id       : 'top',
+          idName   : 'top',
           name     : 'TOP',
-          component: 'SectionTop',
-          color    : 'linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);',
+          component: 'SectionOfTop',
         },
         {
-          id       : 'vision',
+          idName   : 'vision',
           name     : 'VISION',
-          component: 'SectionVision',
-          color    : 'linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);',
+          component: 'SectionOfVision',
         },
         {
-          id       : 'service',
+          idName   : 'service',
           name     : 'SERVICE',
-          component: 'SectionService',
-          color    : 'linear-gradient(to bottom, #192c38, #15324f 34%,  #31527b);',
+          component: 'SectionOfService',
         },
         {
-          id       : 'information',
+          idName   : 'information',
           name     : 'INFORMATION',
-          component: 'SectionInfo',
-          color    : 'linear-gradient(to bottom, #31527b, #246495 66%,  #31527b);',
+          component: 'SectionOfInfo',
         },
         {
-          id       : 'contact',
+          idName   : 'contact',
           name     : 'CONTACT',
-          component: 'SectionContact',
-          color    : '#B5BBC9',
+          component: 'SectionOfContact',
         },
       ],
       isShowMoon: false,
     }
   },
   mounted() {
-    gsap.registerPlugin(ScrollToPlugin, ScrollTrigger,)
+    gsap.registerPlugin(ScrollToPlugin, ScrollTrigger)
     this.screenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
-    window.addEventListener('resize', this.registrationScrollEvent,)
-    const panelsContainer = document.querySelector('#sectionsContainer',)
-    const panels = gsap.utils.toArray(`.${this.$style.section}`,)
-    const tween = gsap.to(panels, {
-      xPercent     : -100 * (panels.length - 1),
+    window.addEventListener('resize', this.registrationScrollEvent)
+
+    const sectionsContainer = document.querySelector('#sectionsContainer')
+    const sections = gsap.utils.toArray('.section')
+
+    const tween = gsap.to(sections, {
+      xPercent     : -100 * (sections.length - 1),
       ease         : 'none',
       scrollTrigger: {
         trigger: '#sectionsContainer',
         pin    : true,
         start  : 'top top',
         scrub  : true,
+        // 要調整
         // snap: {
-        //   snapTo: 1 / (panels.length - 1),
+        //   snapTo: 1 / (sections.length - 1),
         //   inertia: false,
         //   duration: {min: 0.1, max: 0.1}
         // },
-        end    : () => `+=${panelsContainer.offsetWidth - innerWidth}`,
+        end    : () => `+=${sectionsContainer.offsetWidth - innerWidth}`,
       },
-    },)
-    // const screen = gsap.utils.toArray('.screen_item',)
-    // gsap.to(screen, {
-    //   yPercent     : -100 * (panels.length - 1),
-    //   ease         : 'none',
-    //   scrollTrigger: {
-    //     trigger: '#sectionsContainer',
-    //     pin    : true,
-    //     start  : 'top top',
-    //     scrub  : true,
-    //     // snap: {
-    //     //   snapTo: 1 / (panels.length - 1),
-    //     //   inertia: false,
-    //     //   duration: {min: 0.1, max: 0.1}
-    //     // },
-    //     end    : () => `+=${panelsContainer.offsetWidth - innerWidth}`,
-    //   },
-    // },)
-    document.querySelectorAll('.anchor',).forEach((anchor,) => {
-      anchor.addEventListener('click', (e,) => {
+    })
+
+    document.querySelectorAll('.anchor').forEach(anchor => {
+      anchor.addEventListener('click', e => {
         e.preventDefault()
-        const targetElem = document.querySelector(e.target.getAttribute('href',),)
+        const targetElem = document.querySelector(e.target.getAttribute('href'))
         let y = targetElem
-        if (targetElem && panelsContainer === targetElem.parentElement) {
+        if (targetElem && sectionsContainer === targetElem.parentElement) {
           const totalScroll = tween.scrollTrigger.end - tween.scrollTrigger.start
-          const totalMovement = (panels.length - 1) * targetElem.offsetWidth
-          y = Math.round(tween.scrollTrigger.start + (targetElem.offsetLeft / totalMovement) * totalScroll,)
+          const totalMovement = (sections.length - 1) * targetElem.offsetWidth
+          y = Math.round(tween.scrollTrigger.start + (targetElem.offsetLeft / totalMovement) * totalScroll)
         }
         gsap.to(window, {
           scrollTo: {
@@ -131,29 +106,30 @@ export default {
             autoKill: false,
           },
           duration: 1,
-        },)
-      },)
-    },)
-    panels.forEach((sct,) => {
-      const target = document.querySelector(`#navi-${sct.id}`,)
+        })
+      })
+    })
+
+    sections.forEach(section => {
+      const target = document.querySelector(`#nav-${section.id}`)
       ScrollTrigger.create({
-        trigger    : sct,
-        start      : `top top-=${sct.offsetLeft - 1}`,
-        end        : `+=${sct.offsetWidth / 2}`,
+        trigger    : section,
+        start      : `top top-=${section.offsetLeft - 1}`,
+        end        : `+=${section.offsetWidth / 2}`,
         toggleClass: {
           targets  : target,
           className: 'current',
         },
-      },)
-    },)
+      })
+    })
   },
   methods: {
     registrationScrollEvent() {
-      window.addEventListener('scroll', this.checkIsScreenLandscape,)
+      window.addEventListener('scroll', this.checkIsScreenLandscape)
     },
     checkIsScreenLandscape() {
       const currentScreenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
-      if (this.screenStatus !== currentScreenStatus) { location.reload() } else { window.removeEventListener('scroll', this.checkIsScreenLandscape,) }
+      if (this.screenStatus !== currentScreenStatus) { location.reload() } else { window.removeEventListener('scroll', this.checkIsScreenLandscape) }
     },
     showMoon() {
       this.isShowMoon = true
@@ -169,17 +145,17 @@ export default {
 .frontpage {
   overscroll-behavior-y: none;
   overflow             : hidden;
-  color                : c.$white;
+  background-color     : c.$black;
 }
+
 .sections_container {
   height   : 100vh;
   display  : flex;
   flex-wrap: nowrap;
   overflow : hidden;
-}
 
-.section {
-  position: relative;
+  > * {
+    position: relative;
+  }
 }
-
 </style>
