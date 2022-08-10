@@ -1,9 +1,9 @@
 <template>
   <div
     :class="$style.wrapper"
+    :style="{width: `calc(${textReplace}em * 1.16 + 5rem)`}"
   >
     <p
-      :style="{width: `calc(${replace}em * 1.16)`}"
       v-html="htmlString"
     />
   </div>
@@ -18,17 +18,13 @@ export default {
     },
   },
   computed: {
-    replace() {
-      if (process.client) {
-        const text = this.htmlString
-          .replace(/(<([^>]+)>)/gi, '')
-          .replace('<br>', '')
-        const textLength = text.length
-        const textSquare = Math.sqrt(textLength)
-        return Math.round(textSquare) + 2
-      } else {
-        return 0
-      }
+    textReplace() {
+      const text = this.htmlString
+        .replace(/(<([^>]+)>)/gi, '')
+        .replace('<br>', '')
+      const textLength = text.length
+      const textSquare = Math.sqrt(textLength)
+      return Math.round(textSquare) + 2
     },
   },
 }
@@ -41,12 +37,20 @@ export default {
 
 .wrapper {
   position: relative;
+  padding: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+
   &::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
-    width: 150%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
     background-color: rgba($color: c.$blue, $alpha: .05);
   }
 }
