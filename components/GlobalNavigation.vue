@@ -3,16 +3,16 @@
     <div :class="$style.nav_inner">
       <ul :class="$style.nav_list">
         <li
-          v-for="list in sections"
-          :id="`nav-${list.id}`"
-          :key="list.id"
-          :class="[$style.nav_li, 'nav_li']"
+          v-for="section in sections"
+          :id="`nav-${section.id}`"
+          :key="section.id"
+          :class="[$style.nav_li, 'nav_li', currentSection === section.id ? $style.current : '']"
         >
           <a
-            :href="`#${list.id}`"
+            :href="`#${section.id}`"
             :class="[$style.nav_link, 'anchor']"
           >
-            {{ list.name }}
+            {{ section.name }}
           </a>
         </li>
       </ul>
@@ -28,6 +28,10 @@ export default {
     sections: {
       required: true,
       type    : Array,
+    },
+    currentSection: {
+      required: true,
+      type    : String,
     },
   },
 }
@@ -76,6 +80,10 @@ export default {
       opacity: 0;
       transition: opacity .8s;
       pointer-events: none;
+    }
+
+    &.current {
+      color: #f00;
     }
   }
 </style>

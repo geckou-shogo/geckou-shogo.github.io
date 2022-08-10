@@ -25,9 +25,6 @@ export default {
           .replace('<br>', '')
         const textLength = text.length
         const textSquare = Math.sqrt(textLength)
-        console.log(text)
-        console.log(textLength)
-        console.log(textSquare)
         return Math.round(textSquare) + 2
       } else {
         return 0
@@ -41,5 +38,17 @@ export default {
 @use '~/assets/scss/value' as v;
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
+
+.wrapper {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150%;
+    background-color: rgba($color: c.$blue, $alpha: .05);
+  }
+}
 
 </style>

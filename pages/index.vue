@@ -8,6 +8,7 @@
     />
     <GlobalNavigation
       :sections="sections"
+      :currentSection="currentSection"
     />
     <GeckouMoon
       v-if="isShowMoon"
