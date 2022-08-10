@@ -2,16 +2,9 @@
   <main
     :class="$style.frontpage"
   >
-    <GradationBackground
-      :class="$style.screen"
-      :sections="sections"
-    />
     <GlobalNavigation
       :sections="sections"
       :currentSection="currentSection"
-    />
-    <GeckouMoon
-      v-if="isShowMoon"
     />
     <div
       id="sectionsContainer"
@@ -20,16 +13,13 @@
     >
       <section
         v-for="section in sections"
-        :id="section.id"
-        :key="section.id"
-        v-inview:enter="() => {currentSection = section.id}"
-        :class="$style.section"
+        :id="section.idName"
+        :key="section.idName"
+        v-inview:enter="() => {currentSection = section.idName}"
         class="section"
       >
-        <component
-          :is="section.component"
+        <SectionContainer
           :section="section"
-          @viewInScreen="showMoon"
         />
       </section>
     </div>
@@ -46,34 +36,29 @@ export default {
       screenStatus  : '',
       sections      : [
         {
-          id       : 'top',
+          idName   : 'top',
           name     : 'TOP',
-          component: 'SectionTop',
-          color    : 'linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);',
+          component: 'SectionOfTop',
         },
         {
-          id       : 'vision',
+          idName   : 'vision',
           name     : 'VISION',
-          component: 'SectionVision',
-          color    : 'linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);',
+          component: 'SectionOfVision',
         },
         {
-          id       : 'service',
+          idName   : 'service',
           name     : 'SERVICE',
-          component: 'SectionService',
-          color    : 'linear-gradient(to bottom, #192c38, #15324f 34%,  #31527b);',
+          component: 'SectionOfService',
         },
         {
-          id       : 'information',
+          idName   : 'information',
           name     : 'INFORMATION',
-          component: 'SectionInfo',
-          color    : 'linear-gradient(to bottom, #31527b, #246495 66%,  #31527b);',
+          component: 'SectionOfInfo',
         },
         {
-          id       : 'contact',
+          idName   : 'contact',
           name     : 'CONTACT',
-          component: 'SectionContact',
-          color    : '#B5BBC9',
+          component: 'SectionOfContact',
         },
       ],
       isShowMoon: false,
@@ -83,8 +68,10 @@ export default {
     gsap.registerPlugin(ScrollToPlugin, ScrollTrigger)
     this.screenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
     window.addEventListener('resize', this.registrationScrollEvent)
+
     const sectionsContainer = document.querySelector('#sectionsContainer')
-    const sections = gsap.utils.toArray(`.${this.$style.section}`)
+    const sections = gsap.utils.toArray('.section')
+
     const tween = gsap.to(sections, {
       xPercent     : -100 * (sections.length - 1),
       ease         : 'none',
@@ -158,6 +145,7 @@ export default {
 .frontpage {
   overscroll-behavior-y: none;
   overflow             : hidden;
+  background-color     : c.$black;
 }
 
 .sections_container {
@@ -165,10 +153,9 @@ export default {
   display  : flex;
   flex-wrap: nowrap;
   overflow : hidden;
-}
 
-.section {
-  position: relative;
+  > * {
+    position: relative;
+  }
 }
-
 </style>

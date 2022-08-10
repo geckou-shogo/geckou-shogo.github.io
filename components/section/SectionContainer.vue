@@ -1,9 +1,19 @@
 <template>
-  <div
+  <section
+    :id="section.idName"
     :class="$style.section"
   >
-    <slot />
-  </div>
+    <SectionHeader
+      v-if="section.idName !== 'top'"
+      :idName="section.idName"
+      :heading="section.name"
+      :transparent="section.idName === 'contact'"
+    />
+    <component
+      :is="section.component"
+      :section="section"
+    />
+  </section>
 </template>
 
 <script>
@@ -25,10 +35,9 @@ export default {
 @use '~/assets/scss/color' as c;
 
 .section {
-  position       : relative;
-  display        : flex;
-  min-width      : 100vw;
-  width          : 100%;
-  height         : 100vh;
+  position : relative;
+  display  : flex;
+  min-width: 100vw;
+  height   : 100vh;
 }
 </style>
