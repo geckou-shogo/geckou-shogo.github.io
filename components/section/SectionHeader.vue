@@ -7,20 +7,20 @@
       :class="[$style.heading, contentsDisplay ? $style.displayed_border: '']"
       :style="{fontSize: `${headingFontSize}px`}"
     >
-      <ElementDisplayedFromLeft
+      <DisplayFromLeftElement
         :isDisplay="contentsDisplay"
       >
         {{ heading }}
-      </ElementDisplayedFromLeft>
+      </DisplayFromLeftElement>
     </h2>
-    <ElementDisplayedFromLeft
+    <DisplayFromLeftElement
       :isDisplay="contentsDisplay"
     >
       <p
         :class="$style.description"
         v-html="descriptions[idName]"
       />
-    </ElementDisplayedFromLeft>
+    </DisplayFromLeftElement>
   </div>
 </template>
 
