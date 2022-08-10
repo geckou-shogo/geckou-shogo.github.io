@@ -120,12 +120,15 @@ export default {
   &_inner {
     position: absolute;
     display: flex;
-    top: 50%;
+    top: 20%;
     left: 20%;
     gap: 0 10rem;
   }
   &_box {
     position: relative;
+    &:nth-of-type(2) {
+      margin-top: 3em;
+    }
   }
 }
 

@@ -35,9 +35,18 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .wrapper {
   position: relative;
-  padding: 0.5em;
+  padding: 2em;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -52,6 +61,7 @@ export default {
     height: 100%;
     border-radius: 50%;
     background-color: rgba($color: c.$blue, $alpha: .05);
+    mix-blend-mode: screen;
   }
 }
 
