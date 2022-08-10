@@ -4,18 +4,19 @@
     :class="$style.screen"
   >
     <div
-      v-for="item in sectionDatas"
-      :key="item.id"
+      v-for="section in sections"
+      :key="section.id"
       :class="[$style.screen_item, 'screen_item']"
-      :style="{backgroundImage: item.color}"
+      :style="{backgroundImage: section.color}"
     />
   </div>
 </template>
 
 <script>
 export default {
+  name : 'GradationBackground',
   props: {
-    sectionDatas: {
+    sections: {
       required: true,
       type    : Array,
     },

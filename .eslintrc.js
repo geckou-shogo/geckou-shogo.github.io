@@ -11,17 +11,18 @@ module.exports = {
   plugins: [],
   // add your custom rules here
   rules  : {
-    'key-spacing': ['error', {
+    'arrow-parens': ['error', 'as-needed'],
+    'key-spacing' : ['error', {
       align: 'colon',
-    },],
-    'comma-dangle'   : ['error', 'always',],
+    }],
+    'comma-dangle'   : ['error', 'always-multiline'],
     'no-multi-spaces': ['error', {
-      exceptions: { VariableDeclarator: true, },
-    },],
-    'space-before-function-paren': ['error', 'never',],
+      exceptions: { VariableDeclarator: true },
+    }],
+    'space-before-function-paren': ['error', 'never'],
     'vue/attribute-hyphenation'  : ['error', 'never', {
       ignore: [],
-    },],
+    }],
     'vue/multi-word-component-names': 'off',
   },
 }

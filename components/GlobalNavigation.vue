@@ -1,16 +1,16 @@
 <template>
-  <div :class="$style.navi">
-    <div :class="$style.navi_inner">
-      <ul :class="$style.navi_list">
+  <div :class="$style.nav">
+    <div :class="$style.nav_inner">
+      <ul :class="$style.nav_list">
         <li
           v-for="list in sections"
-          :id="`navi-${list.id}`"
+          :id="`nav-${list.id}`"
           :key="list.id"
-          :class="[$style.navi_li, 'navi_li']"
+          :class="[$style.nav_li, 'nav_li']"
         >
           <a
             :href="`#${list.id}`"
-            :class="[$style.navi_link, 'anchor']"
+            :class="[$style.nav_link, 'anchor']"
           >
             {{ list.name }}
           </a>
@@ -23,6 +23,7 @@
 <script>
 
 export default {
+  name : 'GlobalNavigation',
   props: {
     sections: {
       required: true,
@@ -37,18 +38,18 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
-  .navi {
+  .nav {
     position: fixed;
     width: 100%;
     bottom:  64px;
-    z-index: v.zIndex(navi);
+    z-index: v.zIndex(nav);
   }
-  .navi_inner {
+  .nav_inner {
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  .navi_list {
+  .nav_list {
     display: flex;
     gap: 0 60px;
     align-items: center;
@@ -56,7 +57,7 @@ export default {
     font-family: f.family(english);
     color: c.$white;
   }
-  .navi_li {
+  .nav_li {
     position: relative;
     transition: opacity .3s;
     &:hover {
@@ -84,7 +85,7 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
-.navi_li.current {
+.nav_li.current {
   &::after {
     content: "";
     opacity: 1;
