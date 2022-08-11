@@ -1,6 +1,5 @@
 <template>
   <div
-    v-inview:enter="() => {contentsDisplay = true}"
     :class="[$style.section_header, transparent ? $style.transparent : '']"
   >
     <h2
@@ -21,6 +20,10 @@
         v-html="descriptions[idName]"
       />
     </DisplayFromLeftElement>
+    <div
+      v-inview:enter="() => {contentsDisplay = true}"
+      :class="$style.visible_marker"
+    />
   </div>
 </template>
 
@@ -87,12 +90,12 @@ export default {
 @use '~/assets/scss/color' as c;
 
 .section_header {
+  position        : relative;
   display         : flex;
   height          : 100vh;
   flex-direction  : column;
   align-items     : center;
   justify-content : center;
-  position        : relative;
   aspect-ratio    : 1 / 1.62;
   background-color: c.$bgBlack;
 
@@ -117,16 +120,18 @@ export default {
   &::after {
     content         : '';
     position        : absolute;
-    display         : block;
     left            : 0;
     bottom          : 0;
+    display         : block;
     width           : 100%;
     height          : 1px;
+    opacity         : 0;
     background-color: rgba(c.$white, .28);
   }
 
   &.displayed_border {
     &::after {
+      opacity: 1;
       animation-name           : displayBorder;
       animation-duration       : 2s;
       animation-timing-function: ease-out;
@@ -143,6 +148,13 @@ export default {
   flex-wrap      : wrap;
 }
 
+.visible_marker {
+  position: absolute;
+  left: 55%;
+  width: 1px;
+  height: 100vh;
+  // background-color: tomato;
+}
 @keyframes displayBorder {
   0% {
     width: 0%;
