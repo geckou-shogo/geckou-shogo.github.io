@@ -3,7 +3,8 @@
     :class="$style.frontpage"
   >
   <LoadingScreen 
-    :v-if="loading"
+    :v-if="isShow"
+    :class="[$style.loading, isShow ? '' : $style.hide]"
   />
     <GlobalNavigation
       :sections="sections"
@@ -11,7 +12,7 @@
     />
     <div
       id="sectionsContainer"
-      :class="[$style.sections_container, loading ? '' : '$style.show']"
+      :class="[$style.sections_container, isShow ? '' : $style.show]"
       :style="{width: `${sections.length * 100}%`}"
     >
       <section
@@ -35,7 +36,7 @@ import { ScrollTrigger, ScrollToPlugin } from 'gsap/all'
 export default {
   data() {
     return {
-      loading        : true,
+      isShow       : true,
       currentSection: 'top',
       screenStatus  : '',
       sections      : [
@@ -126,6 +127,12 @@ export default {
         },
       })
     })
+
+    this.$nextTick(() => {
+      setTimeout(() => {
+        this.isShow = false
+      }, 2000)
+    })
   },
   methods: {
     registrationScrollEvent() {
@@ -150,6 +157,14 @@ export default {
   overscroll-behavior-y: none;
   overflow             : hidden;
   background-color     : c.$black;
+}
+
+.loading {
+  &.hide {
+    opacity: 0;
+    visibility: hidden;
+    z-index: zIndex('off');
+  }
 }
 
 .sections_container {

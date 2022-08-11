@@ -50,19 +50,18 @@ export default {
   justify-content: center;
   background-color: c.$white;
   z-index: v.zIndex('loading');
+  transition: opacity .5s;
   &_box {
     margin: auto;
     padding: 1rem;
-    width: 200px;
-    height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap:  0 v.$val * 5;
     .letter {
-      margin-left: v.$val * 5;
-      color: c.$black;
       font-size: f.size('larger');
       font-weight: f.weight('bold');
+      color: c.$blue;
       animation-name: loading;
       animation-duration: 1.6s;
       animation-iteration-count: infinite;
