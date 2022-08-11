@@ -14,6 +14,7 @@
     </h2>
     <DisplayFromLeftElement
       :isDisplay="contentsDisplay"
+      :class="$style.description_animation"
     >
       <p
         :class="$style.description"
@@ -146,6 +147,12 @@ export default {
   min-height: 64px;
   justify-content: center;
   flex-wrap      : wrap;
+  &_animation {
+    transition-delay: .2s;
+    span {
+      transition-delay: .2s;
+    }
+  }
 }
 
 .visible_marker {
