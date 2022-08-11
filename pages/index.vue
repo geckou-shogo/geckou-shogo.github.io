@@ -131,7 +131,7 @@ export default {
     this.$nextTick(() => {
       setTimeout(() => {
         this.isShow = false
-      }, 2000)
+      }, 3000)
     })
   },
   methods: {
@@ -160,6 +160,7 @@ export default {
 }
 
 .loading {
+  transition: all 1s;
   &.hide {
     opacity: 0;
     visibility: hidden;
@@ -173,6 +174,7 @@ export default {
   flex-wrap: nowrap;
   overflow : hidden;
   opacity: 0;
+  transition: all 1s;
   &.show {
     opacity: 1;
   }
