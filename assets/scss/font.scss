@@ -30,6 +30,9 @@ $fontFamilyMap: (
   'stewp'  : 'Vollkorn SC',
 );
 
+$fontWeight: (
+  'bold' : 700,
+);
 
 $lineHeightMap: (
   'normal'  : 1.8,
@@ -47,6 +50,10 @@ $letterSpacingMap: (
 
 @function size($key) {
   @return map-get($fontSizeMap, $key);
+};
+
+@function weight($key) {
+  @return map-get($fontWeight, $key);
 };
 
 @function family($key) {

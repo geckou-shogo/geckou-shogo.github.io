@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name : 'SectionVision',
+  name : 'SectionOfInfo',
   props: {
     section: {
       required: true,

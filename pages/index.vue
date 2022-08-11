@@ -2,13 +2,16 @@
   <main
     :class="$style.frontpage"
   >
+  <LoadingScreen 
+    :v-if="loading"
+  />
     <GlobalNavigation
       :sections="sections"
       :currentSection="currentSection"
     />
     <div
       id="sectionsContainer"
-      :class="$style.sections_container"
+      :class="[$style.sections_container, loading ? '' : '$style.show']"
       :style="{width: `${sections.length * 100}%`}"
     >
       <section
@@ -32,6 +35,7 @@ import { ScrollTrigger, ScrollToPlugin } from 'gsap/all'
 export default {
   data() {
     return {
+      loading        : true,
       currentSection: 'top',
       screenStatus  : '',
       sections      : [
@@ -153,6 +157,10 @@ export default {
   height   : 100vh;
   flex-wrap: nowrap;
   overflow : hidden;
+  opacity: 0;
+  &.show {
+    opacity: 1;
+  }
 
   > * {
     position: relative;

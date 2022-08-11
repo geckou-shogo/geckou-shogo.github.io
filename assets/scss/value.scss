@@ -19,8 +19,9 @@ $mobileScreenSize      : 480px;
 }
 
 $zIndexMap: (
+  'loading' : 999,
   'max'     : 100,
-  'nav'    : 80,
+  'nav'     : 80,
   'overlay' : 70,
   'contents': 50,
   'medium'  : 30,    
