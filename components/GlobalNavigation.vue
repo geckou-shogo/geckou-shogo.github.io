@@ -6,12 +6,13 @@
           v-for="section in sections"
           :id="`nav-${section.idName}`"
           :key="section.idName"
-          :class="[$style.nav_li, 'nav_li', currentSection === section.id ? $style.current : '']"
+          :class="[
+            $style.nav_li,
+            'nav_li',
+            currentSection === section.id ? $style.current : ''
+          ]"
         >
-          <a
-            :href="`#${section.idName}`"
-            :class="[$style.nav_link, 'anchor']"
-          >
+          <a :href="`#${section.idName}`" :class="[$style.nav_link, 'anchor']">
             {{ section.name }}
           </a>
         </li>
@@ -21,9 +22,8 @@
 </template>
 
 <script>
-
 export default {
-  name : 'GlobalNavigation',
+  name: "GlobalNavigation",
   props: {
     sections: {
       required: true,
@@ -33,8 +33,8 @@ export default {
       required: true,
       type    : String,
     },
-  },
-}
+  }
+};
 </script>
 
 <style lang="scss" module>
@@ -42,46 +42,46 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
-  .nav {
-    position: fixed;
-    width: 100%;
-    bottom:  64px;
-    z-index: v.zIndex(nav);
+.nav {
+  position: fixed;
+  width: 100%;
+  bottom: 64px;
+  z-index: v.zIndex(nav);
+}
+.nav_inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav_list {
+  display: flex;
+  gap: 0 60px;
+  align-items: center;
+  font-size: f.size(small);
+  font-family: f.family(english);
+  color: c.$white;
+}
+.nav_li {
+  position: relative;
+  transition: opacity 0.3s;
+  &:hover {
+    opacity: 0.7;
   }
-  .nav_inner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: rgba(224, 224, 228, 0.08);
+    opacity: 0;
+    transition: opacity 0.8s;
+    pointer-events: none;
   }
-  .nav_list {
-    display: flex;
-    gap: 0 60px;
-    align-items: center;
-    font-size: f.size(small);
-    font-family: f.family(english);
-    color: c.$white;
-  }
-  .nav_li {
-    position: relative;
-    transition: opacity .3s;
-    &:hover {
-      opacity: .7;
-    }
-    &::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      right: auto;
-      transform: translate(-50% , -50%);
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background-color: rgba(224, 224, 228, 0.08);
-      opacity: 0;
-      transition: opacity .8s;
-      pointer-events: none;
-    }
-  }
+}
 </style>
 
 <style lang="scss">
@@ -120,5 +120,4 @@ export default {
     }
   }
 }
-
 </style>
