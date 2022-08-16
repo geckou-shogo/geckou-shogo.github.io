@@ -2,10 +2,13 @@
   <main
     :class="$style.frontpage"
   >
-  <LoadingScreen 
-    :v-if="isShow"
-    :class="[$style.loading, isShow ? '' : $style.hide]"
-  />
+    <LoadingScreen
+      :vIf="isShow"
+      :class="[$style.loading, isShow ? '' : $style.hide]"
+    />
+    <!-- <GradationBackground
+      :sections="sections"
+    /> -->
     <GlobalNavigation
       :sections="sections"
       :currentSection="currentSection"
@@ -36,7 +39,7 @@ import { ScrollTrigger, ScrollToPlugin } from 'gsap/all'
 export default {
   data() {
     return {
-      isShow       : true,
+      isShow        : true,
       currentSection: 'top',
       screenStatus  : '',
       sections      : [
@@ -44,29 +47,33 @@ export default {
           idName   : 'top',
           name     : 'TOP',
           component: 'SectionOfTop',
+          color    : 'linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);',
         },
         {
           idName   : 'vision',
           name     : 'VISION',
           component: 'SectionOfVision',
+          color    : 'linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);',
         },
         {
           idName   : 'service',
           name     : 'SERVICE',
           component: 'SectionOfService',
+          color    : 'linear-gradient(to bottom, #192c38, #15324f 34%,  #31527b);',
         },
         {
           idName   : 'information',
           name     : 'INFORMATION',
           component: 'SectionOfInfo',
+          color    : 'linear-gradient(to bottom, #31527b, #246495 66%,  #086c92);',
         },
         {
           idName   : 'contact',
           name     : 'CONTACT',
           component: 'SectionOfContact',
+          color    : 'linear-gradient(to bottom, #31527b, #246495 66%,  #086c92);',
         },
       ],
-      isShowMoon: false,
     }
   },
   mounted() {
@@ -76,7 +83,7 @@ export default {
 
     const sectionsContainer = document.querySelector('#sectionsContainer')
     const sections = gsap.utils.toArray('.section')
-
+    const screen = gsap.utils.toArray('.screen_item')
     const tween = gsap.to(sections, {
       xPercent     : -100 * (sections.length - 1),
       ease         : 'none',
@@ -94,7 +101,23 @@ export default {
         end    : () => `+=${sectionsContainer.offsetWidth - innerWidth}`,
       },
     })
-
+    gsap.to(screen, {
+      yPercent     : -100 * (sections.length - 1),
+      ease         : 'none',
+      scrollTrigger: {
+        trigger: 'sectionsContainer',
+        pin    : true,
+        start  : 'top top',
+        scrub  : true,
+        // 要調整
+        // snap: {
+        //   snapTo: 1 / (sections.length - 1),
+        //   inertia: false,
+        //   duration: {min: 0.1, max: 0.1}
+        // },
+        end    : () => `+=${sectionsContainer.offsetWidth - innerWidth}`,
+      },
+    })
     document.querySelectorAll('.anchor').forEach(anchor => {
       anchor.addEventListener('click', e => {
         e.preventDefault()
@@ -127,7 +150,6 @@ export default {
         },
       })
     })
-
     this.$nextTick(() => {
       setTimeout(() => {
         this.isShow = false
@@ -141,9 +163,6 @@ export default {
     checkIsScreenLandscape() {
       const currentScreenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
       if (this.screenStatus !== currentScreenStatus) { location.reload() } else { window.removeEventListener('scroll', this.checkIsScreenLandscape) }
-    },
-    showMoon() {
-      this.isShowMoon = true
     },
   },
 }
@@ -164,7 +183,7 @@ export default {
   &.hide {
     opacity: 0;
     visibility: hidden;
-    z-index: zIndex('off');
+    z-index: v.zIndex('off');
   }
 }
 
@@ -175,6 +194,16 @@ export default {
   overflow : hidden;
   opacity: 0;
   transition: all 1s;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(25, 44, 56, 1) 3%,
+    rgba(11, 25, 38, 1) 6.6%,
+    rgba(10, 29, 40, 1) 9%,
+    rgba(10, 29, 40, 1) 12%,
+    rgba(25, 44, 56, 1) 15%,
+    rgba(21, 50, 79, 1) 18%,
+    rgba(25, 44, 56, 1) 21%, /* serviceセクション一番最初の背景色 */
+    );
   &.show {
     opacity: 1;
   }
