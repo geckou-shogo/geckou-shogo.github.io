@@ -101,23 +101,23 @@ export default {
         end    : () => `+=${sectionsContainer.offsetWidth - innerWidth}`,
       },
     })
-    gsap.to(screen, {
-      yPercent     : -100 * (sections.length - 1),
-      ease         : 'none',
-      scrollTrigger: {
-        trigger: 'sectionsContainer',
-        pin    : true,
-        start  : 'top top',
-        scrub  : true,
-        // 要調整
-        // snap: {
-        //   snapTo: 1 / (sections.length - 1),
-        //   inertia: false,
-        //   duration: {min: 0.1, max: 0.1}
-        // },
-        end    : () => `+=${sectionsContainer.offsetWidth - innerWidth}`,
-      },
-    })
+    // gsap.to(screen, {
+    //   yPercent     : -100 * (sections.length - 1),
+    //   ease         : 'none',
+    //   scrollTrigger: {
+    //     trigger: 'sectionsContainer',
+    //     pin    : true,
+    //     start  : 'top top',
+    //     scrub  : true,
+    //     // 要調整
+    //     // snap: {
+    //     //   snapTo: 1 / (sections.length - 1),
+    //     //   inertia: false,
+    //     //   duration: {min: 0.1, max: 0.1}
+    //     // },
+    //     end    : () => `+=${sectionsContainer.offsetWidth - innerWidth}`,
+    //   },
+    // })
     document.querySelectorAll('.anchor').forEach(anchor => {
       anchor.addEventListener('click', e => {
         e.preventDefault()
@@ -196,14 +196,21 @@ export default {
   transition: all 1s;
   background-image: linear-gradient(
     to bottom,
-    rgba(25, 44, 56, 1) 3%,
-    rgba(11, 25, 38, 1) 6.6%,
-    rgba(10, 29, 40, 1) 9%,
-    rgba(10, 29, 40, 1) 12%,
-    rgba(25, 44, 56, 1) 15%,
-    rgba(21, 50, 79, 1) 18%,
-    rgba(25, 44, 56, 1) 21%, /* serviceセクション一番最初の背景色 */
+    rgba(25, 44, 56, 1) 6.6%,
+    rgba(11, 25, 38, 1) 13.2%,
+    rgba(10, 29, 40, 1) 19.8%,
+    rgba(10, 29, 40, 1) 26.4%,
+    rgba(25, 44, 56, 1) 33%,
+    rgba(21, 50, 79, 1) 39.6%,
+    rgba(25, 44, 56, 1) 46.2%, 
+    rgba(21, 50, 79, 1) 52.8%,
+    rgba(49, 86, 123, 1) 59.4%,
+    rgba(49, 82, 123, 1) 66%,
+    rgba(36, 100, 149, 1) 72.6%,
+    rgba(8, 108, 146, 1) 79.2%,
+    /* contactは未記入 */
     );
+    background-position-y: bottom;
   &.show {
     opacity: 1;
   }
