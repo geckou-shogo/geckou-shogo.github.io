@@ -6,14 +6,13 @@
       :vIf="isShow"
       :class="[$style.loading, isShow ? '' : $style.hide]"
     />
-    <GradationBackground
+    <!-- <GradationBackground
       :sections="sections"
-    />
+    /> -->
     <GlobalNavigation
       :sections="sections"
       :currentSection="currentSection"
     />
-    <GeckouMoon />
     <div
       id="sectionsContainer"
       :class="[$style.sections_container, isShow ? '' : $style.show]"
@@ -102,7 +101,23 @@ export default {
         end    : () => `+=${sectionsContainer.offsetWidth - innerWidth}`,
       },
     })
-
+    gsap.to(screen, {
+      yPercent     : -100 * (sections.length - 1),
+      ease         : 'none',
+      scrollTrigger: {
+        trigger: 'sectionsContainer',
+        pin    : true,
+        start  : 'top top',
+        scrub  : true,
+        // 要調整
+        // snap: {
+        //   snapTo: 1 / (sections.length - 1),
+        //   inertia: false,
+        //   duration: {min: 0.1, max: 0.1}
+        // },
+        end    : () => `+=${sectionsContainer.offsetWidth - innerWidth}`,
+      },
+    })
     document.querySelectorAll('.anchor').forEach(anchor => {
       anchor.addEventListener('click', e => {
         e.preventDefault()
@@ -122,23 +137,7 @@ export default {
         })
       })
     })
-    gsap.to(screen, {
-      yPercent     : -100 * (sections.length - 1),
-      ease         : 'none',
-      scrollTrigger: {
-        trigger: 'sectionsContainer',
-        pin    : true,
-        start  : 'top top',
-        scrub  : true,
-        // 要調整
-        // snap: {
-        //   snapTo: 1 / (sections.length - 1),
-        //   inertia: false,
-        //   duration: {min: 0.1, max: 0.1}
-        // },
-        end    : () => `+=${sectionsContainer.offsetWidth - innerWidth}`,
-      },
-    })
+
     sections.forEach(section => {
       const target = document.querySelector(`#nav-${section.id}`)
       ScrollTrigger.create({
@@ -195,6 +194,16 @@ export default {
   overflow : hidden;
   opacity: 0;
   transition: all 1s;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(25, 44, 56, 1) 3%,
+    rgba(11, 25, 38, 1) 6.6%,
+    rgba(10, 29, 40, 1) 9%,
+    rgba(10, 29, 40, 1) 12%,
+    rgba(25, 44, 56, 1) 15%,
+    rgba(21, 50, 79, 1) 18%,
+    rgba(25, 44, 56, 1) 21%, /* serviceセクション一番最初の背景色 */
+    );
   &.show {
     opacity: 1;
   }
