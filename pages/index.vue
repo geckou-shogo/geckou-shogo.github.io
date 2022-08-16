@@ -126,7 +126,7 @@ export default {
       yPercent     : -100 * (sections.length - 1),
       ease         : 'none',
       scrollTrigger: {
-        trigger: '.screen',
+        trigger: 'sectionsContainer',
         pin    : true,
         start  : 'top top',
         scrub  : true,
@@ -184,7 +184,7 @@ export default {
   &.hide {
     opacity: 0;
     visibility: hidden;
-    z-index: zIndex('off');
+    z-index: v.zIndex('off');
   }
 }
 
