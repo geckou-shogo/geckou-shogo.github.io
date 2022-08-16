@@ -107,7 +107,7 @@ export default {
 }
 
 .content {
-  width: 85vw;
+  width: 100vw;
   height: 100vh;
   &_inner {
     position: absolute;

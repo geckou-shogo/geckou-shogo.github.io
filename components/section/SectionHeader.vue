@@ -147,6 +147,9 @@ export default {
   min-height: 64px;
   justify-content: center;
   flex-wrap      : wrap;
+  span {
+    width: 100%;
+  }
   &_animation {
     transition-delay: .2s;
     span {

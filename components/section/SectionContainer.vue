@@ -1,6 +1,5 @@
 <template>
   <section
-    :id="section.idName"
     :class="$style.section"
   >
     <SectionHeader
@@ -23,7 +22,7 @@ export default {
     section: {
       required: true,
       type    : Object,
-      default : () => {},
+      default : () => { },
     },
   },
 }
@@ -40,4 +39,5 @@ export default {
   min-width: 100vw;
   height   : 100vh;
 }
+
 </style>
