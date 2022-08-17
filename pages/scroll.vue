@@ -14,10 +14,9 @@
       :currentSection="currentSection"
     />
     <div
-      id="sectionsContainer"
+      id="js-scroll"
       :class="[$style.sections_container, isShow ? '' : $style.show]"
       :style="{width: `${sections.length * 100}%`}"
-      data-scroll-container
     >
       <section
         v-for="section in sections"
@@ -25,6 +24,7 @@
         :key="section.idName"
         v-inview:enter="() => {currentSection = section.idName}"
         class="section"
+        data-scroll
       >
         <SectionContainer
           :section="section"
@@ -35,11 +35,8 @@
 </template>
 
 <script>
-import gsap from 'gsap'
-import { ScrollTrigger, ScrollToPlugin } from 'gsap/all'
 
 export default {
-
   data() {
     return {
       isShow        : true,
@@ -80,16 +77,18 @@ export default {
     }
   },
   mounted() {
-    gsap.registerPlugin(ScrollToPlugin, ScrollTrigger)
     this.screenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
     window.addEventListener('resize', this.registrationScrollEvent)
-
     this.$nextTick(() => {
       setTimeout(() => {
         this.isShow = false
       }, 3000)
     })
-    // this.locomotiveScroll()
+    this.lmS = new this.LocomotiveScroll({
+      el    : document.querySelector('#js-scroll'),
+      smooth: true,
+    })
+    console.log('lmS', this.lmS)
   },
   methods: {
     registrationScrollEvent() {
@@ -99,13 +98,6 @@ export default {
       const currentScreenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
       if (this.screenStatus !== currentScreenStatus) { location.reload() } else { window.removeEventListener('scroll', this.checkIsScreenLandscape) }
     },
-    // locomotiveScroll() {
-    //   const locoScroll = new LocomotiveScroll({
-    //     el    : document.querySelector('[data-scroll-container]'),
-    //     smooth: true,
-    //   })
-    // },
-
   },
 }
 </script>
@@ -129,15 +121,4 @@ export default {
   }
 }
 
-.sections_container {
-  opacity: 0;
-  transition: all 1s;
-  &.show {
-    opacity: 1;
-  }
-
-  > * {
-    position: relative;
-  }
-}
 </style>

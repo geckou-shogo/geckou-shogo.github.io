@@ -34,16 +34,22 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '~/node_modules/ress/dist/ress.min.css',
-    '~/node_modules/locomotive-scroll/dist/locomotive-scroll.min.css',
+    'ress/dist/ress.min.css',
+    'locomotive-scroll/dist/locomotive-scroll.min.css',
     '~/assets/scss/base.scss',
     '~/assets/scss/nuxt-content.scss',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '@/plugins/inview.js', ssr: false },
-    { src: '@/plugins/locomotiveScroll.js', ssr: false },
+    {
+      src: '@/plugins/inview.js',
+      ssr: false,
+    },
+    {
+      src : '@/plugins/locomotiveScroll.js',
+      mode: 'client',
+    },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

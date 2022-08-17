@@ -1,6 +1,6 @@
 <template>
-  <section
-    :class="[$style.section, 'section_item']"
+  <div
+    :class="[$style.container, 'section_item']"
   >
     <SectionHeader
       v-if="section.idName !== 'top'"
@@ -12,7 +12,7 @@
       :is="section.component"
       :section="section"
     />
-  </section>
+  </div>
 </template>
 
 <script>
@@ -33,7 +33,7 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
-.section {
+.container {
   position  : relative;
   display   : flex;
   min-width : 100vw;
