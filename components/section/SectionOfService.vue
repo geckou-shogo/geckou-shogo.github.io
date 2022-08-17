@@ -22,7 +22,7 @@
           <div
             :class="$style.content_box_link"
           >
-            <a href="https://teamstove.co.jp/">詳細はこちら</a>
+            <a href="">詳細はこちら</a>
           </div>
         </div>
       </div>
