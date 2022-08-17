@@ -15,16 +15,16 @@
     />
     <div
       id="js-scroll"
-      :class="[$style.sections_container, isShow ? '' : $style.show]"
-      :style="{width: `${sections.length * 100}%`}"
+      :class="[$style.sections_container, 'sections_container', isShow ? '' : $style.show]"
+      data-scroll-container
     >
       <section
-        v-for="section in sections"
+        v-for="(section, index) in sections"
         :id="section.idName"
         :key="section.idName"
         v-inview:enter="() => {currentSection = section.idName}"
         class="section"
-        data-scroll
+        data-scroll-section
       >
         <SectionContainer
           :section="section"
@@ -35,10 +35,13 @@
 </template>
 
 <script>
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/all'
 
 export default {
   data() {
     return {
+      lmS           : null,
       isShow        : true,
       currentSection: 'top',
       screenStatus  : '',
@@ -84,12 +87,9 @@ export default {
         this.isShow = false
       }, 3000)
     })
-    this.lmS = new this.LocomotiveScroll({
-      el    : document.querySelector('#js-scroll'),
-      smooth: true,
-    })
-    console.log('lmS', this.lmS)
+    this.locomotiveScroll()
   },
+
   methods: {
     registrationScrollEvent() {
       window.addEventListener('scroll', this.checkIsScreenLandscape)
@@ -97,6 +97,34 @@ export default {
     checkIsScreenLandscape() {
       const currentScreenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
       if (this.screenStatus !== currentScreenStatus) { location.reload() } else { window.removeEventListener('scroll', this.checkIsScreenLandscape) }
+    },
+    locomotiveScroll() {
+      this.lmS = new this.LocomotiveScroll({
+        el    : document.querySelector('[data-scroll-container]'),
+        smooth: true,
+      })
+      console.log('lmS', this.lmS)
+      // this.lmS.on('scroll', ScrollTrigger.update)
+      // ScrollTrigger.refresh()
+      // ScrollTrigger.scrollerProxy('.sections_container', {
+      //   scrollTop(value) {
+      //     return arguments.length
+      //       ? locoScroll.scrollTo(value, 0, 0)
+      //       : locoScroll.scroll.instance.scroll.y
+      //   },
+      //   getBoundingClientRect() {
+      //     return {
+      //       top   : 0,
+      //       left  : 0,
+      //       width : window.innerWidth,
+      //       height: window.innerHeight,
+      //     }
+      //   },
+
+      //   pinType: document.querySelector('.sections_container').style.transform
+      //     ? 'transform'
+      //     : 'fixed',
+      // })
     },
   },
 }
@@ -119,6 +147,11 @@ export default {
     visibility: hidden;
     z-index: v.zIndex('off');
   }
+}
+
+.sections_container {
+  position: relative;
+  overflow: hidden;
 }
 
 </style>
