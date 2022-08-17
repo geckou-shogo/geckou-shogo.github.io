@@ -1,7 +1,5 @@
 <template>
-  <main
-    :class="$style.frontpage"
-  >
+  <main :class="$style.frontpage">
     <LoadingScreen
       :vIf="isShow"
       :class="[$style.loading, isShow ? '' : $style.hide]"
@@ -9,125 +7,118 @@
     <!-- <GradationBackground
       :sections="sections"
     /> -->
-    <GlobalNavigation
-      :sections="sections"
-      :currentSection="currentSection"
-    />
+    <GlobalNavigation :sections="sections" :currentSection="currentSection" />
     <div
       id="js-scroll"
-      :class="[$style.sections_container, 'sections_container', isShow ? '' : $style.show]"
+      :class="[
+        $style.sections_container,
+        'sections_container',
+        isShow ? '' : $style.show
+      ]"
       data-scroll-container
     >
       <section
         v-for="(section, index) in sections"
         :id="section.idName"
         :key="section.idName"
-        v-inview:enter="() => {currentSection = section.idName}"
+        v-inview:enter="
+          () => {
+            currentSection = section.idName;
+          }
+        "
         class="section"
         data-scroll-section
       >
-        <SectionContainer
-          :section="section"
-        />
+        <SectionContainer :section="section" />
       </section>
     </div>
   </main>
 </template>
 
 <script>
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/all'
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
 
 export default {
   data() {
     return {
-      lmS           : null,
-      isShow        : true,
-      currentSection: 'top',
-      screenStatus  : '',
-      sections      : [
+      lmS: null,
+      isShow: true,
+      currentSection: "top",
+      screenStatus: "",
+      sections: [
         {
-          idName   : 'top',
-          name     : 'TOP',
-          component: 'SectionOfTop',
-          color    : 'linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);',
+          idName: "top",
+          name: "TOP",
+          component: "SectionOfTop",
+          color: "linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);"
         },
         {
-          idName   : 'vision',
-          name     : 'VISION',
-          component: 'SectionOfVision',
-          color    : 'linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);',
+          idName: "vision",
+          name: "VISION",
+          component: "SectionOfVision",
+          color: "linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);"
         },
         {
-          idName   : 'service',
-          name     : 'SERVICE',
-          component: 'SectionOfService',
-          color    : 'linear-gradient(to bottom, #192c38, #15324f 34%,  #31527b);',
+          idName: "service",
+          name: "SERVICE",
+          component: "SectionOfService",
+          color: "linear-gradient(to bottom, #192c38, #15324f 34%,  #31527b);"
         },
         {
-          idName   : 'information',
-          name     : 'INFORMATION',
-          component: 'SectionOfInfo',
-          color    : 'linear-gradient(to bottom, #31527b, #246495 66%,  #086c92);',
+          idName: "information",
+          name: "INFORMATION",
+          component: "SectionOfInfo",
+          color: "linear-gradient(to bottom, #31527b, #246495 66%,  #086c92);"
         },
         {
-          idName   : 'contact',
-          name     : 'CONTACT',
-          component: 'SectionOfContact',
-          color    : 'linear-gradient(to bottom, #31527b, #246495 66%,  #086c92);',
-        },
-      ],
-    }
+          idName: "contact",
+          name: "CONTACT",
+          component: "SectionOfContact",
+          color: "linear-gradient(to bottom, #31527b, #246495 66%,  #086c92);"
+        }
+      ]
+    };
   },
   mounted() {
-    this.screenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
-    window.addEventListener('resize', this.registrationScrollEvent)
+    this.screenStatus =
+      window?.innerWidth > window?.innerHeight ? "landscape" : "portrait";
+    window.addEventListener("resize", this.registrationScrollEvent);
     this.$nextTick(() => {
       setTimeout(() => {
-        this.isShow = false
-      }, 3000)
-    })
-    this.locomotiveScroll()
+        this.isShow = false;
+      }, 3000);
+    });
+    this.$nextTick(() => {
+      this.locomotiveScroll();
+    });
   },
 
   methods: {
     registrationScrollEvent() {
-      window.addEventListener('scroll', this.checkIsScreenLandscape)
+      window.addEventListener("scroll", this.checkIsScreenLandscape);
     },
     checkIsScreenLandscape() {
-      const currentScreenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
-      if (this.screenStatus !== currentScreenStatus) { location.reload() } else { window.removeEventListener('scroll', this.checkIsScreenLandscape) }
+      const currentScreenStatus =
+        window?.innerWidth > window?.innerHeight ? "landscape" : "portrait";
+      if (this.screenStatus !== currentScreenStatus) {
+        location.reload();
+      } else {
+        window.removeEventListener("scroll", this.checkIsScreenLandscape);
+      }
     },
     locomotiveScroll() {
       this.lmS = new this.LocomotiveScroll({
-        el    : document.querySelector('[data-scroll-container]'),
+        el: document.querySelector("[data-scroll-container]"),
         smooth: true,
-      })
-      console.log('lmS', this.lmS)
-      // this.lmS.on('scroll', ScrollTrigger.update)
-      // ScrollTrigger.refresh()
-      // ScrollTrigger.scrollerProxy('.sections_container', {
-      //   scrollTop(value) {
-      //     return arguments.length
-      //       ? locoScroll.scrollTo(value, 0, 0)
-      //       : locoScroll.scroll.instance.scroll.y
-      //   },
-      //   getBoundingClientRect() {
-      //     return {
-      //       top   : 0,
-      //       left  : 0,
-      //       width : window.innerWidth,
-      //       height: window.innerHeight,
-      //     }
-      //   },
-
-      //   pinType: document.querySelector('.sections_container').style.transform
-      //     ? 'transform'
-      //     : 'fixed',
-      // })
-    },
-  },
-}
+        direction: "horizontal",
+        multiplier: 1,
+        horizontalGesture: true
+      });
+      console.log("lmS", this.lmS);
+    }
+  }
+};
 </script>
 <style lang="scss" module>
 @use '~/assets/scss/value' as v;
@@ -136,8 +127,8 @@ export default {
 
 .frontpage {
   overscroll-behavior-y: none;
-  overflow             : hidden;
-  background-color     : c.$black;
+  overflow: hidden;
+  background-color: c.$black;
 }
 
 .loading {
@@ -145,7 +136,7 @@ export default {
   &.hide {
     opacity: 0;
     visibility: hidden;
-    z-index: v.zIndex('off');
+    z-index: v.zIndex("off");
   }
 }
 
@@ -153,5 +144,4 @@ export default {
   position: relative;
   overflow: hidden;
 }
-
 </style>
