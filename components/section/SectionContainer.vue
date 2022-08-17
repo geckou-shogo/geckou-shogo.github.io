@@ -1,6 +1,6 @@
 <template>
   <section
-    :class="$style.section"
+    :class="[$style.section, 'section_item']"
   >
     <SectionHeader
       v-if="section.idName !== 'top'"
@@ -38,5 +38,22 @@ export default {
   display   : flex;
   min-width : 100vw;
   height    : 100vh;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(25, 44, 56, 1) 6.6%,
+    rgba(11, 25, 38, 1) 13.2%,
+    rgba(10, 29, 40, 1) 19.8%,
+    rgba(10, 29, 40, 1) 26.4%,
+    rgba(25, 44, 56, 1) 33%,
+    rgba(21, 50, 79, 1) 39.6%,
+    rgba(25, 44, 56, 1) 46.2%,
+    rgba(21, 50, 79, 1) 52.8%,
+    rgba(49, 86, 123, 1) 59.4%,
+    rgba(49, 82, 123, 1) 66%,
+    rgba(36, 100, 149, 1) 72.6%,
+    rgba(8, 108, 146, 1) 79.2%,
+    /* contactは未記入 */
+    );
+    background-size: 100% 400vh;
 }
 </style>
