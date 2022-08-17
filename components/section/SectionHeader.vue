@@ -147,6 +147,8 @@ export default {
   min-height: 64px;
   justify-content: center;
   flex-wrap      : wrap;
+  white-space: nowrap;
+  text-align: center;
   span {
     width: 100%;
   }
