@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  name: "GlobalNavigation",
+  name : 'GlobalNavigation',
   props: {
     sections: {
       required: true,
@@ -33,8 +33,8 @@ export default {
       required: true,
       type    : String,
     },
-  }
-};
+  },
+}
 </script>
 
 <style lang="scss" module>

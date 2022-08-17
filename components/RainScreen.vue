@@ -56,7 +56,6 @@ export default {
   top:auto;
   width: 100%;
   height:100vh;
-  z-index: v.zIndex(off);
   overflow: hidden;
   span {
     position: absolute;

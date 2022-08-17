@@ -82,24 +82,20 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
-.section_content {
-  position: relative;
-}
-
-.show_marker {
+/* .show_marker {
   position: absolute;
-  right: 0;
+  right: -100px;
   width: 2px;
   height: 100vh;
   background: tomato;
-}
+} */
 
 .rain_marker {
   position: absolute;
   right: -100px;
   width: 2px;
   height: 100vh;
-  background: c.$blue;
+  /* background: c.$blue; */
 }
 
 .vision_rain {
@@ -107,13 +103,12 @@ export default {
 }
 
 .content {
-  width: 100vw;
+  position: relative;
   height: 100vh;
+  z-index: v.zIndex('contents');
   &_inner {
-    position: absolute;
+    margin: 10rem 5rem 10rem 5rem;
     display: flex;
-    top: 20%;
-    left: 20%;
     gap: 0 10rem;
   }
   &_box {

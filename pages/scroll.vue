@@ -14,16 +14,17 @@
       :currentSection="currentSection"
     />
     <div
-      id="sectionsContainer"
-      :class="[$style.sections_container, isShow ? '' : $style.show]"
-      :style="{width: `${sections.length * 100}%`}"
+      id="js-scroll"
+      :class="[$style.sections_container, 'sections_container', isShow ? '' : $style.show]"
+      data-scroll-container
     >
       <section
-        v-for="section in sections"
+        v-for="(section, index) in sections"
         :id="section.idName"
         :key="section.idName"
         v-inview:enter="() => {currentSection = section.idName}"
         class="section"
+        data-scroll-section
       >
         <SectionContainer
           :section="section"
@@ -35,10 +36,12 @@
 
 <script>
 import gsap from 'gsap'
-import { ScrollTrigger, ScrollToPlugin } from 'gsap/all'
+import { ScrollTrigger } from 'gsap/all'
+
 export default {
   data() {
     return {
+      lmS           : null,
       isShow        : true,
       currentSection: 'top',
       screenStatus  : '',
@@ -77,85 +80,16 @@ export default {
     }
   },
   mounted() {
-    gsap.registerPlugin(ScrollToPlugin, ScrollTrigger)
     this.screenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
     window.addEventListener('resize', this.registrationScrollEvent)
-
-    const sectionsContainer = document.querySelector('#sectionsContainer')
-    const sections = gsap.utils.toArray('.section')
-    const screen = gsap.utils.toArray('.section_item')
-    const tween = gsap.to(sections, {
-      xPercent     : -100 * (sections.length - 1),
-      ease         : 'none',
-      scrollTrigger: {
-        trigger: '#sectionsContainer',
-        pin    : true,
-        start  : 'top top',
-        scrub  : true,
-        // 要調整
-        // snap: {
-        //   snapTo: 1 / (sections.length - 1),
-        //   inertia: false,
-        //   duration: {min: 0.1, max: 0.1}
-        // },
-        end    : () => `+=${sectionsContainer.offsetWidth - innerWidth}`,
-      },
-    })
-    gsap.to(screen, {
-      backgroundPositionY: '100%',
-      ease               : 'none',
-      scrollTrigger      : {
-        trigger: 'screen',
-        pin    : true,
-        start  : 'top top',
-        scrub  : true,
-        // 要調整
-        // snap: {
-        //   snapTo: 1 / (sections.length - 1),
-        //   inertia: false,
-        //   duration: {min: 0.1, max: 0.1}
-        // },
-        end    : () => `+=${sectionsContainer.offsetWidth - innerWidth}`,
-      },
-    })
-    document.querySelectorAll('.anchor').forEach(anchor => {
-      anchor.addEventListener('click', e => {
-        e.preventDefault()
-        const targetElem = document.querySelector(e.target.getAttribute('href'))
-        let y = targetElem
-        if (targetElem && sectionsContainer === targetElem.parentElement) {
-          const totalScroll = tween.scrollTrigger.end - tween.scrollTrigger.start
-          const totalMovement = (sections.length - 1) * targetElem.offsetWidth
-          y = Math.round(tween.scrollTrigger.start + (targetElem.offsetLeft / totalMovement) * totalScroll)
-        }
-        gsap.to(window, {
-          scrollTo: {
-            y,
-            autoKill: false,
-          },
-          duration: 1,
-        })
-      })
-    })
-
-    sections.forEach(section => {
-      const target = document.querySelector(`#nav-${section.id}`)
-      ScrollTrigger.create({
-        trigger    : section,
-        start      : `top top-=${section.offsetLeft - 1}`,
-        end        : `+=${section.offsetWidth / 2}`,
-        toggleClass: {
-          targets  : target,
-          className: 'current',
-        },
-      })
-    })
     this.$nextTick(() => {
       setTimeout(() => {
         this.isShow = false
       }, 3000)
     })
+    this.locomotiveScroll()
   },
+
   methods: {
     registrationScrollEvent() {
       window.addEventListener('scroll', this.checkIsScreenLandscape)
@@ -163,6 +97,34 @@ export default {
     checkIsScreenLandscape() {
       const currentScreenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
       if (this.screenStatus !== currentScreenStatus) { location.reload() } else { window.removeEventListener('scroll', this.checkIsScreenLandscape) }
+    },
+    locomotiveScroll() {
+      this.lmS = new this.LocomotiveScroll({
+        el    : document.querySelector('[data-scroll-container]'),
+        smooth: true,
+      })
+      console.log('lmS', this.lmS)
+      // this.lmS.on('scroll', ScrollTrigger.update)
+      // ScrollTrigger.refresh()
+      // ScrollTrigger.scrollerProxy('.sections_container', {
+      //   scrollTop(value) {
+      //     return arguments.length
+      //       ? locoScroll.scrollTo(value, 0, 0)
+      //       : locoScroll.scroll.instance.scroll.y
+      //   },
+      //   getBoundingClientRect() {
+      //     return {
+      //       top   : 0,
+      //       left  : 0,
+      //       width : window.innerWidth,
+      //       height: window.innerHeight,
+      //     }
+      //   },
+
+      //   pinType: document.querySelector('.sections_container').style.transform
+      //     ? 'transform'
+      //     : 'fixed',
+      // })
     },
   },
 }
@@ -188,18 +150,8 @@ export default {
 }
 
 .sections_container {
-  display  : flex;
-  height   : 100vh;
-  flex-wrap: nowrap;
-  overflow : hidden;
-  opacity: 0;
-  transition: all 1s;
-  &.show {
-    opacity: 1;
-  }
-
-  > * {
-    position: relative;
-  }
+  position: relative;
+  overflow: hidden;
 }
+
 </style>

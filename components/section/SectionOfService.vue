@@ -16,6 +16,15 @@
             現行のサイトにワードプレスの記事を表示することができるサービスです。
           </p>
         </div>
+        <div
+          :class="[$style.container ,$style.container_link]"
+        >
+          <div
+            :class="$style.content_box_link"
+          >
+            <a href="">詳細はこちら</a>
+          </div>
+        </div>
       </div>
       <div
         :class="$style.content_box"
@@ -52,20 +61,54 @@ export default {
 @use '~/assets/scss/color' as c;
 
 .section_content {
+  margin: 5rem 2rem;
   display: flex;
   gap: 0 10rem;
 }
 
 .content_box {
   position: relative;
+  &_title {
+    position: relative;
+    padding-bottom: 1em;
+    width: 100%;
+    font-size: f.size('max');
+    text-align: center;
+      &::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: rgba($color: c.$white, $alpha: .28);
+    }
+  }
 }
 
 .container {
+  position: relative;
+  padding: 2rem;
   display: flex;
-  width: calc(10rem * 1.16 + 5rem );
+  width: calc(10rem * 1.16 + 14rem );
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  aspect-ratio: 1 / 1;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: rgba($color: c.$blue, $alpha: .05);
+    mix-blend-mode: screen;
+  }
+  &_link {
+    top: -5rem;
+    left: 15rem;
+    width: calc(10rem * 1.16 + 2rem );
+  }
 }
 
 .stewp {
