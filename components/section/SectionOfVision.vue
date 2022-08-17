@@ -82,10 +82,6 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
-.section_content {
-  position: relative;
-}
-
 .show_marker {
   position: absolute;
   right: 0;
@@ -96,7 +92,7 @@ export default {
 
 .rain_marker {
   position: absolute;
-  right: -100px;
+  right: 0;
   width: 2px;
   height: 100vh;
   background: c.$blue;
@@ -107,13 +103,9 @@ export default {
 }
 
 .content {
-  width: 100vw;
   height: 100vh;
   &_inner {
-    position: absolute;
     display: flex;
-    top: 20%;
-    left: 20%;
     gap: 0 10rem;
   }
   &_box {
