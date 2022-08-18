@@ -82,6 +82,9 @@ export default {
       background-color: rgba($color: c.$white, $alpha: .28);
     }
   }
+  &_text {
+    white-space: normal;
+  }
 }
 
 .container {

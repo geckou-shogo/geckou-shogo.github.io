@@ -4,6 +4,7 @@
     :style="{width: `calc(${textReplace}em * 1.16 + 5rem)`}"
   >
     <p
+      :class="$style.text"
       v-html="htmlString"
     />
   </div>
@@ -63,6 +64,10 @@ export default {
     background-color: rgba($color: c.$blue, $alpha: .05);
     mix-blend-mode: screen;
   }
+}
+
+.text {
+  white-space: normal;
 }
 
 </style>
