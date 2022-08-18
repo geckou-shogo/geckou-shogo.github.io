@@ -7,9 +7,7 @@
     <!-- <GradationBackground
       :sections="sections"
     /> -->
-    <GlobalNavigation :sections="sections" :currentSection="currentSection" />
     <div
-      id="js-scroll"
       :class="[
         $style.sections_container,
         'sections_container',
@@ -17,8 +15,9 @@
       ]"
       data-scroll-container
     >
+      <GlobalNavigation :sections="sections" :currentSection="currentSection" />
       <section
-        v-for="(section, index) in sections"
+        v-for="section in sections"
         :id="section.idName"
         :key="section.idName"
         v-inview:enter="
@@ -52,30 +51,38 @@ export default {
           name     : 'TOP',
           component: 'SectionOfTop',
           color    : 'linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);',
+          anchor   : 'section0',
         },
         {
           idName   : 'vision',
           name     : 'VISION',
           component: 'SectionOfVision',
           color    : 'linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);',
+          anchor   : 'section1',
+
         },
         {
           idName   : 'service',
           name     : 'SERVICE',
           component: 'SectionOfService',
           color    : 'linear-gradient(to bottom, #192c38, #15324f 34%,  #31527b);',
+          anchor   : 'section2',
         },
         {
           idName   : 'information',
           name     : 'INFORMATION',
           component: 'SectionOfInfo',
           color    : 'linear-gradient(to bottom, #31527b, #246495 66%,  #086c92);',
+          anchor   : 'section3',
+
         },
         {
           idName   : 'contact',
           name     : 'CONTACT',
           component: 'SectionOfContact',
           color    : 'linear-gradient(to bottom, #31527b, #246495 66%,  #086c92);',
+          anchor   : 'section4',
+
         },
       ],
     }

@@ -33,6 +33,7 @@ export default {
   transition-duration       : 2s;
   transition-timing-function: ease-in-out;
   overflow                  : hidden;
+  pointer-events: none;
 
   > span {
     display                   : block;

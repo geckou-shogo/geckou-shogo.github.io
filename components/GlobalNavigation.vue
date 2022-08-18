@@ -12,7 +12,11 @@
             currentSection === section.id ? $style.current : ''
           ]"
         >
-          <a :href="`#${section.idName}`" :class="[$style.nav_link, 'anchor']">
+          <a
+            :href="`#${section.idName}`"
+            :class="[$style.nav_link, 'anchor']"
+            data-scroll-to
+          >
             {{ section.name }}
           </a>
         </li>
