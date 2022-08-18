@@ -35,8 +35,8 @@
 </template>
 
 <script>
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/all'
+// import gsap from 'gsap'
+// import { ScrollTrigger } from 'gsap/all'
 
 export default {
   data() {
@@ -51,14 +51,12 @@ export default {
           name     : 'TOP',
           component: 'SectionOfTop',
           color    : 'linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);',
-          anchor   : 'section0',
         },
         {
           idName   : 'vision',
           name     : 'VISION',
           component: 'SectionOfVision',
           color    : 'linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);',
-          anchor   : 'section1',
 
         },
         {
@@ -66,14 +64,12 @@ export default {
           name     : 'SERVICE',
           component: 'SectionOfService',
           color    : 'linear-gradient(to bottom, #192c38, #15324f 34%,  #31527b);',
-          anchor   : 'section2',
         },
         {
           idName   : 'information',
           name     : 'INFORMATION',
           component: 'SectionOfInfo',
           color    : 'linear-gradient(to bottom, #31527b, #246495 66%,  #086c92);',
-          anchor   : 'section3',
 
         },
         {
@@ -81,7 +77,6 @@ export default {
           name     : 'CONTACT',
           component: 'SectionOfContact',
           color    : 'linear-gradient(to bottom, #31527b, #246495 66%,  #086c92);',
-          anchor   : 'section4',
 
         },
       ],
@@ -148,6 +143,7 @@ export default {
 
 .sections_container {
   position: relative;
+  width: 100%;
   overflow: hidden;
 }
 </style>
