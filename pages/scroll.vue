@@ -7,9 +7,7 @@
     <!-- <GradationBackground
       :sections="sections"
     /> -->
-    <GlobalNavigation :sections="sections" :currentSection="currentSection" />
     <div
-      id="js-scroll"
       :class="[
         $style.sections_container,
         'sections_container',
@@ -17,8 +15,9 @@
       ]"
       data-scroll-container
     >
+      <GlobalNavigation :sections="sections" :currentSection="currentSection" />
       <section
-        v-for="(section, index) in sections"
+        v-for="section in sections"
         :id="section.idName"
         :key="section.idName"
         v-inview:enter="
@@ -36,89 +35,91 @@
 </template>
 
 <script>
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/all";
+// import gsap from 'gsap'
+// import { ScrollTrigger } from 'gsap/all'
 
 export default {
   data() {
     return {
-      lmS: null,
-      isShow: true,
-      currentSection: "top",
-      screenStatus: "",
-      sections: [
+      lmS           : null,
+      isShow        : true,
+      currentSection: 'top',
+      screenStatus  : '',
+      sections      : [
         {
-          idName: "top",
-          name: "TOP",
-          component: "SectionOfTop",
-          color: "linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);"
+          idName   : 'top',
+          name     : 'TOP',
+          component: 'SectionOfTop',
+          color    : 'linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);',
         },
         {
-          idName: "vision",
-          name: "VISION",
-          component: "SectionOfVision",
-          color: "linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);"
+          idName   : 'vision',
+          name     : 'VISION',
+          component: 'SectionOfVision',
+          color    : 'linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);',
+
         },
         {
-          idName: "service",
-          name: "SERVICE",
-          component: "SectionOfService",
-          color: "linear-gradient(to bottom, #192c38, #15324f 34%,  #31527b);"
+          idName   : 'service',
+          name     : 'SERVICE',
+          component: 'SectionOfService',
+          color    : 'linear-gradient(to bottom, #192c38, #15324f 34%,  #31527b);',
         },
         {
-          idName: "information",
-          name: "INFORMATION",
-          component: "SectionOfInfo",
-          color: "linear-gradient(to bottom, #31527b, #246495 66%,  #086c92);"
+          idName   : 'information',
+          name     : 'INFORMATION',
+          component: 'SectionOfInfo',
+          color    : 'linear-gradient(to bottom, #31527b, #246495 66%,  #086c92);',
+
         },
         {
-          idName: "contact",
-          name: "CONTACT",
-          component: "SectionOfContact",
-          color: "linear-gradient(to bottom, #31527b, #246495 66%,  #086c92);"
-        }
-      ]
-    };
+          idName   : 'contact',
+          name     : 'CONTACT',
+          component: 'SectionOfContact',
+          color    : 'linear-gradient(to bottom, #31527b, #246495 66%,  #086c92);',
+
+        },
+      ],
+    }
   },
   mounted() {
     this.screenStatus =
-      window?.innerWidth > window?.innerHeight ? "landscape" : "portrait";
-    window.addEventListener("resize", this.registrationScrollEvent);
+      window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
+    window.addEventListener('resize', this.registrationScrollEvent)
     this.$nextTick(() => {
       setTimeout(() => {
-        this.isShow = false;
-      }, 3000);
-    });
+        this.isShow = false
+      }, 3000)
+    })
     this.$nextTick(() => {
-      this.locomotiveScroll();
-    });
+      this.locomotiveScroll()
+    })
   },
 
   methods: {
     registrationScrollEvent() {
-      window.addEventListener("scroll", this.checkIsScreenLandscape);
+      window.addEventListener('scroll', this.checkIsScreenLandscape)
     },
     checkIsScreenLandscape() {
       const currentScreenStatus =
-        window?.innerWidth > window?.innerHeight ? "landscape" : "portrait";
+        window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
       if (this.screenStatus !== currentScreenStatus) {
-        location.reload();
+        location.reload()
       } else {
-        window.removeEventListener("scroll", this.checkIsScreenLandscape);
+        window.removeEventListener('scroll', this.checkIsScreenLandscape)
       }
     },
     locomotiveScroll() {
       this.lmS = new this.LocomotiveScroll({
-        el: document.querySelector("[data-scroll-container]"),
-        smooth: true,
-        direction: "horizontal",
-        multiplier: 1,
-        horizontalGesture: true
-      });
-      console.log("lmS", this.lmS);
-    }
-  }
-};
+        el               : document.querySelector('[data-scroll-container]'),
+        smooth           : true,
+        direction        : 'horizontal',
+        multiplier       : 0.5,
+        horizontalGesture: true,
+      })
+    },
+  },
+}
 </script>
 <style lang="scss" module>
 @use '~/assets/scss/value' as v;
@@ -142,6 +143,7 @@ export default {
 
 .sections_container {
   position: relative;
+  width: 100%;
   overflow: hidden;
 }
 </style>
