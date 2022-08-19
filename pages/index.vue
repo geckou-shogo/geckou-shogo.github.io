@@ -15,13 +15,10 @@
         v-for="section in sections"
         :id="section.idName"
         :key="section.idName"
-        v-inview:enter="
-          () => {
-            currentSection = section.idName;
-          }
-        "
         class="section"
+        data-scroll
         data-scroll-section
+        :data-scroll-id="section.idName"
       >
         <SectionContainer :section="section" />
       </section>
@@ -52,7 +49,6 @@ export default {
           name     : 'VISION',
           component: 'SectionOfVision',
           color    : 'linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);',
-
         },
         {
           idName   : 'service',
@@ -65,7 +61,6 @@ export default {
           name     : 'INFORMATION',
           component: 'SectionOfInfo',
           color    : 'linear-gradient(to bottom, #31527b, #246495 66%,  #086c92);',
-
         },
         {
           idName   : 'contact',
@@ -82,6 +77,13 @@ export default {
 
     this.$nextTick(() => {
       this.locomotiveScroll()
+      this.lmS.on('scroll', args => {
+        console.log(args)
+
+        if (Object.keys(args.currentElements).length === 1) {
+          this.currentSection = Object.keys(args.currentElements)[0]
+        }
+      })
       this.initialized = true
     })
   },
