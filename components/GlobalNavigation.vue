@@ -48,12 +48,13 @@ export default {
 
 .nav {
   position: fixed;
-  width: 100%;
+  width: 0;
   bottom: 64px;
   z-index: v.zIndex(nav);
 }
 .nav_inner {
   display: flex;
+  width: 100vw;
   align-items: center;
   justify-content: center;
 }
