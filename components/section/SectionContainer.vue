@@ -34,6 +34,7 @@ export default {
       type    : Number,
     },
   },
+
 }
 </script>
 
