@@ -30,11 +30,16 @@ export default {
       required: false,
       default : 1000,
     },
+    loadingText: {
+      type    : String,
+      required: false,
+      default : 'Loading...',
+    },
   },
   data() {
     return {
       displayState: true,
-      loadingText : 'Loading...',
+      // loadingText : 'Loading...',
     }
   },
   mounted() {

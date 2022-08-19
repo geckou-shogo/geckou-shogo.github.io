@@ -1,6 +1,7 @@
 <template>
   <div
     :class="[$style.container, 'section_item']"
+    :style="{backgroundPositionY: `${backgroundPositionY}%`}"
   >
     <SectionHeader
       v-if="section.idName !== 'top'"
@@ -28,6 +29,20 @@ export default {
       type    : Object,
       default : () => { },
     },
+    progress: {
+      required: true,
+      type    : Number,
+    },
+  },
+  data() {
+    return {
+      backgroundPositionY: 0,
+    }
+  },
+  watch: {
+    progress(newValue) {
+      this.backgroundPositionY = newValue > this.backgroundPositionY ? newValue : this.backgroundPositionY
+    },
   },
 }
 </script>
@@ -41,7 +56,7 @@ export default {
   position        : relative;
   display         : flex;
   height          : 100vh;
-  min-width       : 100vw;
+  min-width       : calc(100vw + 1px);
   background-image: linear-gradient(
     to bottom,
     rgba(25, 44, 56, 1) 6.6%,

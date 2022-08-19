@@ -10,7 +10,7 @@
         >
           <a
             :href="`#${section.idName}`"
-            :class="[$style.nav_link, 'anchor']"
+            :class="[$style.nav_link, $style.anchor]"
             data-scroll-to
           >
             {{ section.name }}
@@ -59,7 +59,7 @@ export default {
 
 .nav_list {
   display: flex;
-  gap: 0 60px;
+  gap: 0 v.$val * 16;
   align-items: center;
   font-size: f.size(small);
   font-family: f.family(english);
@@ -121,4 +121,11 @@ export default {
     }
   }
 }
+</style>
+
+<style lang="scss">
+@use '~/assets/scss/value' as v;
+@use '~/assets/scss/font' as f;
+@use '~/assets/scss/color' as c;
+
 </style>

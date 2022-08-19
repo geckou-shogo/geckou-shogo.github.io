@@ -20,7 +20,10 @@
         data-scroll-section
         :data-scroll-id="section.idName"
       >
-        <SectionContainer :section="section" />
+        <SectionContainer
+          :section="section"
+          :progress="progress"
+        />
       </section>
     </div>
   </main>
@@ -80,8 +83,7 @@ export default {
       this.locomotiveScroll()
       this.lmS.on('scroll', args => {
         if (Object.keys(args.currentElements).length === 1) this.currentSection = Object.keys(args.currentElements)[0]
-        const progress = args.scroll.x / args.limit.x * 100
-        this.progress = progress > this.progress ? progress : this.progress
+        this.progress = args.scroll.x / args.limit.x * 100
       })
       this.initialized = true
     })
