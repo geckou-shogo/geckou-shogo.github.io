@@ -12,6 +12,7 @@ module.exports = {
   // add your custom rules here
   rules  : {
     'arrow-parens': ['error', 'as-needed'],
+    curly         : ['error', 'multi'],
     'key-spacing' : ['error', {
       align: 'colon',
     }],

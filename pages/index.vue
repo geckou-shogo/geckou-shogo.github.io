@@ -37,6 +37,7 @@ export default {
       initialized   : false,
       currentSection: 'top',
       screenStatus  : '',
+      progress      : 0,
       sections      : [
         {
           idName   : 'top',
@@ -78,13 +79,8 @@ export default {
     this.$nextTick(() => {
       this.locomotiveScroll()
       this.lmS.on('scroll', args => {
-        if (Object.keys(args.currentElements).length) {
-          this.currentSection = Object.keys(args.currentElements)[0]
-        }
-        // if (typeof args.currentElements.hey === 'object') {
-        //   const progress = args.currentElements.hey.progress
-        //   console.log(progress)
-        // }
+        if (Object.keys(args.currentElements).length === 1) this.currentSection = Object.keys(args.currentElements)[0]
+        this.progress = args.scroll.y / args.limit.y * 100
       })
       this.initialized = true
     })
@@ -96,11 +92,10 @@ export default {
     checkIsScreenLandscape() {
       const currentScreenStatus =
         window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
-      if (this.screenStatus !== currentScreenStatus) {
+      if (this.screenStatus !== currentScreenStatus)
         location.reload()
-      } else {
+      else
         window.removeEventListener('scroll', this.checkIsScreenLandscape)
-      }
     },
     locomotiveScroll() {
       this.lmS = new this.LocomotiveScroll({
