@@ -41,7 +41,7 @@ export default {
   },
   watch: {
     progress(newValue) {
-      this.backgroundPositionY = newValue > this.backgroundPositionY ? newValue : this.backgroundPositionY
+      if (newValue > this.backgroundPositionY) this.backgroundPositionY = newValue
     },
   },
 }
