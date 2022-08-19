@@ -6,15 +6,11 @@
           v-for="section in sections"
           :id="`nav-${section.idName}`"
           :key="section.idName"
-          :class="[
-            $style.nav_li,
-            'nav_li',
-            currentSection === section.id ? $style.current : ''
-          ]"
+          :class="[$style.nav_li, currentSection === section.idName ? $style.current : '']"
         >
           <a
             :href="`#${section.idName}`"
-            :class="[$style.nav_link, 'anchor']"
+            :class="[$style.nav_link, $style.anchor]"
             data-scroll-to
           >
             {{ section.name }}
@@ -47,30 +43,37 @@ export default {
 @use '~/assets/scss/color' as c;
 
 .nav {
-  position: fixed;
-  width: 100%;
-  bottom: 64px;
-  z-index: v.zIndex(nav);
+  width   : 0;
+  position: absolute;
+  bottom  : v.$val * 8;
+  z-index : v.zIndex(nav);
 }
+
 .nav_inner {
+  width: 100vw;
   display: flex;
+  width: 100vw;
   align-items: center;
   justify-content: center;
 }
+
 .nav_list {
   display: flex;
-  gap: 0 60px;
+  gap: 0 v.$val * 16;
   align-items: center;
   font-size: f.size(small);
   font-family: f.family(english);
   color: c.$white;
 }
+
 .nav_li {
   position: relative;
   transition: opacity 0.3s;
+
   &:hover {
     opacity: 0.7;
   }
+
   &::after {
     content: "";
     position: absolute;
@@ -85,6 +88,38 @@ export default {
     transition: opacity 0.8s;
     pointer-events: none;
   }
+
+  &.current {
+    &::after {
+      content: "";
+      opacity: 1;
+    }
+
+    .anchor {
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100px;
+        height: 2px;
+        background-color: c.$white;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: block;
+        width: 54px;
+        height: 54px;
+        background-image: url("../assets/img/gecko.png");
+        background-size: 100%;
+      }
+    }
+  }
 }
 </style>
 
@@ -93,35 +128,4 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
-.nav_li.current {
-  &::after {
-    content: "";
-    opacity: 1;
-  }
-
-  .anchor {
-    position: relative;
-    &::before {
-      content: "";
-      position: absolute;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100px;
-      height: 2px;
-      background-color: c.$white;
-    }
-    &::after {
-      content: "";
-      position: absolute;
-      top: 8px;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      display: block;
-      width: 54px;
-      height: 54px;
-      background-image: url("../assets/img/gecko.png");
-      background-size: 100%;
-    }
-  }
-}
 </style>

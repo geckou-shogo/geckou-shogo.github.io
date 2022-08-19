@@ -1,6 +1,7 @@
 <template>
   <div
     :class="[$style.container, 'section_item']"
+    :style="{backgroundPositionY: `${backgroundPositionY}%`}"
   >
     <SectionHeader
       v-if="section.idName !== 'top'"
@@ -8,10 +9,14 @@
       :heading="section.name"
       :transparent="section.idName === 'contact'"
     />
-    <component
-      :is="section.component"
-      :section="section"
-    />
+    <div
+      :class="$style.contents"
+    >
+      <component
+        :is="section.component"
+        :section="section"
+      />
+    </div>
   </div>
 </template>
 
@@ -24,6 +29,20 @@ export default {
       type    : Object,
       default : () => { },
     },
+    progress: {
+      required: true,
+      type    : Number,
+    },
+  },
+  data() {
+    return {
+      backgroundPositionY: 0,
+    }
+  },
+  watch: {
+    progress(newValue) {
+      if (newValue > this.backgroundPositionY) this.backgroundPositionY = newValue
+    },
   },
 }
 </script>
@@ -34,10 +53,10 @@ export default {
 @use '~/assets/scss/color' as c;
 
 .container {
-  position  : relative;
-  display   : flex;
-  min-width : 100vw;
-  height    : 100vh;
+  position        : relative;
+  display         : flex;
+  height          : 100vh;
+  min-width       : calc(100vw + 1px);
   background-image: linear-gradient(
     to bottom,
     rgba(25, 44, 56, 1) 6.6%,
@@ -54,6 +73,6 @@ export default {
     rgba(8, 108, 146, 1) 79.2%,
     /* contactは未記入 */
     );
-    background-size: 100% 400vh;
+  background-size: 100% 400vh;
 }
 </style>

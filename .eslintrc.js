@@ -12,6 +12,7 @@ module.exports = {
   // add your custom rules here
   rules  : {
     'arrow-parens': ['error', 'as-needed'],
+    curly         : ['error', 'multi'],
     'key-spacing' : ['error', {
       align: 'colon',
     }],
@@ -19,10 +20,10 @@ module.exports = {
     'no-multi-spaces': ['error', {
       exceptions: { VariableDeclarator: true },
     }],
-    'space-before-function-paren': ['error', 'never'],
-    'vue/attribute-hyphenation'  : ['error', 'never', {
-      ignore: [],
-    }],
+    'space-before-function-paren'   : ['error', 'never'],
     'vue/multi-word-component-names': 'off',
+    'vue/attribute-hyphenation'     : ['error', 'never', {
+      ignore: ['custom-prop'],
+    }],
   },
 }

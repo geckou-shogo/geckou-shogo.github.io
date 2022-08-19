@@ -77,9 +77,8 @@ export default {
         const headingMaxLength = 'INFORMATION'.length
         const letterSpacing    = 1.16
         return Math.floor(headerWidth / headingMaxLength / letterSpacing)
-      } else {
+      } else
         return 0
-      }
     },
   },
 }
@@ -101,6 +100,7 @@ export default {
   background-color: c.$bgBlack;
 
   &.transparent {
+    margin-top: 1.8rem;
     background-color: transparent;
   }
 }
