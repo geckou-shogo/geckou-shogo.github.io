@@ -5,16 +5,13 @@
     <div
       :class="$style.loading_box"
     >
-      <span :class="[$style.l_1, $style.letter]">L</span>
-      <span :class="[$style.l_2, $style.letter]">o</span>
-      <span :class="[$style.l_3, $style.letter]">a</span>
-      <span :class="[$style.l_4, $style.letter]">d</span>
-      <span :class="[$style.l_5, $style.letter]">i</span>
-      <span :class="[$style.l_6, $style.letter]">n</span>
-      <span :class="[$style.l_7, $style.letter]">g</span>
-      <span :class="[$style.l_8, $style.letter]">.</span>
-      <span :class="[$style.l_9, $style.letter]">.</span>
-      <span :class="[$style.l_10, $style.letter]">.</span>
+      <span
+        v-for="(i, index) in loadingText.length"
+        :key="i"
+        :class="[$style[`l_${i}`], $style.letter]"
+      >
+        {{ loadingText[index] }}
+      </span>
     </div>
   </div>
 </template>
@@ -24,17 +21,25 @@ export default {
   name: 'LoadingScreen',
   props: {
     initialized: {
-      type   : Boolean,
-      default: true,
+      type    : Boolean,
+      required: true,
+      default : true,
     },
     displayTime: {
-      type   : Number,
-      default: 1000,
+      type    : Number,
+      required: false,
+      default : 3000,
     },
+    loadingText: {
+      type: String,
+      required: false,
+      default: 'Loading...'
+    }
   },
   data() {
     return {
       displayState: true,
+      // loadingText : 'Loading...',
     }
   },
   mounted() {
@@ -69,7 +74,7 @@ export default {
     display        : flex;
     align-items    : center;
     justify-content: center;
-    gap            : 0 v.$val * 5;
+    gap            : 0 v.$val * 2;
 
     .letter {
       font-size                : f.size('larger');

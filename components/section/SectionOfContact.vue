@@ -22,7 +22,6 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
-.contact_header.transparent {
-  background-color: transparent;
-}
+
+
 </style>

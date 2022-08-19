@@ -9,12 +9,12 @@
           :class="[
             $style.nav_li,
             'nav_li',
-            currentSection === section.id ? $style.current : ''
+            currentSection === section.idName ? $style.current : ''
           ]"
         >
           <a
             :href="`#${section.idName}`"
-            :class="[$style.nav_link, 'anchor']"
+            :class="[$style.nav_link, $style.anchor]"
             data-scroll-to
           >
             {{ section.name }}
@@ -93,12 +93,6 @@ export default {
     pointer-events: none;
   }
 }
-</style>
-
-<style lang="scss">
-@use '~/assets/scss/value' as v;
-@use '~/assets/scss/font' as f;
-@use '~/assets/scss/color' as c;
 
 .nav_li.current {
   &::after {
@@ -131,4 +125,12 @@ export default {
     }
   }
 }
+</style>
+
+<style lang="scss">
+@use '~/assets/scss/value' as v;
+@use '~/assets/scss/font' as f;
+@use '~/assets/scss/color' as c;
+
+
 </style>

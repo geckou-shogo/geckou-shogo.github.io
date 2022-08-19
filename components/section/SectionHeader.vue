@@ -101,6 +101,7 @@ export default {
   background-color: c.$bgBlack;
 
   &.transparent {
+    margin-top: 1.8rem;
     background-color: transparent;
   }
 }
