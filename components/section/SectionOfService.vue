@@ -135,22 +135,12 @@ export default {
     padding-top: 1rem;
     white-space: normal;
     &_link {
-      color: c.$yellow;
       position: relative;
-      z-index: 1;
-      &::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: 0.2rem;
-        width: 0%;
-        height: 1px;
-        background-color: c.$yellow;
-        z-index: -1;
-        transition: width .5s;
-      }
-      &:hover::after {
-        width: 100%;
+      color: c.$yellow;
+      text-decoration: underline;
+      text-underline-offset: 0.2rem;
+      &:hover {
+        text-decoration: none;
       }
     }
   }
@@ -178,26 +168,16 @@ export default {
     pointer-events: none;
   }
   &_link {
-    top: -5rem;
+    top: -8rem;
     left: 15rem;
     width: calc(10rem * 1.16 + 2rem );
     a {
       position: relative;
       color: c.$yellow;
-      z-index: 1;
-      &::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: 0.2rem;
-        width: 0%;
-        height: 1px;
-        background-color: c.$yellow;
-        z-index: -1;
-        transition: width .5s;
-      }
-      &:hover::after {
-        width: 100%;
+      text-decoration: underline;
+      text-underline-offset: 0.2rem;
+      &:hover {
+        text-decoration: none;
       }
     }
   }
