@@ -93,6 +93,7 @@ export default {
     })
     this.$nextTick(() => {
       this.locomotiveScroll()
+      this.locomotiveCurrent()
     })
   },
 
@@ -116,6 +117,17 @@ export default {
         direction        : 'horizontal',
         multiplier       : 0.5,
         horizontalGesture: true,
+      })
+    },
+    locomotiveCurrent() {
+      this.lmS.on('scroll', args => {
+        // Get all current elements : args.currentElements
+        if (typeof args.currentElements.hey === 'object') {
+          const progress = args.currentElements.hey.progress
+          console.log(progress)
+        // ouput log example: 0.34
+        // gsap example : myGsapAnimation.progress(progress);
+        }
       })
     },
   },

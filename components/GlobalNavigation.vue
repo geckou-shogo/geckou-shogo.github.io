@@ -47,15 +47,23 @@ export default {
 @use '~/assets/scss/color' as c;
 
 .nav {
+<<<<<<< HEAD
+  position: fixed;
+  width: 0;
+  bottom: 64px;
+  z-index: v.zIndex(nav);
+=======
   width: 0;
   position: absolute;
   bottom  : v.$val * 8;
   z-index : v.zIndex(nav);
+>>>>>>> a08bca2cefc24d65e29e6bd47f59e43b0f326371
 }
 
 .nav_inner {
   width: 100vw;
   display: flex;
+  width: 100vw;
   align-items: center;
   justify-content: center;
 }
