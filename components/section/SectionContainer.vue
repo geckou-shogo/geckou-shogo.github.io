@@ -8,10 +8,14 @@
       :heading="section.name"
       :transparent="section.idName === 'contact'"
     />
-    <component
-      :is="section.component"
-      :section="section"
-    />
+    <div
+      :class="$style.contents"
+    >
+      <component
+        :is="section.component"
+        :section="section"
+      />
+    </div>
   </div>
 </template>
 
@@ -37,6 +41,7 @@ export default {
   position        : relative;
   display         : flex;
   height          : 100vh;
+  min-width       : 100vw;
   background-image: linear-gradient(
     to bottom,
     rgba(25, 44, 56, 1) 6.6%,

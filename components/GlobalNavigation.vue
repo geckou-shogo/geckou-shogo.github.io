@@ -6,11 +6,7 @@
           v-for="section in sections"
           :id="`nav-${section.idName}`"
           :key="section.idName"
-          :class="[
-            $style.nav_li,
-            'nav_li',
-            currentSection === section.id ? $style.current : ''
-          ]"
+          :class="[$style.nav_li, currentSection === section.idName ? $style.current : '']"
         >
           <a
             :href="`#${section.idName}`"
@@ -47,17 +43,10 @@ export default {
 @use '~/assets/scss/color' as c;
 
 .nav {
-<<<<<<< HEAD
-  position: fixed;
-  width: 0;
-  bottom: 64px;
-  z-index: v.zIndex(nav);
-=======
-  width: 0;
+  width   : 0;
   position: absolute;
   bottom  : v.$val * 8;
   z-index : v.zIndex(nav);
->>>>>>> a08bca2cefc24d65e29e6bd47f59e43b0f326371
 }
 
 .nav_inner {
@@ -99,42 +88,36 @@ export default {
     transition: opacity 0.8s;
     pointer-events: none;
   }
-}
-</style>
 
-<style lang="scss">
-@use '~/assets/scss/value' as v;
-@use '~/assets/scss/font' as f;
-@use '~/assets/scss/color' as c;
-
-.nav_li.current {
-  &::after {
-    content: "";
-    opacity: 1;
-  }
-
-  .anchor {
-    position: relative;
-    &::before {
-      content: "";
-      position: absolute;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100px;
-      height: 2px;
-      background-color: c.$white;
-    }
+  &.current {
     &::after {
       content: "";
-      position: absolute;
-      top: 8px;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      display: block;
-      width: 54px;
-      height: 54px;
-      background-image: url("../assets/img/gecko.png");
-      background-size: 100%;
+      opacity: 1;
+    }
+
+    .anchor {
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100px;
+        height: 2px;
+        background-color: c.$white;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: block;
+        width: 54px;
+        height: 54px;
+        background-image: url("../assets/img/gecko.png");
+        background-size: 100%;
+      }
     }
   }
 }

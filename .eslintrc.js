@@ -21,7 +21,7 @@ module.exports = {
     }],
     'space-before-function-paren'   : ['error', 'never'],
     'vue/multi-word-component-names': 'off',
-    'vue/attribute-hyphenation'     : ['error', 'always' | 'never', {
+    'vue/attribute-hyphenation'     : ['error', 'never', {
       ignore: ['custom-prop'],
     }],
   },
