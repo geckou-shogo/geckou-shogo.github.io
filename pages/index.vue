@@ -1,18 +1,16 @@
 <template>
   <main :class="$style.frontpage">
     <LoadingScreen
-      :v-if="isShow"
-      :class="[$style.loading, isShow ? '' : $style.hide]"
+      :initialized="initialized"
     />
     <div
-      :class="[
-        $style.sections_container,
-        'sections_container',
-        isShow ? '' : $style.show
-      ]"
+      :class="[ $style.sections_container, initialized ? $style.show : '']"
       data-scroll-container
     >
-      <GlobalNavigation :sections="sections" :currentSection="currentSection" />
+      <GlobalNavigation
+        :sections="sections"
+        :currentSection="currentSection"
+      />
       <section
         v-for="section in sections"
         :id="section.idName"
@@ -39,7 +37,7 @@ export default {
   data() {
     return {
       lmS           : null,
-      isShow        : true,
+      initialized   : false,
       currentSection: 'top',
       screenStatus  : '',
       sections      : [
@@ -74,25 +72,19 @@ export default {
           name     : 'CONTACT',
           component: 'SectionOfContact',
           color    : 'linear-gradient(to bottom, #31527b, #246495 66%,  #086c92);',
-
         },
       ],
     }
   },
   mounted() {
-    this.screenStatus =
-      window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
+    this.screenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
     window.addEventListener('resize', this.registrationScrollEvent)
-    this.$nextTick(() => {
-      setTimeout(() => {
-        this.isShow = false
-      }, 3000)
-    })
+
     this.$nextTick(() => {
       this.locomotiveScroll()
+      this.initialized = true
     })
   },
-
   methods: {
     registrationScrollEvent() {
       window.addEventListener('scroll', this.checkIsScreenLandscape)
@@ -108,11 +100,10 @@ export default {
     },
     locomotiveScroll() {
       this.lmS = new this.LocomotiveScroll({
-        el               : document.querySelector('[data-scroll-container]'),
-        smooth           : true,
-        direction        : 'horizontal',
-        multiplier       : 0.5,
-        horizontalGesture: true,
+        el        : document.querySelector('[data-scroll-container]'),
+        smooth    : true,
+        direction : 'horizontal',
+        multiplier: 0.5,
       })
     },
   },
@@ -125,22 +116,7 @@ export default {
 
 .frontpage {
   overscroll-behavior-y: none;
-  overflow: hidden;
-  background-color: c.$black;
-}
-
-.loading {
-  transition: all 1s;
-  &.hide {
-    opacity: 0;
-    visibility: hidden;
-    z-index: v.zIndex("off");
-  }
-}
-
-.sections_container {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
+  overflow             : hidden;
+  background-color     : c.$black;
 }
 </style>
