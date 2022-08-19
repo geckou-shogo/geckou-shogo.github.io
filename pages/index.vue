@@ -84,7 +84,6 @@ export default {
       this.lmS.on('scroll', args => {
         if (Object.keys(args.currentElements).length === 1) this.currentSection = Object.keys(args.currentElements)[0]
         this.progress = args.scroll.x / args.limit.x * 100
-        console.log(this.progress)
       })
       this.initialized = true
     })
@@ -122,5 +121,4 @@ export default {
   overflow             : hidden;
   background-color     : c.$black;
 }
-
 </style>

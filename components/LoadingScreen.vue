@@ -43,11 +43,10 @@ export default {
     }
   },
   mounted() {
-    if (this.initialized) {
+    if (this.initialized)
       setTimeout(() => {
         this.displayState = false
       }, this.displayTime)
-    }
   },
 }
 </script>

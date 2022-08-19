@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[$style.container, 'section_item']"
-    :style="{backgroundPositionY: `${progress}%`}"
+    :style="{backgroundPositionY: `${backgroundPositionY}%`}"
   >
     <SectionHeader
       v-if="section.idName !== 'top'"
@@ -34,7 +34,16 @@ export default {
       type    : Number,
     },
   },
-
+  data() {
+    return {
+      backgroundPositionY: 0,
+    }
+  },
+  watch: {
+    progress(newValue) {
+      this.backgroundPositionY = newValue > this.backgroundPositionY ? newValue : this.backgroundPositionY
+    },
+  },
 }
 </script>
 
