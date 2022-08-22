@@ -30,8 +30,6 @@
 </template>
 
 <script>
-// import gsap from 'gsap'
-// import { ScrollTrigger } from 'gsap/all'
 
 export default {
   data() {
@@ -43,34 +41,40 @@ export default {
       progress      : 0,
       sections      : [
         {
-          idName   : 'top',
-          name     : 'TOP',
-          component: 'SectionOfTop',
-          color    : 'linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);',
+          idName    : 'top',
+          name      : 'TOP',
+          component : 'SectionOfTop',
+          color     : 'linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);',
+          background: '',
         },
         {
-          idName   : 'vision',
-          name     : 'VISION',
-          component: 'SectionOfVision',
-          color    : 'linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);',
+          idName    : 'vision',
+          name      : 'VISION',
+          component : 'SectionOfVision',
+          color     : 'linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);',
+          background: 'BackgroundForeset',
+
         },
         {
-          idName   : 'service',
-          name     : 'SERVICE',
-          component: 'SectionOfService',
-          color    : 'linear-gradient(to bottom, #192c38, #15324f 34%,  #31527b);',
+          idName    : 'service',
+          name      : 'SERVICE',
+          component : 'SectionOfService',
+          color     : 'linear-gradient(to bottom, #192c38, #15324f 34%,  #31527b);',
+          background: 'BackgroundTown',
         },
         {
-          idName   : 'information',
-          name     : 'INFORMATION',
-          component: 'SectionOfInfo',
-          color    : 'linear-gradient(to bottom, #31527b, #246495 66%,  #086c92);',
+          idName    : 'information',
+          name      : 'INFORMATION',
+          component : 'SectionOfInfo',
+          color     : 'linear-gradient(to bottom, #31527b, #246495 66%,  #086c92);',
+          background: 'BackgroundBuilding',
         },
         {
-          idName   : 'contact',
-          name     : 'CONTACT',
-          component: 'SectionOfContact',
-          color    : 'linear-gradient(to bottom, #31527b, #246495 66%,  #086c92);',
+          idName    : 'contact',
+          name      : 'CONTACT',
+          component : 'SectionOfContact',
+          color     : 'linear-gradient(to bottom, #31527b, #246495 66%,  #086c92);',
+          background: '',
         },
       ],
     }

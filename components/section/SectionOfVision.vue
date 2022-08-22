@@ -81,21 +81,27 @@ export default {
 @use '~/assets/scss/value' as v;
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
-
-/* .show_marker {
-  position: absolute;
-  right: -100px;
-  width: 2px;
-  height: 100vh;
-  background: tomato;
-} */
-
+.section {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-image: url(~/assets/img/svg/forest.svg);
+    background-position: 50% 20%;
+    mix-blend-mode: soft-light;
+  }
+}
+//雨のアニメーションを止める要素
 .rain_marker {
   position: absolute;
   right: -100px;
   width: 2px;
   height: 100vh;
-  /* background: c.$blue; */
 }
 
 .vision_rain {

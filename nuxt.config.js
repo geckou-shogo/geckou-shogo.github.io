@@ -69,7 +69,16 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
+    'nuxt-svg-loader',
+    'nuxt-gsap-module',
   ],
+
+  gsap: {
+    extraPlugins: {
+      scrollTrigger: true,
+      scrollTo     : true,
+    },
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},

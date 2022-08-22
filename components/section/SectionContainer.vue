@@ -30,7 +30,7 @@ export default {
       default : () => { },
     },
     progress: {
-      required: true,
+      required: false,
       type    : Number,
     },
   },
