@@ -52,7 +52,7 @@ export default {
           name      : 'VISION',
           component : 'SectionOfVision',
           color     : 'linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);',
-          background: 'BackgroundForeset',
+          background: 'BackgroundForest',
 
         },
         {

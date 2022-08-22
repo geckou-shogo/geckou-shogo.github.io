@@ -16,11 +16,15 @@
         :is="section.component"
         :section="section"
       />
+      <ParallaxBackground
+        :background="section.background"
+      />
     </div>
   </div>
 </template>
 
 <script>
+
 export default {
   name : 'SectionContainer',
   props: {
@@ -30,7 +34,7 @@ export default {
       default : () => { },
     },
     progress: {
-      required: false,
+      required: true,
       type    : Number,
     },
   },

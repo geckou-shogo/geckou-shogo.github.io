@@ -9,36 +9,40 @@
         :class="$style.list"
       >
         <div
-          v-for="(item, index) in company"
-          :key="company"
+          v-for="item in company"
+          :key="item.name"
           :class="$style.item"
         >
           <dt :class="$style.item_dt">
             {{ item.name }}
           </dt>
           <dd :class="$style.item_dd">
+            <address
+              v-if="item.name === '住所'"
+              :class="$style.item_address"
+            >
+              <div
+                v-for="(value, key) in item.description"
+                :key="key"
+              >
+                {{ value }}
+              </div>
+            </address>
             <div
-              v-if="item.name !== '住所' && item.name !== '事業内容' "
+              v-else-if="item.name === '事業内容'"
+            >
+              <div
+                v-for="text in item.description"
+                :key="text"
+              >
+                {{ text }}
+              </div>
+            </div>
+            <div
+              v-else
               :class="$style.item_description"
             >
               {{ item.description }}
-            </div>
-            <div
-              :class="$style.item_address"
-            >
-              {{ item.description.postcode }}
-              {{ item.description.address1 }}
-              {{ item.description.address2 }}
-              {{ item.description.building }}
-            </div>
-            <div
-              v-for="text in 1"
-              v-if="item.name === '事業内容'"
-              :class="$style.item_business"
-            >
-              {{ item.description[0] }}
-              {{ item.description[1] }}
-              {{ item.description[2] }}
             </div>
           </dd>
         </div>
@@ -69,8 +73,8 @@ export default {
           description: '2019年12月25日',
         },
         {
-          name       : '設立',
-          description: '2019年12月25日',
+          name       : '代表社員',
+          description: '野島将吾',
         },
         {
           name       : '資本金',
@@ -104,4 +108,7 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
+.item_address {
+  font-style: normal;
+}
 </style>

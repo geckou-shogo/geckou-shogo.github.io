@@ -56,7 +56,6 @@ export default {
   top:auto;
   width: 100%;
   height:100vh;
-  overflow: hidden;
   span {
     position: absolute;
     width:1px;
