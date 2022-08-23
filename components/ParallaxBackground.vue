@@ -41,14 +41,15 @@ export default {
 @use '~/assets/scss/color' as c;
 
 .svg {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  width: 110%;
+  width: 100vw;
   height: auto;
+  z-index: 1;
+  mix-blend-mode: soft-light;
   &_image {
-    object-fit: contain;
+    fill: c.$white;
   }
-
 }
 </style>

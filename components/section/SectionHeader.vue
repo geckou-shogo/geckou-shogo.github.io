@@ -98,6 +98,7 @@ export default {
   justify-content : center;
   aspect-ratio    : 1 / 1.62;
   background-color: c.$bgBlack;
+  z-index: v.zIndex('medium');
 
   &.transparent {
     margin-top: 1.8rem;
