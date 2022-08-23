@@ -1,12 +1,13 @@
 <template>
   <div
     data-scroll
-    data-scroll-speed="1"
+    data-scroll-speed="2"
+    :class="$style.svg"
   >
     <component
       :is="background"
       v-if="background"
-      :class="$style.svg"
+      :class="$style.svg_image"
     />
   </div>
 </template>
@@ -39,9 +40,15 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
-/* .svg {
+.svg {
   position: absolute;
   top: 0;
   left: 0;
-} */
+  width: 110%;
+  height: auto;
+  &_image {
+    object-fit: contain;
+  }
+
+}
 </style>
