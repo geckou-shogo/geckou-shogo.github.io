@@ -79,4 +79,9 @@ export default {
     );
   background-size: 100% 400vh;
 }
+
+.contents {
+  flex    : 1 1 auto;
+  position: relative;
+}
 </style>

@@ -1,14 +1,18 @@
 <template>
   <div
-    data-scroll
-    data-scroll-speed="2"
-    :class="$style.svg"
+    :class="$style.wrapper"
   >
-    <component
-      :is="background"
-      v-if="background"
-      :class="$style.svg_image"
-    />
+    <div
+      data-scroll
+      data-scroll-speed="2"
+      :class="$style.image"
+    >
+      <component
+        :is="background"
+        v-if="background"
+        :class="$style.svg_image"
+      />
+    </div>
   </div>
 </template>
 
@@ -40,15 +44,23 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
-.svg {
+.wrapper {
+  width   : 100vw;
+  height  : 100vh;
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 110%;
-  height: auto;
-  &_image {
-    object-fit: contain;
-  }
+  top     : 0;
+  left    : 0;
+}
 
+.image {
+  position      : absolute;
+  bottom        : 50%;
+  left          : 0;
+  width         : 150%;
+  mix-blend-mode: overlay;
+
+  > svg {
+    fill: c.$white;
+  }
 }
 </style>
