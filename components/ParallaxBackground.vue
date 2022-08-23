@@ -3,14 +3,15 @@
     :class="$style.wrapper"
   >
     <div
+      :class="$style.image"
       data-scroll
       data-scroll-speed="2"
-      :class="$style.image"
     >
       <component
         :is="background"
         v-if="background"
         :class="$style.svg_image"
+        preserveAspectRatio="none"
       />
     </div>
   </div>
@@ -45,22 +46,22 @@ export default {
 @use '~/assets/scss/color' as c;
 
 .wrapper {
+  position: absolute;
   width   : 100vw;
   height  : 100vh;
-  position: absolute;
   top     : 0;
   left    : 0;
+  mix-blend-mode: overlay;
+  pointer-events:  none;
 }
 
 .image {
   position      : absolute;
   bottom        : 50%;
   left          : 0;
-  width         : 150%;
-  mix-blend-mode: overlay;
-
-  > svg {
-    fill: c.$white;
+  width         : 100%;
+  svg {
+    fill        : c.$white;
   }
 }
 </style>
