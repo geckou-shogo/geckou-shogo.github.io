@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="$style.wrapper"
+    :class="[$style.wrapper, 'parallaxbackground']"
   >
     <div
       :class="$style.image"

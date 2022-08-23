@@ -85,6 +85,7 @@ export default {
 
     this.$nextTick(() => {
       this.locomotiveScroll()
+      this.backgroundScroll()
       this.lmS.on('scroll', args => {
         if (Object.keys(args.currentElements).length === 1) this.currentSection = Object.keys(args.currentElements)[0]
         this.progress = args.scroll.x / args.limit.x * 100
@@ -110,6 +111,14 @@ export default {
         smooth    : true,
         direction : 'horizontal',
         multiplier: 0.5,
+      })
+    },
+    backgroundScroll() {
+      const elm = document.querySelectorAll('.parallaxbackground')
+      this.lmS.start(elm, {
+        initPosition: { x: 0, y: 1000 },
+        duration    : 600,
+        easing      : [0.25, 0.00, 0.35, 1.00],
       })
     },
   },
