@@ -13,26 +13,32 @@
     <div
       :class="$style.contents"
     >
+      <ParallaxBackground
+        v-if="section.background"
+        :background="section.background"
+        :class="$style.background"
+        data-scroll
+        data-scroll-speed="-10"
+      />
       <component
         :is="section.component"
         :section="section"
-      />
-      <ParallaxBackground
-        :background="section.background"
       />
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
   name : 'SectionContainer',
   props: {
     section: {
       required: true,
       type    : Object,
-      default : () => { },
+    },
+    scrollStatus: {
+      required: true,
+      type    : Object,
     },
     progress: {
       required: true,
@@ -77,8 +83,9 @@ export default {
     rgba(36, 100, 149, 1) 72.6%,
     rgba(8, 108, 146, 1) 79.2%,
     /* contactは未記入 */
-    );
+  );
   background-size: 100% 400vh;
+  overflow       : hidden;
 
   @include v.media('mobile') {
     flex-direction: column;
@@ -92,5 +99,11 @@ export default {
 .contents {
   flex    : 1 1 auto;
   position: relative;
+}
+
+.background {
+  position: absolute;
+  top     : 0;
+  left    : 10%;
 }
 </style>

@@ -22,6 +22,7 @@
         <SectionContainer
           :section="section"
           :progress="progress"
+          :scrollStatus="sectionScrollStatus(section.idName)"
         />
       </section>
     </div>
@@ -36,20 +37,19 @@ export default {
       initialized   : false,
       currentSection: 'top',
       screenStatus  : '',
+      scrollStatus  : {},
       progress      : 0,
       sections      : [
         {
           idName    : 'top',
           name      : 'TOP',
           component : 'SectionOfTop',
-          color     : 'linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);',
           background: '',
         },
         {
           idName    : 'vision',
           name      : 'VISION',
           component : 'SectionOfVision',
-          color     : 'linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);',
           background: 'BackgroundForest',
 
         },
@@ -57,21 +57,18 @@ export default {
           idName    : 'service',
           name      : 'SERVICE',
           component : 'SectionOfService',
-          color     : 'linear-gradient(to bottom, #192c38, #15324f 34%,  #31527b);',
           background: 'BackgroundTown',
         },
         {
           idName    : 'information',
           name      : 'INFORMATION',
           component : 'SectionOfInfo',
-          color     : 'linear-gradient(to bottom, #31527b, #246495 66%,  #086c92);',
           background: 'BackgroundBuilding',
         },
         {
           idName    : 'contact',
           name      : 'CONTACT',
           component : 'SectionOfContact',
-          color     : 'linear-gradient(to bottom, #31527b, #246495 66%,  #086c92);',
           background: '',
         },
       ],
@@ -90,10 +87,10 @@ export default {
           multiplier: .5,
         })
 
-        // this.backgroundScroll()
         this.lmS.on('scroll', args => {
           this.checkIsScreenLandscape()
           if (Object.keys(args.currentElements).length === 1) this.currentSection = Object.keys(args.currentElements)[0]
+          this.scrollStatus = args.currentElements
           this.progress = args.scroll.x / args.limit.x * 100
         })
       }
@@ -109,14 +106,9 @@ export default {
       if (this.screenStatus !== currentScreenStatus) location.reload()
       else window.removeEventListener('scroll', this.checkIsScreenLandscape)
     },
-    // backgroundScroll() {
-    //   const elm = document.querySelectorAll('.parallaxbackground')
-    //   this.lmS.start(elm, {
-    //     initPosition: { x: 0, y: 1000 },
-    //     duration    : 600,
-    //     easing      : [0.25, 0.00, 0.35, 1.00],
-    //   })
-    // },
+    sectionScrollStatus(sectionIdName) {
+      return this.scrollStatus?.[sectionIdName] || {}
+    },
   },
 }
 </script>
