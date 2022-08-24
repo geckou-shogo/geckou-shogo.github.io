@@ -89,7 +89,17 @@ export default {
 
         this.lmS.on('scroll', args => {
           this.checkIsScreenLandscape()
-          if (Object.keys(args.currentElements).length === 1) this.currentSection = Object.keys(args.currentElements)[0]
+          const argsCurrentElements = args.currentElements
+          const sectionElements     = Object.keys(argsCurrentElements)
+            .filter(key => {
+              return this.sections.some(section => section.idName === key)
+            })
+            .reduce((result, key) => {
+              result[key] = argsCurrentElements[key]
+              return result
+            }, {})
+
+          if (Object.keys(sectionElements).length === 1) this.currentSection = Object.keys(sectionElements)[0]
           this.scrollStatus = args.currentElements
           this.progress = args.scroll.x / args.limit.x * 100
         })

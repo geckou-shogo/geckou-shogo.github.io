@@ -7,7 +7,6 @@
       v-if="section.idName !== 'top'"
       :idName="section.idName"
       :heading="section.name"
-      :transparent="section.idName === 'contact'"
       :class="$style.header"
     />
     <div

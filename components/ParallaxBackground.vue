@@ -55,7 +55,7 @@ export default {
   bottom  : 50%;
   left    : 0;
   width   : 100%;
-  opacity : .8;
+  opacity : .6;
 
   svg {
     fill: c.$white;
