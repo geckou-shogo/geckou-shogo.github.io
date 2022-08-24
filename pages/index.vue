@@ -15,7 +15,6 @@
         v-for="section in sections"
         :id="section.idName"
         :key="section.idName"
-        class="section"
         data-scroll
         data-scroll-section
         :data-scroll-id="section.idName"
@@ -23,6 +22,7 @@
         <SectionContainer
           :section="section"
           :progress="progress"
+          :scrollStatus="sectionScrollStatus(section.idName)"
         />
       </section>
     </div>
@@ -30,7 +30,6 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -38,20 +37,19 @@ export default {
       initialized   : false,
       currentSection: 'top',
       screenStatus  : '',
+      scrollStatus  : {},
       progress      : 0,
       sections      : [
         {
           idName    : 'top',
           name      : 'TOP',
           component : 'SectionOfTop',
-          color     : 'linear-gradient(to bottom, #192c38, #0b1926 30%,  #0a1d28);',
           background: '',
         },
         {
           idName    : 'vision',
           name      : 'VISION',
           component : 'SectionOfVision',
-          color     : 'linear-gradient(to bottom, #0a1d28, #192c38 30%,  #15324f);',
           background: 'BackgroundForest',
 
         },
@@ -59,21 +57,18 @@ export default {
           idName    : 'service',
           name      : 'SERVICE',
           component : 'SectionOfService',
-          color     : 'linear-gradient(to bottom, #192c38, #15324f 34%,  #31527b);',
           background: 'BackgroundTown',
         },
         {
           idName    : 'information',
           name      : 'INFORMATION',
           component : 'SectionOfInfo',
-          color     : 'linear-gradient(to bottom, #31527b, #246495 66%,  #086c92);',
           background: 'BackgroundBuilding',
         },
         {
           idName    : 'contact',
           name      : 'CONTACT',
           component : 'SectionOfContact',
-          color     : 'linear-gradient(to bottom, #31527b, #246495 66%,  #086c92);',
           background: '',
         },
       ],
@@ -85,9 +80,27 @@ export default {
 
     this.$nextTick(() => {
       if (this.screenStatus === 'landscape') {
-        this.locomotiveScroll()
+        this.lmS = new this.$locomotiveScroll({
+          el        : document.querySelector('[data-scroll-container]'),
+          smooth    : true,
+          direction : 'horizontal',
+          multiplier: .5,
+        })
+
         this.lmS.on('scroll', args => {
-          if (Object.keys(args.currentElements).length === 1) this.currentSection = Object.keys(args.currentElements)[0]
+          this.checkIsScreenLandscape()
+          const argsCurrentElements = args.currentElements
+          const sectionElements     = Object.keys(argsCurrentElements)
+            .filter(key => {
+              return this.sections.some(section => section.idName === key)
+            })
+            .reduce((result, key) => {
+              result[key] = argsCurrentElements[key]
+              return result
+            }, {})
+
+          if (Object.keys(sectionElements).length === 1) this.currentSection = Object.keys(sectionElements)[0]
+          this.scrollStatus = args.currentElements
           this.progress = args.scroll.x / args.limit.x * 100
         })
       }
@@ -103,17 +116,8 @@ export default {
       if (this.screenStatus !== currentScreenStatus) location.reload()
       else window.removeEventListener('scroll', this.checkIsScreenLandscape)
     },
-    locomotiveScroll() {
-      this.lmS = new this.LocomotiveScroll({
-        el        : document.querySelector('[data-scroll-container]'),
-        smooth    : true,
-        direction : 'horizontal',
-        multiplier: 0.5,
-      })
-    },
-    backgroundScroll() {
-      const elms = document.querySelectorAll('.parallaxbackground')
-      console.log(elms)
+    sectionScrollStatus(sectionIdName) {
+      return this.scrollStatus?.[sectionIdName] || {}
     },
   },
 }

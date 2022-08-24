@@ -1,15 +1,15 @@
 <template>
   <div
-    :class="[$style.wrapper, 'parallaxbackground']"
+    :class="$style.wrapper"
   >
     <div
-      :class="[$style.image, 'parallax_image']"
+      :class="$style.image"
+      data-scroll
+      data-scroll-speed="2"
     >
       <component
         :is="background"
         v-if="background"
-        :class="[$style.svg_image, 'svg_image']"
-        preserveAspectRatio="none"
       />
     </div>
   </div>
@@ -21,7 +21,8 @@ import BackgroundTown from '@/assets/img/svg/town.svg'
 import BackgroundBuilding from '@/assets/img/svg/building.svg'
 
 export default {
-  name      : 'ParallaxBackground',
+  name: 'ParallaxBackground',
+
   components: {
     BackgroundForest,
     BackgroundTown,
@@ -33,18 +34,6 @@ export default {
       type    : String,
     },
   },
-  mounted() {
-    const elem = document.querySelector('.parallax_image')
-    if (elem !== null) {
-      const target = document.getElementsByClassName('svg_image')
-      const parallaxConfig = {
-        delay      : 0, // スクロール止めてから動く秒数
-        orientation: 'up', // 動く方向
-        scale      : 1.5, // 動く大きさ
-      }
-      new this.$simpleParallax(target, parallaxConfig)
-    }
-  },
 }
 
 </script>
@@ -55,23 +44,21 @@ export default {
 @use '~/assets/scss/color' as c;
 
 .wrapper {
-  position: absolute;
-  width   : 100vw;
-  height  : 100vh;
-  top     : 0;
-  left    : 0;
+  width         : 130vw;
+  height        : 100vh;
   mix-blend-mode: overlay;
-  pointer-events:  none;
-  overflow: hidden;
+  pointer-events: none;
 }
 
 .image {
-  position      : absolute;
-  bottom        : 50%;
-  left          : 0;
-  width         : 100%;
+  position: absolute;
+  bottom  : 50%;
+  left    : 0;
+  width   : 100%;
+  opacity : .6;
+
   svg {
-    fill        : c.$white;
+    fill: c.$white;
   }
 }
 </style>
