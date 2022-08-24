@@ -13,13 +13,14 @@ module.exports = {
   rules  : {
     'arrow-parens': ['error', 'as-needed'],
     curly         : ['error', 'multi'],
+    'comma-dangle': ['error', 'always-multiline'],
     'key-spacing' : ['error', {
       align: 'colon',
     }],
-    'comma-dangle'   : ['error', 'always-multiline'],
     'no-multi-spaces': ['error', {
       exceptions: { VariableDeclarator: true },
     }],
+    'no-floating-decimal'           : 'off',
     'space-before-function-paren'   : ['error', 'never'],
     'vue/multi-word-component-names': 'off',
     'vue/attribute-hyphenation'     : ['error', 'never', {

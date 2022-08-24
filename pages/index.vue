@@ -15,7 +15,6 @@
         v-for="section in sections"
         :id="section.idName"
         :key="section.idName"
-        class="section"
         data-scroll
         data-scroll-section
         :data-scroll-id="section.idName"
@@ -30,7 +29,6 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -85,9 +83,16 @@ export default {
 
     this.$nextTick(() => {
       if (this.screenStatus === 'landscape') {
-        this.locomotiveScroll()
-        this.backgroundScroll()
+        this.lmS = new this.$locomotiveScroll({
+          el        : document.querySelector('[data-scroll-container]'),
+          smooth    : true,
+          direction : 'horizontal',
+          multiplier: .5,
+        })
+
+        // this.backgroundScroll()
         this.lmS.on('scroll', args => {
+          this.checkIsScreenLandscape()
           if (Object.keys(args.currentElements).length === 1) this.currentSection = Object.keys(args.currentElements)[0]
           this.progress = args.scroll.x / args.limit.x * 100
         })
@@ -104,22 +109,14 @@ export default {
       if (this.screenStatus !== currentScreenStatus) location.reload()
       else window.removeEventListener('scroll', this.checkIsScreenLandscape)
     },
-    locomotiveScroll() {
-      this.lmS = new this.LocomotiveScroll({
-        el        : document.querySelector('[data-scroll-container]'),
-        smooth    : true,
-        direction : 'horizontal',
-        multiplier: 0.5,
-      })
-    },
-    backgroundScroll() {
-      const elm = document.querySelectorAll('.parallaxbackground')
-      this.lmS.start(elm, {
-        initPosition: { x: 0, y: 1000 },
-        duration    : 600,
-        easing      : [0.25, 0.00, 0.35, 1.00],
-      })
-    },
+    // backgroundScroll() {
+    //   const elm = document.querySelectorAll('.parallaxbackground')
+    //   this.lmS.start(elm, {
+    //     initPosition: { x: 0, y: 1000 },
+    //     duration    : 600,
+    //     easing      : [0.25, 0.00, 0.35, 1.00],
+    //   })
+    // },
   },
 }
 </script>

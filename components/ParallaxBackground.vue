@@ -4,7 +4,6 @@
   >
     <div
       :class="$style.image"
-      data-scroll
       data-scroll-speed="2"
     >
       <component
