@@ -50,6 +50,10 @@ export default {
       src : '@/plugins/locomotiveScroll.js',
       mode: 'client',
     },
+    {
+      src : '@/plugins/simpleParallax.js',
+      mode: 'client',
+    },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
