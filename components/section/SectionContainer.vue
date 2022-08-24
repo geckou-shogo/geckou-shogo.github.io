@@ -8,6 +8,7 @@
       :idName="section.idName"
       :heading="section.name"
       :transparent="section.idName === 'contact'"
+      :class="$style.header"
     />
     <div
       :class="$style.contents"
@@ -78,6 +79,14 @@ export default {
     /* contactは未記入 */
     );
   background-size: 100% 400vh;
+
+  @include v.media('mobile') {
+    flex-direction: column;
+  }
+}
+
+.header {
+  flex: 0 0 0;
 }
 
 .contents {

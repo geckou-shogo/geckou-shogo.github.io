@@ -46,7 +46,11 @@ export default {
   width   : 0;
   position: absolute;
   bottom  : v.$val * 8;
-  z-index : v.zIndex(nav);
+  z-index : v.zIndex('nav');
+
+  @include v.media('mobile') {
+    display: none;
+  }
 }
 
 .nav_inner {

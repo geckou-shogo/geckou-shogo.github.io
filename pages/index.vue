@@ -84,12 +84,14 @@ export default {
     window.addEventListener('resize', this.registrationScrollEvent)
 
     this.$nextTick(() => {
-      this.locomotiveScroll()
-      this.backgroundScroll()
-      this.lmS.on('scroll', args => {
-        if (Object.keys(args.currentElements).length === 1) this.currentSection = Object.keys(args.currentElements)[0]
-        this.progress = args.scroll.x / args.limit.x * 100
-      })
+      if (this.screenStatus === 'landscape') {
+        this.locomotiveScroll()
+        this.backgroundScroll()
+        this.lmS.on('scroll', args => {
+          if (Object.keys(args.currentElements).length === 1) this.currentSection = Object.keys(args.currentElements)[0]
+          this.progress = args.scroll.x / args.limit.x * 100
+        })
+      }
       this.initialized = true
     })
   },
@@ -98,12 +100,9 @@ export default {
       window.addEventListener('scroll', this.checkIsScreenLandscape)
     },
     checkIsScreenLandscape() {
-      const currentScreenStatus =
-        window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
-      if (this.screenStatus !== currentScreenStatus)
-        location.reload()
-      else
-        window.removeEventListener('scroll', this.checkIsScreenLandscape)
+      const currentScreenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
+      if (this.screenStatus !== currentScreenStatus) location.reload()
+      else window.removeEventListener('scroll', this.checkIsScreenLandscape)
     },
     locomotiveScroll() {
       this.lmS = new this.LocomotiveScroll({

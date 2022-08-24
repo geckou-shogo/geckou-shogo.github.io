@@ -100,20 +100,25 @@ export default {
   background-color: c.$bgBlack;
   z-index: v.zIndex('medium');
 
+  @include v.media('mobile') {
+    height : auto;
+    padding: v.$val * 2 0;
+  }
+
   &.transparent {
-    margin-top: 1.8rem;
+    margin-top      : 1.8rem;
     background-color: transparent;
   }
 }
 
 .heading {
-  position      : relative;
-  padding-bottom: v.$val * 2;
-  width         : 100%;
-  color         : c.$white;
-  font-family   : f.family('english');
-  text-align    : center;
-  line-height   : 1;
+  position   : relative;
+  padding    : v.$val * 2;
+  width      : 100%;
+  color      : c.$white;
+  font-family: f.family('english');
+  text-align : center;
+  line-height: 1;
 
   &::first-letter {
     color: c.$mainColor;
@@ -168,6 +173,7 @@ export default {
   height: 100vh;
   // background-color: tomato;
 }
+
 @keyframes displayBorder {
   0% {
     width: 0%;

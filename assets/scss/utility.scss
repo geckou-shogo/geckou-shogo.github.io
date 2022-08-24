@@ -6,11 +6,11 @@
   grid-template-columns: repeat(auto-fit, calc((100% - (#{$gap} * ( #{$column} - 1))) / #{$column}));
   gap                  : $gap;
 
-  @include v.mediaScreen( 'tablet' ) {
+  @include v.media( 'tablet' ) {
     grid-template-columns: repeat(auto-fit, calc(( 100% - (#{$gap} * ( #{$tabletColumn} - 1))) / #{$tabletColumn}));
   }
 
-  @include v.mediaScreen( 'mobile' ) {
+  @include v.media( 'mobile' ) {
     grid-template-columns: repeat(auto-fit, calc(( 100% - ((#{$gap} / 2) * ( #{$mobileColumn} - 1))) / #{$mobileColumn}));
     gap                  : math.div($gap, 2);
   }

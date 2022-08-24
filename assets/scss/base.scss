@@ -7,11 +7,11 @@ html {
   scroll-behavior: smooth;
   font-size      : f.baseSize( 'desktop' );
 
-  @include v.mediaScreen( 'tablet' ) {
+  @include v.media( 'tablet' ) {
     font-size: f.baseSize( 'tablet' );
   }
 
-  @include v.mediaScreen( 'mobile' ) {
+  @include v.media( 'mobile' ) {
     font-size: f.baseSize( 'mobile' );
   }
 }
