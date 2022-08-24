@@ -3,14 +3,12 @@
     :class="[$style.wrapper, 'parallaxbackground']"
   >
     <div
-      :class="$style.image"
-      data-scroll
-      data-scroll-speed="2"
+      :class="[$style.image, 'parallax_image']"
     >
       <component
         :is="background"
         v-if="background"
-        :class="$style.svg_image"
+        :class="[$style.svg_image, 'svg_image']"
         preserveAspectRatio="none"
       />
     </div>
@@ -23,8 +21,7 @@ import BackgroundTown from '@/assets/img/svg/town.svg'
 import BackgroundBuilding from '@/assets/img/svg/building.svg'
 
 export default {
-  name: 'ParallaxBackground',
-
+  name      : 'ParallaxBackground',
   components: {
     BackgroundForest,
     BackgroundTown,
@@ -35,6 +32,18 @@ export default {
       required: true,
       type    : String,
     },
+  },
+  mounted() {
+    const elem = document.querySelector('.parallax_image')
+    if (elem !== null) {
+      const target = document.getElementsByClassName('svg_image')
+      const parallaxConfig = {
+        delay      : 0, // スクロール止めてから動く秒数
+        orientation: 'up', // 動く方向
+        scale      : 1.5, // 動く大きさ
+      }
+      new this.$simpleParallax(target, parallaxConfig)
+    }
   },
 }
 
@@ -53,6 +62,7 @@ export default {
   left    : 0;
   mix-blend-mode: overlay;
   pointer-events:  none;
+  overflow: hidden;
 }
 
 .image {
