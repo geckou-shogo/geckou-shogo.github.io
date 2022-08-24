@@ -82,20 +82,12 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
-/* .show_marker {
-  position: absolute;
-  right: -100px;
-  width: 2px;
-  height: 100vh;
-  background: tomato;
-} */
-
+//雨のアニメーションを止める要素
 .rain_marker {
   position: absolute;
   right: -100px;
   width: 2px;
   height: 100vh;
-  /* background: c.$blue; */
 }
 
 .vision_rain {

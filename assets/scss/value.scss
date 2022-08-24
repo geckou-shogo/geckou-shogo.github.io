@@ -4,7 +4,7 @@ $tabletWidthScreenSize : 1024px;
 $tabletHeightScreenSize: 768px;
 $mobileScreenSize      : 480px;
 
-@mixin mediaScreen( $range ) {
+@mixin media( $range ) {
   @if $range == 'desktop' {
     @media all and (min-width: $tabletWidthScreenSize) and (max-width: $desktopScreenSize) { @content; }
   } @else if $range == 'tablet' {

@@ -1,7 +1,54 @@
 <template>
   <div
     :class="$style.section"
-  />
+  >
+    <div
+      :class="$style.section_container"
+    >
+      <dl
+        :class="$style.list"
+      >
+        <div
+          v-for="item in company"
+          :key="item.name"
+          :class="$style.item"
+        >
+          <dt :class="$style.item_dt">
+            {{ item.name }}
+          </dt>
+          <dd :class="$style.item_dd">
+            <address
+              v-if="item.name === '住所'"
+              :class="$style.item_address"
+            >
+              <div
+                v-for="(value, key) in item.description"
+                :key="key"
+              >
+                {{ value }}
+              </div>
+            </address>
+            <div
+              v-else-if="item.name === '事業内容'"
+            >
+              <div
+                v-for="text in item.description"
+                :key="text"
+              >
+                {{ text }}
+              </div>
+            </div>
+            <div
+              v-else
+              :class="$style.item_description"
+            >
+              {{ item.description }}
+            </div>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -14,6 +61,45 @@ export default {
       default : () => {},
     },
   },
+  data() {
+    return {
+      company: [
+        {
+          name       : '商号',
+          description: '合同会社Geckou',
+        },
+        {
+          name       : '設立',
+          description: '2019年12月25日',
+        },
+        {
+          name       : '代表社員',
+          description: '野島将吾',
+        },
+        {
+          name       : '資本金',
+          description: '100万円',
+        },
+        {
+          name       : '住所',
+          description: {
+            postcode: '〒1800006',
+            address1: '東京都武蔵野市',
+            address2: '中町２丁目８番１４号',
+            building: 'ＷＩＬＬ吉祥寺３０２',
+          },
+        },
+        {
+          name       : '事業内容',
+          description: [
+            'WEBデザイン、',
+            'WEB開発の受託',
+            'WEBサービス開発',
+          ],
+        },
+      ],
+    }
+  },
 }
 </script>
 
@@ -22,4 +108,7 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
+.item_address {
+  font-style: normal;
+}
 </style>

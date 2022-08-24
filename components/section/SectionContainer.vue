@@ -8,6 +8,7 @@
       :idName="section.idName"
       :heading="section.name"
       :transparent="section.idName === 'contact'"
+      :class="$style.header"
     />
     <div
       :class="$style.contents"
@@ -16,11 +17,15 @@
         :is="section.component"
         :section="section"
       />
+      <ParallaxBackground
+        :background="section.background"
+      />
     </div>
   </div>
 </template>
 
 <script>
+
 export default {
   name : 'SectionContainer',
   props: {
@@ -74,5 +79,18 @@ export default {
     /* contactは未記入 */
     );
   background-size: 100% 400vh;
+
+  @include v.media('mobile') {
+    flex-direction: column;
+  }
+}
+
+.header {
+  flex: 0 0 0;
+}
+
+.contents {
+  flex    : 1 1 auto;
+  position: relative;
 }
 </style>

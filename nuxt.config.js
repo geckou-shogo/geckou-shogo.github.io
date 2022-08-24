@@ -50,6 +50,10 @@ export default {
       src : '@/plugins/locomotiveScroll.js',
       mode: 'client',
     },
+    {
+      src : '@/plugins/simpleParallax.js',
+      mode: 'client',
+    },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -69,7 +73,16 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
+    'nuxt-svg-loader',
+    'nuxt-gsap-module',
   ],
+
+  gsap: {
+    extraPlugins: {
+      scrollTrigger: true,
+      scrollTo     : true,
+    },
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
