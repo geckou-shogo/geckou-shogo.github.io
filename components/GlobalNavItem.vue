@@ -34,7 +34,7 @@ export default {
 .container {
   display      : flex;
   align-items  : center;
-  width        : v.$val * 20;
+  width        : v.$val * 14;
   border-radius: 50%;
   aspect-ratio : 1 / 1;
   overflow     : hidden;
@@ -85,8 +85,9 @@ export default {
         width              : 100%;
         height             : 100%;
         border-bottom      : 1px solid c.$white;
+        background-size    : 38%;
         background-image   : url('../assets/img/gecko.png');
-        background-position: center;
+        background-position: bottom center;
         opacity            : 1;
       }
     }

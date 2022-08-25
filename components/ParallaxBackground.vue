@@ -46,7 +46,7 @@ export default {
 .wrapper {
   width         : 120vw;
   height        : 100vh;
-  mix-blend-mode: overlay;
+  mix-blend-mode: soft-light;
   pointer-events: none;
 }
 
@@ -55,7 +55,6 @@ export default {
   bottom  : 50%;
   left    : 0;
   width   : 100%;
-  opacity : .6;
 
   svg {
     fill: c.$white;

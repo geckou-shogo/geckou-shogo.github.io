@@ -43,7 +43,7 @@ export default {
 .wrapper {
   width   : 0;
   position: absolute;
-  bottom  : v.$val * 8;
+  bottom  : v.$val * 6;
   z-index : v.zIndex('nav');
 
   @include v.media('mobile') {
@@ -52,18 +52,15 @@ export default {
 }
 
 .container {
-  width          : 100vw;
-  display        : flex;
-  align-items    : center;
-  justify-content: center;
+  width: 100vw;
 }
 
 .list {
   display        : flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items    : center;
-  width          : 100%;
   max-width      : v.$desktopScreenSize;
   margin         : 0 auto;
+  gap            : v.$val * 6;
 }
 </style>

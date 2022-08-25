@@ -60,8 +60,8 @@ export default {
           background: 'BackgroundTown',
         },
         {
-          idName    : 'information',
-          name      : 'INFORMATION',
+          idName    : 'facts',
+          name      : 'FACTS',
           component : 'SectionOfInfo',
           background: 'BackgroundBuilding',
         },

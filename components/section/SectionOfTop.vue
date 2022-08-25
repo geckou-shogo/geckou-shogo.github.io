@@ -25,9 +25,8 @@ export default {
 @use '~/assets/scss/color' as c;
 
 .section {
-  display: flex;
-  width: 100vw;
+  display        : flex;
+  width          : 100vw;
   justify-content: center;
 }
-
 </style>
