@@ -18,6 +18,17 @@
         </li>
       </ul>
     </nav>
+    <div
+      :class="$style.progress"
+    >
+      <pre>
+
+      {{ sectionElements[idName] }}
+    </pre>
+      <div
+        :class="$style.bar"
+      />
+    </div>
   </div>
 </template>
 
@@ -33,12 +44,18 @@ export default {
       required: true,
       type    : String,
     },
+    sectionElements: {
+      required: true,
+      type    : Object,
+    },
   },
 }
 </script>
 
 <style lang="scss" module>
 @use '~/assets/scss/value' as v;
+@use '~/assets/scss/font' as f;
+@use '~/assets/scss/color' as c;
 
 .wrapper {
   width   : 0;
@@ -62,5 +79,15 @@ export default {
   max-width      : v.$desktopScreenSize;
   margin         : 0 auto;
   gap            : v.$val * 6;
+}
+
+.progress {
+  position: fixed;
+  bottom: v.$val * 6;
+  .bar {
+    width: 100%;
+    height: 1px;
+    background-color: c.$white;
+  }
 }
 </style>

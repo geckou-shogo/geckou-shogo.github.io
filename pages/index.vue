@@ -10,6 +10,7 @@
       <GlobalNavigation
         :sections="sections"
         :currentSection="currentSection"
+        :sectionElements="sectionElements"
       />
       <section
         v-for="section in sections"
@@ -33,13 +34,14 @@
 export default {
   data() {
     return {
-      lmS           : null,
-      initialized   : false,
-      currentSection: 'top',
-      screenStatus  : '',
-      scrollStatus  : {},
-      progress      : 0,
-      sections      : [
+      lmS            : null,
+      initialized    : false,
+      currentSection : 'top',
+      screenStatus   : '',
+      scrollStatus   : {},
+      sectionElements: {},
+      progress       : 0,
+      sections       : [
         {
           idName    : 'top',
           name      : 'TOP',
@@ -90,7 +92,7 @@ export default {
         this.lmS.on('scroll', args => {
           this.checkIsScreenLandscape()
           const argsCurrentElements = args.currentElements
-          const sectionElements     = Object.keys(argsCurrentElements)
+          this.sectionElements = Object.keys(argsCurrentElements)
             .filter(key => {
               return this.sections.some(section => section.idName === key)
             })
@@ -99,7 +101,7 @@ export default {
               return result
             }, {})
 
-          if (Object.keys(sectionElements).length === 1) this.currentSection = Object.keys(sectionElements)[0]
+          if (Object.keys(this.sectionElements).length === 1) this.currentSection = Object.keys(this.sectionElements)[0]
           this.scrollStatus = args.currentElements
           this.progress = args.scroll.x / args.limit.x * 100
         })
@@ -123,6 +125,8 @@ export default {
 }
 </script>
 <style lang="scss" module>
+@use '~/assets/scss/value' as v;
+@use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
 .frontpage {

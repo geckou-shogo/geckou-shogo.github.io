@@ -53,9 +53,9 @@ export default {
   mix-blend-mode: soft-light;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 5s;
+  transition: opacity 2s;
   &.animation {
-    opacity: .6;
+    opacity: 1;
   }
 }
 
