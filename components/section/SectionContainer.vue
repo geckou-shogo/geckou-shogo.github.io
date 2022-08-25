@@ -99,8 +99,9 @@ export default {
 }
 
 .background {
-  position: absolute;
-  top     : 0;
-  left    : 10%;
+  margin-left: 10%;
+  position   : absolute;
+  top        : 0;
+  left       : 0;
 }
 </style>

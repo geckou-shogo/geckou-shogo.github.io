@@ -44,7 +44,7 @@ export default {
 @use '~/assets/scss/color' as c;
 
 .wrapper {
-  width         : 130vw;
+  width         : 120vw;
   height        : 100vh;
   mix-blend-mode: overlay;
   pointer-events: none;
