@@ -32,13 +32,13 @@ export default {
 @use '~/assets/scss/color' as c;
 
 .container {
+  position     : relative;
   display      : flex;
-  align-items  : center;
   width        : v.$val * 20;
+  align-items  : center;
   border-radius: 50%;
   aspect-ratio : 1 / 1;
   overflow     : hidden;
-  position     : relative;
 
   &::before {
     content         : '';
@@ -54,6 +54,7 @@ export default {
   }
 
   .text {
+    position      : relative;
     width         : 100%;
     padding       : v.$val;
     color         : c.$white;
@@ -62,7 +63,6 @@ export default {
     text-align    : center;
     line-height   : 1;
     letter-spacing: 0.1em;
-    position      : relative;
 
     &::before {
       opacity   : 0;

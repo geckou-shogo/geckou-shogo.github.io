@@ -1,11 +1,11 @@
 <template>
   <div
-    :class="$style.wrapper"
+    :class="[$style.wrapper, animation ? $style.animation : '']"
   >
     <div
-      :class="$style.image"
       data-scroll
       data-scroll-speed="2"
+      :class="$style.image"
     >
       <component
         :is="background"
@@ -21,8 +21,7 @@ import BackgroundTown from '@/assets/img/svg/town.svg'
 import BackgroundBuilding from '@/assets/img/svg/building.svg'
 
 export default {
-  name: 'ParallaxBackground',
-
+  name      : 'ParallaxBackground',
   components: {
     BackgroundForest,
     BackgroundTown,
@@ -32,6 +31,11 @@ export default {
     background: {
       required: true,
       type    : String,
+    },
+    animation: {
+      required: false,
+      type    : Boolean,
+      default : false,
     },
   },
 }
@@ -48,6 +52,11 @@ export default {
   height        : 100vh;
   mix-blend-mode: overlay;
   pointer-events: none;
+  opacity: 0;
+  transition: opacity 5s;
+  &.animation {
+    opacity: .6;
+  }
 }
 
 .image {
@@ -55,10 +64,9 @@ export default {
   bottom  : 50%;
   left    : 0;
   width   : 100%;
-  opacity : .6;
-
   svg {
     fill: c.$white;
   }
 }
+
 </style>
