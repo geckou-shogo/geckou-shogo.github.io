@@ -10,6 +10,7 @@
       :class="$style.header"
     />
     <div
+      v-inview:enter="() => {animation = true}"
       :class="$style.contents"
     >
       <ParallaxBackground
@@ -18,6 +19,7 @@
         :class="$style.background"
         data-scroll
         data-scroll-speed="-10"
+        :animation="animation"
       />
       <component
         :is="section.component"
@@ -47,6 +49,7 @@ export default {
   data() {
     return {
       backgroundPositionY: 0,
+      animation          : false,
     }
   },
   watch: {
