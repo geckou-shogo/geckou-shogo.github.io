@@ -2,23 +2,28 @@
   <div :class="$style.wrapper">
     <nav :class="$style.container">
       <ul :class="$style.list">
-        <li v-for="section in sections" :key="section.idName">
+        <li
+          :class="$style.list_item"
+          v-for="section in sections"
+          :key="section.idName"
+        >
           <a :href="`#${section.idName}`" data-scroll-to>
             <GlobalNavItem
               :text="section.name"
               :current="currentSection === section.idName"
             />
-            <div v-if="progress === '10'" :class="$style.dummy"></div>
+            {{ sectionProgress(section.idName) }}
+            <div
+              v-if="
+                sectionProgress(section.idName) > 0 &&
+                  sectionProgress(section.idName) < 99
+              "
+              :class="$style.dummy"
+            />
           </a>
         </li>
       </ul>
     </nav>
-    <div :class="$style.progress" :style="{ width: `${progress}%` }">
-      <pre>
-        {{ sectionElements["top"] }}
-      </pre>
-      <div :class="$style.bar" />
-    </div>
   </div>
 </template>
 
@@ -43,7 +48,11 @@ export default {
       type: Number
     }
   },
-  methods: {}
+  methods: {
+    sectionProgress(idName) {
+      return Math.round(this.sectionElements[idName]?.progress * 100) || 0;
+    }
+  }
 };
 </script>
 
@@ -74,6 +83,9 @@ export default {
   max-width: v.$desktopScreenSize;
   margin: 0 auto;
   gap: v.$val * 6;
+  &_item {
+    position: relative;
+  }
 }
 
 .progress {
@@ -87,12 +99,12 @@ export default {
 }
 
 .dummy {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #fff;
-  z-index: 9999;
+  position: absolute;
+  bottom: 0;
+  left: v.$val * 10;
+  width: 30px;
+  height: 30px;
+  background-color: c.$white;
+  border-radius: 50%;
 }
 </style>

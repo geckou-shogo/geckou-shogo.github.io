@@ -62,30 +62,20 @@ export default {
 
 <style lang="scss" module>
 @use '~/assets/scss/value' as v;
+@use '~/assets/scss/color' as c;
 
 .container {
   position        : relative;
   display         : flex;
   height          : 100vh;
   min-width       : calc(100vw + 1px);
-  background-image: linear-gradient(
-    to bottom,
-    hsl(200, 29%, 6%) 0%,
-    hsl(201, 70%, 12%) 10%,
-    hsl(201, 63%, 13%) 20%,
-    hsl(203, 38%, 16%) 30%,
-    hsl(203, 64%, 14%) 40%,
-    hsl(211, 69%, 13%) 50%,
-    hsl(233, 86%, 11%) 70%,
-    hsl(240, 70%, 15%) 80%,
-    hsl(244, 24%, 35%) 90%,
-    hsl(292, 7%, 44%) 100%,
-  );
-  background-size: 100% 500vh;
-  overflow       : hidden;
+  background-image: c.$backgroundGradient;
+  background-size : 100% 500vh;
+  overflow        : hidden;
 
   @include v.media('mobile') {
-    flex-direction: column;
+    flex-direction  : column;
+    background-image: none;
   }
 }
 
