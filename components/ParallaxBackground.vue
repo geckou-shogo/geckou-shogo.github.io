@@ -54,6 +54,7 @@ export default {
   pointer-events: none;
   opacity: 0;
   transition: opacity 5s;
+
   &.animation {
     opacity: .6;
   }

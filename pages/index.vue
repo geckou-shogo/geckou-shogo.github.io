@@ -123,11 +123,16 @@ export default {
 }
 </script>
 <style lang="scss" module>
+@use '~/assets/scss/value' as v;
 @use '~/assets/scss/color' as c;
 
 .frontpage {
   overscroll-behavior-y: none;
   overflow             : hidden;
-  background-color     : c.$black;
+
+  @include v.media('mobile') {
+    flex-direction  : column;
+    background-image: c.$backgroundGradient;
+  }
 }
 </style>

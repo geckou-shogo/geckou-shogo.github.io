@@ -17,3 +17,17 @@ $accentColor   : $blue;
 $secondaryColor: $blue;
 $alertColor    : $red;
 $inactiveColor : $gray;
+
+$backgroundGradient: linear-gradient(
+  to bottom,
+  hsl(200, 29%, 6%) 0%,
+  hsl(201, 70%, 12%) 10%,
+  hsl(201, 63%, 13%) 20%,
+  hsl(203, 38%, 16%) 30%,
+  hsl(203, 64%, 14%) 40%,
+  hsl(211, 69%, 13%) 50%,
+  hsl(233, 86%, 11%) 70%,
+  hsl(240, 70%, 15%) 80%,
+  hsl(244, 24%, 35%) 90%,
+  hsl(292, 7%, 44%) 100%
+);
