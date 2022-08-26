@@ -52,11 +52,11 @@ export default {
   height        : 100vh;
   mix-blend-mode: soft-light;
   pointer-events: none;
-  opacity: 0;
-  transition: opacity 5s;
+  opacity       : 0;
+  transition    : opacity 5s;
 
   &.animation {
-    opacity: .6;
+    opacity: 1;
   }
 }
 
