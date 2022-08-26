@@ -10,6 +10,7 @@
       :class="$style.header"
     />
     <div
+      v-inview:enter="() => {animation = true}"
       :class="$style.contents"
     >
       <ParallaxBackground
@@ -18,6 +19,7 @@
         :class="$style.background"
         data-scroll
         data-scroll-speed="-10"
+        :animation="animation"
       />
       <component
         :is="section.component"
@@ -47,6 +49,7 @@ export default {
   data() {
     return {
       backgroundPositionY: 0,
+      animation          : false,
     }
   },
   watch: {
@@ -59,8 +62,6 @@ export default {
 
 <style lang="scss" module>
 @use '~/assets/scss/value' as v;
-@use '~/assets/scss/font' as f;
-@use '~/assets/scss/color' as c;
 
 .container {
   position        : relative;
@@ -69,21 +70,18 @@ export default {
   min-width       : calc(100vw + 1px);
   background-image: linear-gradient(
     to bottom,
-    rgba(25, 44, 56, 1) 6.6%,
-    rgba(11, 25, 38, 1) 13.2%,
-    rgba(10, 29, 40, 1) 19.8%,
-    rgba(10, 29, 40, 1) 26.4%,
-    rgba(25, 44, 56, 1) 33%,
-    rgba(21, 50, 79, 1) 39.6%,
-    rgba(25, 44, 56, 1) 46.2%,
-    rgba(21, 50, 79, 1) 52.8%,
-    rgba(49, 86, 123, 1) 59.4%,
-    rgba(49, 82, 123, 1) 66%,
-    rgba(36, 100, 149, 1) 72.6%,
-    rgba(8, 108, 146, 1) 79.2%,
-    /* contactは未記入 */
+    hsl(200, 29%, 6%) 0%,
+    hsl(201, 70%, 12%) 10%,
+    hsl(201, 63%, 13%) 20%,
+    hsl(203, 38%, 16%) 30%,
+    hsl(203, 64%, 14%) 40%,
+    hsl(211, 69%, 13%) 50%,
+    hsl(233, 86%, 11%) 70%,
+    hsl(240, 70%, 15%) 80%,
+    hsl(244, 24%, 35%) 90%,
+    hsl(292, 7%, 44%) 100%,
   );
-  background-size: 100% 400vh;
+  background-size: 100% 500vh;
   overflow       : hidden;
 
   @include v.media('mobile') {
@@ -98,11 +96,24 @@ export default {
 .contents {
   flex    : 1 1 auto;
   position: relative;
+
+  &::before {
+    content         : '';
+    width           : 100%;
+    height          : 100%;
+    background-image: radial-gradient(#333, #000);
+    mix-blend-mode  : lighten;
+    position        : absolute;
+    left            : 0;
+    opacity         : .4;
+    pointer-events  : none;
+  }
 }
 
 .background {
-  position: absolute;
-  top     : 0;
-  left    : 10%;
+  margin-left: 10%;
+  position   : absolute;
+  top        : 0;
+  left       : 0;
 }
 </style>

@@ -58,7 +58,7 @@ export default {
           <span>自社のWEBサービス開発の他、</span>
           <span>WEB制作や開発の受託も承っております。</span>
         `,
-        information: `
+        facts: `
           合同会社Geckouの会社情報です。
         `,
         contact: `
@@ -74,7 +74,7 @@ export default {
       if (process.client) {
         const windowHeight     = window?.innerHeight
         const headerWidth      = windowHeight / 1.62
-        const headingMaxLength = 'INFORMATION'.length
+        const headingMaxLength = 'service'.length
         const letterSpacing    = 1.16
         return Math.floor(headerWidth / headingMaxLength / letterSpacing)
       } else
@@ -168,10 +168,9 @@ export default {
 
 .visible_marker {
   position: absolute;
-  left: 55%;
-  width: 1px;
-  height: 100vh;
-  // background-color: tomato;
+  left    : 55%;
+  width   : 1px;
+  height  : 100vh;
 }
 
 @keyframes displayBorder {

@@ -39,7 +39,6 @@ export default {
   data() {
     return {
       displayState: true,
-      // loadingText : 'Loading...',
     }
   },
   mounted() {
@@ -63,7 +62,7 @@ export default {
   height          : 100vh;
   align-items     : center;
   justify-content : center;
-  background-color: c.$white;
+  background-color: c.$black;
   z-index         : v.zIndex('loading');
   transition      : all 1s;
 
@@ -78,7 +77,7 @@ export default {
     .letter {
       font-size                : f.size('larger');
       font-weight              : f.weight('bold');
-      color                    : c.$blue;
+      color                    : c.$white;
       animation-name           : loading;
       animation-duration       : 1.6s;
       animation-iteration-count: infinite;

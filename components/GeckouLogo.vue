@@ -21,10 +21,10 @@ export default {
   height: 100vh;
   justify-content: center;
   align-items: center;
+
   &_white {
     width: 250px;
     height: 250px;
   }
 }
-
 </style>
