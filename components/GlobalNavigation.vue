@@ -8,43 +8,42 @@
               :text="section.name"
               :current="currentSection === section.idName"
             />
-            <div v-if="progress === '10'" :class="$style.dummy"></div>
+            {{ sectionProgress(section.idName) }}
+            <div v-if="progress === '10'" :class="$style.dummy" />
           </a>
         </li>
       </ul>
     </nav>
-    <div :class="$style.progress" :style="{ width: `${progress}%` }">
-      <pre>
-        {{ sectionElements["top"] }}
-      </pre>
-      <div :class="$style.bar" />
-    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "GlobalNavigation",
+  name : 'GlobalNavigation',
   props: {
     sections: {
       required: true,
-      type: Array
+      type    : Array,
     },
     currentSection: {
       required: true,
-      type: String
+      type    : String,
     },
     sectionElements: {
       required: true,
-      type: Object
+      type    : Object,
     },
     progress: {
       required: true,
-      type: Number
-    }
+      type    : Number,
+    },
   },
-  methods: {}
-};
+  methods: {
+    sectionProgress(idName) {
+      return Math.round(this.sectionElements[idName]?.progress * 100) || 0
+    },
+  },
+}
 </script>
 
 <style lang="scss" module>
