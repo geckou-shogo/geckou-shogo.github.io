@@ -18,10 +18,11 @@
               :class="$style.foot_container"
             >
               <div
-                :currentSection="sectionElements[0] === section.idName"
-                :class="[$style.dummy, currentSection ? $style.visible : '']"
+                :currentSection="currentSection === section.idName"
+                :class="$style.dummy"
               />
             </div>
+            {{ currentSection }}
           </a>
         </li>
       </ul>
