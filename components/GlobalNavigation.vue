@@ -14,12 +14,18 @@
             />
             {{ sectionProgress(section.idName) }}
             <div
-              v-show="
-                sectionProgress(section.idName) > 50 &&
-                  sectionProgress(section.idName) < 99
-              "
-              :class="$style.dummy"
-            />
+              :class="container"
+              :v-if="section.idName !== 'top'"
+            >
+              <div
+                v-for="i in footprintsNumber"
+                v-show="i * 10 <= sectionProgress(section.idName)"
+                :key="i"
+                :class="$style.dummy"
+              >
+                {{ i * 10 }}
+              </div>
+            </div>
           </a>
         </li>
       </ul>
@@ -47,6 +53,11 @@ export default {
       required: true,
       type    : Number,
     },
+  },
+  data() {
+    return {
+      footprintsNumber: 5,
+    }
   },
   methods: {
     sectionProgress(idName) {
@@ -77,12 +88,13 @@ export default {
 }
 
 .list {
-  display: flex;
+  display        : flex;
   justify-content: center;
-  align-items: center;
-  max-width: v.$desktopScreenSize;
-  margin: 0 auto;
-  gap: v.$val * 6;
+  align-items    : center;
+  max-width      : v.$desktopScreenSize;
+  margin         : 0 auto;
+  gap            : v.$val * 6;
+
   &_item {
     position: relative;
   }
@@ -90,21 +102,21 @@ export default {
 
 .progress {
   position: fixed;
-  bottom: v.$val * 6;
+  bottom  : v.$val * 6;
+
   .bar {
-    width: 100%;
-    height: 1px;
+    width           : 100%;
+    height          : 1px;
     background-color: c.$white;
   }
 }
 
 .dummy {
-  position: absolute;
-  bottom: 0;
-  left: v.$val * 10;
-  width: 30px;
-  height: 30px;
+  bottom          : 0;
+  left            : v.$val * 10;
+  width           : 30px;
+  height          : 30px;
   background-color: c.$white;
-  border-radius: 50%;
+  border-radius   : 50%;
 }
 </style>
