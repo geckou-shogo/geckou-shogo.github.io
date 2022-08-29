@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import Gecko from '@/assets/img/svg/gecko.svg'
+import Gecko from '@/assets/images/svg/gecko.svg'
 
 export default {
   name      : 'GlobalNavItem',
@@ -92,7 +92,6 @@ export default {
         height             : 100%;
         border-bottom      : 1px solid c.$white;
         background-size    : 38%;
-        background-image   : url('../assets/img/gecko.png');
         background-position: bottom center;
         opacity            : 1;
       }
