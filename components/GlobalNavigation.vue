@@ -19,13 +19,14 @@
             >
               <div
                 v-for="i in footprintsNumber"
-                v-show="i * 10 <= sectionProgress(section.idName)"
                 :key="i"
-                :class="$style.dummy"
+                :class="[$style.footprints,
+                i * 10 <= sectionProgress(section.idName)
+                || #{currentSectionが、section.idNameよりあとである} ?
+                  $style.show
+                  : '']"
               >
-                <Footprints
-                  :class="[$style.footprints, sectionProgress && currentSection ? $style.visible : '']"
-                />
+                <Footprints />
               </div>
             </div>
             {{ currentSection }}
@@ -122,14 +123,18 @@ export default {
   display: flex;
 }
 
+.foot_list {
+  opacity: 0;
+  &.show {
+    opacity: 1;
+  }
+}
+
 .footprints {
   width  : 30px;
   height : 30px;
   opacity: 0;
   fill   : c.$white;
 
-  &.visible {
-    opacity: 1;
-  }
 }
 </style>
