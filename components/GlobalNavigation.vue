@@ -12,14 +12,23 @@
               :text="section.name"
               :current="currentSection === section.idName"
             />
+            {{ sectionProgress(section.idName) }}
+
             <div
               :class="$style.foot_container"
             >
-              {{ sectionProgress(section.idName) }}
-              <Footprints
-                :class="[$style.footprints, sectionProgress(section.idName) ? $style.visible : '']"
-              />
+              <div
+                v-for="i in footprintsNumber"
+                v-show="i * 10 <= sectionProgress(section.idName)"
+                :key="i"
+                :class="$style.dummy"
+              >
+                <Footprints
+                  :class="[$style.footprints, sectionProgress && currentSection ? $style.visible : '']"
+                />
+              </div>
             </div>
+            {{ currentSection }}
           </a>
         </li>
       </ul>
