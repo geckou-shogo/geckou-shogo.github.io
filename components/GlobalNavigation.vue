@@ -22,7 +22,6 @@
                 :class="$style.dummy"
               />
             </div>
-            {{ currentSection }}
           </a>
         </li>
       </ul>
