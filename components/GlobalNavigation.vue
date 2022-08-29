@@ -3,9 +3,9 @@
     <nav :class="$style.container">
       <ul :class="$style.list">
         <li
-          :class="$style.list_item"
           v-for="section in sections"
           :key="section.idName"
+          :class="$style.list_item"
         >
           <a :href="`#${section.idName}`" data-scroll-to>
             <GlobalNavItem
@@ -14,12 +14,13 @@
             />
             {{ sectionProgress(section.idName) }}
             <div
-              v-if="
-                sectionProgress(section.idName) > 0 &&
-                  sectionProgress(section.idName) < 99
-              "
+              v-for="i in footprintsNumber"
+              v-show="i * 10 <= sectionProgress(section.idName)"
+              :key="i"
               :class="$style.dummy"
-            />
+            >
+              {{ i * 10 }}
+            </div>
           </a>
         </li>
       </ul>
@@ -29,31 +30,36 @@
 
 <script>
 export default {
-  name: "GlobalNavigation",
+  name : 'GlobalNavigation',
   props: {
     sections: {
       required: true,
-      type: Array
+      type    : Array,
     },
     currentSection: {
       required: true,
-      type: String
+      type    : String,
     },
     sectionElements: {
       required: true,
-      type: Object
+      type    : Object,
     },
     progress: {
       required: true,
-      type: Number
+      type    : Number,
+    },
+  },
+  data() {
+    return {
+      footprintsNumber: 5,
     }
   },
   methods: {
     sectionProgress(idName) {
-      return Math.round(this.sectionElements[idName]?.progress * 100) || 0;
-    }
-  }
-};
+      return Math.round(this.sectionElements[idName]?.progress * 100) || 0
+    },
+  },
+}
 </script>
 
 <style lang="scss" module>
@@ -77,12 +83,13 @@ export default {
 }
 
 .list {
-  display: flex;
+  display        : flex;
   justify-content: center;
-  align-items: center;
-  max-width: v.$desktopScreenSize;
-  margin: 0 auto;
-  gap: v.$val * 6;
+  align-items    : center;
+  max-width      : v.$desktopScreenSize;
+  margin         : 0 auto;
+  gap            : v.$val * 6;
+
   &_item {
     position: relative;
   }
@@ -90,21 +97,21 @@ export default {
 
 .progress {
   position: fixed;
-  bottom: v.$val * 6;
+  bottom  : v.$val * 6;
+
   .bar {
-    width: 100%;
-    height: 1px;
+    width           : 100%;
+    height          : 1px;
     background-color: c.$white;
   }
 }
 
 .dummy {
-  position: absolute;
-  bottom: 0;
-  left: v.$val * 10;
-  width: 30px;
-  height: 30px;
+  bottom          : 0;
+  left            : v.$val * 10;
+  width           : 30px;
+  height          : 30px;
   background-color: c.$white;
-  border-radius: 50%;
+  border-radius   : 50%;
 }
 </style>
