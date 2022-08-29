@@ -2,7 +2,10 @@
   <div
     :class="[$style.container, current ? $style.current : '']"
   >
-    <Gecko />
+    <Gecko
+      v-if="current"
+      :class="$style.svg"
+    />
     <div
       :class="$style.text"
     >
@@ -81,21 +84,23 @@ export default {
       background-color: rgba(c.$white, .08);
     }
 
-    .text {
-      &::before {
-        content            : '';
-        position           : absolute;
-        top                : -100%;
-        left               : 0;
-        display            : block;
-        width              : 100%;
-        height             : 100%;
-        border-bottom      : 1px solid c.$white;
-        background-size    : 38%;
-        background-position: bottom center;
-        opacity            : 1;
-      }
+    &::after {
+      content: "";
+      position: absolute;
+      margin-bottom: v.$val * 3.5;
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: c.$white;
     }
+  }
+  .svg {
+    position: absolute;
+    top: v.$val * 3;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 56px;
+    fill: c.$white;
   }
 }
 </style>
