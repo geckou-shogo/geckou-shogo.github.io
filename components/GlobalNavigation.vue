@@ -3,9 +3,9 @@
     <nav :class="$style.container">
       <ul :class="$style.list">
         <li
-          :class="$style.list_item"
           v-for="section in sections"
           :key="section.idName"
+          :class="$style.list_item"
         >
           <a :href="`#${section.idName}`" data-scroll-to>
             <GlobalNavItem
@@ -13,13 +13,23 @@
               :current="currentSection === section.idName"
             />
             {{ sectionProgress(section.idName) }}
-            <div
-              v-if="
-                sectionProgress(section.idName) > 0 &&
-                  sectionProgress(section.idName) < 99
-              "
-              :class="$style.dummy"
-            />
+
+            <div :class="$style.foot_container">
+              <div
+                v-for="i in footprintsNumber"
+                :key="i"
+                :class="[
+                  $style.footprints,
+                  i * 10 <= sectionProgress(section.idName) ||
+                  currentSection <= section.idName
+                    ? $style.show
+                    : ''
+                ]"
+              >
+                <Footprints />
+              </div>
+            </div>
+            {{ currentSection }}
           </a>
         </li>
       </ul>
@@ -28,8 +38,13 @@
 </template>
 
 <script>
+import Footprints from "@/assets/images/svg/footprints.svg";
+
 export default {
   name: "GlobalNavigation",
+  components: {
+    Footprints
+  },
   props: {
     sections: {
       required: true,
@@ -47,6 +62,11 @@ export default {
       required: true,
       type: Number
     }
+  },
+  data() {
+    return {
+      footprintsNumber: 5
+    };
   },
   methods: {
     sectionProgress(idName) {
@@ -79,10 +99,10 @@ export default {
 .list {
   display: flex;
   justify-content: center;
-  align-items: center;
   max-width: v.$desktopScreenSize;
   margin: 0 auto;
   gap: v.$val * 6;
+
   &_item {
     position: relative;
   }
@@ -91,6 +111,7 @@ export default {
 .progress {
   position: fixed;
   bottom: v.$val * 6;
+
   .bar {
     width: 100%;
     height: 1px;
@@ -98,13 +119,24 @@ export default {
   }
 }
 
-.dummy {
-  position: absolute;
-  bottom: 0;
-  left: v.$val * 10;
+.foot_container {
+  display: flex;
+}
+
+.foot_list {
+  opacity: 0;
+  &.show {
+    opacity: 1;
+  }
+}
+
+.footprints {
   width: 30px;
   height: 30px;
-  background-color: c.$white;
-  border-radius: 50%;
+  opacity: 0;
+  fill: c.$white;
+  &.show {
+    opacity: 1;
+  }
 }
 </style>

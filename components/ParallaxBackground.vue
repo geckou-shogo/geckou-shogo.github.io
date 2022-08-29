@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import BackgroundForest from '@/assets/img/svg/forest.svg'
-import BackgroundTown from '@/assets/img/svg/town.svg'
-import BackgroundBuilding from '@/assets/img/svg/building.svg'
+import BackgroundForest from '@/assets/images/svg/forest.svg'
+import BackgroundTown from '@/assets/images/svg/town.svg'
+import BackgroundBuilding from '@/assets/images/svg/building.svg'
 
 export default {
   name      : 'ParallaxBackground',
