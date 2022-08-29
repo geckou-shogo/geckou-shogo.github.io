@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import Gecko from '@/assets/img/svg/gecko.svg'
+import Gecko from '@/assets/images/svg/gecko.svg'
 
 export default {
   name      : 'GlobalNavItem',
@@ -83,6 +83,7 @@ export default {
     &::before {
       background-color: rgba(c.$white, .08);
     }
+
     &::after {
       content: "";
       position: absolute;

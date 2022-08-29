@@ -13,12 +13,11 @@
               :current="currentSection === section.idName"
             />
             <div
-              v-if="section.idName !== 'top'"
               :class="$style.foot_container"
             >
-              <div
-                :currentSection="currentSection"
-                :class="$style.dummy"
+              {{ sectionProgress(section.idName) }}
+              <Footprints
+                :class="[$style.footprints, sectionProgress(section.idName) ? $style.visible : '']"
               />
             </div>
           </a>
@@ -29,8 +28,13 @@
 </template>
 
 <script>
+import Footprints from '@/assets/images/svg/footprints.svg'
+
 export default {
-  name : 'GlobalNavigation',
+  name      : 'GlobalNavigation',
+  components: {
+    Footprints,
+  },
   props: {
     sections: {
       required: true,
@@ -109,14 +113,12 @@ export default {
   display: flex;
 }
 
-.dummy {
-  bottom          : 0;
-  left            : v.$val * 10;
-  width           : 30px;
-  height          : 30px;
-  background-color: c.$white;
-  border-radius   : 50%;
+.footprints {
+  width  : 30px;
+  height : 30px;
   opacity: 0;
+  fill   : c.$white;
+
   &.visible {
     opacity: 1;
   }
