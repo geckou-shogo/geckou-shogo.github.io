@@ -14,12 +14,13 @@
             />
             {{ sectionProgress(section.idName) }}
             <div
-              v-for="i in footprintsNumber"
-              v-show="i * 10 <= sectionProgress(section.idName)"
-              :key="i"
-              :class="$style.dummy"
+              v-if="section.idName !== 'top'"
+              :class="$style.foot_container"
             >
-              {{ i * 10 }}
+              <div
+                :currentSection="sectionElements[0] === section.idName"
+                :class="[$style.dummy, currentSection ? $style.visible : '']"
+              />
             </div>
           </a>
         </li>
@@ -106,6 +107,10 @@ export default {
   }
 }
 
+.foot_container {
+  display: flex;
+}
+
 .dummy {
   bottom          : 0;
   left            : v.$val * 10;
@@ -113,5 +118,9 @@ export default {
   height          : 30px;
   background-color: c.$white;
   border-radius   : 50%;
+  opacity: 0;
+  &.visible {
+    opacity: 1;
+  }
 }
 </style>
