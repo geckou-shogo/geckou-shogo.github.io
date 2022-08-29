@@ -2,6 +2,7 @@
   <div
     :class="[$style.container, current ? $style.current : '']"
   >
+    <Gecko />
     <div
       :class="$style.text"
     >
@@ -11,8 +12,13 @@
 </template>
 
 <script>
+import Gecko from '@/assets/img/svg/gecko.svg'
+
 export default {
-  name : 'GlobalNavItem',
+  name      : 'GlobalNavItem',
+  components: {
+    Gecko,
+  },
   props: {
     text: {
       required: true,
