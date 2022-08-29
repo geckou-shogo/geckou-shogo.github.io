@@ -95,7 +95,7 @@ export default {
   }
   .svg {
     position: absolute;
-    top: v.$val * 3;
+    top: v.$val * 4.3;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 56px;

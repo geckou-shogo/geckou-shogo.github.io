@@ -12,13 +12,12 @@
               :text="section.name"
               :current="currentSection === section.idName"
             />
-            {{ sectionProgress(section.idName) }}
             <div
               v-if="section.idName !== 'top'"
               :class="$style.foot_container"
             >
               <div
-                :currentSection="currentSection === section.idName"
+                :currentSection="currentSection"
                 :class="$style.dummy"
               />
             </div>
@@ -86,7 +85,6 @@ export default {
 .list {
   display        : flex;
   justify-content: center;
-  align-items    : center;
   max-width      : v.$desktopScreenSize;
   margin         : 0 auto;
   gap            : v.$val * 6;
