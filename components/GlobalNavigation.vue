@@ -3,9 +3,9 @@
     <nav :class="$style.container">
       <ul :class="$style.list">
         <li
-          :class="$style.list_item"
           v-for="section in sections"
           :key="section.idName"
+          :class="$style.list_item"
         >
           <a :href="`#${section.idName}`" data-scroll-to>
             <GlobalNavItem
@@ -14,8 +14,8 @@
             />
             {{ sectionProgress(section.idName) }}
             <div
-              v-if="
-                sectionProgress(section.idName) > 0 &&
+              v-show="
+                sectionProgress(section.idName) > 50 &&
                   sectionProgress(section.idName) < 99
               "
               :class="$style.dummy"
@@ -29,31 +29,31 @@
 
 <script>
 export default {
-  name: "GlobalNavigation",
+  name : 'GlobalNavigation',
   props: {
     sections: {
       required: true,
-      type: Array
+      type    : Array,
     },
     currentSection: {
       required: true,
-      type: String
+      type    : String,
     },
     sectionElements: {
       required: true,
-      type: Object
+      type    : Object,
     },
     progress: {
       required: true,
-      type: Number
-    }
+      type    : Number,
+    },
   },
   methods: {
     sectionProgress(idName) {
-      return Math.round(this.sectionElements[idName]?.progress * 100) || 0;
-    }
-  }
-};
+      return Math.round(this.sectionElements[idName]?.progress * 100) || 0
+    },
+  },
+}
 </script>
 
 <style lang="scss" module>
