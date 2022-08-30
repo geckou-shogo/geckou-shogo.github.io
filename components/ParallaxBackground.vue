@@ -40,7 +40,6 @@ export default {
     },
   },
   mounted() {
-    // this.pathCheckMethods()
     this.$nextTick(() => {
       const pathLength = document.querySelector('.forest_svg__path').getTotalLength()
       console.log(pathLength)
@@ -77,14 +76,15 @@ export default {
 
   svg {
     path{
-      fill             : none;
-      stroke-linejoin  : round;
-      stroke           : c.$white;
-      stroke-width     : 1px;
-      stroke-dasharray : 7712px;
-      stroke-dashoffset: 0;
-      animation        : line_animation 10s linear;
-      animation-delay  : 1s;
+      fill               : none;
+      stroke-linejoin    : round;
+      stroke             : c.$white;
+      stroke-width       : 1px;
+      stroke-dasharray   : 7712px;
+    }
+    &.animation {
+      animation          : line_animation 10s ease-in-out;
+      animation-fill-mode: both;
     }
   }
 }
@@ -93,7 +93,6 @@ export default {
   0% {
     stroke-dashoffset: 7712px;
   }
-
   100% {
     stroke-dashoffset: 0;
   }
