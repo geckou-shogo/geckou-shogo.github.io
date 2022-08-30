@@ -1,6 +1,7 @@
 <template>
   <div>
     <Nuxt />
+    <CursorEffect />
   </div>
 </template>
 
@@ -10,6 +11,5 @@
 
 .wrapper {
   width: 100%;
-  color: c.$white;
 }
 </style>
