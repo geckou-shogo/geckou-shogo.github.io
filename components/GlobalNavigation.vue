@@ -3,7 +3,7 @@
     <nav :class="$style.container">
       <ul :class="$style.list">
         <li
-          v-for="section in sections"
+          v-for="(section, index) in sections"
           :key="section.idName"
           :class="$style.list_item"
         >
@@ -20,8 +20,7 @@
                 :key="i"
                 :class="[
                   $style.footprints,
-                  i * 10 <= sectionProgress(section.idName) ||
-                  currentSection <= section.idName
+                  i * 10 <= sectionProgress(section.idName) || index < currentSectionNth
                     ? $style.show
                     : ''
                 ]"
@@ -30,6 +29,7 @@
               </div>
             </div>
             {{ currentSection }}
+            {{ currentSectionNth }}
           </a>
         </li>
       </ul>
@@ -38,42 +38,47 @@
 </template>
 
 <script>
-import Footprints from "@/assets/images/svg/footprints.svg";
+import Footprints from '@/assets/images/svg/footprints.svg'
 
 export default {
-  name: "GlobalNavigation",
+  name      : 'GlobalNavigation',
   components: {
-    Footprints
+    Footprints,
   },
   props: {
     sections: {
       required: true,
-      type: Array
+      type    : Array,
     },
     currentSection: {
       required: true,
-      type: String
+      type    : String,
     },
     sectionElements: {
       required: true,
-      type: Object
+      type    : Object,
     },
     progress: {
       required: true,
-      type: Number
-    }
+      type    : Number,
+    },
   },
   data() {
     return {
-      footprintsNumber: 5
-    };
+      footprintsNumber: 5,
+    }
+  },
+  computed: {
+    currentSectionNth() {
+      return this.sections.findIndex(section => section.idName === this.currentSection)
+    },
   },
   methods: {
     sectionProgress(idName) {
-      return Math.round(this.sectionElements[idName]?.progress * 100) || 0;
-    }
-  }
-};
+      return Math.round(this.sectionElements[idName]?.progress * 100) || 0
+    },
+  },
+}
 </script>
 
 <style lang="scss" module>

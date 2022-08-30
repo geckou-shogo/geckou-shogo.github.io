@@ -38,6 +38,16 @@ export default {
       default : false,
     },
   },
+  // mounted() {
+  //   this.pathCheckMethods()
+  // },
+  // methods: {
+  //   pathCheckMethods() {
+  //     document.addEventListener('DOMContentLoaded', function() {
+  //       console.log(document.getElementById('forest').getTotalLength())
+  //     })
+  //   },
+  // },
 }
 
 </script>

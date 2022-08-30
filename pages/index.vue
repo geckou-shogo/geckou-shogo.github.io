@@ -102,7 +102,8 @@ export default {
               return result
             }, {})
 
-          if (Object.keys(this.sectionElements).length === 1) this.currentSection = Object.keys(this.sectionElements)[0]
+          if (Object.keys(this.sectionElements).length === 1)
+            this.currentSection = Object.keys(this.sectionElements)[0]
           this.scrollStatus = args.currentElements
           this.progress = args.scroll.x / args.limit.x * 100
         })
