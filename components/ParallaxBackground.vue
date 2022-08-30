@@ -40,12 +40,16 @@ export default {
     },
   },
   mounted() {
-    this.pathCheckMethods()
+    // this.pathCheckMethods()
+    this.$nextTick(() => {
+      const pathLength = document.querySelector('.forest_svg__path').getTotalLength()
+      console.log(pathLength)
+    })
   },
   methods: {
     pathCheckMethods() {
       document.addEventListener('DOMContentLoaded', function() {
-        console.log(document.querySelector('.forest_svg__cls-1').getTotalLength())
+        console.log(document.getElementById('forest').getTotalLength())
       })
     },
   },
@@ -72,28 +76,26 @@ export default {
   width   : 100%;
 
   svg {
-    fill: c.$white;
+    path{
+      fill             : none;
+      stroke-linejoin  : round;
+      stroke           : c.$white;
+      stroke-width     : 1px;
+      stroke-dasharray : 7712px;
+      stroke-dashoffset: 0;
+      animation        : line_animation 10s linear;
+      animation-delay  : 1s;
+    }
   }
 }
 
-.animation.forest_svg__cls-1 {
-  animation: forest 8s ease-in forwards;
-}
-
-@keyframes forest {
+@keyframes line_animation {
   0% {
     stroke-dashoffset: 7712px;
   }
+
   100% {
-    stroke-dashoffset:0px;
+    stroke-dashoffset: 0;
   }
 }
-
-</style>
-
-<style lang="scss">
-.forest_svg__cls-1 {
-  stroke-dasharray:  7712px;
-}
-
 </style>
