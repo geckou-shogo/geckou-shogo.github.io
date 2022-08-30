@@ -38,16 +38,20 @@ export default {
       default : false,
     },
   },
-  // mounted() {
-  //   this.pathCheckMethods()
-  // },
-  // methods: {
-  //   pathCheckMethods() {
-  //     document.addEventListener('DOMContentLoaded', function() {
-  //       console.log(document.getElementById('forest').getTotalLength())
-  //     })
-  //   },
-  // },
+  mounted() {
+    // this.pathCheckMethods()
+    this.$nextTick(() => {
+      const pathLength = document.querySelector('.forest_svg__path').getTotalLength()
+      console.log(pathLength)
+    })
+  },
+  methods: {
+    pathCheckMethods() {
+      document.addEventListener('DOMContentLoaded', function() {
+        console.log(document.getElementById('forest').getTotalLength())
+      })
+    },
+  },
 }
 
 </script>
@@ -62,12 +66,12 @@ export default {
   height        : 100vh;
   mix-blend-mode: soft-light;
   pointer-events: none;
-  opacity       : 0;
+  /* opacity       : 0;
   transition    : opacity 5s;
 
   &.animation {
     opacity: 1;
-  }
+  } */
 }
 
 .image {
@@ -77,8 +81,24 @@ export default {
   width   : 100%;
 
   svg {
-    fill: c.$white;
+    path{
+      fill             : none;
+      stroke-linejoin  : round;
+      stroke           : c.$white;
+      stroke-width     : 1px;
+      stroke-dasharray : 7712px;
+      stroke-dashoffset: 0;
+      animation        : line_animation 10s linear;
+    }
   }
 }
 
+@keyframes line_animation {
+  to {
+    stroke-dashoffset: 0;
+  }
+  from {
+    stroke-dashoffset: 7712px;
+  }
+}
 </style>
