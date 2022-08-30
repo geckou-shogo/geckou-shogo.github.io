@@ -3,7 +3,7 @@
     <nav :class="$style.container">
       <ul :class="$style.list">
         <li
-          v-for="section in sections"
+          v-for="(section, index) in sections"
           :key="section.idName"
           :class="$style.list_item"
         >
@@ -20,8 +20,7 @@
                 :key="i"
                 :class="[
                   $style.footprints,
-                  i * 10 <= sectionProgress(section.idName) ||
-                    currentSection <= section.idName
+                  i * 10 <= sectionProgress(section.idName) || index < currentSectionNth
                     ? $style.show
                     : ''
                 ]"
@@ -30,6 +29,7 @@
               </div>
             </div>
             {{ currentSection }}
+            {{ currentSectionNth }}
           </a>
         </li>
       </ul>
@@ -67,6 +67,11 @@ export default {
     return {
       footprintsNumber: 5,
     }
+  },
+  computed: {
+    currentSectionNth() {
+      return this.sections.findIndex(section => section.idName === this.currentSection)
+    },
   },
   methods: {
     sectionProgress(idName) {
