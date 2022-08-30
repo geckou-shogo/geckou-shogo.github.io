@@ -82,23 +82,25 @@ export default {
 
   svg {
     path{
-      fill             : none;
-      stroke-linejoin  : round;
-      stroke           : c.$white;
-      stroke-width     : 1px;
-      stroke-dasharray : 7712px;
-      stroke-dashoffset: 0;
-      animation        : line_animation 10s linear;
+      fill               : none;
+      stroke-linejoin    : round;
+      stroke             : c.$white;
+      stroke-width       : 1px;
+      stroke-dasharray   : 7712px;
+      stroke-dashoffset  : 7712px;
+      animation          : line_animation 10s;
+      animation-direction: reverse;
+      animation-fill-mode: both;
     }
   }
 }
 
 @keyframes line_animation {
   to {
-    stroke-dashoffset: 0;
+    stroke-dashoffset: 7712px;
   }
   from {
-    stroke-dashoffset: 7712px;
+    stroke-dashoffset: 0;
   }
 }
 </style>
