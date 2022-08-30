@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="[$style.wrapper, animation ? $style.animation : '']"
+    :class="$style.wrapper"
   >
     <div
       data-scroll
@@ -10,6 +10,7 @@
       <component
         :is="background"
         v-if="background"
+        :class="animation ? $style.animation : ''"
       />
     </div>
   </div>
@@ -38,16 +39,16 @@ export default {
       default : false,
     },
   },
-  // mounted() {
-  //   this.pathCheckMethods()
-  // },
-  // methods: {
-  //   pathCheckMethods() {
-  //     document.addEventListener('DOMContentLoaded', function() {
-  //       console.log(document.getElementById('forest').getTotalLength())
-  //     })
-  //   },
-  // },
+  mounted() {
+    this.pathCheckMethods()
+  },
+  methods: {
+    pathCheckMethods() {
+      document.addEventListener('DOMContentLoaded', function() {
+        console.log(document.querySelector('.forest_svg__cls-1').getTotalLength())
+      })
+    },
+  },
 }
 
 </script>
@@ -62,12 +63,6 @@ export default {
   height        : 100vh;
   mix-blend-mode: soft-light;
   pointer-events: none;
-  opacity       : 0;
-  transition    : opacity 5s;
-
-  &.animation {
-    opacity: 1;
-  }
 }
 
 .image {
@@ -79,6 +74,26 @@ export default {
   svg {
     fill: c.$white;
   }
+}
+
+.animation.forest_svg__cls-1 {
+  animation: forest 8s ease-in forwards;
+}
+
+@keyframes forest {
+  0% {
+    stroke-dashoffset: 7712px;
+  }
+  100% {
+    stroke-dashoffset:0px;
+  }
+}
+
+</style>
+
+<style lang="scss">
+.forest_svg__cls-1 {
+  stroke-dasharray:  7712px;
 }
 
 </style>
