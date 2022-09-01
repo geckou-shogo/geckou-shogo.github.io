@@ -74,12 +74,13 @@ export default {
       stroke             : c.$white;
       stroke-width       : 1px;
       stroke-dasharray   : var(--pass-length);
-      animation          : draw_line 10s;
       animation-fill-mode: both;
     }
 
     &.animation {
-      fill: c.$black;
+      path {
+        animation: draw_line 10s;
+      }
     }
   }
 }
