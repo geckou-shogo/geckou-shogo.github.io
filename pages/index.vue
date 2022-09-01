@@ -66,7 +66,7 @@ export default {
           idName    : 'facts',
           name      : 'FACTS',
           component : 'SectionOfInfo',
-          background: 'BackgroundBuilding',
+          background: 'BackgroundCity',
         },
         {
           idName    : 'contact',

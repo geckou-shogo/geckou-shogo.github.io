@@ -19,14 +19,14 @@
 <script>
 import BackgroundForest from '@/assets/images/svg/forest.svg'
 import BackgroundTown from '@/assets/images/svg/town.svg'
-import BackgroundBuilding from '@/assets/images/svg/building.svg'
+import BackgroundCity from '@/assets/images/svg/city.svg'
 
 export default {
   name      : 'ParallaxBackground',
   components: {
     BackgroundForest,
     BackgroundTown,
-    BackgroundBuilding,
+    BackgroundCity,
   },
   props: {
     background: {
@@ -41,20 +41,16 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      const pathLength = document.querySelector('.forest_svg__path').getTotalLength()
-      console.log(pathLength)
-      const forest = document.querySelector('.forest_svg__path')
-      forest.style.setProperty('--pass', '7712' + 'px')
+      const pathElement = document.querySelector(`[data-svg="${this.background}"]`)
+      const pathLength  = pathElement.getTotalLength()
+      pathElement.style.setProperty('--pass-length', `${pathLength}px`)
     })
   },
-
 }
-
 </script>
 
 <style lang="scss" module>
 @use '~/assets/scss/value' as v;
-@use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
 .wrapper {
@@ -62,7 +58,7 @@ export default {
   height        : 100vh;
   mix-blend-mode: soft-light;
   pointer-events: none;
-  --pass             : 0;
+  --pass-length : 0;
 }
 
 .image {
@@ -72,25 +68,27 @@ export default {
   width   : 100%;
 
   svg {
-    path{
+    path {
       fill               : none;
       stroke-linejoin    : round;
       stroke             : c.$white;
       stroke-width       : 1px;
-      stroke-dasharray   : var(--pass);
-    }
-    &.animation {
-      animation          : line_animation 10s ease-in-out;
+      stroke-dasharray   : var(--pass-length);
+      animation          : draw_line 10s;
       animation-fill-mode: both;
+    }
+
+    &.animation {
+      fill: c.$black;
     }
   }
 }
 
-@keyframes line_animation {
-  0% {
-    stroke-dashoffset: var(--pass);
+@keyframes draw_line {
+  from {
+    stroke-dashoffset: var(--pass-length);
   }
-  100% {
+  to {
     stroke-dashoffset: 0;
   }
 }
