@@ -12,8 +12,8 @@
               :text="section.name"
               :current="currentSection === section.idName"
             />
-            {{ sectionProgress(section.idName) }}
-
+            <!-- デバッグ用 -->
+            <!-- {{ sectionProgress(section.idName) }} -->
             <div :class="$style.foot_container">
               <div
                 v-for="i in footprintsNumber"
@@ -28,8 +28,9 @@
                 <Footprints />
               </div>
             </div>
-            {{ currentSection }}
-            {{ currentSectionNth }}
+            <!-- デバッグ用 -->
+            <!-- {{ currentSection }}
+            {{ currentSectionNth }} -->
           </a>
         </li>
       </ul>
@@ -65,7 +66,7 @@ export default {
   },
   data() {
     return {
-      footprintsNumber: 5,
+      footprintsNumber: 8,
     }
   },
   computed: {
@@ -106,7 +107,7 @@ export default {
   justify-content: center;
   max-width: v.$desktopScreenSize;
   margin: 0 auto;
-  gap: v.$val * 6;
+  gap: 0 v.$val * 8;
 
   &_item {
     position: relative;
@@ -125,6 +126,9 @@ export default {
 }
 
 .foot_container {
+  position: absolute;
+  top: v.$val * 6.5;
+  margin: 0 6.2rem;
   display: flex;
 }
 
@@ -136,9 +140,13 @@ export default {
 }
 
 .footprints {
-  width: 30px;
-  height: 30px;
+  width: 12px;
+  height: 12px;
   opacity: 0;
+  transform: rotate(140deg);
+  &:nth-of-type(2n) {
+    transform: rotate(66deg);
+  }
   fill: c.$white;
   &.show {
     opacity: 1;
