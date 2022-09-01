@@ -22,7 +22,7 @@
                   $style.footprints,
                   i * 10 <= sectionProgress(section.idName) || index < currentSectionNth
                     ? $style.show
-                    : ''
+                    : '',
                 ]"
               >
                 <Footprints />
@@ -66,7 +66,7 @@ export default {
   },
   data() {
     return {
-      footprintsNumber: 8,
+      footprintsNumber: 12,
     }
   },
   computed: {
@@ -111,6 +111,26 @@ export default {
 
   &_item {
     position: relative;
+    &:nth-of-type(2) {
+      .foot_container {
+        margin: 0 7rem;
+      }
+    }
+    &:nth-of-type(3) {
+      .foot_container {
+        margin: 0 7.5rem;
+      }
+    }
+    &:nth-of-type(4) {
+      .foot_container {
+        margin: 0 6.8rem;
+      }
+    }
+    &:last-of-type {
+      .foot_container {
+        display: none;
+      }
+    }
   }
 }
 
@@ -130,6 +150,7 @@ export default {
   top: v.$val * 6.5;
   margin: 0 6.2rem;
   display: flex;
+  pointer-events: none;
 }
 
 .foot_list {
@@ -140,12 +161,12 @@ export default {
 }
 
 .footprints {
-  width: 12px;
-  height: 12px;
+  width: 8px;
+  height: 8px;
   opacity: 0;
-  transform: rotate(140deg);
+  transform: scale(-1, 1) rotate(-65deg);
   &:nth-of-type(2n) {
-    transform: rotate(66deg);
+    transform: rotate(112deg);
   }
   fill: c.$white;
   &.show {

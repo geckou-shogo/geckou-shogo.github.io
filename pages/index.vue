@@ -65,7 +65,7 @@ export default {
         {
           idName    : 'facts',
           name      : 'FACTS',
-          component : 'SectionOfInfo',
+          component : 'SectionOfFacts',
           background: 'BackgroundCity',
         },
         {
@@ -102,7 +102,7 @@ export default {
               return result
             }, {})
 
-          if (Object.keys(this.sectionElements).length === 1)
+          if (Object.keys(this.sectionElements).length)
             this.currentSection = Object.keys(this.sectionElements)[0]
           this.scrollStatus = args.currentElements
           this.progress = args.scroll.x / args.limit.x * 100

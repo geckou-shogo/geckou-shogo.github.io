@@ -53,7 +53,7 @@
 
 <script>
 export default {
-  name : 'SectionOfInfo',
+  name : 'SectionOfFacts',
   props: {
     section: {
       required: true,
@@ -110,5 +110,9 @@ export default {
 
 .item_address {
   font-style: normal;
+}
+
+.list {
+  display: flex;
 }
 </style>
