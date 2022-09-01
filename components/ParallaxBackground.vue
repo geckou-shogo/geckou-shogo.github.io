@@ -43,15 +43,11 @@ export default {
     this.$nextTick(() => {
       const pathLength = document.querySelector('.forest_svg__path').getTotalLength()
       console.log(pathLength)
+      const forest = document.querySelector('.forest_svg__path')
+      forest.style.setProperty('--pass', '7712' + 'px')
     })
   },
-  methods: {
-    pathCheckMethods() {
-      document.addEventListener('DOMContentLoaded', function() {
-        console.log(document.getElementById('forest').getTotalLength())
-      })
-    },
-  },
+
 }
 
 </script>
@@ -66,6 +62,7 @@ export default {
   height        : 100vh;
   mix-blend-mode: soft-light;
   pointer-events: none;
+  --pass             : 0;
 }
 
 .image {
@@ -80,7 +77,7 @@ export default {
       stroke-linejoin    : round;
       stroke             : c.$white;
       stroke-width       : 1px;
-      stroke-dasharray   : 7712px;
+      stroke-dasharray   : var(--pass);
     }
     &.animation {
       animation          : line_animation 10s ease-in-out;
@@ -91,7 +88,7 @@ export default {
 
 @keyframes line_animation {
   0% {
-    stroke-dashoffset: 7712px;
+    stroke-dashoffset: var(--pass);
   }
   100% {
     stroke-dashoffset: 0;
