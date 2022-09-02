@@ -14,24 +14,24 @@
             />
             <!-- デバッグ用 -->
             <!-- {{ sectionProgress(section.idName) }} -->
-            <div :class="$style.foot_container">
-              <div
-                v-for="i in footprintsNumber"
-                :key="i"
-                :class="[
-                  $style.footprints,
-                  i * 10 <= sectionProgress(section.idName) || index < currentSectionNth
-                    ? $style.show
-                    : '',
-                ]"
-              >
-                <Footprints />
-              </div>
-            </div>
             <!-- デバッグ用 -->
             <!-- {{ currentSection }}
-            {{ currentSectionNth }} -->
+              {{ currentSectionNth }} -->
           </a>
+          <div :class="$style.foot_container">
+            <div
+              v-for="i in footprintsNumber"
+              :key="i"
+              :class="[
+                $style.footprints,
+                i * 10 <= sectionProgress(section.idName) || index < currentSectionNth
+                  ? $style.show
+                  : '',
+              ]"
+            >
+              <Footprints />
+            </div>
+          </div>
         </li>
       </ul>
     </nav>
@@ -134,41 +134,33 @@ export default {
   }
 }
 
-.progress {
-  position: fixed;
-  bottom: v.$val * 6;
-
-  .bar {
-    width: 100%;
-    height: 1px;
-    background-color: c.$white;
-  }
-}
-
 .foot_container {
-  position: absolute;
-  top: v.$val * 6.5;
-  margin: 0 6.2rem;
-  display: flex;
+  position      : absolute;
+  top           : v.$val * 6.5;
+  margin        : 0 6.2rem;
+  display       : flex;
   pointer-events: none;
 }
 
 .foot_list {
   opacity: 0;
+
   &.show {
     opacity: 1;
   }
 }
 
 .footprints {
-  width: 8px;
-  height: 8px;
-  opacity: 0;
+  width    : 5px;
+  height   : 5px;
+  opacity  : 0;
   transform: scale(-1, 1) rotate(-65deg);
+  fill     : c.$white;
+
   &:nth-of-type(2n) {
     transform: rotate(112deg);
   }
-  fill: c.$white;
+
   &.show {
     opacity: 1;
   }
