@@ -1,48 +1,28 @@
 <template>
   <div
-    :class="$style.section"
+    :class="$style.container"
   >
     <div
-      v-inview:enter="show"
-      :class="$style.show_marker"
-    />
-    <div
-      v-inview:enter="rain"
-      :class="$style.rain_marker"
-    />
-    <div
-      :class="$style.section_content"
+      :class="$style.content"
+      data-scroll
+      data-scroll-speed="1"
     >
-      <RainScreen
-        :inView="screen"
-        :class="$style.vision_rain"
-      />
-      <div
-        :class="$style.content"
-      >
-        <div
-          :class="$style.content_inner"
-        >
-          <div :class="$style.content_box">
-            <LightCircle
-              :htmlString="`
-                合同会社Geckouは、<br>
-                月明かりが、暗闇で迷う人を照らして導くように、人々の助けとなれるよう、名づけられました。`
-              "
-            />
-          </div>
-          <div :class="$style.content_box">
-            <LightCircle
-              :htmlString="`
-                エンタテインメントや娯楽といった
-                付加価値の提供だけではなく、
-                WEBサービスや、WEB開発の効率化により、悩みや不満を解消することで、
-                希望を叶えられるよう応援いたします。
-              `"
-            />
-          </div>
-        </div>
-      </div>
+      <SpotlightContainer>
+        <SquareText
+          :htmlString="`合同会社Geckouは、<br>月明かりが、暗闇で迷う人を照らして導くように、人々の助けとなれるよう、名づけられました。`"
+        />
+      </SpotlightContainer>
+    </div>
+    <div
+      :class="$style.content"
+      data-scroll
+      data-scroll-speed="3"
+    >
+      <SpotlightContainer>
+        <SquareText
+          :htmlString="`エンタテインメントや娯楽といった付加価値の提供だけではなく、<br>WEBサービスや、WEB開発の効率化により、悩みや不満を解消することで、希望を叶えられるよう応援いたします。`"
+        />
+      </SpotlightContainer>
     </div>
   </div>
 </template>
@@ -56,24 +36,6 @@ export default {
       type    : Object,
     },
   },
-  data() {
-    return {
-      screen: false,
-    }
-  },
-  mounted() {
-    this.$nextTick(() => {
-      this.show()
-    })
-  },
-  methods: {
-    show() {
-      this.$emit('viewInScreen')
-    },
-    rain() {
-      this.screen = true
-    },
-  },
 }
 </script>
 
@@ -82,33 +44,33 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
-//雨のアニメーションを止める要素
-.rain_marker {
-  position: absolute;
-  right: -100px;
-  width: 2px;
-  height: 100vh;
-}
-
-.vision_rain {
-  position: absolute;
+.container {
+  height : 100%;
+  display: flex;
+  gap    : v.$val * 20;
+  height : 100%;
+  padding: 0 v.$val * 51 0 v.$val * 32;
 }
 
 .content {
+  flex    : 0 0 auto;
   position: relative;
-  height: 100vh;
-  z-index: v.zIndex('contents');
-  &_inner {
-    margin: 10rem 5rem 10rem 5rem;
-    display: flex;
-    gap: 0 10rem;
-  }
-  &_box {
+
+  > * {
     position: relative;
-    &:nth-of-type(2) {
-      margin-top: 3em;
+    left    : 0;
+  }
+
+  &:first-child {
+    > * {
+      top: 32%;
+    }
+  }
+
+  &:last-child {
+    > * {
+      top: 24%;
     }
   }
 }
-
 </style>

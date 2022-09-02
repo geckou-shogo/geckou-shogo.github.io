@@ -1,5 +1,5 @@
+@use 'color' as c;
 @use 'value' as v;
-@use 'sass:math';
 
 @mixin gridList( $column: 2, $tabletColumn: 2, $mobileColumn: 1, $gap: v.$val * 4 ) {
   display              : grid;
@@ -12,6 +12,15 @@
 
   @include v.media( 'mobile' ) {
     grid-template-columns: repeat(auto-fit, calc(( 100% - ((#{$gap} / 2) * ( #{$mobileColumn} - 1))) / #{$mobileColumn}));
-    gap                  : math.div($gap, 2);
+    gap                  : calc($gap / 2);
   }
+}
+
+@mixin spotlight {
+  width           : 100%;
+  height          : 100%;
+  border-radius   : 50%;
+  background-color: rgba(c.$main, .04);
+  mix-blend-mode  : screen;
+  pointer-events  : none;
 }

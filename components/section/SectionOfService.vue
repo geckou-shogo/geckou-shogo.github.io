@@ -1,74 +1,100 @@
 <template>
   <div
-    :class="$style.section"
+    :class="$style.container"
   >
     <div
-      :class="$style.section_container"
+      :class="$style.contents"
     >
-      <div
-        :class="$style.section_content"
+      <SpotlightContainer
+        :class="$style.content"
       >
-        <div
-          :class="$style.content_box"
+        <template
+          #heading
         >
-          <div :class="$style.container">
-            <h2 :class="[$style.content_box_title, $style.stewp]">
-              STEWP
-            </h2>
-            <p :class="$style.content_box_text">
-              現行のサイトにワードプレスの記事を表示することができるサービスです。
-            </p>
-          </div>
-          <div
-            :class="[$style.container ,$style.container_link]"
+          <h3
+            :class="$style.stewp"
           >
-            <div
-              :class="$style.content_box_link"
-            >
-              <a href="" target="_blank">詳細はこちら</a>
-            </div>
-          </div>
-        </div>
-        <div
-          :class="$style.content_box"
+            STEWP
+          </h3>
+        </template>
+        <p
+          :class="$style.text"
         >
-          <div :class="$style.container">
-            <h2 :class="$style.content_box_title">
-              WEBサイト制作
-            </h2>
-            <p :class="$style.content_box_text">
-              ランディングページからコーポレートサイトまで、量産されたテンプレートではなく、目的に合わせたデザインで制作します。
-            </p>
-          </div>
-        </div>
-      </div>
+          現行のサイトにワードプレスの記事を<br>表示することができるサービスです。
+        </p>
+      </SpotlightContainer>
       <div
-        :class="$style.section_content"
+        :class="$style.link_content"
       >
-        <div
-          :class="$style.content_box"
-        >
-          <div :class="$style.container">
-            <h2 :class="$style.content_box_title">
-              WEBサービス開発
-            </h2>
-            <p :class="$style.content_box_text">
-              自社アプリやECサイトなどのWEB開発も承っております。<br>
-              あなたのアイディアの実現や、抱えている問題の解決など、私たちにお手伝いさせてください。
-            </p>
+        <SpotlightContainer>
+          <div
+            :class="$style.link"
+          >
+            <a
+              href="https://stewp.app/"
+              target="_blank"
+            >
+              詳細はこちら
+            </a>
           </div>
-        </div>
-        <div
-          :class="$style.content_box"
-        >
-          <div :class="$style.container">
-            <p :class="$style.content_box_text">
-              Geckouは<a :class="$style.content_box_text_link" href="https://teamstove.co.jp/" target="_blank">株式会社STOVE</a>と業務提携をしており、バックエンドのシステムにノーコードツール”CORE”を使用し、迅速な開発を可能としています。<br>
-              まずはお気軽にご相談ください
-            </p>
-          </div>
-        </div>
+        </SpotlightContainer>
       </div>
+    </div>
+    <div
+      :class="$style.contents"
+    >
+      <SpotlightContainer
+        :class="$style.content"
+      >
+        <template
+          #heading
+        >
+          <h3>
+            WEBサイト制作
+          </h3>
+        </template>
+        <p
+          :class="$style.text"
+        >
+          ランディングページからコーポレートサイトまで、<br>
+          量産されたテンプレートではなく、目的に合わせたデザインで制作します。
+        </p>
+      </SpotlightContainer>
+    </div>
+    <div
+      :class="$style.contents"
+    >
+      <SpotlightContainer
+        :class="$style.content"
+      >
+        <template
+          #heading
+        >
+          <h3>
+            WEBサービス開発
+          </h3>
+        </template>
+        <p
+          :class="$style.text"
+        >
+          自社アプリやECサイトなどのWEB開発も承っております。<br>
+          あなたのアイディアの実現や、抱えている問題の解決など、私たちにお手伝いさせてください。
+        </p>
+      </SpotlightContainer>
+    </div>
+    <div
+      :class="$style.contents"
+    >
+      <SpotlightContainer
+        :class="$style.content"
+      >
+        <p
+          :class="$style.text"
+        >
+          Geckouは<a href="https:teamstove.co.jp" target="_blank">株式会社STOVE</a>と業務提携をしており、バックエンドのシステムにノーコードツール"CORE"を使用し、迅速な開発を可能としています。<br>
+          まずはお気軽にご相談ください
+        </p>
+      </SpotlightContainer>
     </div>
   </div>
 </template>
@@ -91,101 +117,65 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
-.section_container {
-  display: flex;
-  gap: 0 15rem;
-}
-
-.section_content {
-  margin: 8rem 2rem;
-  display: flex;
-  gap: 0 10rem;
-  &:nth-of-type(2) {
-    margin: 4rem;
-    gap: 0;
-    .content_box {
-      &:nth-of-type(2) {
-        top: 10rem;
-        left: -4rem;
-      }
-    }
-  }
-
-}
-
-.content_box {
-  position: relative;
-  &_title {
-    position: relative;
-    padding-bottom: 1rem;
-    width: 100%;
-    font-size: clamp(1.5rem, 1.25rem + 1.25vw, 2.188rem);
-    text-align: center;
-      &::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      display: block;
-      width: 100%;
-      height: 1px;
-      background-color: rgba($color: c.$white, $alpha: .28);
-    }
-  }
-  &_text {
-    padding-top: 1rem;
-    white-space: normal;
-    &_link {
-      position: relative;
-      color: c.$yellow;
-      text-decoration: underline;
-      text-underline-offset: 0.2rem;
-      &:hover {
-        text-decoration: none;
-      }
-    }
-  }
-}
-
 .container {
-  position: relative;
-  padding: 2rem;
+  height : 100%;
   display: flex;
-  width: calc(10rem * 1.16 + 14rem );
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  aspect-ratio: 1 / 1;
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background-color: rgba($color: c.$blue, $alpha: .05);
-    mix-blend-mode: screen;
-    pointer-events: none;
+  gap    : v.$val * 20;
+  height : 100%;
+  padding: 0 v.$val * 51 0 v.$val * 32;
+}
+
+.contents {
+  flex    : 0 0 auto;
+  position: relative;
+
+  > * {
+    position: relative;
   }
-  &_link {
-    top: -8rem;
-    left: 15rem;
-    width: calc(10rem * 1.16 + 2rem );
-    a {
-      position: relative;
-      color: c.$yellow;
-      text-decoration: underline;
-      text-underline-offset: 0.2rem;
-      &:hover {
-        text-decoration: none;
-      }
+
+  &:first-child {
+    .content {
+      top: 8%;
+    }
+  }
+
+  &:nth-child(2) {
+    .content {
+      top: 12%;
+    }
+  }
+}
+
+.text {
+  max-width: 35em;
+  padding  : v.$val * 2 v.$val * 8 0;
+}
+
+.link_content {
+  width: v.$val * 24;
+  top  : - v.$val * 12;
+  left : calc(100% - #{v.$val} * 12);
+
+  .link {
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+    width          : 100%;
+    height         : 100%;
+
+    > a {
+      display       : block;
+      width         : 100%;
+      padding-bottom: v.$val;
+      text-align    : center;
+      border-bottom : 1px solid rgba(c.$accent, .28);
     }
   }
 }
 
 .stewp {
-  font-size: clamp(1.5rem, 1.023rem + 2.39vw, 2.813rem);
-  font-family: f.family('stewp');
+  font-family   : f.family('stewp');
+  font-weight   : normal;
+  letter-spacing: .1em;
 }
-
 </style>

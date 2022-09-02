@@ -20,11 +20,13 @@
         data-scroll
         data-scroll-section
         :data-scroll-id="section.idName"
+        :class="$style.section"
       >
         <SectionContainer
           :section="section"
           :progress="progress"
-          :scrollStatus="sectionScrollStatus(section.idName)"
+          :scrollStatus="scrollStatus"
+          :sectionStatus="sectionStatus(section.idName)"
         />
       </section>
     </div>
@@ -40,6 +42,7 @@ export default {
       currentSection : 'top',
       screenStatus   : '',
       scrollStatus   : {},
+      currentElements: {},
       sectionElements: {},
       progress       : 0,
       sections       : [
@@ -92,19 +95,19 @@ export default {
 
         this.lmS.on('scroll', args => {
           this.checkIsScreenLandscape()
-          const argsCurrentElements = args.currentElements
-          this.sectionElements = Object.keys(argsCurrentElements)
+          this.currentElements = args.currentElements
+          this.scrollStatus = args.scroll
+          this.sectionElements = Object.keys(this.currentElements)
             .filter(key => {
               return this.sections.some(section => section.idName === key)
             })
             .reduce((result, key) => {
-              result[key] = argsCurrentElements[key]
+              result[key] = this.currentElements[key]
               return result
             }, {})
 
           if (Object.keys(this.sectionElements).length)
             this.currentSection = Object.keys(this.sectionElements)[0]
-          this.scrollStatus = args.currentElements
           this.progress = args.scroll.x / args.limit.x * 100
         })
       }
@@ -120,8 +123,8 @@ export default {
       if (this.screenStatus !== currentScreenStatus) location.reload()
       else window.removeEventListener('scroll', this.checkIsScreenLandscape)
     },
-    sectionScrollStatus(sectionIdName) {
-      return this.scrollStatus?.[sectionIdName] || {}
+    sectionStatus(sectionIdName) {
+      return this.currentElements?.[sectionIdName] || {}
     },
   },
 }
@@ -138,5 +141,9 @@ export default {
     flex-direction  : column;
     background-image: c.$backgroundGradient;
   }
+}
+
+.section {
+  overflow: hidden;
 }
 </style>

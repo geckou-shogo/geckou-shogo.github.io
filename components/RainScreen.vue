@@ -2,11 +2,15 @@
   <div
     :class="[$style.container, inView ? $style.stop : '']"
   >
-    <!-- {{ inView }} デバッグ用の記述です  -->
     <div :class="$style.rain_area">
       <span
-        v-for="rain in 20"
+        v-for="rain in rainfall"
         :key="rain"
+        :style="{
+          left: `${(100 / rainfall) * rain + calcRandomNumber(1, 3)}%`,
+          top : `-${calcRandomNumber(150, 200)}px`,
+          animationDuration: `${calcRandomNumber(5, 15)}s`
+        }"
       />
     </div>
   </div>
@@ -14,6 +18,7 @@
 
 <script>
 export default {
+  name : 'RainScreen',
   props: {
     inView: {
       required: false,
@@ -21,7 +26,16 @@ export default {
       default : false,
     },
   },
-
+  data() {
+    return {
+      rainfall: 20,
+    }
+  },
+  methods: {
+    calcRandomNumber(min, max) {
+      return Math.floor(Math.random() * (max + 1 - min)) + min
+    },
+  },
 }
 </script>
 
@@ -42,57 +56,32 @@ export default {
 .container {
   width: 100%;
   height: 100vh;
+
   &.stop {
-    animation-name: opacity;
-    animation-duration: 1s;
+    animation-name           : opacity;
+    animation-duration       : 1s;
     animation-timing-function: ease-out;
-    animation-fill-mode: forwards;
+    animation-fill-mode      : forwards;
   }
 }
 
 .rain_area {
-  position: absolute;
-  right:0;
-  top:auto;
-  width: 100%;
-  height:100vh;
+  width : 100%;
+  height: 100vh;
+
   span {
-    position: absolute;
-    width:1px;
-    height:100px;
-    background:c.$white;
-    opacity:0.4;
+    position  : absolute;
+    width     : 1px;
+    height    : v.$val * 8;
+    background: c.$white;
+    opacity   : .2;
+    animation : rain infinite;
   }
 }
 
-.rain_area span:nth-child(1){left:5%; top:-190px; animation: rain-anim 10s infinite;}
-.rain_area span:nth-child(2){left:10%; top:-180px; animation: rain-anim 11s infinite;}
-.rain_area span:nth-child(3){left:15%; top:-170px; animation: rain-anim 8s infinite;}
-.rain_area span:nth-child(4){left:20%; top:-160px; animation: rain-anim 12s infinite;}
-.rain_area span:nth-child(5){left:25%; top:-150px; animation: rain-anim 10s infinite;}
-
-.rain_area span:nth-child(6){left:30%; top:-150px; animation: rain-anim 11s infinite;}
-.rain_area span:nth-child(7){left:35%; top:-160px; animation: rain-anim 13s infinite;}
-.rain_area span:nth-child(8){left:40%; top:-170px; animation: rain-anim 7s infinite;}
-.rain_area span:nth-child(9){left:45%; top:-180px; animation: rain-anim 9s infinite;}
-.rain_area span:nth-child(10){left:50%; top:-190px; animation: rain-anim 11s infinite;}
-
-.rain_area span:nth-child(11){left:55%; top:-190px; animation: rain-anim 10s infinite;}
-.rain_area span:nth-child(12){left:60%; top:-180px; animation: rain-anim 6s infinite;}
-.rain_area span:nth-child(13){left:65%; top:-170px; animation: rain-anim 14s infinite;}
-.rain_area span:nth-child(14){left:70%; top:-160px; animation: rain-anim 12s infinite;}
-.rain_area span:nth-child(15){left:75%; top:-150px; animation: rain-anim 10s infinite;}
-
-.rain_area span:nth-child(16){left:80%; top:-150px; animation: rain-anim 14s infinite;}
-.rain_area span:nth-child(17){left:85%; top:-160px; animation: rain-anim 8s infinite;}
-.rain_area span:nth-child(18){left:90%; top:-170px; animation: rain-anim 9s infinite;}
-.rain_area span:nth-child(19){left:95%; top:-180px; animation: rain-anim 11s infinite;}
-.rain_area span:nth-child(20){left:100%; top:-190px; animation: rain-anim9 13s infinite;}
-
-@keyframes rain-anim {
-
-  0% { transform: translate(0px,0px);}
-  4% { transform: translate(0px,1600px);}
+@keyframes rain {
+  0% { transform: translate(0px, 0px);}
+  4% { transform: translate(0px, 1600px);}
 
   5% { transform: translate(200px,0px);}
   9% { transform: translate(200px,1600px);}
@@ -148,8 +137,6 @@ export default {
   90% { transform: translate(50px,0px);}
   99% { transform: translate(50px,1600px);}
 
-  100% { transform: translate(0px,0px);}
-
+  100% { transform: translate(0px, 0px);}
 }
-
 </style>

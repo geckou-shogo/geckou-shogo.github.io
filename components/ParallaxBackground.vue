@@ -1,17 +1,20 @@
 <template>
   <div
     :class="$style.wrapper"
+    :style="{
+      left: `${positionX}px`,
+    }"
   >
-    <div
-      data-scroll
-      data-scroll-speed="2"
-      :class="$style.image"
-    >
-      <component
-        :is="background"
-        v-if="background"
-        :class="animation ? $style.animation : ''"
-      />
+    <div>
+      <div
+        :class="$style.image"
+      >
+        <component
+          :is="background"
+          v-if="background"
+          :class="animation ? $style.animation : ''"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -38,6 +41,10 @@ export default {
       type    : Boolean,
       default : false,
     },
+    positionX: {
+      required: true,
+      type    : Number,
+    },
   },
   mounted() {
     this.$nextTick(() => {
@@ -54,18 +61,21 @@ export default {
 @use '~/assets/scss/color' as c;
 
 .wrapper {
-  width         : 120vw;
+  width         : 115vw;
   height        : 100vh;
+  margin        : 0;
   mix-blend-mode: soft-light;
   pointer-events: none;
-  --pass-length : 0;
+  position      : fixed;
 }
 
 .image {
-  position: absolute;
-  bottom  : 50%;
-  left    : 0;
-  width   : 100%;
+  position     : absolute;
+  bottom       : 50%;
+  left         : 0;
+  width        : 100%;
+  --pass-length: 0;
+  opacity      : .5;
 
   svg {
     path {
@@ -79,17 +89,18 @@ export default {
 
     &.animation {
       path {
-        animation: draw_line 10s;
+        animation: draw_line 3s linear;
       }
     }
   }
 }
 
 @keyframes draw_line {
-  from {
+  0% {
     stroke-dashoffset: var(--pass-length);
   }
-  to {
+
+  100% {
     stroke-dashoffset: 0;
   }
 }

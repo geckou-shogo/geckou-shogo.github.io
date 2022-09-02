@@ -31,7 +31,7 @@ export default {
   width           : 200vw;
   height          : 200vh;
   border-radius   : 50%;
-  background-image: radial-gradient(rgba(c.$white, .1) 0%, rgba(c.$white, 0) 50%, rgba(c.$white, 0) 100%,);
+  background-image: radial-gradient(rgba(c.$white, .2) 0%, rgba(c.$white, 0) 50%, rgba(c.$white, 0) 100%,);
   mix-blend-mode  : overlay;
   pointer-events  : none;
   position        : absolute;

@@ -1,17 +1,20 @@
 <template>
   <div
-    :class="[$style.section_header, transparent ? $style.transparent : '']"
+    :class="$style.container"
   >
-    <h2
-      :class="[$style.heading, contentsDisplay ? $style.displayed_border: '']"
-      :style="{fontSize: `${headingFontSize}px`}"
+    <div
+      :class="$style.container__top"
     >
-      <DisplayFromLeftElement
-        :isDisplay="contentsDisplay"
+      <h2
+        :class="[$style.heading, contentsDisplay ? $style.displayed_border: '']"
       >
-        {{ heading }}
-      </DisplayFromLeftElement>
-    </h2>
+        <DisplayFromLeftElement
+          :isDisplay="contentsDisplay"
+        >
+          {{ heading }}
+        </DisplayFromLeftElement>
+      </h2>
+    </div>
     <DisplayFromLeftElement
       :isDisplay="contentsDisplay"
       :class="$style.description_animation"
@@ -40,11 +43,6 @@ export default {
       required: true,
       type    : String,
     },
-    transparent: {
-      required: false,
-      type    : Boolean,
-      default : false,
-    },
   },
   data() {
     return {
@@ -69,18 +67,6 @@ export default {
       },
     }
   },
-  computed: {
-    headingFontSize() {
-      if (process.client) {
-        const windowHeight     = window?.innerHeight
-        const headerWidth      = windowHeight / 1.62
-        const headingMaxLength = 'service'.length
-        const letterSpacing    = 1.16
-        return Math.floor(headerWidth / headingMaxLength / letterSpacing)
-      } else
-        return 0
-    },
-  },
 }
 </script>
 
@@ -89,25 +75,26 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
-.section_header {
+.container {
   position        : relative;
   display         : flex;
   height          : 100vh;
   flex-direction  : column;
-  align-items     : center;
-  justify-content : center;
   aspect-ratio    : 1 / 1.62;
-  background-color: c.$bgBlack;
-  z-index: v.zIndex('medium');
+  background-color: c.$black;
+  position        : relative;
+  z-index         : v.zIndex('contents');
 
   @include v.media('mobile') {
     height : auto;
     padding: v.$val * 2 0;
   }
 
-  &.transparent {
-    margin-top      : 1.8rem;
-    background-color: transparent;
+  &__top {
+    flex           : 0 0 50%;
+    display        : flex;
+    flex-direction : column;
+    justify-content: flex-end;
   }
 }
 
@@ -116,12 +103,13 @@ export default {
   padding    : v.$val * 2;
   width      : 100%;
   color      : c.$white;
+  font-size  : f.size('heading');
   font-family: f.family('english');
   text-align : center;
   line-height: 1;
 
   &::first-letter {
-    color: c.$mainColor;
+    color: c.$main;
   }
 
   &::after {
@@ -133,7 +121,7 @@ export default {
     width           : 100%;
     height          : 1px;
     opacity         : 0;
-    background-color: rgba(c.$white, .28);
+    background-color: c.$border;
   }
 
   &.displayed_border {
@@ -150,20 +138,9 @@ export default {
 .description {
   padding        : v.$val * 2 v.$val * 4;
   display        : flex;
-  min-height: 64px;
   justify-content: center;
   flex-wrap      : wrap;
-  white-space: nowrap;
-  text-align: center;
-  span {
-    width: 100%;
-  }
-  &_animation {
-    transition-delay: .2s;
-    span {
-      transition-delay: .2s;
-    }
-  }
+  text-align     : center;
 }
 
 .visible_marker {

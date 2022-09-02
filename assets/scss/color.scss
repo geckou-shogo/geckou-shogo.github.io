@@ -1,32 +1,25 @@
 $white     : #e0e0e4;
-$darkWhite : #f5f5f5;
-$black     : #333;
+$black     : #141313;
 $lightBlack: #555;
 $darkBlack : #111;
-$bgBlack   : #141313;
 $gray      : #ddd;
-$lightGray : #eee;
-$darkGray  : #999;
 $red       : #f55c5c;
 $blue      : #1c4ac9;
 $yellow    : #ded9b3;
 
-$mainColor     : $blue;
-$baseColor     : $white;
-$accentColor   : $blue;
-$secondaryColor: $blue;
-$alertColor    : $red;
-$inactiveColor : $gray;
+$main  : $blue;
+$accent: $yellow;
+$border: rgba($white, .28);
 
 $backgroundGradient: linear-gradient(
   to bottom,
-  hsl(200, 29%, 6%) 0%,
-  hsl(201, 70%, 12%) 10%,
-  hsl(201, 63%, 13%) 20%,
-  hsl(203, 38%, 16%) 30%,
-  hsl(203, 64%, 14%) 40%,
+  hsl(203, 29%, 6%) 0%,
+  hsl(205, 76%, 8%) 10%,
+  hsl(207, 64%, 13%) 20%,
+  hsl(209, 38%, 16%) 30%,
+  hsl(210, 64%, 14%) 40%,
   hsl(211, 69%, 13%) 50%,
-  hsl(233, 86%, 11%) 70%,
+  hsl(233, 86%, 13%) 70%,
   hsl(240, 70%, 15%) 80%,
   hsl(244, 24%, 35%) 90%,
   hsl(292, 7%, 44%) 100%

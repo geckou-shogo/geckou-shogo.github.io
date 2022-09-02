@@ -76,7 +76,7 @@ export default {
 
     .letter {
       font-size                : f.size('larger');
-      font-weight              : f.weight('bold');
+      font-weight              : bold;
       color                    : c.$white;
       animation-name           : loading;
       animation-duration       : 1.6s;

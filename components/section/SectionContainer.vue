@@ -17,9 +17,8 @@
         v-if="section.background"
         :background="section.background"
         :class="$style.background"
-        data-scroll
-        data-scroll-speed="-10"
         :animation="animation"
+        :positionX="(scrollStatus.x - sectionStatus.left) - (scrollStatus.x * 1.02 / 50)"
       />
       <component
         :is="section.component"
@@ -38,6 +37,10 @@ export default {
       type    : Object,
     },
     scrollStatus: {
+      required: true,
+      type    : Object,
+    },
+    sectionStatus: {
       required: true,
       type    : Object,
     },
@@ -91,11 +94,11 @@ export default {
     content         : '';
     width           : 100%;
     height          : 100%;
-    background-image: radial-gradient(#333, #000);
-    mix-blend-mode  : lighten;
+    background-image: radial-gradient(#000, #333);
+    mix-blend-mode  : screen;
     position        : absolute;
     left            : 0;
-    opacity         : .4;
+    opacity         : .2;
     pointer-events  : none;
   }
 }
