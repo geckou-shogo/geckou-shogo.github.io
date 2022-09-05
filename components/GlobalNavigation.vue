@@ -20,11 +20,11 @@
           </a>
           <div :class="$style.foot_container">
             <div
-              v-for="i in footprintsNumber"
-              :key="i"
+              v-for="n in footprintsNumber"
+              :key="n"
               :class="[
                 $style.footprints,
-                i * 10 <= sectionProgress(section.idName) || index < currentSectionNth
+                isDisplayedFootprint(n, section) || index < currentSectionNth
                   ? $style.show
                   : '',
               ]"
@@ -77,6 +77,10 @@ export default {
   methods: {
     sectionProgress(idName) {
       return Math.round(this.sectionElements[idName]?.progress * 100) || 0
+    },
+    isDisplayedFootprint(n, section) {
+      // n が足跡の何番目
+      return n * 10 + 40 <= this.sectionProgress(section.idName)
     },
   },
 }
