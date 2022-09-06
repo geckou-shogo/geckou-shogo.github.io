@@ -85,7 +85,7 @@ export default {
   position        : relative;
   z-index         : v.zIndex('contents');
 
-  @include v.media('mobile') {
+  @include v.media('portrait') {
     height : auto;
     padding: v.$val * 2 0;
   }

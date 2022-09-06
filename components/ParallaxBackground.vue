@@ -2,7 +2,7 @@
   <div
     :class="$style.wrapper"
     :style="{
-      left: `${positionX}px`,
+      left: screenStatus === 'landscape' ? `${positionX}px` : 'auto'
     }"
   >
     <div>
@@ -45,6 +45,10 @@ export default {
       required: true,
       type    : Number,
     },
+    screenStatus: {
+      required: true,
+      type    : String,
+    },
   },
   mounted() {
     this.$nextTick(() => {
@@ -67,6 +71,9 @@ export default {
   mix-blend-mode: soft-light;
   pointer-events: none;
   position      : fixed;
+  @include v.media('portrait') {
+    width: 100%;
+  }
 }
 
 .image {

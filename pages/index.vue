@@ -27,6 +27,7 @@
           :progress="progress"
           :scrollStatus="scrollStatus"
           :sectionStatus="sectionStatus(section.idName)"
+          :screenStatus="screenStatus"
         />
       </section>
     </div>

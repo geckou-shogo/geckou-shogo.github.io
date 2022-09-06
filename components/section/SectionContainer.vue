@@ -19,6 +19,7 @@
         :class="$style.background"
         :animation="animation"
         :positionX="(scrollStatus.x - sectionStatus.left) - (scrollStatus.x * 1.02 / 50)"
+        :screenStatus="screenStatus"
       />
       <component
         :is="section.component"
@@ -48,6 +49,10 @@ export default {
       required: true,
       type    : Number,
     },
+    screenStatus: {
+      required: true,
+      type    : String,
+    },
   },
   data() {
     return {
@@ -76,9 +81,8 @@ export default {
   background-size : 100% 500vh;
   overflow        : hidden;
 
-  @include v.media('mobile') {
+  @include v.media('portrait') {
     flex-direction  : column;
-    background-image: none;
   }
 }
 

@@ -7,7 +7,7 @@
     >
       {{ text }}
       <Gecko
-        v-if="current"
+        v-if="current && sectionProgress <= geckoHideProgress"
         :class="$style.gecko"
       />
     </div>
@@ -30,6 +30,14 @@ export default {
     current: {
       required: true,
       type    : Boolean,
+    },
+    sectionProgress: {
+      required: true,
+      type    : Number,
+    },
+    geckoHideProgress: {
+      required: true,
+      type    : Number,
     },
   },
 }

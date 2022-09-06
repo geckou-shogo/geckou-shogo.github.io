@@ -125,6 +125,11 @@ address {
     height: 100%;
     align-items: center;
   }
+  @include v.media('portrait') {
+    &_container {
+      flex-direction: column;
+    }
+  }
 }
 
 .list {

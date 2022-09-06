@@ -45,11 +45,16 @@ export default {
 @use '~/assets/scss/color' as c;
 
 .container {
+  padding: 0 v.$val * 51 0 v.$val * 32;
   height : 100%;
   display: flex;
   gap    : v.$val * 20;
   height : 100%;
-  padding: 0 v.$val * 51 0 v.$val * 32;
+  @include v.media('portrait') {
+    padding: v.$val * 10;
+    flex-direction: column;
+    gap: v.$val * 4 0;
+  }
 }
 
 .content {
@@ -70,6 +75,18 @@ export default {
   &:last-child {
     > * {
       top: 24%;
+    }
+  }
+  @include v.media ('portrait') {
+    &:first-child {
+      > * {
+        top: 0;
+      }
+    }
+    &:last-child {
+      > * {
+        top: 0;
+      }
     }
   }
 }

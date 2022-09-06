@@ -3,6 +3,7 @@ $desktopScreenSize     : 1280px;
 $tabletWidthScreenSize : 1024px;
 $tabletHeightScreenSize: 768px;
 $mobileScreenSize      : 480px;
+$portrait              : portrait;
 
 @mixin media( $range ) {
   @if $range == 'desktop' {
@@ -15,6 +16,8 @@ $mobileScreenSize      : 480px;
     @media all and (min-width: $mobileScreenSize) and (max-width: $tabletHeightScreenSize) { @content; }
   } @else if $range == 'mobile' {
     @media all and (max-width: $mobileScreenSize) { @content; }
+  } @else if $range == 'portrait' {
+    @media all and (orientation: $portrait) {@content;}
   }
 }
 
