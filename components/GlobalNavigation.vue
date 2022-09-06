@@ -13,7 +13,7 @@
               :current="currentSection === section.idName"
             />
             <!-- デバッグ用 -->
-            {{ sectionProgress(section.idName) }}
+            <!-- {{ sectionProgress(section.idName) }} -->
             <!-- デバッグ用 -->
             <!-- {{ currentSection }}
               {{ currentSectionNth }} -->
