@@ -88,12 +88,10 @@
       <SpotlightContainer
         :class="$style.content"
       >
-        <p
-          :class="$style.text"
-        >
-          Geckouは<a href="https:teamstove.co.jp" target="_blank">株式会社STOVE</a>と業務提携をしており、バックエンドのシステムにノーコードツール"CORE"を使用し、迅速な開発を可能としています。<br>
-          まずはお気軽にご相談ください
-        </p>
+        <SquareText
+          :htmlString="message"
+          :class="$style.stove"
+        />
       </SpotlightContainer>
     </div>
   </div>
@@ -108,6 +106,11 @@ export default {
       type    : Object,
       default : () => { },
     },
+  },
+  data() {
+    return {
+      message: 'Geckouは<a :class="$style.stove" href="https:teamstove.co.jp" target="_blank">株式会社STOVE</a>と業務提携をしており、バックエンドのシステムにノーコードツール"CORE"を使用し、迅速な開発を可能としています。<br>まずはお気軽にご相談ください',
+    }
   },
 }
 </script>
@@ -169,6 +172,7 @@ export default {
       padding-bottom: v.$val;
       text-align    : center;
       border-bottom : 1px solid rgba(c.$accent, .28);
+      cursor: pointer;
     }
   }
 }
@@ -177,5 +181,15 @@ export default {
   font-family   : f.family('stewp');
   font-weight   : normal;
   letter-spacing: .1em;
+}
+
+.stove {
+  a {
+    text-decoration: underline;
+    text-underline-offset: .2em;
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
 </style>

@@ -13,38 +13,42 @@
           :key="item.name"
           :class="$style.item"
         >
-          <dt :class="$style.item_dt">
-            {{ item.name }}
-          </dt>
-          <dd :class="$style.item_dd">
-            <address
-              v-if="item.name === '住所'"
-              :class="$style.item_address"
-            >
-              <div
-                v-for="(value, key) in item.description"
-                :key="key"
+          <SpotlightContainer
+            :class="$style.contents"
+          >
+            <dt :class="$style.item_dt">
+              {{ item.name }}
+            </dt>
+            <dd :class="$style.item_dd">
+              <address
+                v-if="item.name === '住所'"
+                :class="$style.item_address"
               >
-                {{ value }}
-              </div>
-            </address>
-            <div
-              v-else-if="item.name === '事業内容'"
-            >
+                <div
+                  v-for="(value, key) in item.description"
+                  :key="key"
+                >
+                  {{ value }}
+                </div>
+              </address>
               <div
-                v-for="text in item.description"
-                :key="text"
+                v-else-if="item.name === '事業内容'"
               >
-                {{ text }}
+                <div
+                  v-for="text in item.description"
+                  :key="text"
+                >
+                  {{ text }}
+                </div>
               </div>
-            </div>
-            <div
-              v-else
-              :class="$style.item_description"
-            >
-              {{ item.description }}
-            </div>
-          </dd>
+              <div
+                v-else
+                :class="$style.item_description"
+              >
+                {{ item.description }}
+              </div>
+            </dd>
+          </SpotlightContainer>
         </div>
       </dl>
     </div>
@@ -58,7 +62,7 @@ export default {
     section: {
       required: true,
       type    : Object,
-      default : () => {},
+      default : () => { },
     },
   },
   data() {
@@ -108,11 +112,27 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
-.item_address {
+address {
   font-style: normal;
+}
+
+.section {
+  width: 100%;
+  height: 100%;
+  &_container {
+    padding: 0 v.$val * 4;
+    display: flex;
+    height: 100%;
+    align-items: center;
+  }
 }
 
 .list {
   display: flex;
+  gap: 0 v.$val * 4;
+}
+
+.contents {
+  padding: v.$val * 6;
 }
 </style>

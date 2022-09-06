@@ -13,7 +13,7 @@
               :current="currentSection === section.idName"
             />
             <!-- デバッグ用 -->
-            <!-- {{ sectionProgress(section.idName) }} -->
+            {{ sectionProgress(section.idName) }}
             <!-- デバッグ用 -->
             <!-- {{ currentSection }}
               {{ currentSectionNth }} -->
@@ -80,7 +80,7 @@ export default {
     },
     isDisplayedFootprint(n, section) {
       // n が足跡の何番目
-      return n * 10 + 40 <= this.sectionProgress(section.idName)
+      return n * 4 + 51 <= this.sectionProgress(section.idName)
     },
   },
 }
@@ -169,4 +169,5 @@ export default {
     opacity: 1;
   }
 }
+
 </style>
