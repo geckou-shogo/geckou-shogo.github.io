@@ -129,6 +129,7 @@ export default {
   @include v.media ('portrait') {
     padding: v.$val * 4;
     flex-direction: column;
+    align-items: center;
     gap: v.$val * 10 0;
 
   }
