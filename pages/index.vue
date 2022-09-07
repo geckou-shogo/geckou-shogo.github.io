@@ -107,7 +107,8 @@ export default {
             return result
           }, {})
         if (Object.keys(this.sectionElements).length) this.currentSection = Object.keys(this.sectionElements)[0]
-        this.progress = this.screenStatus === 'landscape' ? args.scroll.x / args.limit.x * 100 : args.scroll.y / args.limit.y * 100
+        const direction = this.screenStatus === 'landscape' ? 'x' : 'y'
+        this.progress = args.scroll?.[direction] / args.limit?.[direction] * 100 || 0
       })
       this.initialized = true
     })
