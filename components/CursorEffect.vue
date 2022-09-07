@@ -36,5 +36,8 @@ export default {
   pointer-events  : none;
   position        : absolute;
   z-index         : v.zIndex(max);
+  @include v.media ('portrait') {
+    display: none;
+  }
 }
 </style>
