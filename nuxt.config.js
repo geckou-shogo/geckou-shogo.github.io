@@ -50,10 +50,6 @@ export default {
       src : '@/plugins/locomotiveScroll.js',
       mode: 'client',
     },
-    {
-      src : '@/plugins/simpleParallax.js',
-      mode: 'client',
-    },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -74,7 +70,6 @@ export default {
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
     'nuxt-svg-loader',
-    'nuxt-gsap-module',
   ],
 
   gsap: {
@@ -92,8 +87,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: ['sal', 'gsap'],
-    loaders  : {
+    loaders: {
       scss: {
         implementation: Sass,
       },

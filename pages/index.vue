@@ -82,7 +82,8 @@ export default {
     }
   },
   mounted() {
-    this.screenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
+    const mediaState = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
+    this.$store.commit('mediaStatus/addMediaState', mediaState)
     window.addEventListener('resize', this.registrationScrollEvent)
 
     this.$nextTick(() => {
