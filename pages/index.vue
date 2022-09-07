@@ -31,6 +31,7 @@
         />
       </section>
     </div>
+    <p> {{ scrollStatus }} </p>
   </main>
 </template>
 
@@ -87,32 +88,27 @@ export default {
     window.addEventListener('resize', this.registrationScrollEvent)
 
     this.$nextTick(() => {
-      if (this.screenStatus === 'landscape') {
-        this.lmS = new this.$locomotiveScroll({
-          el        : document.querySelector('[data-scroll-container]'),
-          smooth    : true,
-          direction : 'horizontal',
-          multiplier: .5,
-        })
-
-        this.lmS.on('scroll', args => {
-          this.checkIsScreenLandscape()
-          this.currentElements = args.currentElements
-          this.scrollStatus = args.scroll
-          this.sectionElements = Object.keys(this.currentElements)
-            .filter(key => {
-              return this.sections.some(section => section.idName === key)
-            })
-            .reduce((result, key) => {
-              result[key] = this.currentElements[key]
-              return result
-            }, {})
-
-          if (Object.keys(this.sectionElements).length)
-            this.currentSection = Object.keys(this.sectionElements)[0]
-          this.progress = args.scroll.x / args.limit.x * 100
-        })
-      }
+      this.lmS = new this.$locomotiveScroll({
+        el        : document.querySelector('[data-scroll-container]'),
+        smooth    : true,
+        direction : this.screenStatus === 'landscape' ? 'horizontal' : 'vertical',
+        multiplier: .5,
+      })
+      this.lmS.on('scroll', args => {
+        this.checkIsScreenLandscape()
+        this.currentElements = args.currentElements
+        this.scrollStatus = args.scroll
+        this.sectionElements = Object.keys(this.currentElements)
+          .filter(key => {
+            return this.sections.some(section => section.idName === key)
+          })
+          .reduce((result, key) => {
+            result[key] = this.currentElements[key]
+            return result
+          }, {})
+        if (Object.keys(this.sectionElements).length) this.currentSection = Object.keys(this.sectionElements)[0]
+        this.screenStatus === 'landscape' ? this.progress = args.scroll.x / args.limit.x * 100 : this.progress = args.scroll.y / args.limit.y * 100
+      })
       this.initialized = true
     })
   },
