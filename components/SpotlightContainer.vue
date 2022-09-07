@@ -78,11 +78,20 @@ export default {
   border-bottom  : 1px solid c.$border;
   font-size      : f.size('max');
   line-height    : 1;
+  @include v.media('portrait') {
+    flex: 0 0 40%;
+  }
 }
 
 .contents {
   flex : 1 0 50%;
   width: 100%;
+  @include v.media('portrait') {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 @keyframes sway {

@@ -82,6 +82,8 @@ export default {
   overflow        : hidden;
 
   @include v.media('portrait') {
+    min-width: auto;
+    width: 100%;
     height: auto;
     flex-direction  : column;
   }
@@ -113,5 +115,8 @@ export default {
   position   : absolute;
   top        : 0;
   left       : 0;
+  @include v.media('portrait') {
+    margin-left: 0;
+  }
 }
 </style>

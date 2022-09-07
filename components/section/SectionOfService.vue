@@ -182,6 +182,9 @@ export default {
       cursor: pointer;
     }
   }
+  @include v.media ('portrait') {
+    left: 50%;
+  }
 }
 
 .stewp {

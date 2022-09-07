@@ -126,6 +126,7 @@ address {
     align-items: center;
   }
   @include v.media('portrait') {
+    margin: v.$val * 4 0;
     &_container {
       flex-direction: column;
     }
@@ -135,6 +136,10 @@ address {
 .list {
   display: flex;
   gap: 0 v.$val * 4;
+  @include v.media('portrait') {
+    flex-direction: column;
+    gap: v.$val * 4 0;
+  }
 }
 
 .contents {
