@@ -1,12 +1,15 @@
 <template>
   <div
+    v-if="section.idName !== 'top'"
     :class="$style.wrapper"
     :style="{
-      left: screenStatus === 'landscape' ? `${positionX}px` : 'auto'
+      left: screenStatus === 'landscape' ? `${positionX}px` : 'auto',
     }"
   >
     <div>
       <div
+        data-scroll
+        :data-scroll-speed="screenStatus === 'landscape' ? '0' : '2'"
         :class="$style.image"
       >
         <component
@@ -32,6 +35,10 @@ export default {
     BackgroundCity,
   },
   props: {
+    section: {
+      required: true,
+      type    : Object,
+    },
     background: {
       required: true,
       type    : String,
@@ -72,6 +79,7 @@ export default {
   pointer-events: none;
   position      : fixed;
   @include v.media('portrait') {
+    bottom: 0;
     width: 100%;
   }
 }

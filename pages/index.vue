@@ -31,7 +31,6 @@
         />
       </section>
     </div>
-    <p> {{ scrollStatus }} </p>
   </main>
 </template>
 

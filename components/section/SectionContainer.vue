@@ -20,6 +20,7 @@
         :animation="animation"
         :positionX="(scrollStatus.x - sectionStatus.left) - (scrollStatus.x * 1.02 / 50)"
         :screenStatus="screenStatus"
+        :section="section"
       />
       <component
         :is="section.component"
@@ -78,7 +79,7 @@ export default {
   height          : 100vh;
   min-width       : calc(100vw + 1px);
   background-image: c.$backgroundGradient;
-  background-size : 100% 500vh;
+  background-size : 100% 800vh;
   overflow        : hidden;
 
   @include v.media('portrait') {
@@ -116,6 +117,9 @@ export default {
   top        : 0;
   left       : 0;
   @include v.media('portrait') {
+    position: fixed;
+    top: auto;
+    bottom: 0;
     margin-left: 0;
   }
 }
