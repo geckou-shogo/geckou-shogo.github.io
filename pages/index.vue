@@ -28,6 +28,7 @@
           :scrollStatus="scrollStatus"
           :sectionStatus="sectionStatus(section.idName)"
           :screenStatus="screenStatus"
+          :currentSection="currentSection"
         />
       </section>
     </div>

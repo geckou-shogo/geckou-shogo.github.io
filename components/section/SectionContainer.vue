@@ -21,6 +21,7 @@
         :positionX="(scrollStatus.x - sectionStatus.left) - (scrollStatus.x * 1.02 / 50)"
         :screenStatus="screenStatus"
         :section="section"
+        :currentSection="currentSection"
       />
       <component
         :is="section.component"
@@ -37,6 +38,10 @@ export default {
     section: {
       required: true,
       type    : Object,
+    },
+    currentSection: {
+      required: true,
+      type    : String,
     },
     scrollStatus: {
       required: true,
