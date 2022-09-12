@@ -28,6 +28,7 @@ export default {
   display        : flex;
   width          : 100vw;
   justify-content: center;
+
   @include v.media ('portrait') {
     width: 100%;
   }
