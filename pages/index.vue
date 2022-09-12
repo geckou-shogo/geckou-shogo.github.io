@@ -109,6 +109,7 @@ export default {
         if (Object.keys(this.sectionElements).length) this.currentSection = Object.keys(this.sectionElements)[0]
         const direction = this.screenStatus === 'landscape' ? 'x' : 'y'
         this.progress = args.scroll?.[direction] / args.limit?.[direction] * 100 || 0
+        console.log(this.currentElements)
       })
       this.initialized = true
     })

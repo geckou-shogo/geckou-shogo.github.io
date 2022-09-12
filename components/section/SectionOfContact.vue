@@ -48,5 +48,9 @@ export default {
   > form {
     display: block;
   }
+  @include v.media('portrait') {
+    margin: v.$val * 8 0;
+    padding: 0 v.$val * 2;
+  }
 }
 </style>

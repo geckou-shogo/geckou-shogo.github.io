@@ -82,7 +82,7 @@ export default {
   position      : fixed;
 
   @include v.media('portrait') {
-    bottom: 0;
+    top: calc(50% - 1.5rem);
     width: 100%;
   }
 }
@@ -112,7 +112,7 @@ export default {
     }
   }
 
-  /* @include v.media('portrait') {
+  @include v.media('portrait') {
     svg {
       opacity: 0;
     }
@@ -122,7 +122,7 @@ export default {
         opacity: 1;
       }
     }
-  } */
+  }
 }
 
 @keyframes draw_line {
