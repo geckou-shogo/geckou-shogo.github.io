@@ -56,7 +56,7 @@
         <p
           :class="$style.text"
         >
-          ランディングページからコーポレートサイトまで、<br>
+          ランディングページからコーポレートサイトまで、
           量産されたテンプレートではなく、目的に合わせたデザインで制作します。
         </p>
       </SpotlightContainer>
@@ -90,7 +90,6 @@
       >
         <SquareText
           :htmlString="message"
-          :class="$style.stove"
         />
       </SpotlightContainer>
     </div>
@@ -124,14 +123,14 @@ export default {
   padding: 0 v.$val * 51 0 v.$val * 32;
   height : 100%;
   display: flex;
-  gap    : v.$val * 20;
+  gap    : v.$val * 24;
   height : 100%;
-  @include v.media ('portrait') {
-    padding: v.$val * 4;
-    flex-direction: column;
-    align-items: center;
-    gap: v.$val * 10 0;
 
+  @include v.media ('portrait') {
+    padding       : v.$val * 4;
+    flex-direction: column;
+    align-items   : center;
+    gap           : v.$val * 10 0;
   }
 }
 
@@ -152,6 +151,18 @@ export default {
   &:nth-child(2) {
     .content {
       top: 12%;
+    }
+  }
+
+  &:nth-child(3) {
+    .content {
+      top: 7%;
+    }
+  }
+
+  &:nth-child(4) {
+    .content {
+      top: 10%;
     }
   }
 }
@@ -179,7 +190,6 @@ export default {
       padding-bottom: v.$val;
       text-align    : center;
       border-bottom : 1px solid rgba(c.$accent, .28);
-      cursor: pointer;
     }
   }
   @include v.media ('portrait') {
@@ -191,15 +201,5 @@ export default {
   font-family   : f.family('stewp');
   font-weight   : normal;
   letter-spacing: .1em;
-}
-
-.stove {
-  a {
-    text-decoration: underline;
-    text-underline-offset: .2em;
-    &:hover {
-      text-decoration: none;
-    }
-  }
 }
 </style>

@@ -9,7 +9,7 @@
     >
       <SpotlightContainer>
         <SquareText
-          :htmlString="`合同会社Geckouは、<br>月明かりが、暗闇で迷う人を照らして導くように、人々の助けとなれるよう、名づけられました。`"
+          :htmlString="`合同会社Geckouは、月明かりが、暗闇で迷う人を照らして導くように、人々の助けとなれるよう、名づけられました。`"
         />
       </SpotlightContainer>
     </div>
@@ -50,11 +50,12 @@ export default {
   display: flex;
   gap    : v.$val * 20;
   height : 100%;
+
   @include v.media('portrait') {
-    padding: v.$val * 10;
+    padding       : v.$val * 10;
     flex-direction: column;
-    align-items: center;
-    gap: v.$val * 4 0;
+    align-items   : center;
+    gap           : v.$val * 4 0;
   }
 }
 
@@ -78,12 +79,9 @@ export default {
       top: 24%;
     }
   }
+
   @include v.media ('portrait') {
-    &:first-child {
-      > * {
-        top: 0;
-      }
-    }
+    &:first-child,
     &:last-child {
       > * {
         top: 0;

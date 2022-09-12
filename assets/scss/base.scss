@@ -37,8 +37,18 @@ a {
   display        : inline-block;
   color          : c.$accent;
   text-decoration: none;
+  transition     : color .3s;
+
+  &:hover {
+    color: lighten( c.$accent, 10%);
+  }
 }
 
 img {
   display: block;
+}
+
+
+address {
+  font-style: normal;
 }

@@ -15,6 +15,7 @@
             />
           </a>
           <ProgressFootprints
+            v-if="section.idName !== 'contact'"
             :sectionProgress="sectionProgress(section.idName)"
             :startProgress="animationTransitionProgress"
           />
@@ -86,6 +87,10 @@ export default {
   justify-content: center;
   max-width      : v.$desktopScreenSize;
   margin         : 0 auto;
-  gap            : 0 v.$val * 8;
+
+  > li {
+    display    : flex;
+    align-items: center;
+  }
 }
 </style>

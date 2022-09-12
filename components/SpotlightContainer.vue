@@ -14,7 +14,7 @@
         name="heading"
       />
     </div>
-    <div :class="$style.contents">
+    <div :class="$style.content">
       <slot />
     </div>
   </div>
@@ -53,7 +53,7 @@ export default {
   opacity        : 0;
   transition     : opacity 1s;
   white-space    : normal;
-  text-shadow    : 2px 2px 2px c.$black;
+  text-shadow    : 2px 2px 2px rgba(c.$black, .5);
 
   &::before {
     @include u.spotlight;
@@ -78,18 +78,20 @@ export default {
   border-bottom  : 1px solid c.$border;
   font-size      : f.size('max');
   line-height    : 1;
+
   @include v.media('portrait') {
     flex: 0 0 40%;
   }
 }
 
-.contents {
+.content {
   flex : 1 0 50%;
   width: 100%;
+
   @include v.media('portrait') {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display        : flex;
+    flex-direction : column;
+    align-items    : center;
     justify-content: center;
   }
 }

@@ -36,8 +36,8 @@ $lineHeightMap: (
 );
 
 $letterSpacingMap: (
-  'normal'  : .16em,
-  'narrowed': .08em
+  'normal'  : .2em,
+  'narrowed': .1em
 );
 
 @function baseSize($key) {

@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="screenStatus === 'landscape' ? currentSection : currentSection !== 'top' "
+    v-show="screenStatus === 'landscape' ? currentSection : currentSection !== 'top' "
     :class="$style.wrapper"
     :style="{
       left: screenStatus === 'landscape' ? `${positionX}px` : 'auto',
@@ -8,11 +8,8 @@
   >
     <div>
       <div
-        data-scroll
-        :data-scroll-speed="screenStatus === 'landscape' ? '0' : '2'"
         :class="$style.image"
       >
-        {{ currentSection }}
         <component
           :is="background"
           v-if="background"
@@ -66,8 +63,7 @@ export default {
     this.$nextTick(() => {
       const pathElement = document.querySelector(`[data-svg="${this.background}"]`)
       const pathLength  = pathElement?.getTotalLength() || 0
-      if (pathElement)
-        pathElement.style.setProperty('--pass-length', `${pathLength}px`)
+      if (pathElement) pathElement.style.setProperty('--pass-length', `${pathLength}px`)
     })
   },
 }
@@ -84,6 +80,7 @@ export default {
   mix-blend-mode: soft-light;
   pointer-events: none;
   position      : fixed;
+
   @include v.media('portrait') {
     bottom: 0;
     width: 100%;
@@ -114,17 +111,18 @@ export default {
       }
     }
   }
-  @include v.media('portrait') {
+
+  /* @include v.media('portrait') {
     svg {
       opacity: 0;
     }
+
     svg {
       &.animation {
         opacity: 1;
       }
     }
-
-  }
+  } */
 }
 
 @keyframes draw_line {

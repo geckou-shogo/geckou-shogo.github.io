@@ -5,7 +5,6 @@
     <div
       :class="$style.loading_box"
     >
-      <!-- {{ displayState }} -->
       <span
         v-for="(i, index) in loadingText.length"
         :key="i"
@@ -42,11 +41,14 @@ export default {
       displayState: true,
     }
   },
-  mounted() {
-    this.displayState = false
-    // if (this.initialized)
-    //   setTimeout(() => {
-    //   }, this.displayTime)
+  watch: {
+    initialized() {
+      if (this.initialized) {
+        setTimeout(() => {
+          this.displayState = false
+        }, this.displayTime)
+      }
+    },
   },
 }
 </script>

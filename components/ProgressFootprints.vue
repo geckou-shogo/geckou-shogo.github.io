@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     isDisplayedFootprint(n) {
-      const count = (100 - this.startProgress) / this.footprintsNumber
+      const count = (100 - this.startProgress) / (this.footprintsNumber - 1)
       return this.startProgress + (count * n) <= this.sectionProgress
     },
   },
@@ -49,22 +49,24 @@ export default {
 @use '~/assets/scss/color' as c;
 
 .container {
-  position      : absolute;
-  top           : v.$val * 6.5;
-  margin        : 0 6.2rem;
-  display       : flex;
-  pointer-events: none;
+  display    : flex;
+  align-items: center;
+  padding    : 0 v.$val;
 }
 
 .footprints {
-  width    : 5px;
-  height   : 5px;
-  opacity  : 0;
-  transform: scale(-1, 1) rotate(-65deg);
-  fill     : c.$white;
+  width     : 5px;
+  height    : 5px;
+  margin-top: 8px;
+  opacity   : 0;
+  transform : scale(-1, 1) rotate(-65deg);
+  fill      : c.$white;
 
   &:nth-of-type(2n) {
-    transform: rotate(112deg);
+    transform    : rotate(112deg);
+    margin-top   : 0;
+    margin-bottom: 8px;
+    margin-right : 4px;
   }
 
   &.show {

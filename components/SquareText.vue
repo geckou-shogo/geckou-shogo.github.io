@@ -34,7 +34,7 @@ export default {
         .replace('<br>', '')
       const textLength = text.length
       const textSquare = Math.sqrt(textLength)
-      return (Math.round(textSquare) + 6) * 1.16
+      return (Math.round(textSquare) + 8) * 1.16
     },
   },
 }
@@ -49,5 +49,13 @@ export default {
   align-items    : center;
   justify-content: center;
   aspect-ratio   : 1 / 1;
+
+  a {
+    border-bottom : 1px solid rgba(c.$accent, .28);
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
 </style>

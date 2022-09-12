@@ -1,57 +1,49 @@
 <template>
   <div
-    :class="$style.section"
+    :class="$style.container"
   >
-    <div
-      :class="$style.section_container"
+    <dl
+      :class="$style.list"
     >
-      <dl
-        :class="$style.list"
+      <div
+        v-for="item in company"
+        :key="item.name"
+        :class="$style.item"
       >
-        <div
-          v-for="item in company"
-          :key="item.name"
-          :class="$style.item"
+        <SpotlightContainer
+          :class="$style.content_wrapper"
         >
-          <SpotlightContainer
-            :class="$style.contents"
+          <div
+            :class="$style.content"
           >
-            <dt :class="$style.item_dt">
+            <dt
+              :class="$style.team"
+            >
               {{ item.name }}
             </dt>
             <dd :class="$style.item_dd">
-              <address
-                v-if="item.name === '住所'"
+              <component
+                :is="item.name === '住所' ? 'address' : 'span'"
+                v-if="typeof item.description === 'object'"
                 :class="$style.item_address"
               >
                 <div
-                  v-for="(value, key) in item.description"
-                  :key="key"
+                  v-for="value in item.description"
+                  :key="value"
                 >
                   {{ value }}
                 </div>
-              </address>
-              <div
-                v-else-if="item.name === '事業内容'"
-              >
-                <div
-                  v-for="text in item.description"
-                  :key="text"
-                >
-                  {{ text }}
-                </div>
-              </div>
+              </component>
               <div
                 v-else
-                :class="$style.item_description"
               >
                 {{ item.description }}
               </div>
             </dd>
-          </SpotlightContainer>
-        </div>
-      </dl>
-    </div>
+          </div>
+        </SpotlightContainer>
+      </div>
+    </dl>
   </div>
 </template>
 
@@ -112,37 +104,56 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
-address {
-  font-style: normal;
-}
+.container {
+  padding: 0 v.$val * 51 0 v.$val * 32;
+  height : 100%;
 
-.section {
-  width: 100%;
-  height: 100%;
-  &_container {
-    padding: 0 v.$val * 4;
-    display: flex;
-    height: 100%;
-    align-items: center;
-  }
   @include v.media('portrait') {
     margin: v.$val * 4 0;
-    &_container {
-      flex-direction: column;
-    }
   }
 }
 
 .list {
+  height : 100%;
   display: flex;
-  gap: 0 v.$val * 4;
+  gap    : v.$val * 20;
+
   @include v.media('portrait') {
     flex-direction: column;
-    gap: v.$val * 4 0;
+    gap           : v.$val * 4 0;
+  }
+
+  .item {
+    position: relative;
+
+    .content_wrapper {
+      position: relative;
+    }
+
+    &:nth-child(odd) {
+      > * {
+        top: 32%;
+      }
+    }
+
+    &:nth-child(even) {
+      > * {
+        top: 24%;
+      }
+    }
   }
 }
 
-.contents {
-  padding: v.$val * 6;
+.content {
+  display        : flex;
+  flex-direction : column;
+  justify-content: center;
+  height         : 100%;
+  padding        : v.$val * 8;
+}
+
+.team {
+  margin-bottom: v.$val;
+  font-weight  : bold;
 }
 </style>

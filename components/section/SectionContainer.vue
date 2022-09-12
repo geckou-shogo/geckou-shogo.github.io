@@ -115,17 +115,4 @@ export default {
     pointer-events  : none;
   }
 }
-
-.background {
-  margin-left: 10%;
-  position   : absolute;
-  top        : 0;
-  left       : 0;
-  @include v.media('portrait') {
-    position: fixed;
-    top: auto;
-    bottom: 0;
-    margin-left: 0;
-  }
-}
 </style>
