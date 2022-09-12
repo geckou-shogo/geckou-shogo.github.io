@@ -10,17 +10,14 @@
       :class="$style.header"
     />
     <div
-      v-inview:enter="() => {animation = true}"
       :class="$style.contents"
     >
       <ParallaxBackground
         v-if="section.background"
         :background="section.background"
-        :class="$style.background"
-        :animation="animation"
         :positionX="(scrollStatus.x - sectionStatus.left) - (scrollStatus.x * 1.02 / 50)"
+        :positionY="backGroundPositionYAtPortrait"
         :screenStatus="screenStatus"
-        :section="section"
         :currentSection="currentSection"
       />
       <component
@@ -66,6 +63,13 @@ export default {
       animation          : false,
     }
   },
+  computed: {
+    backGroundPositionYAtPortrait() {
+      return process.client && this.screenStatus === 'portrait'
+        ? ((this.sectionStatus?.bottom || 0) - window?.innerHeight) - this.scrollStatus.y
+        : 0
+    },
+  },
   watch: {
     progress(newValue) {
       if (newValue > this.backgroundPositionY) this.backgroundPositionY = newValue
@@ -100,8 +104,8 @@ export default {
 }
 
 .contents {
-  flex    : 1 1 auto;
-  position: relative;
+  flex     : 1 1 auto;
+  position : relative;
 
   &::before {
     content         : '';

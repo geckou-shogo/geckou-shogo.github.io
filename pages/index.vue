@@ -1,5 +1,7 @@
 <template>
-  <main :class="$style.frontpage">
+  <main
+    :class="$style.frontpage"
+  >
     <LoadingScreen
       :initialized="initialized"
     />

@@ -1,21 +1,21 @@
 <template>
   <div
-    v-show="screenStatus === 'landscape' ? currentSection : currentSection !== 'top' "
+    v-if="background"
+    ref="parallaxBackground"
+    v-inview:enter="() => {isMoveAnimation = true}"
     :class="$style.wrapper"
     :style="{
-      left: screenStatus === 'landscape' ? `${positionX}px` : 'auto',
+      left : screenStatus === 'landscape' ? `${positionX}px` : 'auto',
+      bottom: screenStatus === 'portrait' ? `calc(${Math.max(positionY, 0)}px + 3rem)` : 'auto',
     }"
   >
-    <div>
-      <div
-        :class="$style.image"
-      >
-        <component
-          :is="background"
-          v-if="background"
-          :class="animation ? $style.animation : ''"
-        />
-      </div>
+    <div
+      :class="$style.image"
+    >
+      <component
+        :is="background"
+        :class="isMoveAnimation ? $style.animation : ''"
+      />
     </div>
   </div>
 </template>
@@ -33,10 +33,6 @@ export default {
     BackgroundCity,
   },
   props: {
-    section: {
-      required: true,
-      type    : Object,
-    },
     currentSection: {
       required: true,
       type    : String,
@@ -45,12 +41,11 @@ export default {
       required: true,
       type    : String,
     },
-    animation: {
-      required: false,
-      type    : Boolean,
-      default : false,
-    },
     positionX: {
+      required: true,
+      type    : Number,
+    },
+    positionY: {
       required: true,
       type    : Number,
     },
@@ -58,6 +53,11 @@ export default {
       required: true,
       type    : String,
     },
+  },
+  data() {
+    return {
+      isMoveAnimation: false,
+    }
   },
   mounted() {
     this.$nextTick(() => {
@@ -82,8 +82,10 @@ export default {
   position      : fixed;
 
   @include v.media('portrait') {
-    bottom: 0;
-    width: 100%;
+    bottom  : v.$val * 4;
+    height  : auto;
+    width   : 100%;
+    position: absolute;
   }
 }
 
@@ -111,18 +113,6 @@ export default {
       }
     }
   }
-
-  /* @include v.media('portrait') {
-    svg {
-      opacity: 0;
-    }
-
-    svg {
-      &.animation {
-        opacity: 1;
-      }
-    }
-  } */
 }
 
 @keyframes draw_line {
