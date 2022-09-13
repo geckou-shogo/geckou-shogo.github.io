@@ -83,7 +83,7 @@ export default {
   aspect-ratio    : 1 / 1.62;
   background-color: c.$black;
   position        : relative;
-  z-index         : v.zIndex('contents');
+  z-index         : v.zIndex('contents') + 1;
 
   @include v.media('portrait') {
     height : auto;

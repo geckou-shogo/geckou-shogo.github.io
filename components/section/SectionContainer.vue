@@ -26,13 +26,27 @@
         :is="section.component"
         :section="section"
       />
+      <div
+        v-if="section.idName !== 'top'"
+        :class="$style.logo"
+        :style="{
+          left: screenStatus === 'landscape' ? `${scrollStatus.x - sectionStatus.left}px` : 'auto',
+        }"
+      >
+        <GeckouLogo />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import GeckouLogo from '@/assets/images/svg/logo.svg'
+
 export default {
-  name : 'SectionContainer',
+  name      : 'SectionContainer',
+  components: {
+    GeckouLogo,
+  },
   props: {
     section: {
       required: true,
@@ -90,8 +104,7 @@ export default {
   height          : 100vh;
   min-width       : calc(100vw + 1px);
   background-image: c.$backgroundGradient;
-  background-size : 100% 800vh;
-  overflow        : hidden;
+  background-size : 100% 700vh;
 
   @include v.media('portrait') {
     min-width: auto;
@@ -120,5 +133,12 @@ export default {
     opacity         : .2;
     pointer-events  : none;
   }
+}
+
+.logo {
+  width   : v.$val * 10;
+  position: absolute;
+  top     : 10%;
+  z-index : v.zIndex('contents');
 }
 </style>

@@ -39,6 +39,7 @@
 
 <script>
 export default {
+  name: 'TopPage',
   data() {
     return {
       lmS            : null,
