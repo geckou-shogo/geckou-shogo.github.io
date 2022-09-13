@@ -5,15 +5,17 @@
     v-inview:enter="() => {isMoveAnimation = true}"
     :class="$style.wrapper"
     :style="{
+      left: screenStatus === 'landscape' ? `${positionX}px` : 'auto',
       bottom: screenStatus === 'portrait' ? `calc(${Math.max(positionY, 0)}px + 3rem)` : 'auto',
     }"
   >
     <div
       :class="$style.image"
       :style="{
-        left : screenStatus === 'landscape' ? `${positionX}px` : `-${positionY}px`,
+        left: screenStatus === 'portrait' ? `calc((-${checkProgress}% / 2)` : 'auto',
       }"
     >
+      {{ Math.round((sectionStatus?.progress || 0) * 100) }}
       <component
         :is="background"
         :class="isMoveAnimation ? $style.animation : ''"
@@ -55,11 +57,24 @@ export default {
       required: true,
       type    : String,
     },
+    progress: {
+      required: true,
+      type    : Number,
+    },
+    sectionStatus: {
+      required: true,
+      type    : Object,
+    },
   },
   data() {
     return {
       isMoveAnimation: false,
     }
+  },
+  computed: {
+    checkProgress() {
+      return Math.round((this.sectionStatus?.progress || 0) * 100)
+    },
   },
   mounted() {
     this.$nextTick(() => {
@@ -117,7 +132,7 @@ export default {
   }
   @include v.media('portrait') {
     svg {
-      width: 120%;
+      width: 200%;
     }
   }
 }

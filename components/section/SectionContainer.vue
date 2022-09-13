@@ -19,6 +19,8 @@
         :positionY="backGroundPositionYAtPortrait"
         :screenStatus="screenStatus"
         :currentSection="currentSection"
+        :progress="progress"
+        :sectionStatus="sectionStatus"
       />
       <component
         :is="section.component"
