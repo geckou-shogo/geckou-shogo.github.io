@@ -15,7 +15,6 @@
         left: screenStatus === 'portrait' ? `calc((-${checkProgress}% / 2)` : 'auto',
       }"
     >
-      {{ Math.round((sectionStatus?.progress || 0) * 100) }}
       <component
         :is="background"
         :class="isMoveAnimation ? $style.animation : ''"
