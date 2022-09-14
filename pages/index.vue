@@ -6,6 +6,11 @@
       :initialized="initialized"
     />
     <div
+      v-if="screenStatus === 'portrait'"
+      :class="$style.portrait_background"
+      :style="{backgroundPositionY: `${backgroundPositionY}%`}"
+    />
+    <div
       :class="[ $style.sections_container, initialized ? $style.show : '']"
       data-scroll-container
     >
@@ -42,15 +47,16 @@ export default {
   name: 'TopPage',
   data() {
     return {
-      lmS            : null,
-      initialized    : false,
-      currentSection : 'top',
-      screenStatus   : '',
-      scrollStatus   : {},
-      currentElements: {},
-      sectionElements: {},
-      progress       : 0,
-      sections       : [
+      lmS                : null,
+      initialized        : false,
+      currentSection     : 'top',
+      screenStatus       : '',
+      scrollStatus       : {},
+      currentElements    : {},
+      sectionElements    : {},
+      progress           : 0,
+      backgroundPositionY: 0,
+      sections           : [
         {
           idName    : 'top',
           name      : 'TOP',
@@ -84,6 +90,11 @@ export default {
         },
       ],
     }
+  },
+  watch: {
+    progress(newValue) {
+      if (newValue > this.backgroundPositionY) this.backgroundPositionY = newValue
+    },
   },
   mounted() {
     this.initialized = true
@@ -139,13 +150,21 @@ export default {
   overscroll-behavior-y: none;
   overflow             : hidden;
 
-  @include v.media('mobile') {
+  @include v.media('portrait') {
     flex-direction  : column;
-    background-image: c.$backgroundGradient;
   }
 }
 
 .section {
   overflow: hidden;
+}
+
+.portrait_background {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-size : 100% 1400vh;
+  background-image: c.$backgroundGradient;
 }
 </style>

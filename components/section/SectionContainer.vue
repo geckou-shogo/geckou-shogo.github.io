@@ -109,8 +109,9 @@ export default {
   @include v.media('portrait') {
     min-width: auto;
     width: 100%;
-    height: auto;
+    height: 100%;
     flex-direction  : column;
+    background-image: none;
   }
 }
 

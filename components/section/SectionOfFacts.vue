@@ -110,7 +110,7 @@ export default {
 
   @include v.media('portrait') {
     margin: v.$val * 4 0;
-    padding: 0 v.$val * 8;
+    padding: 0 v.$val * 4;
   }
 }
 
