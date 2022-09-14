@@ -1,7 +1,17 @@
 <template>
   <div :class="$style.wrapper">
-    <nav :class="$style.container">
-      <ul :class="$style.list">
+    <button
+      v-if="screenStatus === 'portrait'"
+      type="button"
+      :class="[$style.hamburger_button, btnOpen ? $style.open : '']"
+      @click="btnOpen=!btnOpen"
+    >
+      <span />
+      <span />
+      <span />
+    </button>
+    <nav :class="[$style.container, btnOpen ? $style.open : '']">
+      <ul :class="[$style.list, btnOpen ? $style.open : '']">
         <li
           v-for="section in sections"
           :key="section.idName"
@@ -45,10 +55,15 @@ export default {
       required: true,
       type    : Number,
     },
+    screenStatus: {
+      required: true,
+      type    : String,
+    },
   },
   data() {
     return {
       animationTransitionProgress: 60,
+      btnOpen                    : false,
     }
   },
   computed: {
@@ -60,12 +75,15 @@ export default {
     sectionProgress(idName) {
       return Math.round(this.sectionElements[idName]?.progress * 100) || 0
     },
+
   },
 }
 </script>
 
 <style lang="scss" module>
 @use '~/assets/scss/value' as v;
+@use '~/assets/scss/font' as f;
+@use '~/assets/scss/color' as c;
 
 .wrapper {
   width   : 0;
@@ -73,13 +91,24 @@ export default {
   bottom  : v.$val * 6;
   z-index : v.zIndex('nav');
 
-  @include v.media('portrait') {
-    display: none;
-  }
 }
 
 .container {
   width: 100vw;
+  @include v.media('portrait') {
+    position: fixed;
+    top: 0;
+    right: -120%;
+    transition: right .5s;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    &.open {
+      right: 0;
+      opacity: 1;
+      visibility: visible;
+    }
+  }
 }
 
 .list {
@@ -92,5 +121,54 @@ export default {
     display    : flex;
     align-items: center;
   }
+  @include v.media('portrait') {
+    display: flex;
+    max-width: none;
+    width: 50%;
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    li {
+      width: 100%;
+    }
+    &.open {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
 }
+
+.hamburger_button {
+  position: fixed;
+  top: v.$val * 2;
+  right: v.$val * 2;
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: v.zIndex('max');
+  & span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: c.$white;
+  }
+  &::after {
+    content: "MENU";
+    position: absolute;
+    top: v.$val * 2.8;
+    font-size: f.size('smaller');
+    text-align: center;
+  }
+  &.open {
+    & span {
+      background-color: red;
+    }
+  }
+
+}
+
 </style>

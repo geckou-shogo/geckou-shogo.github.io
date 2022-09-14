@@ -61,9 +61,9 @@ export default {
       required: true,
       type    : Number,
     },
-    sectionStatus: {
+    sectionProgress: {
       required: true,
-      type    : Object,
+      type    : Number,
     },
   },
   data() {
@@ -73,7 +73,7 @@ export default {
   },
   computed: {
     checkProgress() {
-      return Math.round((this.sectionStatus?.progress || 0) * 100)
+      return Math.round((this.sectionProgress || 0) * 100)
     },
   },
   mounted() {

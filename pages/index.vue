@@ -19,6 +19,7 @@
         :currentSection="currentSection"
         :sectionElements="sectionElements"
         :progress="progress"
+        :screenStatus="screenStatus"
       />
       <section
         v-for="section in sections"

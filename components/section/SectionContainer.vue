@@ -21,6 +21,7 @@
         :currentSection="currentSection"
         :progress="progress"
         :sectionStatus="sectionStatus"
+        :sectionProgress="sectionStatus.progress || 0"
       />
       <component
         :is="section.component"
