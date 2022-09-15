@@ -16,7 +16,11 @@
           v-for="section in sections"
           :key="section.idName"
         >
-          <a :href="`#${section.idName}`" data-scroll-to>
+          <a
+            :href="`#${section.idName}`"
+            data-scroll-to
+            @click="btnOpen=!btnOpen"
+          >
             <GlobalNavItem
               :text="section.name"
               :current="currentSection === section.idName"
@@ -74,7 +78,6 @@ export default {
     sectionProgress(idName) {
       return Math.round(this.sectionElements[idName]?.progress * 100) || 0
     },
-
   },
 }
 </script>
@@ -97,13 +100,14 @@ export default {
   @include v.media('portrait') {
     position: fixed;
     top: 0;
-    right: -120%;
-    transition: right .5s;
+    transition: all .6s;
     width: 100%;
+    height: 100vh;
     opacity: 0;
     visibility: hidden;
+    background-size: contain;
+    background-image: c.$backgroundGradient;
     &.open {
-      right: 0;
       opacity: 1;
       visibility: visible;
     }
@@ -123,12 +127,16 @@ export default {
   @include v.media('portrait') {
     display: flex;
     max-width: none;
-    width: 50%;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
     opacity: 0;
     visibility: hidden;
     li {
       width: 100%;
+      justify-content: center;
     }
     &.open {
       opacity: 1;
@@ -154,17 +162,29 @@ export default {
     width: 100%;
     height: 2px;
     background-color: c.$white;
+    transition: all .6s ease-out;
   }
   &::after {
     content: "MENU";
     position: absolute;
-    top: v.$val * 2.8;
+    top: v.$val * 3;
     font-size: f.size('smaller');
     text-align: center;
   }
   &.open {
-    & span {
-      background-color: red;
+    span  {
+      &:nth-of-type(1) {
+        opacity: 0;
+      }
+      &:nth-of-type(2) {
+        transform: translateY(-2px) rotate(225deg);
+      }
+      &:nth-of-type(3) {
+        transform: translateY(-9px) rotate(495deg);
+      }
+    }
+    &::after {
+      content: "CLOSE";
     }
   }
 

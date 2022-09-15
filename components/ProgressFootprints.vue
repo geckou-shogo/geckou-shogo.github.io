@@ -52,6 +52,9 @@ export default {
   display    : flex;
   align-items: center;
   padding    : 0 v.$val;
+  @include v.media('portrait') {
+    display: none;
+  }
 }
 
 .footprints {
