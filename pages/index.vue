@@ -1,5 +1,6 @@
 <template>
   <main
+    id="frontpage"
     :class="$style.frontpage"
   >
     <LoadingScreen
@@ -19,6 +20,7 @@
         :currentSection="currentSection"
         :sectionElements="sectionElements"
         :progress="progress"
+        @toggleNav="toggleMobileNav"
       />
       <section
         v-for="section in sections"
@@ -42,6 +44,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'TopPage',
   data() {
@@ -54,6 +57,7 @@ export default {
       sectionElements    : {},
       progress           : 0,
       backgroundPositionY: 0,
+      mobileScrollY      : 0,
       sections           : [
         {
           idName    : 'top',
@@ -144,6 +148,19 @@ export default {
     },
     sectionStatus(sectionIdName) {
       return this.currentElements?.[sectionIdName] || {}
+    },
+    toggleMobileNav(state) {
+      const frontPage = document.getElementById('frontpage')
+      const pageScrollY = window.scrollY
+      console.log(pageScrollY)
+
+      if (state === true) {
+        frontPage.style.position = 'fixed'
+        frontPage.style.top = this.mobileScrollY
+      } else {
+        frontPage.style.position = 'static'
+        window.scrollTo(pageScrollY, 0)
+      }
     },
   },
 }

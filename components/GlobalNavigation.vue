@@ -2,9 +2,10 @@
   <div :class="$style.wrapper">
     <button
       v-if="screenStatus === 'portrait'"
+      id="nav_btn"
       type="button"
       :class="[$style.hamburger_button, btnOpen ? $style.open : '']"
-      @click="btnOpen=!btnOpen"
+      @click="navigationBtn"
     >
       <span />
       <span />
@@ -17,9 +18,10 @@
           :key="section.idName"
         >
           <a
+            class="nav_btn_link"
             :href="`#${section.idName}`"
             data-scroll-to
-            @click="btnOpen=!btnOpen"
+            @click="navigationBtn"
           >
             <GlobalNavItem
               :text="section.name"
@@ -77,6 +79,9 @@ export default {
   methods: {
     sectionProgress(idName) {
       return Math.round(this.sectionElements[idName]?.progress * 100) || 0
+    },
+    navigationBtn() {
+      this.$emit('toggleNav', this.btnOpen = !this.btnOpen)
     },
   },
 }
