@@ -2,8 +2,8 @@
   <div
     :class="$style.wrapper"
     :style="{
-      width : `calc(${circleWidth}em + ${padding * 2}rem)`,
-      padding: `${padding}rem`,
+      width : `calc(${circleWidth}em + ${containerPadding * 2}rem)`,
+      padding: `${containerPadding}rem`,
     }"
   >
     <p
@@ -22,11 +22,6 @@ export default {
       type    : String,
     },
   },
-  data() {
-    return {
-      padding: 4,
-    }
-  },
   computed: {
     circleWidth() {
       const text = this.htmlString
@@ -35,6 +30,9 @@ export default {
       const textLength = text.length
       const textSquare = Math.sqrt(textLength)
       return (Math.round(textSquare) + 8) * 1.16
+    },
+    containerPadding() {
+      return this.$store.state?.screen === 'landscape' ? 4 : 2
     },
   },
 }

@@ -5,15 +5,7 @@
 
 html {
   scroll-behavior: smooth;
-  font-size      : f.baseSize( 'desktop' );
-
-  @include v.media( 'tablet' ) {
-    font-size: f.baseSize( 'tablet' );
-  }
-
-  @include v.media( 'mobile' ) {
-    font-size: f.baseSize( 'mobile' );
-  }
+  font-size      : clamp(.875rem, .761rem + .57vw, 1.125rem);
 }
 
 body {
@@ -24,6 +16,7 @@ body {
   letter-spacing       : f.letterSpacing( 'normal' );
   word-wrap            : break-word;
   font-feature-settings: 'palt';
+  overscroll-behavior  : none;
 }
 
 ul {

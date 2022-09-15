@@ -20,7 +20,7 @@
   width           : 100%;
   height          : 100%;
   border-radius   : 50%;
-  background-color: rgba(lighten(c.$main, 20%), .04);
+  background-color: rgba(lighten(c.$white, 20%), .05);
   mix-blend-mode  : screen;
   pointer-events  : none;
 }

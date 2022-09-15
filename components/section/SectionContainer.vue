@@ -15,26 +15,24 @@
       <ParallaxBackground
         v-if="section.background"
         :background="section.background"
-        :positionX="(scrollStatus.x - sectionStatus.left) - (scrollStatus.x * 1.02 / 50)"
-        :positionY="backGroundPositionYAtPortrait"
-        :screenStatus="screenStatus"
+        :positionX="(scrollingIncrementInSection) - (scrollStatus.x * 1.02 / 50)"
+        :positionY="Math.max(backGroundPositionYAtPortrait, 0)"
         :currentSection="currentSection"
-        :progress="progress"
-        :sectionStatus="sectionStatus"
+        :sectionProgress="Math.round((sectionStatus.progress || 0) * 100) || 0"
       />
       <component
         :is="section.component"
         :section="section"
       />
-      <div
+      <!-- <div
         v-if="section.idName !== 'top'"
         :class="$style.logo"
         :style="{
-          left: screenStatus === 'landscape' ? `${scrollStatus.x - sectionStatus.left}px` : 'auto',
+          left: screenStatus === 'landscape' ? `${scrollingIncrementInSection}px` : 'auto',
         }"
       >
         <GeckouLogo />
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -68,10 +66,6 @@ export default {
       required: true,
       type    : Number,
     },
-    screenStatus: {
-      required: true,
-      type    : String,
-    },
   },
   data() {
     return {
@@ -80,9 +74,24 @@ export default {
     }
   },
   computed: {
+    windowInnerHeight() {
+      return process.client ? window?.innerHeight : 0
+    },
+    sectionOffsetBottom() {
+      return this.sectionStatus?.bottom || 0
+    },
+    isInSection() {
+      return this.section.idName === this.currentSection
+    },
+    screenStatus() {
+      return this.$store.state?.screen || ''
+    },
+    scrollingIncrementInSection() {
+      return this.isInSection ? this.scrollStatus.x - this.sectionStatus.left : 0
+    },
     backGroundPositionYAtPortrait() {
-      return process.client && this.screenStatus === 'portrait'
-        ? ((this.sectionStatus?.bottom || 0) - window?.innerHeight) - this.scrollStatus.y
+      return this.screenStatus === 'portrait'
+        ? this.sectionOffsetBottom - this.windowInnerHeight - this.scrollStatus.y
         : 0
     },
   },
@@ -107,9 +116,9 @@ export default {
   background-size : 100% 700vh;
 
   @include v.media('portrait') {
-    min-width: auto;
-    width: 100%;
-    height: 100%;
+    min-width       : auto;
+    width           : 100%;
+    height          : 100%;
     flex-direction  : column;
     background-image: none;
   }

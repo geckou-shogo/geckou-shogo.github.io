@@ -1,21 +1,24 @@
 <template>
   <div
-    v-if="background"
     ref="parallaxBackground"
     v-inview:enter="() => {isMoveAnimation = true}"
     :class="$style.wrapper"
     :style="{
-      left: screenStatus === 'landscape' ? `${positionX}px` : 'auto',
-      bottom: screenStatus === 'portrait' ? `calc(${Math.max(positionY, 0)}px + 3rem)` : 'auto',
+      left: screenStatus === 'landscape' ? `${positionX}px` : '0',
+      bottom: screenStatus === 'landscape'
+        ? `auto`
+        : positionY
+          ? '3rem'
+          : `calc(${positionY} + 3rem)`,
+      position: screenStatus === 'portrait' ? positionY ? 'fixed' : 'absolute' : 'fixed',
     }"
   >
     <div
       :class="$style.image"
       :style="{
-        left: screenStatus === 'portrait' ? `calc((-${checkProgress}% / 2)` : 'auto',
+        left: screenStatus === 'portrait' ? `-${sectionProgress}%` : 'auto',
       }"
     >
-      {{ Math.round((sectionStatus?.progress || 0) * 100) }}
       <component
         :is="background"
         :class="isMoveAnimation ? $style.animation : ''"
@@ -53,17 +56,9 @@ export default {
       required: true,
       type    : Number,
     },
-    screenStatus: {
-      required: true,
-      type    : String,
-    },
-    progress: {
+    sectionProgress: {
       required: true,
       type    : Number,
-    },
-    sectionStatus: {
-      required: true,
-      type    : Object,
     },
   },
   data() {
@@ -72,8 +67,8 @@ export default {
     }
   },
   computed: {
-    checkProgress() {
-      return Math.round((this.sectionStatus?.progress || 0) * 100)
+    screenStatus() {
+      return this.$store.state?.screen || ''
     },
   },
   mounted() {
@@ -102,7 +97,6 @@ export default {
     bottom  : v.$val * 4;
     height  : auto;
     width   : 100%;
-    position: absolute;
   }
 }
 
@@ -113,6 +107,10 @@ export default {
   width        : 100%;
   --pass-length: 0;
   opacity      : .5;
+
+  @include v.media('portrait') {
+    width: 200%;
+  }
 
   svg {
     path {
@@ -128,11 +126,6 @@ export default {
       path {
         animation: draw_line 3s linear;
       }
-    }
-  }
-  @include v.media('portrait') {
-    svg {
-      width: 200%;
     }
   }
 }

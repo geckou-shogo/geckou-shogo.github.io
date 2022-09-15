@@ -6,7 +6,7 @@
       :initialized="initialized"
     />
     <div
-      v-if="screenStatus === 'portrait'"
+      v-if="$store.state.screen === 'portrait'"
       :class="$style.portrait_background"
       :style="{backgroundPositionY: `${backgroundPositionY}%`}"
     />
@@ -34,7 +34,6 @@
           :progress="progress"
           :scrollStatus="scrollStatus"
           :sectionStatus="sectionStatus(section.idName)"
-          :screenStatus="screenStatus"
           :currentSection="currentSection"
         />
       </section>
@@ -50,7 +49,6 @@ export default {
       lmS                : null,
       initialized        : false,
       currentSection     : 'top',
-      screenStatus       : '',
       scrollStatus       : {},
       currentElements    : {},
       sectionElements    : {},
@@ -98,14 +96,15 @@ export default {
   },
   mounted() {
     this.initialized = true
-    this.screenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
+    const screenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
+    this.$store.commit('addScreenState', screenStatus)
     window.addEventListener('resize', this.registrationScrollEvent)
 
     this.$nextTick(() => {
       this.lmS = new this.$locomotiveScroll({
         el        : document.querySelector('[data-scroll-container]'),
         smooth    : true,
-        direction : this.screenStatus === 'landscape' ? 'horizontal' : 'vertical',
+        direction : screenStatus === 'landscape' ? 'horizontal' : 'vertical',
         multiplier: .5,
       })
       this.lmS.on('scroll', args => {
@@ -120,8 +119,14 @@ export default {
             result[key] = this.currentElements[key]
             return result
           }, {})
-        if (Object.keys(this.sectionElements).length) this.currentSection = Object.keys(this.sectionElements)[0]
-        const direction = this.screenStatus === 'landscape' ? 'x' : 'y'
+        if (Object.keys(this.sectionElements).length) {
+          this.currentSection = Object.keys(this.sectionElements)
+            .sort((a, b) => {
+              const order = this.sections.map(section => section.idName)
+              return order.indexOf(a) - order.indexOf(b)
+            })[0]
+        }
+        const direction = screenStatus === 'landscape' ? 'x' : 'y'
         this.progress = args.scroll?.[direction] / args.limit?.[direction] * 100 || 0
       })
       this.initialized = true
@@ -133,7 +138,8 @@ export default {
     },
     checkIsScreenLandscape() {
       const currentScreenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
-      if (this.screenStatus !== currentScreenStatus) location.reload()
+      const screenStatus = this.$store.state.screen
+      if (screenStatus !== currentScreenStatus) location.reload()
       else window.removeEventListener('scroll', this.checkIsScreenLandscape)
     },
     sectionStatus(sectionIdName) {
