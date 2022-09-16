@@ -6,11 +6,15 @@
     :style="{
       left: screenStatus === 'landscape' ? `${positionX}px` : '0',
       bottom: screenStatus === 'landscape'
-        ? `auto`
-        : positionY
-          ? '3rem'
-          : `calc(${positionY} + 3rem)`,
-      position: screenStatus === 'portrait' ? positionY ? 'fixed' : 'absolute' : 'fixed',
+        ?`auto`
+        : isInSection
+          ? bottomValueInPortrait
+          : `calc(${sectionHeight}px - 100vh + ${bottomValueInPortrait})`,
+      position: screenStatus === 'landscape'
+        ? 'fixed'
+        : positionY >= 0 && isInSection
+          ? 'fixed'
+          : 'absolute',
     }"
   >
     <div
@@ -60,10 +64,19 @@ export default {
       required: true,
       type    : Number,
     },
+    isInSection: {
+      required: true,
+      type    : Boolean,
+    },
+    sectionHeight: {
+      required: true,
+      type    : Number,
+    },
   },
   data() {
     return {
-      isMoveAnimation: false,
+      isMoveAnimation      : false,
+      bottomValueInPortrait: '3rem',
     }
   },
   computed: {
@@ -89,7 +102,7 @@ export default {
   width         : 115vw;
   height        : 100vh;
   margin        : 0;
-  mix-blend-mode: soft-light;
+  mix-blend-mode: overlay;
   pointer-events: none;
   position      : fixed;
 
@@ -116,7 +129,7 @@ export default {
     path {
       fill               : none;
       stroke-linejoin    : round;
-      stroke             : c.$white;
+      stroke             : transparent;
       stroke-width       : 1px;
       stroke-dasharray   : var(--pass-length);
       animation-fill-mode: both;
@@ -124,6 +137,7 @@ export default {
 
     &.animation {
       path {
+        stroke             : c.$white;
         animation: draw_line 3s linear;
       }
     }
