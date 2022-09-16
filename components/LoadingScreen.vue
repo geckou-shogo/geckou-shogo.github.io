@@ -21,18 +21,17 @@ export default {
   name : 'LoadingScreen',
   props: {
     initialized: {
-      type    : Boolean,
       required: true,
-      default : true,
+      type    : Boolean,
     },
     displayTime: {
-      type    : Number,
       required: false,
-      default : 1000,
+      type    : Number,
+      default : 0,
     },
     loadingText: {
-      type    : String,
       required: false,
+      type    : String,
       default : 'Loading...',
     },
   },

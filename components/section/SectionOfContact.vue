@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  name : 'SectionContact',
+  name : 'SectionOfContact',
   props: {
     section: {
       required: true,
