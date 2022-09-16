@@ -18,7 +18,6 @@
           :key="section.idName"
         >
           <a
-            class="nav_btn_link"
             :href="`#${section.idName}`"
             data-scroll-to
             @click="navigationBtn"
@@ -129,22 +128,25 @@ export default {
     display    : flex;
     align-items: center;
   }
+
   @include v.media('portrait') {
-    display: flex;
-    max-width: none;
-    width: 100%;
-    height: 100%;
+    display        : flex;
+    max-width      : none;
+    width          : 100%;
+    height         : 100%;
     justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    opacity: 0;
-    visibility: hidden;
+    align-items    : center;
+    flex-direction : column;
+    opacity        : 0;
+    visibility     : hidden;
+
     li {
-      width: 100%;
+      width          : 100%;
       justify-content: center;
     }
+
     &.open {
-      opacity: 1;
+      opacity   : 1;
       visibility: visible;
     }
   }
@@ -162,7 +164,8 @@ export default {
   justify-content: center;
   flex-direction: column;
   z-index: v.zIndex('max');
-  & span {
+
+  span {
     display: block;
     width: 100%;
     height: 2px;
@@ -176,6 +179,7 @@ export default {
     font-size: f.size('smaller');
     text-align: center;
   }
+
   &.open {
     span  {
       &:nth-of-type(1) {

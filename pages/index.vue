@@ -12,6 +12,7 @@
       :style="{backgroundPositionY: `${backgroundPositionY}%`}"
     />
     <div
+      v-if="initialized"
       :class="[ $style.sections_container, initialized ? $style.show : '']"
       data-scroll-container
     >

@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  name : 'SectionVision',
+  name : 'SectionOfVision',
   props: {
     section: {
       required: true,

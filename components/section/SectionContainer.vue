@@ -18,23 +18,29 @@
         :positionX="(scrollingIncrementInSection) - (scrollStatus.x * 1.02 / 50)"
         :positionY="backGroundPositionYAtPortrait"
         :currentSection="currentSection"
-        :sectionProgress="Math.round((sectionStatus.progress || 0) * 100) || 0"
+        :sectionProgress="sectionProgress"
         :isInSection="isInSection"
         :sectionHeight="sectionHeight"
       />
       <component
         :is="section.component"
         :section="section"
+        :progress="sectionProgress"
       />
-      <!-- <div
-        v-if="section.idName !== 'top'"
+      <a
+        v-if="section.idName !== 'top' && screenStatus === 'landscape'"
+        data-scroll-to
+        href="#top"
         :class="$style.logo"
         :style="{
-          left: screenStatus === 'landscape' ? `${scrollingIncrementInSection}px` : 'auto',
+          left: `${scrollingIncrementInSection}px`,
         }"
       >
-        <GeckouLogo />
-      </div> -->
+        <LogoSymbol
+          :class="$style.logo__symbol"
+          :color="'white'"
+        />
+      </a>
     </div>
   </div>
 </template>
@@ -84,6 +90,9 @@ export default {
     },
     screenStatus() {
       return this.$store.state?.screen || ''
+    },
+    sectionProgress() {
+      return Math.round((this.sectionStatus.progress || 0) * 100) || 0
     },
     scrollingIncrementInSection() {
       return this.scrollStatus.x - this.sectionStatus.left
@@ -159,5 +168,10 @@ export default {
   position: absolute;
   top     : 10%;
   z-index : v.zIndex('contents');
+
+  &__symbol {
+    opacity       : .05;
+    mix-blend-mode: overlay;
+  }
 }
 </style>
