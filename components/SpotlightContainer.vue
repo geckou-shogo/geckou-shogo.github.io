@@ -75,7 +75,6 @@ export default {
   flex           : 0 0 50%;
   width          : 100%;
   padding-bottom : v.$val * 2;
-  border-bottom  : 1px solid c.$border;
   font-size      : f.size('max');
   line-height    : 1;
 
