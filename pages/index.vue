@@ -21,6 +21,7 @@
         :currentSection="currentSection"
         :sectionElements="sectionElements"
         :progress="progress"
+        :class="[$style.nav, $store.state.screen === 'landscape' && Math.round(progress) ? $style.lower : '']"
         @toggleNav="toggleMobileNav"
       />
       <section
@@ -153,7 +154,6 @@ export default {
     toggleMobileNav(state) {
       const frontPage = document.getElementById('frontpage')
       const pageScrollY = window.scrollY
-      console.log(pageScrollY)
 
       if (state === true) {
         frontPage.style.position = 'fixed'
@@ -190,5 +190,15 @@ export default {
   height: 100vh;
   background-size : 100% 1400vh;
   background-image: c.$backgroundGradient;
+}
+
+.nav {
+  position  : absolute;
+  bottom    : v.$val * 18;
+  transition: bottom 3s ease-out;
+
+  &.lower {
+    bottom: v.$val * 6;
+  }
 }
 </style>

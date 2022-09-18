@@ -93,26 +93,25 @@ export default {
 
 .wrapper {
   width   : 0;
-  position: absolute;
-  bottom  : v.$val * 6;
   z-index : v.zIndex('nav');
-
 }
 
 .container {
   width: 100vw;
+
   @include v.media('portrait') {
-    position: fixed;
-    top: 0;
-    transition: all .6s;
-    width: 100%;
-    height: 100vh;
-    opacity: 0;
-    visibility: hidden;
-    background-size: contain;
+    position        : fixed;
+    top             : 0;
+    transition      : all .6s;
+    width           : 100%;
+    height          : 100vh;
+    opacity         : 0;
+    visibility      : hidden;
+    background-size : contain;
     background-image: c.$backgroundGradient;
+
     &.open {
-      opacity: 1;
+      opacity   : 1;
       visibility: visible;
     }
   }
@@ -196,7 +195,5 @@ export default {
       content: "CLOSE";
     }
   }
-
 }
-
 </style>

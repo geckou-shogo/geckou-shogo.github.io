@@ -22,9 +22,14 @@ export default {
       type    : Number,
     },
   },
-  computed: {
-    isEnabledAnimation() {
-      return !this.progress || this.progress >= 55
+  data() {
+    return {
+      isEnabledAnimation: false,
+    }
+  },
+  watch: {
+    progress(newValue) {
+      this.isEnabledAnimation = !newValue || newValue >= 55
     },
   },
 }
