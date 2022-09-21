@@ -95,47 +95,55 @@ export default {
       ],
     }
   },
+  computed: {
+    currentScreenStatus() {
+      if (process.client) {
+        return window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
+      } else {
+        return ''
+      }
+    },
+  },
   watch: {
     progress(newValue) {
       if (newValue > this.backgroundPositionY) this.backgroundPositionY = newValue
     },
   },
   mounted() {
-    this.initialized = true
-    const screenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
-    this.$store.commit('addScreenState', screenStatus)
+    this.$store.commit('addScreenState', this.currentScreenStatus)
     window.addEventListener('resize', this.registrationScrollEvent)
-
+    this.initialized = true
     this.$nextTick(() => {
-      this.lmS = new this.$locomotiveScroll({
-        el        : document.querySelector('[data-scroll-container]'),
-        smooth    : true,
-        direction : screenStatus === 'landscape' ? 'horizontal' : 'vertical',
-        multiplier: .5,
-      })
-      this.lmS.on('scroll', args => {
-        this.checkIsScreenLandscape()
-        this.currentElements = args.currentElements
-        this.scrollStatus = args.scroll
-        this.sectionElements = Object.keys(this.currentElements)
-          .filter(key => {
-            return this.sections.some(section => section.idName === key)
-          })
-          .reduce((result, key) => {
-            result[key] = this.currentElements[key]
-            return result
-          }, {})
-        if (Object.keys(this.sectionElements).length) {
-          this.currentSection = Object.keys(this.sectionElements)
-            .sort((a, b) => {
-              const order = this.sections.map(section => section.idName)
-              return order.indexOf(a) - order.indexOf(b)
-            })[0]
-        }
-        const direction = screenStatus === 'landscape' ? 'x' : 'y'
-        this.progress = args.scroll?.[direction] / args.limit?.[direction] * 100 || 0
-      })
-      this.initialized = true
+      setTimeout(() => {
+        this.lmS = new this.$locomotiveScroll({
+          el        : document.querySelector('[data-scroll-container]'),
+          smooth    : true,
+          direction : this.currentScreenStatus === 'landscape' ? 'horizontal' : 'vertical',
+          multiplier: .5,
+        })
+        this.lmS.on('scroll', args => {
+          this.checkIsScreenLandscape()
+          this.currentElements = args.currentElements
+          this.scrollStatus = args.scroll
+          this.sectionElements = Object.keys(this.currentElements)
+            .filter(key => {
+              return this.sections.some(section => section.idName === key)
+            })
+            .reduce((result, key) => {
+              result[key] = this.currentElements[key]
+              return result
+            }, {})
+          if (Object.keys(this.sectionElements).length) {
+            this.currentSection = Object.keys(this.sectionElements)
+              .sort((a, b) => {
+                const order = this.sections.map(section => section.idName)
+                return order.indexOf(a) - order.indexOf(b)
+              })[0]
+          }
+          const direction = this.currentScreenStatus === 'landscape' ? 'x' : 'y'
+          this.progress = args.scroll?.[direction] / args.limit?.[direction] * 100 || 0
+        })
+      }, 1000)
     })
   },
   methods: {
@@ -143,9 +151,8 @@ export default {
       window.addEventListener('scroll', this.checkIsScreenLandscape)
     },
     checkIsScreenLandscape() {
-      const currentScreenStatus = window?.innerWidth > window?.innerHeight ? 'landscape' : 'portrait'
       const screenStatus = this.$store.state.screen
-      if (screenStatus !== currentScreenStatus) location.reload()
+      if (screenStatus !== this.currentScreenStatus) location.reload()
       else window.removeEventListener('scroll', this.checkIsScreenLandscape)
     },
     sectionStatus(sectionIdName) {
@@ -184,10 +191,10 @@ export default {
 }
 
 .portrait_background {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 100vh;
+  position        : fixed;
+  top             : 0;
+  width           : 100%;
+  height          : 100vh;
   background-size : 100% 1400vh;
   background-image: c.$backgroundGradient;
 }
