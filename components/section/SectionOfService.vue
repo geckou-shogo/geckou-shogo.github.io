@@ -98,7 +98,7 @@
 
 <script>
 export default {
-  name : 'SectionVision',
+  name : 'SectionOfService',
   props: {
     section: {
       required: true,

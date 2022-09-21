@@ -1,18 +1,10 @@
 <template>
   <div
-    :class="[$style.loading, displayState ? '' : $style.hide]"
+    :class="[$style.container, displayState ? '' : $style.hide]"
   >
-    <div
-      :class="$style.loading_box"
-    >
-      <span
-        v-for="(i, index) in loadingText.length"
-        :key="i"
-        :class="[$style[`l_${i}`], $style.letter]"
-      >
-        {{ loadingText[index] }}
-      </span>
-    </div>
+    <LogoSymbol
+      :class="$style.logo"
+    />
   </div>
 </template>
 
@@ -21,19 +13,8 @@ export default {
   name : 'LoadingScreen',
   props: {
     initialized: {
-      type    : Boolean,
       required: true,
-      default : true,
-    },
-    displayTime: {
-      type    : Number,
-      required: false,
-      default : 1000,
-    },
-    loadingText: {
-      type    : String,
-      required: false,
-      default : 'Loading...',
+      type    : Boolean,
     },
   },
   data() {
@@ -46,7 +27,7 @@ export default {
       if (this.initialized) {
         setTimeout(() => {
           this.displayState = false
-        }, this.displayTime)
+        })
       }
     },
   },
@@ -58,56 +39,48 @@ export default {
 @use '~/assets/scss/font' as f;
 @use '~/assets/scss/color' as c;
 
-.loading {
+.container {
   position        : fixed;
   display         : flex;
   width           : 100vw;
   height          : 100vh;
   align-items     : center;
   justify-content : center;
-  background-color: c.$black;
-  z-index         : v.zIndex('loading');
-  transition      : all 1s;
-
-  &_box {
-    margin         : auto;
-    padding        : 1rem;
-    display        : flex;
-    align-items    : center;
-    justify-content: center;
-    gap            : 0 v.$val * 2;
-
-    .letter {
-      font-size                : f.size('larger');
-      font-weight              : bold;
-      color                    : c.$white;
-      animation-name           : loading;
-      animation-duration       : 1.6s;
-      animation-iteration-count: infinite;
-      animation-direction      : linear;
-    }
-  }
+  background-image: linear-gradient(
+    to bottom,
+    hsl(203, 29%, 6%) 0%,
+    hsl(205, 76%, 8%) 100%,
+  );
+  z-index   : v.zIndex('max');
+  transition: all 1s;
+  opacity   : 1;
 
   &.hide {
-    opacity   : 0;
-    visibility: hidden;
-    z-index   : v.zIndex('off');
-  }
-}
-
-@keyframes loading {
-  0% {
     opacity: 0;
+    z-index: -1;
   }
+}
+
+.logo {
+  height    : v.$val * 10;
+  animation: flickering 3s infinite;
+  position  : absolute;
+  top       : calc(50% - ( v.$val * 10));
+
+  @include v.media('portrait') {
+    height    : v.$val * 8;
+    top       : calc(50% - (#{v.$val} * 8));
+  }
+}
+
+@keyframes flickering {
+  0%,
   100% {
-    opacity: 1;
+    opacity: .3;
+  }
+
+  50% {
+    opacity: .1;
   }
 }
-
-@for $i from 1 through 10 {
-  .l_#{$i} {
-    animation-delay: 0.48s + $i*0.15;
-  }
-}
-
 </style>

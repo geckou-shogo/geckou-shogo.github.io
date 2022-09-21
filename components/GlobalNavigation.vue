@@ -18,7 +18,6 @@
           :key="section.idName"
         >
           <a
-            class="nav_btn_link"
             :href="`#${section.idName}`"
             data-scroll-to
             @click="navigationBtn"
@@ -94,25 +93,25 @@ export default {
 
 .wrapper {
   width   : 0;
-  position: absolute;
-  bottom  : v.$val * 6;
   z-index : v.zIndex('nav');
-
 }
 
 .container {
   width: 100vw;
+
   @include v.media('portrait') {
-    position: fixed;
-    top: 0;
-    transition: all .6s;
-    width: 100%;
-    opacity: 0;
-    visibility: hidden;
-    background-size: contain;
+    position        : fixed;
+    top             : 0;
+    transition      : all .6s;
+    width           : 100%;
+    height          : 100vh;
+    opacity         : 0;
+    visibility      : hidden;
+    background-size : contain;
     background-image: c.$backgroundGradient;
+
     &.open {
-      opacity: 1;
+      opacity   : 1;
       visibility: visible;
     }
   }
@@ -128,22 +127,25 @@ export default {
     display    : flex;
     align-items: center;
   }
+
   @include v.media('portrait') {
     display: flex;
     max-width: none;
     width: 100%;
     height: 100vh;
     justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    opacity: 0;
-    visibility: hidden;
+    align-items    : center;
+    flex-direction : column;
+    opacity        : 0;
+    visibility     : hidden;
+
     li {
-      width: 100%;
+      width          : 100%;
       justify-content: center;
     }
+
     &.open {
-      opacity: 1;
+      opacity   : 1;
       visibility: visible;
     }
   }
@@ -161,7 +163,8 @@ export default {
   justify-content: center;
   flex-direction: column;
   z-index: v.zIndex('max');
-  & span {
+
+  span {
     display: block;
     width: 100%;
     height: 2px;
@@ -175,6 +178,7 @@ export default {
     font-size: f.size('smaller');
     text-align: center;
   }
+
   &.open {
     span  {
       &:nth-of-type(1) {
@@ -191,7 +195,5 @@ export default {
       content: "CLOSE";
     }
   }
-
 }
-
 </style>

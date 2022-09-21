@@ -2,18 +2,34 @@
   <div
     :class="$style.section"
   >
-    <GeckouLogo />
+    <GeckouLogo
+      :class="[$style.logo, isEnabledAnimation ? $style.animation : '']"
+      :animation="isEnabledAnimation"
+    />
   </div>
 </template>
 
 <script>
 export default {
-  name : 'SectionTop',
+  name : 'SectionOfTop',
   props: {
     section: {
       required: true,
       type    : Object,
-      default : () => {},
+    },
+    progress: {
+      required: true,
+      type    : Number,
+    },
+  },
+  data() {
+    return {
+      isEnabledAnimation: false,
+    }
+  },
+  watch: {
+    progress(newValue) {
+      this.isEnabledAnimation = !newValue || newValue >= 55
     },
   },
 }
@@ -27,10 +43,35 @@ export default {
 .section {
   display        : flex;
   width          : 100vw;
+  height         : 100vh;
   justify-content: center;
+  align-items    : center;
+  position       : relative;
 
   @include v.media ('portrait') {
     width: 100%;
+  }
+}
+
+.logo {
+  height    : v.$val * 10;
+  position  : absolute;
+  transition: top 3s ease-out;
+  top       : calc(50% - (#{v.$val} * 10));
+
+  @include v.media('portrait') {
+    height    : v.$val * 8;
+    position  : fixed;
+    transition: top 2s ease-out;
+    top       : calc(50% - (#{v.$val} * 8));
+  }
+
+  &.animation {
+    top: 10%;
+
+    @include v.media('portrait') {
+      top: v.$val * 4;
+    }
   }
 }
 </style>

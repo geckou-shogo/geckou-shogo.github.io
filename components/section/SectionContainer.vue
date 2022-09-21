@@ -16,23 +16,31 @@
         v-if="section.background"
         :background="section.background"
         :positionX="(scrollingIncrementInSection) - (scrollStatus.x * 1.02 / 50)"
-        :positionY="Math.max(backGroundPositionYAtPortrait, 0)"
+        :positionY="backGroundPositionYAtPortrait"
         :currentSection="currentSection"
-        :sectionProgress="Math.round((sectionStatus.progress || 0) * 100) || 0"
+        :sectionProgress="sectionProgress"
+        :isInSection="isInSection"
+        :sectionHeight="sectionHeight"
       />
       <component
         :is="section.component"
         :section="section"
+        :progress="sectionProgress"
       />
-      <!-- <div
-        v-if="section.idName !== 'top'"
+      <a
+        v-if="section.idName !== 'top' && screenStatus === 'landscape'"
+        data-scroll-to
+        href="#top"
         :class="$style.logo"
         :style="{
-          left: screenStatus === 'landscape' ? `${scrollingIncrementInSection}px` : 'auto',
+          left: `${scrollingIncrementInSection}px`,
         }"
       >
-        <GeckouLogo />
-      </div> -->
+        <LogoSymbol
+          :class="$style.logo__symbol"
+          :color="'white'"
+        />
+      </a>
     </div>
   </div>
 </template>
@@ -80,19 +88,25 @@ export default {
     sectionOffsetBottom() {
       return this.sectionStatus?.bottom || 0
     },
-    isInSection() {
-      return this.section.idName === this.currentSection
-    },
     screenStatus() {
       return this.$store.state?.screen || ''
     },
+    sectionProgress() {
+      return Math.round((this.sectionStatus.progress || 0) * 100) || 0
+    },
     scrollingIncrementInSection() {
-      return this.isInSection ? this.scrollStatus.x - this.sectionStatus.left : 0
+      return this.scrollStatus.x - this.sectionStatus.left
     },
     backGroundPositionYAtPortrait() {
       return this.screenStatus === 'portrait'
         ? this.sectionOffsetBottom - this.windowInnerHeight - this.scrollStatus.y
         : 0
+    },
+    isInSection() {
+      return !!(Math.max(this.scrollStatus.y - (this.sectionStatus?.top || 0), 0))
+    },
+    sectionHeight() {
+      return this.sectionStatus?.el?.clientHeight || 0
     },
   },
   watch: {
@@ -132,6 +146,10 @@ export default {
   flex     : 1 1 auto;
   position : relative;
 
+  @include v.media('portrait') {
+    position: inherit;
+  }
+
   &::before {
     content         : '';
     width           : 100%;
@@ -150,5 +168,10 @@ export default {
   position: absolute;
   top     : 10%;
   z-index : v.zIndex('contents');
+
+  &__symbol {
+    opacity       : .05;
+    mix-blend-mode: overlay;
+  }
 }
 </style>
