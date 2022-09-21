@@ -107,7 +107,6 @@ export default {
     top: 0;
     transition: all .6s;
     width: 100%;
-    height: 100vh;
     opacity: 0;
     visibility: hidden;
     background-size: contain;
@@ -133,7 +132,7 @@ export default {
     display: flex;
     max-width: none;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     justify-content: center;
     align-items: center;
     flex-direction: column;

@@ -150,16 +150,15 @@ export default {
       return this.currentElements?.[sectionIdName] || {}
     },
     toggleMobileNav(state) {
-      const frontPage = document.getElementById('frontpage')
-      const pageScrollY = window.scrollY
-      console.log(pageScrollY)
+      const frontPage = document.querySelector('#frontpage')
 
       if (state === true) {
+        this.mobileScrollY = window.scrollY || window.pageYOffset
         frontPage.style.position = 'fixed'
-        frontPage.style.top = this.mobileScrollY
+        frontPage.style.top = `${this.mobileScrollY * 1}px`
       } else {
         frontPage.style.position = 'static'
-        window.scrollTo(pageScrollY, 0)
+        window.scrollTo(0, this.mobileScrollY)
       }
     },
   },
