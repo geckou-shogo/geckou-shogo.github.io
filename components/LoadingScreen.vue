@@ -25,9 +25,7 @@ export default {
   watch: {
     initialized() {
       if (this.initialized) {
-        setTimeout(() => {
-          this.displayState = false
-        })
+        this.displayState = false
       }
     },
   },
