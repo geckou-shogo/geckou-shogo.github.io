@@ -108,7 +108,6 @@ export default {
     opacity         : 0;
     visibility      : hidden;
     background-size : contain;
-    background-image: c.$backgroundGradient;
 
     &.open {
       opacity   : 1;
